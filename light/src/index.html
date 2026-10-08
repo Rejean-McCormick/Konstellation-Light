@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'" />
+  <meta name="description" content="Konstellation Light — navigation vérifiée sur les surfaces de lecture Kristal v10." />
+  <title>Konstellation Light · Kristal Explorer</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">✳</span><div><strong>KONSTELLATION</strong><small>LIGHT / KRISTAL v10</small></div></div>
+    <div class="rail-label">COLLECTIONS</div>
+    <label class="field-label" for="collection">Kristal</label>
+    <select id="collection" aria-label="Choisir un Kristal"><option>Chargement…</option></select>
+    <label class="field-label" for="revision">Version publiée</label>
+    <select id="revision" aria-label="Choisir une révision"><option>—</option></select>
+    <div class="rail-label views-label">LENSES DE NAVIGATION</div>
+    <nav aria-label="Vues"><button type="button" class="view active" data-lens="constellation"><span>◌</span> Constellation</button><button type="button" class="view" data-lens="registry"><span>▤</span> Répertoire</button><button type="button" class="view" data-lens="trace"><span>◇</span> Traçabilité</button><button type="button" class="view" data-lens="compare"><span>⇆</span> Versions</button></nav>
+    <div class="rail-bottom"><p>LECTURE SEULE</p><small>Une projection ne crée ni engagement, ni publication, ni autorité sémantique.</small></div>
+  </aside>
+  <main class="main">
+    <header class="top"><div class="eyebrow">EXPLORATEUR DE SURFACES PUBLIQUES <span class="live-dot"></span> <span id="mode-label">Données précompilées</span></div><div class="top-actions"><button id="share" type="button" class="button ghost">↗ Partager</button><button id="export" type="button" class="button ghost">⇩ Sélection</button><button id="offline" type="button" class="button accent">◉ Hors ligne</button></div></header>
+    <section class="heading"><div><div class="chip">NAVIGATION DÉRIVÉE <span>·</span> NON NORMATIVE</div><h1 id="title">Kristal Explorer</h1><p id="subtitle">Sélectionnez une collection pour explorer ses structures et ses références.</p></div></section>
+    <section class="metrics" aria-label="Statistiques"><div class="metric"><span>FICHIERS DÉCLARÉS</span><strong id="metric-files">—</strong></div><div class="metric"><span>ARTEFACTS LOGIQUES</span><strong id="metric-members">—</strong></div><div class="metric"><span>RELATIONS TECHNIQUES</span><strong id="metric-relations">—</strong></div><div class="metric"><span>INTÉGRITÉ DE SURFACE</span><strong id="metric-verified" class="verified">—</strong></div></section>
+    <section class="workspace"><div class="explore"><div class="panel-heading"><div><h2 id="panel-title">Carte des relations</h2><p id="panel-hint">Les liens représentent uniquement la topologie d'hébergement déclarée.</p></div><span class="view-tag" id="view-tag">CONSTELLATION</span><a id="open-full" class="embed-open" href="./">↗ Plein écran</a></div><div class="search-row"><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Rechercher un fichier, un artefact, une relation…" aria-label="Rechercher dans le Kristal" autocomplete="off" /></label><span id="count" class="results"></span></div><div id="visual" class="visual" aria-live="polite"><div class="loading">Chargement du catalogue…</div></div><div class="panel-foot"><span id="truncation">Affichage progressif</span><button id="reset" type="button" class="link-button">Réinitialiser les filtres</button></div></div><aside class="inspector" aria-label="Inspection"><div class="panel-heading"><h2>Inspecteur</h2><span class="inspector-icon">⌁</span></div><div id="inspection" class="inspection"><p>Sélectionnez un élément pour consulter son origine et ses déclarations.</p></div></aside></section>
+    <footer class="footer"><span>Konstellation Light · édition statique expérimentale</span><span>Kristal Framework v10 · État sémantique ≠ Surface de lecture ≠ Publication ≠ Activation</span></footer>
+  </main>
+</div>
+<div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+</body>
+</html>

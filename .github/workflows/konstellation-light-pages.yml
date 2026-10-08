@@ -1,0 +1,70 @@
+name: Konstellation Light — opt-in public Pages
+
+# Intentionally manual: never publish a private Kristal collection without a deliberate review.
+on:
+  workflow_dispatch:
+    inputs:
+      collection_directory:
+        description: 'Optional: repository-relative PUBLIC verified Kristal v10 collection path, containing kristals/index.json. Empty = bundled public demo.'
+        required: false
+        type: string
+        default: ''
+      revision:
+        description: 'Revision label (immutable for a given export)'
+        required: false
+        type: string
+        default: 'public'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: konstellation-light-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.15.0'
+      - name: Validate light exporter
+        run: node --test tests/kristal-v10.test.mjs tests/light.test.mjs
+      - name: Compile explicitly public Kristal collection
+        if: ${{ inputs.collection_directory != '' }}
+        env:
+          LIGHT_COLLECTION: ${{ inputs.collection_directory }}
+          LIGHT_REVISION: ${{ inputs.revision }}
+        shell: bash
+        run: |
+          if [[ ! "$LIGHT_COLLECTION" =~ ^[a-zA-Z0-9_./-]+$ || "$LIGHT_COLLECTION" == /* || "$LIGHT_COLLECTION" == *..* ]]; then
+            echo 'Invalid collection path' >&2
+            exit 1
+          fi
+          if [[ ! -f "$LIGHT_COLLECTION/kristals/index.json" ]]; then
+            echo 'Missing v10 collection index' >&2
+            exit 1
+          fi
+          node scripts/build-light.mjs --collection "$LIGHT_COLLECTION" --out light/site --public YES --revision "$LIGHT_REVISION"
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: light/site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

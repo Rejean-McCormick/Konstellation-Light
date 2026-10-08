@@ -1,0 +1,18 @@
+{
+  "format": "konstellation.light-catalog/1.0",
+  "notice": "Navigation dérivée. Aucun contrôle de signature, publication, activation ou autorité sémantique.",
+  "entries": [
+    {
+      "slug": "demo-v9-small",
+      "title": "Demo v9 Small Kristal",
+      "revision": "demo-v10",
+      "state_ref": "urn:kristal:state:demo-v9-small",
+      "surface_digest": "sha256:ab944f5009c1b55f3a98a527b450bd5e3a7dd6d182c0cbb1a7b2f372c2d59624",
+      "path": "data/pack-7be42c0936a6ae5c12f5373bba888ee96a2cc9feb36d23a721e3482da86f457f.json",
+      "sha256": "sha256:7be42c0936a6ae5c12f5373bba888ee96a2cc9feb36d23a721e3482da86f457f",
+      "bytes": 11383,
+      "members": 1,
+      "files": 24
+    }
+  ]
+}
