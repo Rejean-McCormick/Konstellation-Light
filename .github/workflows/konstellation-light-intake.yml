@@ -1,0 +1,59 @@
+name: Konstellation Light — pinned public intake (NO DEPLOY)
+
+# C3 has not established an accepted publication/qualification receipt yet.
+# This workflow intentionally checks byte integrity and exports a preview only.
+# repository_dispatch requires a GitHub-authenticated API caller; its payload is
+# NOT itself a signature, a qualification receipt or a publication authorization.
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: 'Exact 40-character commit already public in Rejean-McCormick/kristal-public'
+        type: string
+        required: true
+      index_digest:
+        description: 'Exact sha256: digest in the public v10 collection index'
+        type: string
+        required: true
+  repository_dispatch:
+    types: [kristal-qualified-release-v1]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: light-intake-${{ github.event.client_payload.commit || inputs.commit || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  preview-only:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tests C4
+        run: node --test tests/kristal-v10.test.mjs tests/light.test.mjs tests/pinned-intake.test.mjs
+      - name: Import pinned already-public collection
+        env:
+          SOURCE_COMMIT: ${{ github.event.client_payload.commit || inputs.commit }}
+          INDEX_DIGEST: ${{ github.event.client_payload.index_digest || inputs.index_digest }}
+        run: |
+          node scripts/import-pinned-collection.mjs \
+            --repository Rejean-McCormick/kristal-public \
+            --commit "$SOURCE_COMMIT" --expected-index-digest "$INDEX_DIGEST" \
+            --out "$RUNNER_TEMP/public-collection"
+          node scripts/build-light.mjs --collection "$RUNNER_TEMP/public-collection" \
+            --out "$RUNNER_TEMP/light-preview" --public YES \
+            --revision "$SOURCE_COMMIT" \
+            --repository https://github.com/Rejean-McCormick/kristal-public \
+            --commit "$SOURCE_COMMIT"
+      - name: Upload preview, NOT GitHub Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: light-preview-${{ github.run_id }}
+          path: ${{ runner.temp }}/light-preview
+          retention-days: 7
+
+# No deploy job and no pages:write/id-token:write permissions by design.

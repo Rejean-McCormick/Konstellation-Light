@@ -44,3 +44,30 @@ test('light: commit links require pinned GitHub URL and full SHA',t=>{
  r=build(p,['--repository','https://github.com/example/project','--commit','abcd']);assert.notEqual(r.status,0);
  r=build(p,['--repository','https://github.com/example/project','--commit','a'.repeat(40)]);assert.equal(r.status,0,r.stderr);
 });
+
+test('light: append refuses mutation of the same slug@revision and preserves the old output',t=>{
+ const p=workspace(t);fixture(p.collection);const one=build(p,['--revision','stable','--repository','https://github.com/example/project','--commit','a'.repeat(40)]);assert.equal(one.status,0,one.stderr);
+ const before=fs.readFileSync(path.join(p.out,'data/catalog.json'));const catalog=JSON.parse(before);const oldPack=fs.readFileSync(path.join(p.out,catalog.entries[0].path));
+ const mutated=build(p,['--revision','stable','--append','YES','--repository','https://github.com/example/project','--commit','b'.repeat(40)]);
+ assert.notEqual(mutated.status,0);assert.match(mutated.stderr,/Révision immuable/);
+ assert.deepEqual(fs.readFileSync(path.join(p.out,'data/catalog.json')),before);
+ assert.deepEqual(fs.readFileSync(path.join(p.out,catalog.entries[0].path)),oldPack);
+});
+test('light: failed append leaves previously published files unchanged',t=>{
+ const p=workspace(t);const f=fixture(p.collection);assert.equal(build(p,['--revision','one']).status,0);
+ const old=fs.readFileSync(path.join(p.out,'data/catalog.json'));fs.writeFileSync(path.join(p.collection,f.dir,'AI_START_HERE.md'),'evil');
+ const next=build(p,['--revision','two','--append','YES']);assert.notEqual(next.status,0);
+ assert.deepEqual(fs.readFileSync(path.join(p.out,'data/catalog.json')),old);
+ assert.equal(JSON.parse(old).entries.length,1);
+});
+
+test('light: imported source pin cannot be relabeled as another GitHub commit',t=>{
+ const p=workspace(t);const f=fixture(p.collection);
+ const index=JSON.parse(fs.readFileSync(path.join(p.collection,'kristals/index.json')));
+ fs.writeFileSync(path.join(p.collection,'LIGHT_SOURCE_PIN.json'),JSON.stringify({
+  format:'konstellation.light-source-pin/1.0',repository:'Rejean-McCormick/kristal-public',
+  commit:'a'.repeat(40),index_digest:index.index_digest,qualification_verified:false,publication_verified:false}));
+ const r=build(p,['--revision','demo','--repository','https://github.com/Rejean-McCormick/kristal-public','--commit','b'.repeat(40)]);
+ assert.notEqual(r.status,0);assert.match(r.stderr,/Source pin incohérent/);
+ assert(!fs.existsSync(p.out));
+});

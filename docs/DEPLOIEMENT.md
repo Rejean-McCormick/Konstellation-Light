@@ -22,7 +22,7 @@ La workflow incluse sous `.github/workflows/konstellation-light-pages.yml` utili
 1. Copier le **projet autonome** dans la racine d'un dépôt destiné à Pages (ou adapter les chemins de la workflow).
 2. Configurer **Settings → Pages → Source: GitHub Actions**.
 3. Dans **Actions**, déclencher manuellement `Konstellation Light — opt-in public Pages`.
-4. Sans collection spécifiée, la workflow publie uniquement la démonstration déjà générée ; avec une collection versionnée dans le dépôt, elle construit avant publication.
+4. Sans collection spécifiée, la workflow publie uniquement la démonstration déjà générée ; une collection réelle est **bloquée**, même versionnée dans le dépôt, jusqu’à la réception vérifiée des preuves C3.
 5. Surveiller les contrôles CI et la protection d'environnement `github-pages`.
 
 Attention : un dépôt privé ne rend pas automatiquement le site Pages privé. Ne pas y déposer des surfaces sensibles. Les versions et commits Github ne créent pas d'autorité sémantique.

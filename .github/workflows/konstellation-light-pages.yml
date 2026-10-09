@@ -1,6 +1,7 @@
 name: Konstellation Light — opt-in public Pages
 
-# Intentionally manual: never publish a private Kristal collection without a deliberate review.
+# Intentionally manual. Until the C3 qualification+authorization receipt is integrated,
+# only the original explicitly public demo may be deployed.
 on:
   workflow_dispatch:
     inputs:
@@ -32,22 +33,11 @@ jobs:
           node-version: '24.15.0'
       - name: Validate light exporter
         run: node --test tests/kristal-v10.test.mjs tests/light.test.mjs
-      - name: Compile explicitly public Kristal collection
+      - name: Reject real collection deployment until trusted C3 gate is integrated
         if: ${{ inputs.collection_directory != '' }}
-        env:
-          LIGHT_COLLECTION: ${{ inputs.collection_directory }}
-          LIGHT_REVISION: ${{ inputs.revision }}
-        shell: bash
         run: |
-          if [[ ! "$LIGHT_COLLECTION" =~ ^[a-zA-Z0-9_./-]+$ || "$LIGHT_COLLECTION" == /* || "$LIGHT_COLLECTION" == *..* ]]; then
-            echo 'Invalid collection path' >&2
-            exit 1
-          fi
-          if [[ ! -f "$LIGHT_COLLECTION/kristals/index.json" ]]; then
-            echo 'Missing v10 collection index' >&2
-            exit 1
-          fi
-          node scripts/build-light.mjs --collection "$LIGHT_COLLECTION" --out light/site --public YES --revision "$LIGHT_REVISION"
+          echo 'C4 safety gate: publication de collections réelles désactivée sans preuve C3 acceptée.' >&2
+          exit 1
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload site artifact
