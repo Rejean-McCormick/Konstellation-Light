@@ -3,3 +3,4 @@ __pycache__/
 exports/
 settings.local.json
 *.part
+previews/

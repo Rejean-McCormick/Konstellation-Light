@@ -103,7 +103,7 @@ const catalog = { format:'konstellation.light-catalog/1.0',
   notice: 'Navigation dérivée. Aucun contrôle de signature, publication, activation ou autorité sémantique.',
   entries };
 staged.set('data/catalog.json', json(catalog));
-for (const name of ['index.html','app.js','style.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
+for (const name of ['index.html','app.js','graph-core.mjs','style.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
 staged.set('.nojekyll', Buffer.from(''));
 // Compose a complete site in a sibling directory and swap only after success.
 // Existing deployments must not be left half-updated if source checks or disk I/O fail.
@@ -124,7 +124,7 @@ const backup = path.join(outputParent, `.light-backup-${path.basename(temp)}`);
 let backedUp = false;
 try {
   for (const [rel, bytes] of staged) {
-    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|style\.css|sw\.js|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
+    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|style\.css|sw\.js|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
     const target = path.join(temp, rel);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, bytes);

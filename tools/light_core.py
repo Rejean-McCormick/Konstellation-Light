@@ -23,7 +23,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 ROOT = Path(__file__).resolve().parents[1]
 SHA256 = re.compile(r"sha256:[0-9a-f]{64}\Z")
 PACK_PATH = re.compile(r"data/pack-[0-9a-f]{64}\.json\Z")
-SITE_FIXED = {".nojekyll", "index.html", "app.js", "style.css", "sw.js", "data/catalog.json"}
+SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "style.css", "sw.js", "data/catalog.json"}
 
 
 class LightError(ValueError):

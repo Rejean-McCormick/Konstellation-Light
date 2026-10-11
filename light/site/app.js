@@ -1,3 +1,4 @@
+import {clampSatellites, graphNeighborhood, navigationPath} from './graph-core.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
 // All untrusted labels are inserted with textContent; no semantic authority is inferred.
 const $ = (id) => document.getElementById(id);
@@ -13,12 +14,12 @@ const svgElement = (tag, attributes = {}) => {
   return e;
 };
 const short = (s, n = 34) => String(s).length > n ? `${String(s).slice(0, n - 1)}…` : String(s);
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0 };
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [] };
 let toastTimeout;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
 function urlState() {
   const p = new URLSearchParams(location.search);
-  p.set('k', state.slug || ''); p.set('r', state.revision || ''); p.set('lens', state.lens);
+  p.set('k', state.slug || ''); p.set('r', state.revision || ''); p.set('lens', state.lens); p.set('n', String(state.satellites));
   if (state.selection) p.set('focus', state.selection); else p.delete('focus');
   if (state.query) p.set('q', state.query); else p.delete('q');
   if (state.embed) p.set('embed', '1'); else p.delete('embed');
@@ -41,17 +42,21 @@ async function loadPack(entry) {
   if (`sha256:${await sha256(bytes)}` !== entry.sha256) throw Error('Échec de contrôle SHA-256 du bundle.');
   const obj = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
   if (obj.format !== 'konstellation.light-navigation/1.0' || obj.semantic_authority !== false ||
-      obj.view_kind !== 'derived-hosting-navigation' || obj.slug !== entry.slug || obj.revision !== entry.revision ||
+      !['derived-hosting-navigation','derived-semantic-preview'].includes(obj.view_kind) || obj.slug !== entry.slug || obj.revision !== entry.revision ||
       obj.surface_digest !== entry.surface_digest || !Array.isArray(obj.nodes) || !Array.isArray(obj.edges) ||
       obj.nodes.length > 12000 || obj.edges.length > 12000) throw Error('Format ou identité du bundle non conforme.');
+  const semantic = obj.view_kind === 'derived-semantic-preview';
+  if (semantic && (entry.mode !== 'semantic_preview' || obj.revision !== 'candidate-local' || obj.state_ref !== 'local-curated-not-a-v10-publication')) throw Error('Prévisualisation non autorisée.');
+  if (!semantic && entry.mode === 'semantic_preview') throw Error('Mode du catalogue incohérent.');
+  const semanticKinds = new Set(['notion','societe','role','tache','ressource','territoire','periode','evenement','source','cours','competence','pratique','institution']);
   const ids = new Set();
   for (const n of obj.nodes) {
     if (typeof n.id !== 'string' || n.id.length > 300 || ids.has(n.id) || typeof n.label !== 'string' ||
-        n.label.length > 600 || !['hosted_state','logical_artifact','hosted_file'].includes(n.kind)) throw Error('Nœud du bundle invalide.');
+        n.label.length > 600 || !(semantic ? semanticKinds.has(n.kind) : ['hosted_state','logical_artifact','hosted_file'].includes(n.kind))) throw Error('Nœud du bundle invalide.');
     ids.add(n.id);
   }
   for (const e of obj.edges) {
-    if (!ids.has(e.from) || !ids.has(e.to) || !['lists_file','has_member'].includes(e.relation)) throw Error('Relation dérivée invalide.');
+    if (!ids.has(e.from) || !ids.has(e.to) || !(semantic ? /^[a-z0-9][a-z0-9._:-]{0,119}$/i.test(e.relation) : ['lists_file','has_member'].includes(e.relation))) throw Error('Relation dérivée invalide.');
   }
   return obj;
 }
@@ -69,6 +74,7 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
     state.slug = slug; state.revision = revision; state.bundle = data;
     const validFocus = keepFocus && data.nodes.some(n => n.id === state.selection);
     if (!validFocus) state.selection = data.nodes[0]?.id || null;
+    state.history = state.selection ? [state.selection] : [];
     fillSelect($('collection'), [...new Set(state.catalog.entries.map(e => e.slug))].map(s => [s, state.catalog.entries.find(e=>e.slug===s).title]), slug);
     fillSelect($('revision'), existingRevisions(slug).map(x => [x.revision, x.revision]), revision);
     render(); urlState();
@@ -88,11 +94,11 @@ function filteredNodes() {
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
-  state.selection = id; render(); urlState();
+  state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
 }
 function lensMeta() {
   return {
-    constellation: ['Carte des relations', 'Relations techniques déclarées entre état, artefacts et fichiers.'],
+    constellation: ['Carte des relations', state.bundle.view_kind === 'derived-semantic-preview' ? 'Navigation sur une curation de connaissances candidate, non validée ni publiée.' : 'Relations techniques déclarées entre état, artefacts et fichiers.'],
     registry: ['Répertoire vérifié', 'Liste complète des éléments techniques présents dans le bundle.'],
     trace: ['Chaîne de traçabilité', 'Empreintes de surface et engagements déclarés, sans validation d’autorité.'],
     compare: ['Comparaison de versions', 'Différences observées entre deux bundles du même Kristal.'],
@@ -101,11 +107,15 @@ function lensMeta() {
 function render() {
   const data = state.bundle; if (!data) return;
   $('title').textContent = data.title;
-  $('subtitle').textContent = `Révision ${data.revision} · État ${short(data.state_ref, 85)} · Lecture opérationnelle sans mutation`;
-  $('metric-files').textContent = String(data.metrics.files);
+  const semantic = data.view_kind === 'derived-semantic-preview';
+  $('subtitle').textContent = semantic ? 'PRÉVISUALISATION LOCALE · Graphe sémantique candidat · Pas une collection v10 publiée' : `Révision ${data.revision} · État ${short(data.state_ref, 85)} · Lecture opérationnelle sans mutation`;
+  $('metric-files').textContent = semantic ? '—' : String(data.metrics.files);
   $('metric-members').textContent = String(data.metrics.members);
   $('metric-relations').textContent = String(data.edges.length);
-  $('metric-verified').textContent = data.verification.byteDigestsVerified ? '✓ Octets vérifiés au build' : 'Non vérifié';
+  $('metric-verified').textContent = semantic ? '⚠ Candidat local (SHA-256 de transport)' : data.verification.byteDigestsVerified ? '✓ Octets vérifiés au build' : 'Non vérifié';
+  $('graph-controls').hidden = state.lens !== 'constellation';
+  $('satellites').value = String(state.satellites); $('satellites-count').textContent = String(state.satellites);
+  $('graph-back').disabled = state.history.length < 2;
   const [heading, hint] = lensMeta(); $('panel-title').textContent = heading; $('panel-hint').textContent = hint;
   $('view-tag').textContent = state.lens.toUpperCase();
   document.querySelectorAll('[data-lens]').forEach(btn => { btn.classList.toggle('active', btn.dataset.lens === state.lens); btn.setAttribute('aria-pressed', String(btn.dataset.lens === state.lens)); });
@@ -118,31 +128,37 @@ function render() {
   drawInspection();
 }
 function drawGraph(target, visible) {
-  if (!visible.length) { target.append(element('div', 'empty', 'Aucun résultat pour cette recherche.')); return; }
-  const root = state.bundle.nodes.find(n => n.kind === 'hosted_state') || state.bundle.nodes[0];
-  const others = visible.filter(n=>n.id !== root.id);
-  // Favor the currently selected record to preserve context while enforcing a tight visual budget.
-  const ordered = state.selection && others.some(n => n.id === state.selection) ? [others.find(n=>n.id===state.selection), ...others.filter(n=>n.id!==state.selection)] : others;
-  const shown = [root, ...ordered.slice(0, Math.min(state.embed ? 15 : 26, ordered.length))];
-  const svg = svgElement('svg', { viewBox:'0 0 730 380', role:'group', 'aria-label':'Graphe de navigation technique : sélectionner un nœud ouvre son inspecteur' });
-  const xy = new Map([[root.id,{x:365,y:190}]]);
-  const count = shown.length - 1;
-  shown.slice(1).forEach((n,i)=> {const t=(i / Math.max(1,count))*2*Math.PI-Math.PI/2, ring=count>13 && i>=13 ? 148 : 112;
-    xy.set(n.id,{x:365+Math.cos(t)*ring*1.9,y:190+Math.sin(t)*ring});});
-  for(const edge of state.bundle.edges){ if(!xy.has(edge.from)||!xy.has(edge.to))continue;
-    const a=xy.get(edge.from),b=xy.get(edge.to);
-    svg.append(svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link'})); }
-  for(const n of shown){ const p=xy.get(n.id), central=n.id===root.id;
-    const group=svgElement('g',{class:'graph-node','data-kind':n.kind,'data-selected':String(state.selection===n.id),role:'button',tabindex:'0','aria-label':`Inspecter ${n.label}`});
-    group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?36:20}));
-    const sym=svgElement('text',{x:p.x,y:p.y+4,class:'type-mark'});sym.textContent=central?'✳':n.kind==='hosted_file'?'▤':'◇';group.append(sym);
-    const label=svgElement('text',{x:p.x,y:p.y+(central?53:35)});label.textContent=short(n.label,central?29:20);group.append(label);
+  const all=state.bundle.nodes;
+  const selected=all.find(n=>n.id===state.selection)||all[0];
+  if (!selected) { target.append(element('div','empty','Aucun nœud disponible.'));return; }
+  const matched=state.query.trim() ? new Set(visible.map(n=>n.id)) : null;
+  const view=graphNeighborhood(all,state.bundle.edges,selected.id,state.satellites,matched);
+  const shown=view.nodes;
+  const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group','aria-label':'Graphe navigable : Entrée ou clic pour recentrer sur une bulle'});
+  const xy=new Map([[selected.id,{x:380,y:226}]]);
+  const count=shown.length-1;
+  shown.slice(1).forEach((n,i)=>{const angle=2*Math.PI*i/Math.max(1,count)-Math.PI/2;
+    const radius=count>13 ? 174+(i%2)*24 : 162;
+    xy.set(n.id,{x:380+Math.cos(angle)*radius*1.65,y:226+Math.sin(angle)*radius});
+  });
+  for(const edge of view.edges){const a=xy.get(edge.from),b=xy.get(edge.to);
+    if(!a||!b)continue;
+    const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link'});
+    const tooltip=svgElement('title');tooltip.textContent=edge.relation.replaceAll('_',' ');line.append(tooltip);svg.append(line);
+  }
+  for(const n of shown){const p=xy.get(n.id),central=n.id===selected.id;
+    const group=svgElement('g',{class:'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${n.label}`});
+    group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?43:23}));
+    const sym=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});sym.textContent=central?'✳':'◇';group.append(sym);
+    const label=svgElement('text',{x:p.x,y:p.y+(central?59:38)});label.textContent=short(n.label,central?32:24);group.append(label);
+    const tip=svgElement('title');tip.textContent=n.description||n.label;group.append(tip);
     group.addEventListener('click',()=>focusOn(n.id));
     group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(n.id);}});
     svg.append(group);
   }
   target.append(svg);
-  $('truncation').textContent = `Graphe borné : ${shown.length} / ${visible.length} nœuds affichés · Répertoire pour la liste complète`;
+  if(view.degree===0) target.append(element('p','graph-empty',state.query?'Aucun voisin correspondant à la recherche. Effacer la recherche pour voir les relations.':'Aucun lien direct déclaré pour cette notion.')); 
+  $('truncation').textContent=`${shown.length-1} / ${view.degree} bulles voisines visibles · ${state.satellites} maximum · ${state.bundle.edges.length} relations déclarées`;
 }
 function drawRegistry(target, nodes) {
   const container=element('div','record-list');
@@ -207,10 +223,18 @@ function drawInspection(){
   const dl=element('dl');addDefinition(dl,'Identifiant de navigation',n.id);
   addDefinition(dl,'Type de projection',n.kind);
   addDefinition(dl,'Relations entrantes',d.edges.filter(e=>e.to===n.id).length);
-  addDefinition(dl,'State ref',short(d.state_ref,100));target.append(dl);
+  addDefinition(dl,'State ref',short(d.state_ref,100));
+  if(n.period)addDefinition(dl,'Période',n.period);
+  if(n.source)addDefinition(dl,'Source déclarée (non vérifiée)',n.source);
+  if(d.view_kind==='derived-semantic-preview') {
+    const related=d.edges.filter(e=>e.from===n.id||e.to===n.id).slice(0,30);
+    for(const e of related) {const other=d.nodes.find(x=>x.id===(e.from===n.id?e.to:e.from));
+      if(other)addDefinition(dl,e.relation.replaceAll('_',' '),other.label);}
+  }
+  target.append(dl);
   const href=gitFileLink(d,n);
   if(href){const a=element('a','inspector-action','↗ Fichier au commit GitHub');a.href=href;a.target='_blank';a.rel='noopener noreferrer';target.append(a);}
-  target.append(element('p','note','Cette entité n’est pas une assertion validée. Le graphe décrit la navigation et l’hébergement, pas le degré de vérité.'));
+  target.append(element('p','note',d.view_kind==='derived-semantic-preview' ? 'Curation de prévisualisation locale : ni autorité historique, ni collection v10 publiée. Les sources demandent une revue éditoriale.' : 'Cette entité n’est pas une assertion validée. Le graphe décrit la navigation et l’hébergement, pas le degré de vérité.'));
   if(d.source?.repository){const issue=element('a','inspector-action','⌁ Proposer un signalement');
     const title=`Konstellation Light · ${d.slug} · ${short(n.label,70)}`;
     const body=`Révision: ${d.revision}\nState ref: ${d.state_ref}\nSurface digest: ${d.surface_digest}\nEntité: ${n.id}\nLien: ${location.href}\n\nObservation (à compléter) :`;
@@ -220,14 +244,17 @@ function drawInspection(){
 function selectionDescriptor() {
  const d=state.bundle;
  return { format:'konstellation.light-selection/1.0', note:'Sélection de navigation dérivée, sans engagement sémantique',slug:d.slug,revision:d.revision,
-  state_ref:d.state_ref,surface_digest:d.surface_digest,lens:state.lens,focus:state.selection,query:state.query };
+  state_ref:d.state_ref,surface_digest:d.surface_digest,lens:state.lens,focus:state.selection,query:state.query,satellites:state.satellites };
 }
 async function main(){
   const params=new URLSearchParams(location.search);
   state.embed=params.get('embed')==='1';document.documentElement.classList.toggle('embed',state.embed);
+  const back=params.get('retour');
+  if(back && /^\/eleve\/(?:[a-z0-9._~!$&'()*+,;=:@%\/?-]*)$/i.test(back) && !back.includes('//')){ $('back-ekole').href=back; $('back-ekole').hidden=false; }
+  else if(location.pathname.includes('/eleve/konstellation/')){ $('back-ekole').href='../'; $('back-ekole').hidden=false; }
   state.query=(params.get('q')||'').slice(0,250);$('search').value=state.query;
   state.lens=['constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
-  state.selection=params.get('focus');
+  state.selection=params.get('focus'); state.satellites=clampSatellites(params.get('n')||8);
   try {
     const res=await fetch('./data/catalog.json',{cache:'no-cache'});if(!res.ok)throw Error('Catalogue indisponible');
     const catalog=await res.json();
@@ -243,6 +270,9 @@ $('collection').addEventListener('change',()=>{const s=$('collection').value;sta
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
 for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.lens=btn.dataset.lens;state.page=0;render();urlState();});
 $('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;render();urlState();});
+$('satellites').addEventListener('input',()=>{state.satellites=clampSatellites($('satellites').value);render();urlState();});
+$('graph-back').addEventListener('click',()=>{if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();});
+$('graph-home').addEventListener('click',()=>{if(!state.bundle)return;focusOn(state.bundle.nodes[0].id);});
 $('reset').addEventListener('click',()=>{state.page=0;state.query='';$('search').value='';render();urlState();});
 $('share').addEventListener('click',async()=>{urlState();try{await navigator.clipboard.writeText(location.href);notify('Lien de navigation copié.');}catch{notify(`Copiez l’URL du navigateur pour partager la vue.`);}});
 $('export').addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';

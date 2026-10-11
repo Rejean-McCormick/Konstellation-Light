@@ -7,6 +7,7 @@ import threading
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox, scrolledtext
 import webbrowser
+from tools.ekole_auto_preview import find_ekole, build_local_preview, start_available_preview, install_in_ekole, kristal_file, valid_ekole, ekole_diagnosis, restore_autochtones_from_zip
 from tools.light_core import (ROOT, LightError, build_public_collection, site_dir, validated_site,
                               start_preview, export_site_zip, prepare_checkout, generate_gitbook_note)
 
@@ -19,6 +20,16 @@ class Console(tk.Tk):
         self.minsize(700, 580)
         self.option_add("*Font", ("Segoe UI", 10))
         self.preview_server = None
+        self.ekole_server = None
+        self.ekole_site = None
+        self.ekole_url = None
+        self.ekole_result = None
+        self.ekole_busy = False
+        auto_ekole = find_ekole()
+        self.ekole_folder = tk.StringVar(value=str(auto_ekole) if auto_ekole else "")
+        self.ekole_status = tk.StringVar(value="")
+        self.ekole_folder.trace_add('write', lambda *_: self._refresh_ekole_status())
+        self.ekole_reviewed = tk.BooleanVar(value=False)
         self.collection = tk.StringVar(value="")
         self.revision = tk.StringVar(value="public-v1")
         self.append = tk.BooleanVar(value=False)
@@ -32,13 +43,17 @@ class Console(tk.Tk):
         self._make_welcome()
         self._make_build()
         self._make_preview()
+        self._make_ekole()
+        self._refresh_ekole_status()
         self._make_deploy()
         self._make_gitbook()
         self.log = scrolledtext.ScrolledText(self, height=7, font=("Consolas", 9), wrap="word")
         self.log.pack(fill="x", padx=12, pady=(0,10))
         self._write("Projet: " + str(ROOT))
-        pages = {"welcome":0,"build":1,"preview":2,"deploy":3,"gitbook":4}
+        pages = {"welcome":0,"build":1,"preview":2,"ekole":3,"ekole_auto":3,"deploy":4,"gitbook":5}
         self.tabs.select(pages.get(initial,0))
+        if initial == "ekole_auto" and auto_ekole and valid_ekole(auto_ekole):
+            self.after(350, self._ekole_open)
         self.protocol("WM_DELETE_WINDOW", self._close)
 
     def _write(self, s):
@@ -78,9 +93,10 @@ class Console(tk.Tk):
         ttk.Label(f,text="Destination Windows prévue :",font=("Segoe UI",10,"bold")).pack(anchor="w")
         ttk.Label(f,text=r"C:\mycode\Konstellation\Konstellation-Light",font=("Consolas",11)).pack(anchor="w",pady=8)
         for line in ["1. Prévisualiser : ouvre le site de démonstration en local.",
-                     "2. Construire : sélectionne une collection publique v10 vérifiée (Node.js requis).",
-                     "3. Déployer : exporte un ZIP ou prépare un dépôt Git local sous docs/konstellation-light.",
-                     "4. GitBook : génère un lien d'intégration vers une URL déjà publique."]:
+                     "2. Ekole : génère et ouvre le graphe autochtone en un clic, en local.",
+                     "3. Construire : sélectionne une collection publique v10 vérifiée (Node.js requis).",
+                     "4. Déployer : exporte un ZIP ou prépare un dépôt Git local sous docs/konstellation-light.",
+                     "5. GitBook : génère un lien d'intégration vers une URL déjà publique."]:
             ttk.Label(f,text=line,wraplength=650).pack(anchor="w",pady=6)
         ttk.Label(f,text="Aucun outil ne pousse de code sur GitHub, n'active un Kristal, ni ne publie secrètement une collection privée.",
                   foreground="#905a20",wraplength=650).pack(anchor="w",pady=20)
@@ -103,6 +119,119 @@ class Console(tk.Tk):
         ttk.Button(f,text="Ouvrir Konstellation Light",command=self._preview).pack(anchor="w",pady=12)
         ttk.Button(f,text="Vérifier les bundles statiques",command=lambda:self._worker("Vérification du site",lambda: validated_site(site_dir(ROOT)))).pack(anchor="w",pady=5)
         ttk.Label(f,text="La prévisualisation écoute uniquement sur 127.0.0.1:4177.").pack(anchor="w",pady=14)
+
+    def _make_ekole(self):
+        f=self._frame("Ekole · Graphe", "Un clic pour lire le Kristal autochtone v4, préparer ses relations et ouvrir la carte hors Internet. Ne touche ni aux cours ni aux Kristals.")
+        self._field(f,"Dossier RACINE Ekole (contient site/ et kristals/)",self.ekole_folder,lambda:self._folder(self.ekole_folder))
+        ttk.Label(f,textvariable=self.ekole_status,wraplength=660,justify="left",foreground="#765226").pack(anchor="w",pady=(4,8))
+        ttk.Button(f,text="Restaurer le Kristal manquant depuis un ZIP Ekole…",command=self._ekole_restore).pack(anchor="w",pady=(4,6))
+        ttk.Button(f,text="Créer / actualiser et OUVRIR le graphe",command=self._ekole_open).pack(anchor="w",pady=(8,6))
+        ttk.Label(f,text="Le site candidat reste privé sur 127.0.0.1, dans previews/ekole-autochtones-local. Aucun compte, aucune publication v10.",wraplength=660,justify="left").pack(anchor="w",pady=(4,15))
+        ttk.Separator(f,orient="horizontal").pack(fill="x",pady=9)
+        ttk.Label(f,text="Optionnel — intégrer à Ekole Élève",font=("Segoe UI",11,"bold")).pack(anchor="w",pady=(7,4))
+        ttk.Label(f,text="À faire seulement après vérification des sources, des formulations et des autorisations de consultation. Ekole doit ensuite être démarré sur son propre port 8765.",wraplength=660,justify="left").pack(anchor="w",pady=(3,6))
+        ttk.Checkbutton(f,text="J’ai relu les connaissances et je confirme leur utilisation pour le public Élève ciblé.",variable=self.ekole_reviewed).pack(anchor="w",pady=6)
+        ttk.Button(f,text="Copier le site dans Ekole (sans rien écraser)",command=self._ekole_install).pack(anchor="w",pady=5)
+
+    def _refresh_ekole_status(self):
+        folder=self.ekole_folder.get().strip()
+        if not folder:
+            self.ekole_status.set("Sélectionner la racine Ekole. Emplacement recommandé : C:\\mycode\\Ekole")
+            return
+        self.ekole_status.set(ekole_diagnosis(Path(folder))['message'])
+
+    def _ekole_restore(self):
+        root=self.ekole_folder.get().strip()
+        if not root:
+            messagebox.showwarning("Racine Ekole", "Choisir d’abord C:\\mycode\\Ekole ou le dossier contenant site/ et kristals/.")
+            return
+        state=ekole_diagnosis(Path(root))
+        if state['status']=='ready':
+            messagebox.showinfo("Kristal présent", "Le Kristal v4 est déjà installé au bon endroit. Aucune restauration requise.")
+            return
+        if state['status']!='missing':
+            messagebox.showerror("Racine Ekole",state['message'])
+            return
+        chosen=filedialog.askopenfilename(parent=self,title="Choisir le snapshot ZIP Ekole",
+            filetypes=[("Archives Ekole", "*.zip"),("Tous les fichiers", "*.*")])
+        if not chosen:return
+        if not messagebox.askyesno("Restauration locale sans écrasement",
+            "Extraire UNIQUEMENT le Kristal autonome des sociétés autochtones depuis ce ZIP vers :\n"
+            +str(Path(root)/'kristals'/'societes-autochtones-quebec')
+            +"\n\nAucun cours et aucun Kristal existant ne seront remplacés. Continuer ?"):
+            return
+        try:
+            result=restore_autochtones_from_zip(Path(chosen),Path(root))
+            self._refresh_ekole_status()
+            self._write(f"✓ Kristal restauré : {result['files']} fichiers dans {result['target']}")
+            messagebox.showinfo("Restauration terminée",
+                f"{result['files']} fichiers installés dans\n{result['target']}\n\nLa carte peut maintenant être créée.")
+        except Exception as exc:
+            self._ekole_failed(str(exc))
+
+    def _ekole_open(self):
+        if self.ekole_busy:
+            return
+        folder=self.ekole_folder.get().strip()
+        if not folder:
+            messagebox.showwarning("Dossier Ekole introuvable","Choisir le dossier Ekole contenant kristals/.")
+            return
+        self.ekole_busy=True
+        self._write("▶ Préparation automatique du graphe : " + folder)
+        def work():
+            try:
+                result=build_local_preview(Path(folder))
+                self.after(0,lambda:self._ekole_ready(result))
+            except Exception as exc:
+                error=str(exc)
+                self.after(0,lambda:self._ekole_failed(error))
+        threading.Thread(target=work,daemon=True).start()
+
+    def _ekole_ready(self,result):
+        self.ekole_busy=False
+        try:
+            site=result['site'].resolve()
+            if self.ekole_server is None or site!=self.ekole_site:
+                if self.ekole_server is not None:
+                    self.ekole_server.shutdown();self.ekole_server.server_close()
+                self.ekole_server,self.ekole_url=start_available_preview(site)
+                self.ekole_site=site
+            self.ekole_result=result
+            stats=result['stats'];note=" (déjà généré, réutilisé)" if result['cached'] else " (compilé)"
+            self._write(f"✓ {stats['nodes']} bulles, {stats['edges']} liens{note} : {self.ekole_url}")
+            webbrowser.open(self.ekole_url)
+        except Exception as exc:
+            self._ekole_failed(str(exc))
+
+    def _ekole_failed(self,error):
+        self.ekole_busy=False
+        self._write("✖ " + error)
+        messagebox.showerror("Graphe Ekole",error)
+
+    def _ekole_install(self):
+        if self.ekole_busy:
+            return
+        if not self.ekole_reviewed.get():
+            messagebox.showwarning("Revue préalable","Relire les connaissances, puis confirmer la revue avant l’intégration Élève.")
+            return
+        if not self.ekole_result or self.ekole_result['source'].resolve()!=kristal_file(Path(self.ekole_folder.get())):
+            messagebox.showwarning("Graphe nécessaire","Commencer par générer et ouvrir le graphe pour ce dossier Ekole.")
+            return
+        if not messagebox.askyesno("Installer dans Ekole Élève","Copier une PRÉVISUALISATION CANDIDATE dans site/eleve/konstellation ? Elle pourrait ensuite être accessible sur le réseau de ton école. Aucun fichier existant ne sera écrasé. Continuer ?"):
+            return
+        try:
+            folder=Path(self.ekole_folder.get())
+            # Validate that the compilation still represents the exact source file.
+            from tools.ekole_auto_preview import preview_plan
+            plan=preview_plan(folder)
+            if plan['signature']!=self.ekole_result['signature']:
+                raise ValueError('Le Kristal a changé. Reconstruire le graphe puis refaire la revue.')
+            target=install_in_ekole(self.ekole_result,folder)
+            msg=f"Site copié : {target}\nOuvrir Ekole sur http://127.0.0.1:8765/eleve/konstellation/"
+            self._write("✓ " + msg)
+            messagebox.showinfo("Ekole Élève",msg)
+        except Exception as exc:
+            self._ekole_failed(str(exc))
 
     def _make_deploy(self):
         f=self._frame("Déployer", "Deux méthodes : ZIP statique pour un hébergeur ou copie contrôlée dans un dépôt Git local.")
@@ -168,6 +297,8 @@ class Console(tk.Tk):
     def _close(self):
         if self.preview_server is not None:
             self.preview_server.shutdown();self.preview_server.server_close()
+        if self.ekole_server is not None:
+            self.ekole_server.shutdown();self.ekole_server.server_close()
         self.destroy()
 
 

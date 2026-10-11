@@ -1,3 +1,7 @@
+> **Windows / Ekole :** voir [Chemins canoniques et restauration du Kristal v4](README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md).
+
+> **Nouveau v0.3 : exploration Ekole sans terminal.** Extrais la mise à jour dans Konstellation-Light, puis double-clique sur `Explorer-Ekole-Autochtones.pyw` pour détecter le Kristal, préparer le graphe et l’ouvrir automatiquement. Guide : [README_LANCEUR_EKOLE_AUTOMATIQUE.md](README_LANCEUR_EKOLE_AUTOMATIQUE.md).
+
 # Konstellation Light
 
 **Standalone Windows-oriented toolkit and static website for browsing verified public Kristal v10 collections.** This project is separate from the full Konstellation server. It uses a v10 collection reader, a navigation compiler and a lightweight static interface; it does not alter Kristal semantic state.
@@ -55,3 +59,7 @@ python -m unittest discover -s tests -p "test_windows_tools.py"
 ## Repository map
 
 `light/` contains the static app and demo site; `tools/` provides Windows GUI operations; `scripts/` builds collections and supports local preview; `server/` reads v10 manifests; `tests/` covers regressions; `docs/` contains architecture and deployment guides.
+
+## Évolution Ekole : graphe de connaissances
+
+Lire **[README_KONSTELLATION_LIGHT_EKOLE_NEXT.md](README_KONSTELLATION_LIGHT_EKOLE_NEXT.md)** pour le curseur 3–25 bulles, le recentrage, les graphes locaux candidats et l’installateur optionnel vers Ekole Élève. La navigation v10 publique reste distincte des prévisualisations v9.
