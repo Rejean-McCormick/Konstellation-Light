@@ -100,3 +100,7 @@ GitBook : ajouter un lien vers `https://OWNER.github.io/REPOSITORY/?k=SLUG&lens=
 5. Collaboration GitHub Issues/PR : ouvrir un flux de suggestion révisable, sans promotion automatique d'autorité.
 
 Le déploiement lui-même et les flux privés GitHub/GitBook n'ont pas été testés ici. Les tests livrés couvrent le build et l'intégrité, pas une qualification complète des navigateurs ou des permissions GitBook.
+
+## 8. Extension C4 v0.5 — gouvernance de la diffusion
+
+Konstellation Light reste un **consommateur statique public** de releases approuvées, non le registre de 126 workspaces locaux, ni le navigateur privé du Konstellation complet. Le garde C4 actif n'accepte que le **site de démonstration synthétique épinglé** et ne transforme pas SHA-256 en preuve d'une qualification C1, autorisation C2, ou publication C3. La procédure de publication réelle reste bloquée tant que les producteurs et consommateurs n'ont pas adopté ensemble un format de reçu vérifiable et sa source de confiance. `config/c4-demo-pin.json` est un outil de revue des octets (défense contre erreur), **pas** une signature cryptographique d'autorité. Le navigateur a une notice explicite indiquant ces frontières et montre des révisions techniques, pas des « versions publiées ».

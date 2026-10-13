@@ -1,4 +1,5 @@
-Konstellation Light · édition Ekole One Click v0.3
+Konstellation Light — 0.5.0-c4-demo-gate-preview
+
 .github/workflows/konstellation-light-intake.yml
 .github/workflows/konstellation-light-pages.yml
 .gitignore
@@ -6,21 +7,24 @@ CHANGELOG.md
 Construire-Light.pyw
 Deployer-Light.pyw
 Explorer-Ekole-Autochtones.pyw
-FILETREE.txt
 GitBook-Light.pyw
 GitSink.bat
 Konstellation-Light.pyw
 Previsualiser-Ekole.pyw
 Previsualiser-Light.pyw
 README.md
+README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md
 README_KONSTELLATION_LIGHT_EKOLE_NEXT.md
 README_LANCEUR_EKOLE_AUTOMATIQUE.md
+SMARTDUMP_INDEX.txt
 SNAPSHOT_INDEX.txt
 VERSION
 ZmartZnap.pyw
+config/c4-demo-pin.json
 docs/ARCHITECTURE.md
 docs/C4_PUBLICATION_INTAKE.md
 docs/DEPLOIEMENT.md
+docs/UPDATE_REPORT_C4_2026-10-12.md
 examples/ekole-curation-demo.json
 light/site/.nojekyll
 light/site/app.js
@@ -35,13 +39,17 @@ light/src/graph-core.mjs
 light/src/index.html
 light/src/style.css
 light/src/sw.js
+node-tests.log
+python-tests.log
 scripts/build-light.mjs
 scripts/build-semantic-preview.mjs
+scripts/c4-publication-gate.mjs
 scripts/import-pinned-collection.mjs
 scripts/project-ekole-encyclopedia.mjs
 scripts/serve-light.mjs
 server/errors.mjs
 server/integrations/kristal-v10.mjs
+tests/c4-gate.test.mjs
 tests/graph-navigation.test.mjs
 tests/helpers/light-fixture.mjs
 tests/kristal-v10.test.mjs

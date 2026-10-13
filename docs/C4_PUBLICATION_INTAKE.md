@@ -1,6 +1,6 @@
 # C4 — Import GitHub public épinglé et porte de publication
 
-Statut : **préparation / preview uniquement, aucun déploiement de collection réelle autorisé par cette livraison**.
+Statut : **0.5.0-c4-demo-gate-preview — préparation / preview uniquement; aucune collection réelle autorisée sur Pages.**
 
 ## 1. Frontières et responsabilités
 
@@ -32,6 +32,23 @@ node scripts/build-light.mjs \
 Remplacer les placeholders par les valeurs exactes du commit et de l'index **déjà publics**. Un échec entraîne un refus sans création du dossier destination. Les scripts n'exécutent aucun programme du dépôt téléchargé, ne téléchargent pas automatiquement d'autres dépôts et rejettent les liens symboliques de la collection. `--out` de l'import doit pointer sur un dossier **non existant**, avec parent existant.
 
 Le build Light respecte l'intégrité octet-à-octet de la surface v10, crée des packs immuables `pack-<SHA-256>.json` et refuse qu'une même paire `(slug, revision)` désigne un contenu différent ; sa sortie est assemblée avant remplacement, afin que les erreurs préalables ne remplacent pas l'ancien site.
+
+## 2bis. Porte de contrôle C4 effectivement appliquée au site
+
+Le fichier `config/c4-demo-pin.json` enregistre **les empreintes du catalogue, du bundle et des six fichiers statiques de la démonstration synthétique** (non une autorité de publication). `scripts/c4-publication-gate.mjs` vérifie la liste de fichiers, l’absence de symlinks, le digest/format de chaque bundle et cette référence exacte. Il produit un diagnostic `konstellation.light-c4-preflight/1.0` :
+
+- `ALLOW_DEMO_ONLY` (code 0) : **démo épinglée uniquement**; `qualification`, `authorization` et `publication` restent `NOT_VERIFIED`.
+- `BLOCK_REAL_COLLECTION` (code 3) : site octet-conforme mais non-démo; interdit au workflow Pages malgré `--public YES`, `repository_dispatch`, `git SHA` ou `index_digest`.
+- `BLOCK` (code 2) : format, fichiers ou empreintes invalides; refuser même un aperçu.
+
+La porte de contrôle Pages exécute ce script **après** les tests et **avant** `upload-pages-artifact`. L'import pinned exécute le même script et exige le code 3 : ses octets peuvent être prévisualisés mais jamais interprétés comme une publication qualifiée. Le GUI Python valide indépendamment la démonstration avant préparation d'un checkout Git. **La référence de démo est modifiable par les mainteneurs du dépôt**, donc des règles de branches et une revue des PR sont nécessaires : ce mécanisme évite surtout les substitutions accidentelles; il ne prouve pas la légitimité de son émetteur.
+
+```bash
+node scripts/c4-publication-gate.mjs --site light/site
+node --test tests/c4-gate.test.mjs tests/pinned-intake.test.mjs
+```
+
+**La séquence C1 → C2 → C3 → C4 de production reste BLOQUÉE**, car le dépôt ne contient pas de format de reçu et de racines de confiance adoptés par les parties. Le déploiement manuel de la démonstration **ne certifie pas** son contenu en tant qu'état Kristal.
 
 ## 3. Workflows GitHub fournis
 

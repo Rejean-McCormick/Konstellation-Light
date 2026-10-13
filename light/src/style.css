@@ -16,3 +16,11 @@
 
 .top-actions a.button {display:inline-flex;text-decoration:none;align-items:center}
 .top-actions a[hidden]{display:none}
+
+/* C4: persistent distinction between byte integrity and publication authority. */
+.c4-disclosure{margin:20px 0 0;padding:12px 16px;background:#142f2d;border:1px solid #1e6864;border-radius:10px;color:#b8dad1;font-size:11px;line-height:1.7}
+.c4-disclosure strong{color:#7fe6cc;font-size:10px;letter-spacing:.08em;margin-right:6px}
+.brand-mark{border-color:#1e6864;background:#153833;color:#8ee0ca}
+.button.accent{background:#1e6864;border-color:#1e6864}
+.graph-node[data-selected="true"] circle{fill:#1e6864;stroke:#a4f0db}
+.embed .c4-disclosure{display:none}

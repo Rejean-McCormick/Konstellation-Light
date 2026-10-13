@@ -1,5 +1,11 @@
 # Déployer Konstellation Light
 
+## Porte de diffusion C4 (v0.5)
+
+**Seule la démonstration synthétique épinglée peut être préparée pour GitHub Pages aujourd’hui.** Le GUI, le workflow Pages et le contrôle Node interdisent toute collection réelle dans ce flux tant que les preuves C1/C2/C3 ne sont pas adoptées et validées. Pour un build d'une collection personnelle, reste en **prévisualisation locale** ou export de revue; ne publie pas ses octets dans un repo public.
+
+Pour inspecter l'admissibilité de la démo : `node scripts/c4-publication-gate.mjs --site light/site`. Statut `BLOCK_REAL_COLLECTION` = intégrité technique mais aucune autorisation publique établie.
+
 ## Préparer
 
 Utiliser l'application graphique `Konstellation-Light.pyw`. Le dossier `light/site` contient initialement une **démonstration publique** ; il ne reflète pas automatiquement tes vrais Kristals. Pour d'autres données, sélectionner une collection synchronisée v10 et confirmer explicitement la diffusion publique.

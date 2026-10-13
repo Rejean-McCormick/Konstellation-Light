@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       collection_directory:
-        description: 'Optional: repository-relative PUBLIC verified Kristal v10 collection path, containing kristals/index.json. Empty = bundled public demo.'
+        description: 'C4 locked: leave empty for the pinned synthetic demo. Real collections are BLOCKED pending C1/C2/C3 approval.'
         required: false
         type: string
         default: ''
@@ -38,6 +38,8 @@ jobs:
         run: |
           echo 'C4 safety gate: publication de collections réelles désactivée sans preuve C3 acceptée.' >&2
           exit 1
+      - name: Refuse any non-demo content in the Pages artifact
+        run: node scripts/c4-publication-gate.mjs --site light/site
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload site artifact

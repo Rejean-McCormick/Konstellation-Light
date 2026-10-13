@@ -1,0 +1,69 @@
+SMART DUMPER INDEX
+==================
+generated_at: 2026-10-12T18:59:17.430130
+source_root: C:\mycode\Konstellation\Konstellation-Light
+mode: snapshot
+zip_file: Konstellation-Light_Code_snapshot.zip
+embedded_index: SMARTDUMP_INDEX.txt
+file_count: 56
+total_bytes: 300741
+compression: ZIP_DEFLATED level 1
+
+FILES
+-----
+.github/workflows/konstellation-light-intake.yml	2371 bytes
+.github/workflows/konstellation-light-pages.yml	1833 bytes
+.gitignore	65 bytes
+CHANGELOG.md	2916 bytes
+Construire-Light.pyw	245 bytes
+Deployer-Light.pyw	246 bytes
+docs/ARCHITECTURE.md	9079 bytes
+docs/C4_PUBLICATION_INTAKE.md	6172 bytes
+docs/DEPLOIEMENT.md	3586 bytes
+examples/ekole-curation-demo.json	3354 bytes
+Explorer-Ekole-Autochtones.pyw	251 bytes
+FILETREE.txt	1437 bytes
+GitBook-Light.pyw	247 bytes
+GitSink.bat	1863 bytes
+Konstellation-Light.pyw	247 bytes
+light/site/.nojekyll	0 bytes
+light/site/app.js	22691 bytes
+light/site/data/catalog.json	701 bytes
+light/site/data/pack-7be42c0936a6ae5c12f5373bba888ee96a2cc9feb36d23a721e3482da86f457f.json	11383 bytes
+light/site/graph-core.mjs	1718 bytes
+light/site/index.html	5225 bytes
+light/site/style.css	11067 bytes
+light/site/sw.js	1315 bytes
+light/src/app.js	22691 bytes
+light/src/graph-core.mjs	1718 bytes
+light/src/index.html	5225 bytes
+light/src/style.css	11067 bytes
+light/src/sw.js	1315 bytes
+Previsualiser-Ekole.pyw	250 bytes
+Previsualiser-Light.pyw	247 bytes
+README.md	4847 bytes
+README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md	3424 bytes
+README_KONSTELLATION_LIGHT_EKOLE_NEXT.md	4665 bytes
+README_LANCEUR_EKOLE_AUTOMATIQUE.md	3840 bytes
+scripts/build-light.mjs	8448 bytes
+scripts/build-semantic-preview.mjs	4770 bytes
+scripts/import-pinned-collection.mjs	5938 bytes
+scripts/project-ekole-encyclopedia.mjs	3556 bytes
+scripts/serve-light.mjs	1536 bytes
+server/errors.mjs	364 bytes
+server/integrations/kristal-v10.mjs	16148 bytes
+SHA256SUMS.txt	4948 bytes
+SNAPSHOT_INDEX.txt	1458 bytes
+tests/graph-navigation.test.mjs	4928 bytes
+tests/helpers/light-fixture.mjs	3431 bytes
+tests/kristal-v10.test.mjs	6963 bytes
+tests/light.test.mjs	6045 bytes
+tests/pinned-intake.test.mjs	5762 bytes
+tests/test_ekole_auto_preview.py	7694 bytes
+tests/test_windows_tools.py	4378 bytes
+tools/__init__.py	55 bytes
+tools/ekole_auto_preview.py	14180 bytes
+tools/light_core.py	11884 bytes
+tools/light_gui.py	18035 bytes
+VERSION	30 bytes
+ZmartZnap.pyw	22889 bytes

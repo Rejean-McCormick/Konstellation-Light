@@ -97,6 +97,42 @@ def validated_site(site: Path) -> dict:
     return {"revisions": len(entries), "kristals": len({x['slug'] for x in entries}), "files": len(permitted)}
 
 
+
+def validate_demo_for_staging(site: Path) -> dict:
+    """Fail closed: checkout staging could become public on the next manual Git push.
+
+    This verifies the exact bundled demo, not a C1/C2/C3 qualification.
+    The JSON pin is a repository-controlled accident guard, not a trust anchor.
+    """
+    site = Path(site)
+    verified = validated_site(site)
+    pin = _load_json(ROOT / "config" / "c4-demo-pin.json")
+    catalog_file = site / "data" / "catalog.json"
+    catalog = _load_json(catalog_file)
+    entries = catalog["entries"]
+    if pin.get("format") != "konstellation.light-demo-pin/1.0" or len(entries) != 1:
+        raise LightError("C4 : seuls les fichiers de la démo épinglée peuvent être préparés pour GitHub Pages.")
+    entry = entries[0]
+    bundle_file = site / entry["path"]
+    bundle = _load_json(bundle_file)
+    assets = {name: hashlib.sha256((site / name).read_bytes()).hexdigest()
+              for name in (".nojekyll", "app.js", "graph-core.mjs", "index.html", "style.css", "sw.js")}
+    if not (
+        assets == pin.get("site_assets_sha256")
+        and entry.get("slug") == pin.get("slug")
+        and entry.get("revision") == pin.get("revision")
+        and entry.get("state_ref") == pin.get("state_ref")
+        and bundle.get("state_ref") == pin.get("state_ref")
+        and bundle.get("view_kind") == "derived-hosting-navigation"
+        and bundle.get("source") is None
+        and "mode" not in entry
+        and hashlib.sha256(catalog_file.read_bytes()).hexdigest() == pin.get("catalog_sha256")
+        and hashlib.sha256(bundle_file.read_bytes()).hexdigest() == pin.get("bundle_sha256")
+    ):
+        raise LightError("C4 : préparation de collection réelle BLOQUÉE sans qualification et autorisation indépendantes.")
+    return verified
+
+
 def build_public_collection(collection: Path, revision: str, *, append=False,
                             repository="", commit="", project: Path = ROOT) -> str:
     project = Path(project).resolve()
@@ -153,7 +189,7 @@ def prepare_checkout(site: Path, checkout: Path) -> Path:
     Existing Light folder is backed up outside the Git checkout.
     """
     site = Path(site).resolve()
-    validated_site(site)
+    validate_demo_for_staging(site)
     checkout = Path(checkout).resolve()
     if checkout == site or checkout in site.parents or site in checkout.parents:
         raise LightError("Le dépôt cible ne peut pas contenir le dossier source (ni l'inverse).")

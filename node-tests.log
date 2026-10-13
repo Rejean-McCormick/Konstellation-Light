@@ -1,0 +1,220 @@
+TAP version 13
+# Subtest: C4 preflight: pins only bundled demonstration, without treating it as qualified
+ok 1 - C4 preflight: pins only bundled demonstration, without treating it as qualified
+  ---
+  duration_ms: 3.07144
+  type: 'test'
+  ...
+# Subtest: C4 preflight: integrity-valid REAL collection remains publication BLOCKED
+ok 2 - C4 preflight: integrity-valid REAL collection remains publication BLOCKED
+  ---
+  duration_ms: 246.31117
+  type: 'test'
+  ...
+# Subtest: C4 preflight: detects bytes changed, unlisted files and missing content
+ok 3 - C4 preflight: detects bytes changed, unlisted files and missing content
+  ---
+  duration_ms: 10.542245
+  type: 'test'
+  ...
+# Subtest: C4 preflight: symlinks rejected before publication
+ok 4 - C4 preflight: symlinks rejected before publication
+  ---
+  duration_ms: 3.672972
+  type: 'test'
+  ...
+# Subtest: C4 preflight: workflow enforces Pages demo-only and preview never deploys
+ok 5 - C4 preflight: workflow enforces Pages demo-only and preview never deploys
+  ---
+  duration_ms: 0.469104
+  type: 'test'
+  ...
+# Subtest: curseur borné entre 3 et 25 et 8 par défaut
+ok 6 - curseur borné entre 3 et 25 et 8 par défaut
+  ---
+  duration_ms: 0.845418
+  type: 'test'
+  ...
+# Subtest: navigation centrée sur les voisins réels, sans ajout artificiel
+ok 7 - navigation centrée sur les voisins réels, sans ajout artificiel
+  ---
+  duration_ms: 11.59024
+  type: 'test'
+  ...
+# Subtest: navigation sans mutation et retour
+ok 8 - navigation sans mutation et retour
+  ---
+  duration_ms: 0.362163
+  type: 'test'
+  ...
+# Subtest: curation explicite produit site statique vérifiable, jamais un bundle v10
+ok 9 - curation explicite produit site statique vérifiable, jamais un bundle v10
+  ---
+  duration_ms: 247.499806
+  type: 'test'
+  ...
+# Subtest: curation rejette les relations inventées et empêche la publication publique implicite
+ok 10 - curation rejette les relations inventées et empêche la publication publique implicite
+  ---
+  duration_ms: 97.823614
+  type: 'test'
+  ...
+# Subtest: adaptateur Kristal v4: extrait des faits et leurs sources, pas les exercices/corrigés
+ok 11 - adaptateur Kristal v4: extrait des faits et leurs sources, pas les exercices/corrigés
+  ---
+  duration_ms: 148.288619
+  type: 'test'
+  ...
+# Subtest: v10: collection index, byte digests and derived operational navigation
+ok 12 - v10: collection index, byte digests and derived operational navigation
+  ---
+  duration_ms: 15.908166
+  type: 'test'
+  ...
+# Subtest: v10: refuses tampered byte contents, no trust by filename
+ok 13 - v10: refuses tampered byte contents, no trust by filename
+  ---
+  duration_ms: 11.644557
+  type: 'test'
+  ...
+# Subtest: v10: refuses index digest mismatch
+ok 14 - v10: refuses index digest mismatch
+  ---
+  duration_ms: 109.811197
+  type: 'test'
+  ...
+# Subtest: v10: refuses unmanaged file or symlink
+ok 15 - v10: refuses unmanaged file or symlink
+  ---
+  duration_ms: 8.952999
+  type: 'test'
+  ...
+# Subtest: v10: refuses budget exhaustion and missing required files
+ok 16 - v10: refuses budget exhaustion and missing required files
+  ---
+  duration_ms: 5.114167
+  type: 'test'
+  ...
+# Subtest: v10: refuses manifest/index disagreement, even with file digests unchanged
+ok 17 - v10: refuses manifest/index disagreement, even with file digests unchanged
+  ---
+  duration_ms: 8.175567
+  type: 'test'
+  ...
+# Subtest: v10: rejects malicious relative paths in declared files
+ok 18 - v10: rejects malicious relative paths in declared files
+  ---
+  duration_ms: 6.176039
+  type: 'test'
+  ...
+# Subtest: light: refuses build without explicit public intention
+ok 19 - light: refuses build without explicit public intention
+  ---
+  duration_ms: 52.393012
+  type: 'test'
+  ...
+# Subtest: light: build verifies v10 and generates a deterministic static bundle
+ok 20 - light: build verifies v10 and generates a deterministic static bundle
+  ---
+  duration_ms: 169.249471
+  type: 'test'
+  ...
+# Subtest: light: refuses tampered source before publishing
+ok 21 - light: refuses tampered source before publishing
+  ---
+  duration_ms: 70.515903
+  type: 'test'
+  ...
+# Subtest: light: append retains verified previous revisions and allows comparison
+ok 22 - light: append retains verified previous revisions and allows comparison
+  ---
+  duration_ms: 746.267035
+  type: 'test'
+  ...
+# Subtest: light: tampered previous bundle is not silently carried forward
+ok 23 - light: tampered previous bundle is not silently carried forward
+  ---
+  duration_ms: 204.627495
+  type: 'test'
+  ...
+# Subtest: light: commit links require pinned GitHub URL and full SHA
+ok 24 - light: commit links require pinned GitHub URL and full SHA
+  ---
+  duration_ms: 217.742869
+  type: 'test'
+  ...
+# Subtest: light: append refuses mutation of the same slug@revision and preserves the old output
+ok 25 - light: append refuses mutation of the same slug@revision and preserves the old output
+  ---
+  duration_ms: 130.759598
+  type: 'test'
+  ...
+# Subtest: light: failed append leaves previously published files unchanged
+ok 26 - light: failed append leaves previously published files unchanged
+  ---
+  duration_ms: 157.962736
+  type: 'test'
+  ...
+# Subtest: light: imported source pin cannot be relabeled as another GitHub commit
+ok 27 - light: imported source pin cannot be relabeled as another GitHub commit
+  ---
+  duration_ms: 73.69331
+  type: 'test'
+  ...
+# Subtest: intake: exact SHA import of synthetic public-like collection, no qualification claim
+ok 28 - intake: exact SHA import of synthetic public-like collection, no qualification claim
+  ---
+  duration_ms: 240.750863
+  type: 'test'
+  ...
+# Subtest: intake: rejects unexpected repository, SHA, missing index digest
+ok 29 - intake: rejects unexpected repository, SHA, missing index digest
+  ---
+  duration_ms: 73.172678
+  type: 'test'
+  ...
+# Subtest: intake: refuses index pin mismatch without a leftover destination
+ok 30 - intake: refuses index pin mismatch without a leftover destination
+  ---
+  duration_ms: 456.541413
+  type: 'test'
+  ...
+# Subtest: intake: refuses a tampered public-like surface pinned at a new exact SHA
+ok 31 - intake: refuses a tampered public-like surface pinned at a new exact SHA
+  ---
+  duration_ms: 274.231419
+  type: 'test'
+  ...
+# Subtest: intake: refuses unlisted collection subdirectories and symlinks
+ok 32 - intake: refuses unlisted collection subdirectories and symlinks
+  ---
+  duration_ms: 120.089645
+  type: 'test'
+  ...
+# Subtest: intake: refuses a committed symbolic link in public-like tree
+ok 33 - intake: refuses a committed symbolic link in public-like tree
+  ---
+  duration_ms: 90.549667
+  type: 'test'
+  ...
+# Subtest: intake: workflow cannot deploy to Pages, no write token
+ok 34 - intake: workflow cannot deploy to Pages, no write token
+  ---
+  duration_ms: 0.493529
+  type: 'test'
+  ...
+# Subtest: intake: main Pages workflow refuses all collection paths pending C3 qualification gate
+ok 35 - intake: main Pages workflow refuses all collection paths pending C3 qualification gate
+  ---
+  duration_ms: 0.222646
+  type: 'test'
+  ...
+1..35
+# tests 35
+# suites 0
+# pass 35
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2283.10237

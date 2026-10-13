@@ -6,7 +6,7 @@ import shutil
 import tempfile
 import unittest
 from zipfile import ZipFile
-from tools.light_core import (ROOT, LightError, build_public_collection, export_site_zip,
+from tools.light_core import (ROOT, LightError, build_public_collection, export_site_zip, validate_demo_for_staging,
                               generate_gitbook_note, prepare_checkout, site_dir, start_preview,
                               validated_site)
 
@@ -27,6 +27,22 @@ class WindowsToolsTest(unittest.TestCase):
             self.assertIn('index.html', z.namelist())
             self.assertIn('data/catalog.json', z.namelist())
             self.assertNotIn('light/site/index.html', z.namelist())
+
+    def test_pages_checkout_staging_accepts_only_exact_demo(self):
+        self.assertEqual(validate_demo_for_staging(self.site)['revisions'], 1)
+        # This remains a *byte-valid* site after a rebuilt pack/catalog, but
+        # the source is not the fixed synthetic Pages demo.
+        catalog = json.loads((self.site / 'data/catalog.json').read_text())
+        catalog['entries'][0]['revision'] = 'not-the-approved-demo'
+        payload = self.site / 'data/catalog.json'
+        payload.write_text(json.dumps(catalog), encoding='utf-8')
+        self.assertEqual(validated_site(self.site)['revisions'], 1)
+        with self.assertRaisesRegex(LightError, 'C4'):
+            validate_demo_for_staging(self.site)
+        checkout = self.tmp / 'repo'; checkout.mkdir(); (checkout / '.git').mkdir()
+        with self.assertRaisesRegex(LightError, 'C4'):
+            prepare_checkout(self.site, checkout)
+        self.assertFalse((checkout / 'docs').exists())
 
     def test_cannot_export_corrupt_bundle(self):
         catalog = json.loads((self.site/'data/catalog.json').read_text())

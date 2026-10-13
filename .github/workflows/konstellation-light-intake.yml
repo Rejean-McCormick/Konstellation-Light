@@ -49,6 +49,16 @@ jobs:
             --revision "$SOURCE_COMMIT" \
             --repository https://github.com/Rejean-McCormick/kristal-public \
             --commit "$SOURCE_COMMIT"
+      - name: Confirm the preview is NOT a qualified Pages publication
+        run: |
+          set +e
+          node scripts/c4-publication-gate.mjs --site "$RUNNER_TEMP/light-preview"
+          CODE=$?
+          set -e
+          if [ "$CODE" -ne 3 ]; then
+            echo "Expected transport-valid but publication-BLOCKED status 3; got $CODE" >&2
+            exit 1
+          fi
       - name: Upload preview, NOT GitHub Pages
         uses: actions/upload-artifact@v4
         with:

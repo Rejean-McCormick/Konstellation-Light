@@ -4,7 +4,7 @@
 
 # Konstellation Light
 
-**Standalone Windows-oriented toolkit and static website for browsing verified public Kristal v10 collections.** This project is separate from the full Konstellation server. It uses a v10 collection reader, a navigation compiler and a lightweight static interface; it does not alter Kristal semantic state.
+**Standalone Windows-oriented toolkit and static website for browsing v10 collection read surfaces with byte-integrity checks.** Actual publication authorization is **not** inferred by Light. This project is separate from the full Konstellation server. It uses a v10 collection reader, a navigation compiler and a lightweight static interface; it does not alter Kristal semantic state.
 
 ## Installation
 
@@ -17,6 +17,20 @@ Reference folder: `C:\mycode\Konstellation\Konstellation-Light`. Extract project
 
 The `.pyw` files are Python GUIs, not compiled `.exe` files. They do not automatically execute remote Git operations or ask for GitHub tokens.
 
+## C4 publishing boundary — v0.5 preview
+
+**Current behavior:** `light/site` contains an explicitly pinned **synthetic demonstration**. The manual GitHub Pages workflow now runs `node scripts/c4-publication-gate.mjs --site light/site` before upload. **Any real v10 collection is blocked from Pages**, even if its transport hashes verify; C1 qualification, C2 authorization, and C3 immutable-release proofs are not yet ratified and verified in C4. The pinned input workflow remains preview-only; neither `repository_dispatch` nor a Git commit nor `--public YES` grants permission to publish. See [C4 status and gates](docs/C4_PUBLICATION_INTAKE.md).
+
+Run locally to inspect the static site without deploying:
+
+```bash
+node scripts/c4-publication-gate.mjs --site light/site
+node --test tests/*.test.mjs
+python -m unittest discover -s tests
+```
+
+The Windows **Preview** tab now includes a C4 check. `Deployer-Light.pyw` may stage **only the exact pinned demo** in a Git checkout; ZIP export of other verified previews requires explicit review and does not prove public authorization.
+
 ## Three deployment paths
 
 ### Export a static ZIP
@@ -25,7 +39,7 @@ In `Deployer-Light.pyw`, choose the ZIP export. The result contains static site 
 
 ### Copy into an existing GitHub Pages checkout
 
-Choose an existing local Git checkout containing `.git`. The tool copies the site to `docs/konstellation-light/` and keeps previous files in a hidden **sibling backup directory outside the Git checkout**. You must still review, commit and push changes yourself, and configure GitHub Pages to serve the selected branch from `/docs`. The embedded site is then available under `/konstellation-light/` on that Pages host. Never copy a private Kristal into a public Pages target.
+For the current C4 gate, only the exact pinned **synthetic demo** can be copied. Choose an existing local Git checkout containing `.git`. The tool copies the site to `docs/konstellation-light/` and keeps previous files in a hidden **sibling backup directory outside the Git checkout**. You must still review, commit and push changes yourself, and configure GitHub Pages to serve the selected branch from `/docs`. The embedded site is then available under `/konstellation-light/` on that Pages host. Never copy a private Kristal into a public Pages target.
 
 Alternatively, the manual `.github/workflows/konstellation-light-pages.yml` workflow deploys `light/site/` from a dedicated repository; see the [deployment guide](docs/DEPLOIEMENT.md).
 
@@ -35,7 +49,7 @@ After publishing the site over HTTPS, `GitBook-Light.pyw` can generate `exports/
 
 ## Build and verify
 
-The GUI requires explicit confirmation that the selected collection is **public**. It does not infer privacy authorization from GitHub metadata.
+The GUI requires explicit confirmation of **public exposure intent** for builds. That checkbox is not a proof of C1/C2/C3 authority, and the resulting build is a **review-only preview** until qualified.
 
 ```powershell
 cd C:\mycode\Konstellation\Konstellation-Light
@@ -48,7 +62,7 @@ python -m unittest discover -s tests -p "test_windows_tools.py"
 
 ## Security and limitations
 
-- Exported navigation is **derived**, not a new semantic authority, publication record or activation event.
+- Exported navigation is **derived**, not a new semantic authority, publication record or activation event. **Konstellation (full)** owns navigation across all accessible local/private Kristals; Light is limited to a public static subset.
 - Files, manifests, paths, the collection index and declared SHA-256 digests are checked before build; this is not independent proof of semantic correctness.
 - A public site may expose every included data file. Explicit data-owner authorization must precede export.
 - The static navigator does not implement every server-side Konstellation Lens.

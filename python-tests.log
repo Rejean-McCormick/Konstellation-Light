@@ -1,0 +1,21 @@
+test_archive_rejects_traversal_or_wrong_identity (test_ekole_auto_preview.OneClickTests.test_archive_rejects_traversal_or_wrong_identity) ... ok
+test_compile_cache_and_source_updates (test_ekole_auto_preview.OneClickTests.test_compile_cache_and_source_updates) ... ok
+test_detects_nested_snapshot_instead_of_misleading_missing (test_ekole_auto_preview.OneClickTests.test_detects_nested_snapshot_instead_of_misleading_missing) ... ok
+test_fails_when_missing_or_wrong_kristal (test_ekole_auto_preview.OneClickTests.test_fails_when_missing_or_wrong_kristal) ... ok
+test_find_ekole_from_sibling_or_env (test_ekole_auto_preview.OneClickTests.test_find_ekole_from_sibling_or_env) ... ok
+test_local_http_and_install_guardrails (test_ekole_auto_preview.OneClickTests.test_local_http_and_install_guardrails) ... ok
+test_missing_kristal_shows_correct_root_and_restoration (test_ekole_auto_preview.OneClickTests.test_missing_kristal_shows_correct_root_and_restoration) ... ok
+test_modified_curation_is_never_overwritten (test_ekole_auto_preview.OneClickTests.test_modified_curation_is_never_overwritten) ... ok
+test_cannot_export_corrupt_bundle (test_windows_tools.WindowsToolsTest.test_cannot_export_corrupt_bundle) ... ok
+test_checkout_must_be_git (test_windows_tools.WindowsToolsTest.test_checkout_must_be_git) ... ok
+test_demo_is_valid_and_site_zip_is_extractable (test_windows_tools.WindowsToolsTest.test_demo_is_valid_and_site_zip_is_extractable) ... ok
+test_gitbook_https_and_safe_embed (test_windows_tools.WindowsToolsTest.test_gitbook_https_and_safe_embed) ... ok
+test_no_undeclared_files (test_windows_tools.WindowsToolsTest.test_no_undeclared_files) ... ok
+test_pages_checkout_staging_accepts_only_exact_demo (test_windows_tools.WindowsToolsTest.test_pages_checkout_staging_accepts_only_exact_demo) ... ok
+test_prepare_local_git_checkout_and_backup (test_windows_tools.WindowsToolsTest.test_prepare_local_git_checkout_and_backup) ... ok
+test_preview_http_and_no_dotfiles (test_windows_tools.WindowsToolsTest.test_preview_http_and_no_dotfiles) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 1.518s
+
+OK

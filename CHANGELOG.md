@@ -1,3 +1,12 @@
+## 0.5.0-c4-demo-gate-preview — Kristal v10 C4 boundaries (2026-10-12)
+
+- New `scripts/c4-publication-gate.mjs`: verifies every bundle and the exact pinned **synthetic demo** before manual GitHub Pages deployment; any other collection returns `BLOCK_REAL_COLLECTION`, even if all hashes match. Pin is a repository review guard, not an authorization signature.
+- GitHub Pages workflow performs the C4 preflight immediately before site upload. Pinned intake continues to create **review-only artifacts**, and now checks `BLOCK_REAL_COLLECTION` explicitly.
+- Windows GUI now provides a **C4 status** check; checkout staging refuses any non-demo site, while ZIP export remains an explicitly confirmed review operation.
+- Browser displays the distinction between SHA-256 byte integrity and publication/qualification; the revision label no longer claims `published` status, and the dark UI uses the `#1E6864` accent.
+- The existing v10 adapter, Ekole local previews, append-only revision integrity, and Source Pin transport checks remain in place. No C1/C2/C3 receipt verifier has been added; real publication stays blocked.
+- Added JS/Python regression tests, source-pinning documentation, regenerated site, and file manifest. **No live deployment or private collection exposure.**
+
 ## v0.4 — Diagnostic des chemins et restauration non destructive
 - La racine Ekole est reconnue même lorsque le Kristal autochtone v4 manque.
 - L’onglet Ekole affiche l’état de la source, son chemin canonique et les cas d’extraction imbriquée.

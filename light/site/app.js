@@ -99,7 +99,7 @@ function focusOn(id) {
 function lensMeta() {
   return {
     constellation: ['Carte des relations', state.bundle.view_kind === 'derived-semantic-preview' ? 'Navigation sur une curation de connaissances candidate, non validée ni publiée.' : 'Relations techniques déclarées entre état, artefacts et fichiers.'],
-    registry: ['Répertoire vérifié', 'Liste complète des éléments techniques présents dans le bundle.'],
+    registry: ['Répertoire des données du bundle', 'Liste complète des éléments techniques présents dans le bundle.'],
     trace: ['Chaîne de traçabilité', 'Empreintes de surface et engagements déclarés, sans validation d’autorité.'],
     compare: ['Comparaison de versions', 'Différences observées entre deux bundles du même Kristal.'],
   }[state.lens];
@@ -112,7 +112,7 @@ function render() {
   $('metric-files').textContent = semantic ? '—' : String(data.metrics.files);
   $('metric-members').textContent = String(data.metrics.members);
   $('metric-relations').textContent = String(data.edges.length);
-  $('metric-verified').textContent = semantic ? '⚠ Candidat local (SHA-256 de transport)' : data.verification.byteDigestsVerified ? '✓ Octets vérifiés au build' : 'Non vérifié';
+  $('metric-verified').textContent = semantic ? '⚠ Candidat local (SHA-256 de transport)' : data.verification.byteDigestsVerified ? '✓ Octets conformes au manifeste' : 'Non vérifié';
   $('graph-controls').hidden = state.lens !== 'constellation';
   $('satellites').value = String(state.satellites); $('satellites-count').textContent = String(state.satellites);
   $('graph-back').disabled = state.history.length < 2;
@@ -191,7 +191,7 @@ function drawTrace(target){ const d=state.bundle,holder=element('div','evidence'
 }
 async function drawCompare(target){
   const versions=existingRevisions(state.slug).filter(x=>x.revision!==state.revision);
-  if(!versions.length){target.append(element('div','empty','Une deuxième révision vérifiée du même Kristal est nécessaire pour comparer.'));$('truncation').textContent='Aucune comparaison artificielle';return;}
+  if(!versions.length){target.append(element('div','empty','Une deuxième révision contrôlée du même Kristal est nécessaire pour comparer.'));$('truncation').textContent='Aucune comparaison artificielle';return;}
   const old=versions[versions.length-1];const heading=element('p','',`Comparaison de « ${state.revision} » avec « ${old.revision} »`);target.append(heading);
   try {const other=await loadPack(old); if(state.lens!=='compare')return;
     const identity=(n)=>n.kind+'\u0000'+n.label;

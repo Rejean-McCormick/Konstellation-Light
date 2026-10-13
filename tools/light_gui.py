@@ -118,6 +118,8 @@ class Console(tk.Tk):
         ttk.Label(f,text="Site : light/site",font=("Consolas",11)).pack(anchor="w",pady=12)
         ttk.Button(f,text="Ouvrir Konstellation Light",command=self._preview).pack(anchor="w",pady=12)
         ttk.Button(f,text="Vérifier les bundles statiques",command=lambda:self._worker("Vérification du site",lambda: validated_site(site_dir(ROOT)))).pack(anchor="w",pady=5)
+        ttk.Button(f,text="C4 · Vérifier l’admissibilité GitHub Pages (démo uniquement)",
+                   command=lambda:self._worker("Contrôle C4",self._c4_status)).pack(anchor="w",pady=5)
         ttk.Label(f,text="La prévisualisation écoute uniquement sur 127.0.0.1:4177.").pack(anchor="w",pady=14)
 
     def _make_ekole(self):
@@ -139,6 +141,16 @@ class Console(tk.Tk):
             self.ekole_status.set("Sélectionner la racine Ekole. Emplacement recommandé : C:\\mycode\\Ekole")
             return
         self.ekole_status.set(ekole_diagnosis(Path(folder))['message'])
+
+    def _c4_status(self):
+        from tools.light_core import validate_demo_for_staging
+        try:
+            result = validate_demo_for_staging(site_dir(ROOT))
+        except LightError as exc:
+            raise LightError("C4 BLOQUÉ : " + str(exc) + "\nIntégrité SHA seule ≠ qualification C1/C2/C3.") from exc
+        return (f"C4 : démonstration synthétique épinglée confirmée ({result['revisions']} révision).\n"
+                "Cela autorise uniquement la PRÉPARATION de cette démo. "
+                "Aucune publication/qualification d’un véritable Kristal n'est établie.")
 
     def _ekole_restore(self):
         root=self.ekole_folder.get().strip()
@@ -281,12 +293,17 @@ class Console(tk.Tk):
     def _export(self):
         dest=filedialog.asksaveasfilename(defaultextension=".zip",filetypes=[("ZIP","*.zip")],
                  initialfile="Konstellation-Light-Site-Public.zip")
-        if dest:self._worker("Export statique",lambda:export_site_zip(site_dir(ROOT),Path(dest)))
+        if dest:
+            if not messagebox.askyesno("C4 — archive de prévisualisation",
+                "Le ZIP peut contenir des données d’une collection réelle. Son intégrité SHA-256 ne prouve ni autorisation publique, ni qualification C1/C2/C3.\n\n"
+                "Créer cette archive pour révision locale, sans publication automatique ?"):
+                return
+            self._worker("Export statique (non qualifié)",lambda:export_site_zip(site_dir(ROOT),Path(dest)))
 
     def _deploy(self):
         selected=self.checkout.get().strip()
         if not selected:messagebox.showerror("Dépôt requis","Choisir un dépôt Git local.");return
-        if not messagebox.askyesno("Préparer GitHub Pages", "Copier le site dans docs/konstellation-light du dépôt sélectionné ? Une version existante sera sauvegardée. Aucun push automatique."):
+        if not messagebox.askyesno("C4 — démonstration uniquement", "Seule la démonstration synthétique épinglée peut être préparée pour un dépôt Git local. Les collections réelles sont BLOQUÉES en attente des reçus C1/C2/C3. Aucun commit ni push automatique. Continuer ?"):
             return
         self._worker("Copie vers Git local",lambda:prepare_checkout(site_dir(ROOT),Path(selected)))
 
