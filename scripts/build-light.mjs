@@ -5,7 +5,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
-import { inspectGithubKristal, listGithubKristals, toNavigationPack } from '../server/integrations/kristal-v10.mjs';
+import { inspectGithubKristal, listGithubKristals, toNavigationPack } from '../shared/kristal-v10.mjs';
+import { discoveryProjection } from '../shared/discovery.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const digest = (x) => createHash('sha256').update(x).digest('hex');
@@ -16,7 +17,7 @@ for (let i = 2; i < process.argv.length; i += 2) {
   if (!key.startsWith('--') || !process.argv[i + 1]) throw Error(`Argument invalide: ${key}`);
   options[key.slice(2)] = process.argv[i + 1];
 }
-if (options.help) { console.log('node scripts/build-light.mjs --collection PATH --out PATH --public YES [--revision LABEL] [--repository https://github.com/owner/repo] [--commit SHA] [--append YES]'); process.exit(0); }
+if (options.help) { console.log('node scripts/build-light.mjs --collection PATH --out PATH --public YES [--revision LABEL] [--repository https://github.com/owner/repo] [--commit SHA] [--append YES] [--discovery YES]'); process.exit(0); }
 const publicIntent = options.public === 'YES';
 if (!publicIntent) throw Error('Export refusé : fournir explicitement --public YES (les données seront accessibles publiquement).');
 const collection = options.collection ? path.resolve(options.collection) : '';
@@ -44,6 +45,8 @@ if (fs.existsSync(sourcePinFile)) {
 const revision = options.revision || (gitSHA || 'local');
 if (!/^[a-zA-Z0-9._-]{1,70}$/.test(revision)) throw Error('Révision invalide.');
 const append = options.append === 'YES';
+if (options.discovery !== undefined && options.discovery !== 'YES' && options.discovery !== 'NO') throw Error('--discovery doit être YES ou NO.');
+const includeDiscovery = options.discovery === 'YES';
 const baseCatalogFile = path.join(output, 'data/catalog.json');
 const previous = append && fs.existsSync(baseCatalogFile) ? JSON.parse(fs.readFileSync(baseCatalogFile)) : null;
 if (previous && (previous.format !== 'konstellation.light-catalog/1.0' || !Array.isArray(previous.entries))) throw Error('Ancien catalogue non supporté.');
@@ -56,6 +59,7 @@ for (const item of listed) {
   const pack = toNavigationPack(checked, maxRecords);
   const nodes = pack.entities.map((e) => ({ id: e.id, kind: e.type, label: e.label, description: e.description }));
   const edges = pack.assertions.map((a) => ({ from: a.subject, to: a.value, relation: a.relation }));
+  const selectedDiscovery = includeDiscovery ? discoveryProjection(checked, collection) : null;
   const bundle = {
     format: 'konstellation.light-navigation/1.0',
     view_kind: 'derived-hosting-navigation',
@@ -68,6 +72,7 @@ for (const item of listed) {
     source: repoURL ? { repository: repoURL.replace(/\/$/, ''), commit: gitSHA } : null,
     metrics: { members: checked.state.members.length, files: checked.files.length, bytes: checked.sync.total_bytes },
     nodes, edges,
+    ...(selectedDiscovery ? { discovery: selectedDiscovery } : {}),
   };
   const bytes = json(bundle), sha256 = digest(bytes);
   const filename = `data/pack-${sha256}.json`;
@@ -103,7 +108,7 @@ const catalog = { format:'konstellation.light-catalog/1.0',
   notice: 'Navigation dérivée. Aucun contrôle de signature, publication, activation ou autorité sémantique.',
   entries };
 staged.set('data/catalog.json', json(catalog));
-for (const name of ['index.html','app.js','graph-core.mjs','style.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
+for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','style.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
 staged.set('.nojekyll', Buffer.from(''));
 // Compose a complete site in a sibling directory and swap only after success.
 // Existing deployments must not be left half-updated if source checks or disk I/O fail.
@@ -124,7 +129,7 @@ const backup = path.join(outputParent, `.light-backup-${path.basename(temp)}`);
 let backedUp = false;
 try {
   for (const [rel, bytes] of staged) {
-    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|style\.css|sw\.js|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
+    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|style\.css|sw\.js|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
     const target = path.join(temp, rel);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, bytes);

@@ -1,4 +1,5 @@
-import {clampSatellites, graphNeighborhood, navigationPath} from './graph-core.mjs';
+import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors} from './graph-core.mjs';
+import {portraitFor, orbitPreview} from './profile.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
 // All untrusted labels are inserted with textContent; no semantic authority is inferred.
 const $ = (id) => document.getElementById(id);
@@ -14,8 +15,9 @@ const svgElement = (tag, attributes = {}) => {
   return e;
 };
 const short = (s, n = 34) => String(s).length > n ? `${String(s).slice(0, n - 1)}…` : String(s);
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [] };
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null };
 let toastTimeout;
+let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
 function urlState() {
   const p = new URLSearchParams(location.search);
@@ -48,15 +50,35 @@ async function loadPack(entry) {
   const semantic = obj.view_kind === 'derived-semantic-preview';
   if (semantic && (entry.mode !== 'semantic_preview' || obj.revision !== 'candidate-local' || obj.state_ref !== 'local-curated-not-a-v10-publication')) throw Error('Prévisualisation non autorisée.');
   if (!semantic && entry.mode === 'semantic_preview') throw Error('Mode du catalogue incohérent.');
-  const semanticKinds = new Set(['notion','societe','role','tache','ressource','territoire','periode','evenement','source','cours','competence','pratique','institution']);
+  const semanticKinds = new Set(['notion','societe','role','tache','ressource','territoire','periode','evenement','source','cours','competence','pratique','institution','person','personne','human','place','location','lieu','city','country','region']);
   const ids = new Set();
   for (const n of obj.nodes) {
     if (typeof n.id !== 'string' || n.id.length > 300 || ids.has(n.id) || typeof n.label !== 'string' ||
         n.label.length > 600 || !(semantic ? semanticKinds.has(n.kind) : ['hosted_state','logical_artifact','hosted_file'].includes(n.kind))) throw Error('Nœud du bundle invalide.');
+    if (semantic && n.portrait !== undefined && !/^\.\/images\/[a-f0-9]{64}\.(?:png|jpe?g|webp|gif)$/.test(n.portrait)) throw Error('Image de fiche non conforme.');
     ids.add(n.id);
   }
   for (const e of obj.edges) {
     if (!ids.has(e.from) || !ids.has(e.to) || !(semantic ? /^[a-z0-9][a-z0-9._:-]{0,119}$/i.test(e.relation) : ['lists_file','has_member'].includes(e.relation))) throw Error('Relation dérivée invalide.');
+  }
+  if (obj.discovery !== undefined) {
+    const d=obj.discovery;
+    const own=(x,k)=>Object.prototype.hasOwnProperty.call(x,k);
+    const allowed=new Set(['format','authority','provenance','freshness','classification','organization','native_kind','reader_profile','access_pattern','size_class','tracked_local_bytes','measurement_completeness']);
+    const text=x=>typeof x==='string'&&x.length>0&&x.length<=120&&!/[\x00-\x1f\x7f]/.test(x);
+    if (!d || typeof d!=='object' || Array.isArray(d) || !Object.keys(d).every(k=>allowed.has(k)) ||
+        d.format!=='konstellation.light-discovery-projection/1.0'||d.authority!=='noncanonical_advisory_only'||
+        d.provenance!=='verified_v10_transport'||d.freshness!=='not_independently_verified'||
+        !d.classification||typeof d.classification!=='object'||Array.isArray(d.classification)||
+        !text(d.organization)||!(d.native_kind===null||text(d.native_kind))||!text(d.reader_profile)||!text(d.access_pattern)||
+        !['tiny','small','medium','large','massive'].includes(d.size_class)||
+        !Number.isSafeInteger(d.tracked_local_bytes)||d.tracked_local_bytes<0||
+        !['partial','measured_referenced_local_files'].includes(d.measurement_completeness)||
+        !Object.entries(d.classification).every(([k,v])=>['arketype_version','primary_archetype','supporting_archetypes','primary_usage','usage_slug','usage_family','domain'].includes(k)&&
+          (k==='supporting_archetypes'?Array.isArray(v)&&v.length<=20&&v.every(x=>text(x)&&/^ARK-[0-9]{2,}$/.test(x)):
+           text(v) && (k==='primary_archetype'?/^ARK-[0-9]{2,}$/.test(v):k==='primary_usage'?/^PRF-[0-9]{2,}$/.test(v):true))))
+      throw Error('Métadonnées Discovery invalides.');
+    if (!/^kristal\.reader\/[a-z0-9][a-z0-9-]{0,100}$/.test(d.reader_profile)||!own(d,'classification')) throw Error('Profil Discovery invalide.');
   }
   return obj;
 }
@@ -71,7 +93,7 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
   $('visual').replaceChildren(element('div', 'loading', 'Vérification de l’intégrité du bundle…'));
   try {
     const data = await loadPack(row);
-    state.slug = slug; state.revision = revision; state.bundle = data;
+    state.slug = slug; state.revision = revision; state.bundle = data; state.portraitId = null;
     const validFocus = keepFocus && data.nodes.some(n => n.id === state.selection);
     if (!validFocus) state.selection = data.nodes[0]?.id || null;
     state.history = state.selection ? [state.selection] : [];
@@ -94,7 +116,7 @@ function filteredNodes() {
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
-  state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
+  state.portraitId = null; state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
 }
 function lensMeta() {
   return {
@@ -127,14 +149,34 @@ function render() {
   if (state.lens === 'compare') drawCompare(view);
   drawInspection();
 }
+function profileCard(target, node, opener = null) {
+  target.querySelector('.node-portrait-card')?.remove();
+  const profile=portraitFor(node);
+  if (!profile) return;
+  const card=element('section','node-portrait-card');
+  card.setAttribute('role','dialog');card.setAttribute('aria-label',`Fiche de ${profile.title}`);
+  card.setAttribute('aria-modal','false');
+  const close=element('button','portrait-close','×');close.type='button';close.setAttribute('aria-label','Fermer la fiche');
+  close.addEventListener('click',()=>{state.portraitId=null;card.remove();const toFocus=opener || portraitOpener;if(toFocus?.isConnected)toFocus.focus();portraitOpener=null;});
+  const kind=element('div','portrait-kind',`FICHE · ${profile.typeLabel}`);
+  const visual=element('div','portrait-visual');
+  if(profile.image){const img=element('img');img.loading='lazy';img.decoding='async';img.src=profile.image;img.alt=`Illustration de ${profile.title}`;img.addEventListener('error',()=>visual.replaceChildren(element('span','',profile.symbol)));visual.append(img);}
+  else visual.append(element('span','',profile.symbol));
+  card.append(close,kind,visual,element('h3','',profile.title));
+  if(profile.description)card.append(element('p','',profile.description));
+  for(const field of profile.fields){const row=element('div','portrait-field');row.append(element('strong','',field.name),element('span','',field.value));card.append(row);}
+  card.append(element('p','portrait-note','Données déclarées dans cette projection.'));target.append(card);
+  if(opener){portraitOpener=opener;close.focus();}
+}
 function drawGraph(target, visible) {
   const all=state.bundle.nodes;
   const selected=all.find(n=>n.id===state.selection)||all[0];
   if (!selected) { target.append(element('div','empty','Aucun nœud disponible.'));return; }
   const matched=state.query.trim() ? new Set(visible.map(n=>n.id)) : null;
   const view=graphNeighborhood(all,state.bundle.edges,selected.id,state.satellites,matched);
+  const neighborIndex=buildNeighborIndex(all,state.bundle.edges);
   const shown=view.nodes;
-  const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group','aria-label':'Graphe navigable : Entrée ou clic pour recentrer sur une bulle'});
+  const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group','aria-label':'Graphe navigable : Entrée ou clic pour recentrer sur une bulle. Survolez pour voir les satellites secondaires.'});
   const xy=new Map([[selected.id,{x:380,y:226}]]);
   const count=shown.length-1;
   shown.slice(1).forEach((n,i)=>{const angle=2*Math.PI*i/Math.max(1,count)-Math.PI/2;
@@ -146,6 +188,27 @@ function drawGraph(target, visible) {
     const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link'});
     const tooltip=svgElement('title');tooltip.textContent=edge.relation.replaceAll('_',' ');line.append(tooltip);svg.append(line);
   }
+  let previewGroup=null;
+  const clearPreview=()=>{previewGroup?.remove();previewGroup=null;};
+  const showPreview=(node)=>{
+    clearPreview();
+    if(node.id===selected.id)return;
+    // The center is already visible: exclude it from the preview satellites.
+    const secondary=previewNeighbors(neighborIndex,node.id,[selected.id],6);
+    if(!secondary.length)return;
+    const anchor=xy.get(node.id);
+    const obstacles=[...xy].map(([id,p])=>({...p,r:id===selected.id?43:25}));
+    const positions=orbitPreview(secondary,anchor,760,470,6,obstacles);
+    previewGroup=svgElement('g',{class:'graph-secondary-preview','aria-hidden':'true'});
+    previewGroup.append(svgElement('circle',{cx:anchor.x,cy:anchor.y,r:38,class:'preview-halo'}));
+    for(const child of positions){
+      previewGroup.append(svgElement('line',{x1:anchor.x,y1:anchor.y,x2:child.x,y2:child.y}));
+      previewGroup.append(svgElement('circle',{cx:child.x,cy:child.y,r:18}));
+      const name=svgElement('text',{x:child.x,y:child.y+31,class:'preview-label'});
+      name.textContent=short(child.label,19);previewGroup.append(name);
+    }
+    svg.append(previewGroup);
+  };
   for(const n of shown){const p=xy.get(n.id),central=n.id===selected.id;
     const group=svgElement('g',{class:'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${n.label}`});
     group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?43:23}));
@@ -154,10 +217,27 @@ function drawGraph(target, visible) {
     const tip=svgElement('title');tip.textContent=n.description||n.label;group.append(tip);
     group.addEventListener('click',()=>focusOn(n.id));
     group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(n.id);}});
+    if(!central){group.addEventListener('mouseenter',()=>showPreview(n));group.addEventListener('mouseleave',clearPreview);
+      group.addEventListener('focus',()=>showPreview(n));group.addEventListener('blur',clearPreview);}
     svg.append(group);
   }
+  // Separate buttons, not nested inside the navigation buttons.
+  for(const n of shown){const profile=portraitFor(n);if(!profile)continue;
+    const p=xy.get(n.id),central=n.id===selected.id;
+    const badge=svgElement('g',{class:'graph-portrait-indicator',role:'button',tabindex:'0',
+      'aria-label':`Ouvrir la fiche de ${n.label}`});
+    const x=p.x+(central?33:19),y=p.y-(central?31:18);
+    badge.append(svgElement('circle',{cx:x,cy:y,r:central?12:10}));
+    const mark=svgElement('text',{x,y:y+4});mark.textContent='i';badge.append(mark);
+    const open=(e)=>{e.stopPropagation();clearPreview();state.portraitId=n.id;profileCard(target,n,badge);};
+    badge.addEventListener('click',open);
+    badge.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(e);}});
+    svg.append(badge);
+  }
   target.append(svg);
-  if(view.degree===0) target.append(element('p','graph-empty',state.query?'Aucun voisin correspondant à la recherche. Effacer la recherche pour voir les relations.':'Aucun lien direct déclaré pour cette notion.')); 
+  target.append(element('p','graph-hint','Survolez ou focalisez une bulle pour voir ses satellites · Le bouton « i » ouvre sa fiche.'));
+  if(state.portraitId){const node=all.find(n=>n.id===state.portraitId);if(node)profileCard(target,node);}
+  if(view.degree===0) target.append(element('p','graph-empty',state.query?'Aucun voisin correspondant à la recherche. Effacer la recherche pour voir les relations.':'Aucun lien direct déclaré pour cette notion.'));
   $('truncation').textContent=`${shown.length-1} / ${view.degree} bulles voisines visibles · ${state.satellites} maximum · ${state.bundle.edges.length} relations déclarées`;
 }
 function drawRegistry(target, nodes) {
@@ -224,6 +304,18 @@ function drawInspection(){
   addDefinition(dl,'Type de projection',n.kind);
   addDefinition(dl,'Relations entrantes',d.edges.filter(e=>e.to===n.id).length);
   addDefinition(dl,'State ref',short(d.state_ref,100));
+  if(d.discovery && n.kind==='hosted_state') {
+    const meta=d.discovery, c=meta.classification;
+    if(c.primary_archetype)addDefinition(dl,'Arketype déclaré',c.primary_archetype);
+    if(c.primary_usage)addDefinition(dl,'Usage Arketype déclaré',c.primary_usage);
+    if(c.usage_slug)addDefinition(dl,'Usage',c.usage_slug);
+    if(c.domain)addDefinition(dl,'Domaine déclaré',c.domain);
+    addDefinition(dl,'Organisation',meta.organization);
+    addDefinition(dl,'Lecteur conseillé (non exécuté)',meta.reader_profile);
+    addDefinition(dl,'Accès suggéré',meta.access_pattern);
+    addDefinition(dl,'Taille des fichiers référencés',`${meta.tracked_local_bytes.toLocaleString('fr-FR')} octets · ${meta.size_class}`);
+    addDefinition(dl,'Fraîcheur du profil','Non établie indépendamment');
+  }
   if(n.period)addDefinition(dl,'Période',n.period);
   if(n.source)addDefinition(dl,'Source déclarée (non vérifiée)',n.source);
   if(d.view_kind==='derived-semantic-preview') {
@@ -270,6 +362,7 @@ $('collection').addEventListener('change',()=>{const s=$('collection').value;sta
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
 for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.lens=btn.dataset.lens;state.page=0;render();urlState();});
 $('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;render();urlState();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
 $('satellites').addEventListener('input',()=>{state.satellites=clampSatellites($('satellites').value);render();urlState();});
 $('graph-back').addEventListener('click',()=>{if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();});
 $('graph-home').addEventListener('click',()=>{if(!state.bundle)return;focusOn(state.bundle.nodes[0].id);});

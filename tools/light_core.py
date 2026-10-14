@@ -23,7 +23,8 @@ from zipfile import ZipFile, ZIP_DEFLATED
 ROOT = Path(__file__).resolve().parents[1]
 SHA256 = re.compile(r"sha256:[0-9a-f]{64}\Z")
 PACK_PATH = re.compile(r"data/pack-[0-9a-f]{64}\.json\Z")
-SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "style.css", "sw.js", "data/catalog.json"}
+IMAGE_PATH = re.compile(r"\./images/([0-9a-f]{64})\.(png|jpg|jpeg|webp|gif)\Z")
+SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "profile.mjs", "style.css", "sw.js", "data/catalog.json"}
 
 
 class LightError(ValueError):
@@ -83,6 +84,23 @@ def validated_site(site: Path) -> dict:
         if parsed.get("format") != "konstellation.light-navigation/1.0" or parsed.get("semantic_authority") is not False:
             raise LightError(f"Données de navigation invalides : {rel}")
         permitted.add(rel)
+        for node in parsed.get('nodes', []):
+            if not isinstance(node, dict):
+                raise LightError('Nœud du bundle invalide.')
+            portrait = node.get('portrait')
+            if portrait is None:
+                continue
+            m = IMAGE_PATH.fullmatch(portrait) if isinstance(portrait, str) else None
+            if parsed.get('view_kind') != 'derived-semantic-preview' or not m:
+                raise LightError('Chemin de portrait non autorisé.')
+            local = portrait[2:]
+            image = site / local
+            if not image.is_file() or image.is_symlink() or image.stat().st_size > 2 * 1024 * 1024:
+                raise LightError('Image de fiche absente, dangereuse ou trop volumineuse.')
+            contents = image.read_bytes()
+            if hashlib.sha256(contents).hexdigest() != m.group(1):
+                raise LightError('Image de fiche modifiée après le build.')
+            permitted.add(local)
     seen_files = set()
     for entry in site.rglob("*"):
         if entry.is_symlink():
@@ -116,7 +134,7 @@ def validate_demo_for_staging(site: Path) -> dict:
     bundle_file = site / entry["path"]
     bundle = _load_json(bundle_file)
     assets = {name: hashlib.sha256((site / name).read_bytes()).hexdigest()
-              for name in (".nojekyll", "app.js", "graph-core.mjs", "index.html", "style.css", "sw.js")}
+              for name in (".nojekyll", "app.js", "graph-core.mjs", "profile.mjs", "index.html", "style.css", "sw.js")}
     if not (
         assets == pin.get("site_assets_sha256")
         and entry.get("slug") == pin.get("slug")
@@ -134,7 +152,7 @@ def validate_demo_for_staging(site: Path) -> dict:
 
 
 def build_public_collection(collection: Path, revision: str, *, append=False,
-                            repository="", commit="", project: Path = ROOT) -> str:
+                            repository="", commit="", include_discovery=False, project: Path = ROOT) -> str:
     project = Path(project).resolve()
     collection = Path(collection).resolve()
     if not (collection / "kristals" / "index.json").is_file():
@@ -148,6 +166,8 @@ def build_public_collection(collection: Path, revision: str, *, append=False,
                "--out", str(site_dir(project)), "--public", "YES", "--revision", revision]
     if append:
         command += ["--append", "YES"]
+    if include_discovery:
+        command += ["--discovery", "YES"]
     if repository or commit:
         if not repository or not commit:
             raise LightError("URL du dépôt GitHub et commit complet obligatoires ensemble.")

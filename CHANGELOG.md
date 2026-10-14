@@ -1,3 +1,11 @@
+## 0.5.1-discovery-arketype-preview — 2026-10-13
+
+- Ajout d'une projection explicitement opt-in des trois manifestes Authoring Kit 3.3 (`--discovery YES`) avec validation SHA-256, contrôle d'identité et champs autorisés limités.
+- Ajout de l'affichage Arketype / profil de lecture dans l'inspecteur, uniquement si les métadonnées ont été projetées.
+- Déplacement du lecteur v10 interne vers `shared/kristal-v10.mjs` ; mise à jour des imports et des tests.
+- Ajout d'un nettoyeur Windows graphique `Nettoyer_Mise_A_Jour.pyw` à sauvegarde extérieure, empreintes figées et confirmation explicite.
+- Le site de démonstration C4 et son épinglage ne sont pas modifiés ; aucune publication de vrai Kristal n'est autorisée.
+
 ## 0.5.0-c4-demo-gate-preview — Kristal v10 C4 boundaries (2026-10-12)
 
 - New `scripts/c4-publication-gate.mjs`: verifies every bundle and the exact pinned **synthetic demo** before manual GitHub Pages deployment; any other collection returns `BLOCK_REAL_COLLECTION`, even if all hashes match. Pin is a repository review guard, not an authorization signature.

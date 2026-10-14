@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
-import { listGithubKristals, inspectGithubKristal, loadGithubKristal, verifyCollectionIndex } from '../server/integrations/kristal-v10.mjs';
+import { listGithubKristals, inspectGithubKristal, loadGithubKristal, verifyCollectionIndex } from '../shared/kristal-v10.mjs';
 
 const digest = (bytes) => 'sha256:' + createHash('sha256').update(bytes).digest('hex');
 // This fixture follows the Framework v10 draft.3 digest projections (not a semantic state generator).

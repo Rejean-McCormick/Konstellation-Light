@@ -24,3 +24,28 @@
 .button.accent{background:#1e6864;border-color:#1e6864}
 .graph-node[data-selected="true"] circle{fill:#1e6864;stroke:#a4f0db}
 .embed .c4-disclosure{display:none}
+
+/* Ephemeral, non-interactive second-ring preview. */
+.graph-secondary-preview { pointer-events: none; animation: secondary-appear .16s ease-out both; }
+.graph-secondary-preview line { stroke: #88d7c5; stroke-width: 1.2; stroke-dasharray: 5 4; opacity: .85; }
+.graph-secondary-preview circle { fill: #17473f; stroke: #a0e3d4; stroke-width: 1.5; filter: drop-shadow(0 2px 4px #061c23); }
+.graph-secondary-preview .preview-halo { fill: #408a78; fill-opacity: .22; stroke: #8de4cb; stroke-opacity: .7; }
+.graph-secondary-preview .preview-label { fill: #e5fff5; font-size: 10px; font-weight: 650; text-anchor: middle; paint-order: stroke; stroke: #0e2230; stroke-width: 3px; stroke-linejoin: round; }
+.graph-portrait-indicator { cursor: pointer; outline: none; }
+.graph-portrait-indicator circle { fill: #268f83; stroke: #effff8; stroke-width: 1.5; }
+.graph-portrait-indicator text { pointer-events: none; fill: white; font-size: 12px; font-weight: 800; text-anchor: middle; }
+.graph-portrait-indicator:hover circle, .graph-portrait-indicator:focus circle { fill: #126b67; stroke: white; stroke-width: 2.5; }
+.node-portrait-card { position: absolute; z-index: 6; right: 14px; top: 16px; width: min(290px, calc(100% - 28px)); max-height: 92%; overflow: auto; padding: 18px; border: 1px solid #4a9e9b; border-radius: 12px; color: #d4eaf5; background: #14283b; box-shadow: 0 12px 35px #050e20e0; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.node-portrait-card .portrait-close { position: absolute; right: 10px; top: 7px; background: transparent; border: 0; font-size: 23px; color: #b8dadd; cursor: pointer; }
+.node-portrait-card .portrait-kind { color: #8cdbc7; font-size: 10px; letter-spacing: 1.6px; font-weight: 750; }
+.node-portrait-card .portrait-visual { display: grid; place-items: center; margin-top: 10px; width: 100%; height: 125px; border-radius: 9px; background: linear-gradient(130deg,#21465d,#24675e); font-size: 56px; color: #a9e9d6; overflow: hidden; }
+.node-portrait-card .portrait-visual img { width: 100%; height: 100%; object-fit: contain; }
+.node-portrait-card h3 { margin: 12px 0 5px; font-size: 18px; line-height: 1.3; color: #f0faff; }
+.node-portrait-card p { margin: 9px 0; }
+.node-portrait-card .portrait-field { border-top: 1px solid #355466; padding: 8px 0; display: grid; gap: 3px; }
+.node-portrait-card .portrait-field strong { text-transform: uppercase; font-size: 10px; color: #8caebd; letter-spacing: .06em; }
+.node-portrait-card .portrait-note { border-top: 1px solid #355466; padding-top: 10px; color: #8caebe; font-size: 10px; }
+@keyframes secondary-appear { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .graph-secondary-preview { animation: none; } }
+
+.graph-hint { color:#a9c4d1; font-size:11px; text-align:center; margin:0 8px 12px; line-height:1.5; }

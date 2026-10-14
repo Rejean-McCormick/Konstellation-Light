@@ -104,3 +104,12 @@ Le déploiement lui-même et les flux privés GitHub/GitBook n'ont pas été tes
 ## 8. Extension C4 v0.5 — gouvernance de la diffusion
 
 Konstellation Light reste un **consommateur statique public** de releases approuvées, non le registre de 126 workspaces locaux, ni le navigateur privé du Konstellation complet. Le garde C4 actif n'accepte que le **site de démonstration synthétique épinglé** et ne transforme pas SHA-256 en preuve d'une qualification C1, autorisation C2, ou publication C3. La procédure de publication réelle reste bloquée tant que les producteurs et consommateurs n'ont pas adopté ensemble un format de reçu vérifiable et sa source de confiance. `config/c4-demo-pin.json` est un outil de revue des octets (défense contre erreur), **pas** une signature cryptographique d'autorité. Le navigateur a une notice explicite indiquant ces frontières et montre des révisions techniques, pas des « versions publiées ».
+
+
+## 9. Alignement Discovery 3.3 / Arketype 1.4 (Light 0.5.1)
+
+Le lecteur v10 a été déplacé vers `shared/kristal-v10.mjs`, afin d'avoir un point d'import interne réutilisable ; **cela ne remplace pas encore le partage inter-dépôts** avec Konstellation complet.
+
+La projection optionnelle `shared/discovery.mjs` lit uniquement des documents **déjà inclus et vérifiés dans la surface v10**. Elle transmet des champs allowlistés au navigateur (`konstellation.light-discovery-projection/1.0`), qui les affiche comme *déclaratifs* dans l'inspecteur. La classification Arketype n'implique pas d'index spécialisé fonctionnel, de fraîcheur ni d'autorisation. Les paramètres de parsing restent propres aux lecteurs et ne sont pas exécutés depuis les manifestes.
+
+La démo C4 épinglée n'est pas régénérée. Les sites issus d'une vraie collection demeurent interdits sur GitHub Pages par les politiques C4 actuelles. Détails : [ALIGNEMENT_DISCOVERY_3_3.md](ALIGNEMENT_DISCOVERY_3_3.md).

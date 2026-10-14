@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = b => createHash('sha256').update(b).digest('hex');
 const PACK = /^data\/pack-([a-f0-9]{64})\.json$/;
-const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
+const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'profile.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
 const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
 export class C4GateError extends Error { constructor(code,message) {super(message);this.name='C4GateError';this.code=code;} }
 const reject = (code,message) => {throw new C4GateError(code,message);};

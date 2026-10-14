@@ -7,12 +7,14 @@ import shutil
 import tempfile
 import unittest
 import zipfile
+import base64
+import subprocess
 from urllib.request import urlopen
 from tools.ekole_auto_preview import (
     RELATIVE_KRISTAL, build_local_preview, find_ekole, install_in_ekole,
     preview_plan, start_available_preview, ekole_diagnosis, restore_autochtones_from_zip,
 )
-from tools.light_core import ROOT, LightError
+from tools.light_core import ROOT, LightError, validated_site
 
 FIXTURE = {
     'payload':{
@@ -36,7 +38,7 @@ class OneClickTests(unittest.TestCase):
         self.project=self.base/'Konstellation'/'Konstellation-Light'
         self.project.mkdir(parents=True)
         for asset in ('scripts/project-ekole-encyclopedia.mjs','scripts/build-semantic-preview.mjs',
-                      'light/src/app.js','light/src/graph-core.mjs','light/src/index.html',
+                      'light/src/app.js','light/src/graph-core.mjs', 'light/src/profile.mjs','light/src/index.html',
                       'light/src/style.css','light/src/sw.js'):
             dest=self.project/asset
             dest.parent.mkdir(parents=True,exist_ok=True)
@@ -102,6 +104,25 @@ class OneClickTests(unittest.TestCase):
         info=ekole_diagnosis(self.ekole)
         self.assertEqual(info['status'],'nested')
         self.assertIn('Ekole_Pack',info['message'])
+
+    def test_local_portrait_is_allowlisted_and_byte_verified(self):
+        sample=json.loads((ROOT/'examples/ekole-curation-demo.json').read_text(encoding='utf8'))
+        sample['nodes'].append({'id':'person-portrait','kind':'person','label':'Portrait de test',
+                                'description':'Fiction', 'portrait':'portraits/figure.png'})
+        sample['edges'].append({'from':'organisation','to':'person-portrait','relation':'test'})
+        cur=self.base/'curation.json'
+        cur.write_text(json.dumps(sample,ensure_ascii=False),encoding='utf8')
+        media=self.base/'portraits'/'figure.png';media.parent.mkdir()
+        media.write_bytes(base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/1sQAAAAASUVORK5CYII='))
+        site=self.base/'preview-site'
+        result=subprocess.run(['node',str(ROOT/'scripts/build-semantic-preview.mjs'),'--input',str(cur),
+                               '--out',str(site),'--local','YES'],cwd=ROOT,text=True,capture_output=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertEqual(validated_site(site)['revisions'],1)
+        image=next((site/'images').iterdir())
+        image.write_bytes(image.read_bytes()+b'TAMPER')
+        with self.assertRaisesRegex(LightError,'modifiée'):
+            validated_site(site)
 
     def test_compile_cache_and_source_updates(self):
         p=build_local_preview(self.ekole,project=self.project)

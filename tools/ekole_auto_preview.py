@@ -24,7 +24,7 @@ LOCAL_DIR = Path('previews/ekole-autochtones-local')
 ASSETS = (
     'scripts/project-ekole-encyclopedia.mjs',
     'scripts/build-semantic-preview.mjs',
-    'light/src/app.js', 'light/src/graph-core.mjs',
+    'light/src/app.js', 'light/src/graph-core.mjs', 'light/src/profile.mjs',
     'light/src/index.html', 'light/src/style.css', 'light/src/sw.js',
 )
 

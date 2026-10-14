@@ -31,6 +31,23 @@ python -m unittest discover -s tests
 
 The Windows **Preview** tab now includes a C4 check. `Deployer-Light.pyw` may stage **only the exact pinned demo** in a Git checkout; ZIP export of other verified previews requires explicit review and does not prove public authorization.
 
+
+## Mise à jour 0.5.1 — Discovery 3.3 / Arketype 1.4
+
+Cette mise à jour aligne la **construction de sites locaux** sur les trois manifestes
+facultatifs du Kristal Authoring Kit 3.3 : `kristal.discovery.json`,
+`derived/reader-inventory.json` et `derived/reader-profile.json`.
+La classification Arketype est *déclarative* et n'est jamais une autorisation.
+
+- Dans l'onglet **Construire**, cocher explicitement « Inclure le résumé Discovery / Arketype » si le contenu de classification et les volumes mesurés peuvent être divulgués. Par défaut : **désactivé**.
+- En CLI : `node scripts/build-light.mjs --collection CHEMIN --out previews/site --public YES --revision essai --discovery YES`.
+- Les trois manifestes doivent être **référencés et validés par la surface de synchronisation v10** ; un fichier Discovery placé hors de cette surface n'est jamais aspiré. En cas d'ensemble partiel ou incohérent, la projection demandée échoue. Sans métadonnées, le lecteur historique fonctionne normalement.
+- Seul un résumé de champs autorisés (ARK/PRF, organisation, profil et classe/volume référencés) entre dans le bundle statique. Aucun chemin d'artefact, inventaire détaillé ou liste d'instructions parseur n'est exporté dans le résumé. Les octets sont vérifiés, mais la fraîcheur des conseils et la classification ne sont **pas vérifiées indépendamment**.
+- Le **lecteur v10** utilisé par la compilation se trouve maintenant dans `shared/kristal-v10.mjs`, et non plus dans `server/integrations/kristal-v10.mjs`. Ceci ne centralise pas encore les copies détenues par les deux dépôts Konstellation.
+- Si tu extrais le ZIP dans un dépôt existant, ouvre **`Nettoyer_Mise_A_Jour.pyw`** à la racine. Il montre les anciens fichiers reconnus, ne retire que des versions correspondant à leurs empreintes d'origine, demande confirmation et sauvegarde leurs octets à côté du dépôt avant de les retirer. Il ne parcourt pas les Kristals privés.
+
+**Publication :** le site synthétique épinglé `light/site` est conservé **sans modification** ; le garde C4 n'autorise toujours que ce jeu de démonstration. Reconstruire `light/site` avec une vraie collection, même validée ou même avec `--discovery YES`, **bloque** les Pages. Pour les essais locaux, utilise `--out previews/site` ou un répertoire de prévisualisation. Voir [le guide de migration](docs/ALIGNEMENT_DISCOVERY_3_3.md).
+
 ## Three deployment paths
 
 ### Export a static ZIP

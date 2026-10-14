@@ -8,10 +8,11 @@
   "bundle_sha256": "7be42c0936a6ae5c12f5373bba888ee96a2cc9feb36d23a721e3482da86f457f",
   "site_assets_sha256": {
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "app.js": "b4ec2252797510b00cd9bcaea53ff0e6125c59655193b02331061f2cdb546429",
-    "graph-core.mjs": "d5c97d33672ec2297e7b9ed1d4d19678a9eb7bd3b52345cb8327fc096322bf0b",
+    "app.js": "b3e1b60604813ec8e14d46822760586ff60374a63e840e89338ca7a0494d359b",
+    "graph-core.mjs": "ed1a871616d58633434a204b90d753aa2d36a0bbf9130751d33074abbe9e58c6",
     "index.html": "1dcfe8285bc3e22ad4aca3726271e3a12ae0366894c1333c8cbe9cb11e5cc35b",
-    "style.css": "69ea398bec5e5afa0ba9aca2a0eda8f5f947bd339cbece1fabf87db4bed23eff",
-    "sw.js": "1dd18712e7cddb64001f609fe445bc73132cc5c31476127c00b7cc7a9bc9b6eb"
+    "style.css": "e020d1da3d8017fe84c20af60f2f4a93cefbb9c7c677eced0231038482a3ed37",
+    "sw.js": "1d2bed282e8480ef626c21b488ec3590b88e097d94357d026cb1384f84b751ac",
+    "profile.mjs": "141cb3746a27be09fff71377d18b2e1a96c73f6afa3f127681fae30acdc3e2a5"
   }
 }

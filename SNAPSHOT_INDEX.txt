@@ -1,5 +1,7 @@
-Konstellation Light 0.3.0-ekole-one-click
-Files: 54 (+ checksum manifest)
+Konstellation Light — updated snapshot index
+Baseline: znapshot_Konstellation-Light_10131043.zip
+Files listed: 67 (generated indices excluded)
+
 .github/workflows/konstellation-light-intake.yml
 .github/workflows/konstellation-light-pages.yml
 .gitignore
@@ -7,50 +9,63 @@ CHANGELOG.md
 Construire-Light.pyw
 Deployer-Light.pyw
 Explorer-Ekole-Autochtones.pyw
-FILETREE.txt
 GitBook-Light.pyw
 GitSink.bat
 Konstellation-Light.pyw
+Nettoyer_Mise_A_Jour.pyw
 Previsualiser-Ekole.pyw
 Previsualiser-Light.pyw
 README.md
+README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md
 README_KONSTELLATION_LIGHT_EKOLE_NEXT.md
 README_LANCEUR_EKOLE_AUTOMATIQUE.md
-SNAPSHOT_INDEX.txt
 VERSION
 ZmartZnap.pyw
+config/c4-demo-pin.json
+docs/ALIGNEMENT_DISCOVERY_3_3.md
 docs/ARCHITECTURE.md
 docs/C4_PUBLICATION_INTAKE.md
 docs/DEPLOIEMENT.md
+docs/SATELLITES-ET-FICHES.md
+docs/UPDATE_REPORT_C4_2026-10-12.md
 examples/ekole-curation-demo.json
+examples/portraits-et-survol-demo.json
 light/site/.nojekyll
 light/site/app.js
 light/site/data/catalog.json
 light/site/data/pack-7be42c0936a6ae5c12f5373bba888ee96a2cc9feb36d23a721e3482da86f457f.json
 light/site/graph-core.mjs
 light/site/index.html
+light/site/profile.mjs
 light/site/style.css
 light/site/sw.js
 light/src/app.js
 light/src/graph-core.mjs
 light/src/index.html
+light/src/profile.mjs
 light/src/style.css
 light/src/sw.js
 scripts/build-light.mjs
 scripts/build-semantic-preview.mjs
+scripts/c4-publication-gate.mjs
 scripts/import-pinned-collection.mjs
 scripts/project-ekole-encyclopedia.mjs
 scripts/serve-light.mjs
 server/errors.mjs
-server/integrations/kristal-v10.mjs
+shared/discovery.mjs
+shared/kristal-v10.mjs
+tests/c4-gate.test.mjs
+tests/discovery.test.mjs
 tests/graph-navigation.test.mjs
 tests/helpers/light-fixture.mjs
 tests/kristal-v10.test.mjs
 tests/light.test.mjs
 tests/pinned-intake.test.mjs
+tests/test_cleanup_update.py
 tests/test_ekole_auto_preview.py
 tests/test_windows_tools.py
 tools/__init__.py
+tools/cleanup_update.py
 tools/ekole_auto_preview.py
 tools/light_core.py
 tools/light_gui.py

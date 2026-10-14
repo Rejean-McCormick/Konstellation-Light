@@ -1,0 +1,221 @@
+{
+  "format": "konstellation.semantic-curation/1.0",
+  "visibility": "local-preview",
+  "slug": "demo-portraits-et-survol",
+  "title": "Démonstration locale — satellites secondaires et fiches",
+  "nodes": [
+    {
+      "id": "organisation",
+      "kind": "notion",
+      "label": "Organisation humaine",
+      "description": "Modèle de départ pour explorer comment des groupes humains coordonnent leurs activités. Exemple conceptuel, sans faits historiques particuliers."
+    },
+    {
+      "id": "societe",
+      "kind": "societe",
+      "label": "Société",
+      "description": "Groupe humain étudié dans son propre territoire et dans son contexte temporel."
+    },
+    {
+      "id": "role",
+      "kind": "role",
+      "label": "Rôle",
+      "description": "Fonction occupée par une personne ou un groupe selon le contexte."
+    },
+    {
+      "id": "tache",
+      "kind": "tache",
+      "label": "Tâche",
+      "description": "Activité qui contribue au fonctionnement de l'organisation."
+    },
+    {
+      "id": "ressource",
+      "kind": "ressource",
+      "label": "Ressource",
+      "description": "Objet, lieu, savoir ou outil mobilisé pour une activité."
+    },
+    {
+      "id": "regle",
+      "kind": "notion",
+      "label": "Règle",
+      "description": "Norme déclarée à documenter dans son contexte; elle ne décrit pas nécessairement une pratique réelle."
+    },
+    {
+      "id": "decision",
+      "kind": "notion",
+      "label": "Prise de décision",
+      "description": "Processus de discussion, de choix ou d'arbitrage, propre à chaque organisation."
+    },
+    {
+      "id": "periode",
+      "kind": "periode",
+      "label": "Époque",
+      "description": "Un fait historique ne s'applique pas automatiquement à toutes les périodes."
+    },
+    {
+      "id": "territoire",
+      "kind": "territoire",
+      "label": "Territoire",
+      "description": "Espace avec lequel une société entretient des relations géographiques, culturelles et historiques."
+    },
+    {
+      "id": "source",
+      "kind": "source",
+      "label": "Document ou témoignage",
+      "description": "La provenance d'un fait doit être conservée avec sa date et son contexte de transmission."
+    },
+    {
+      "id": "interaction",
+      "kind": "notion",
+      "label": "Interactions",
+      "description": "Échanges, alliances, coopérations et conflits entre organisations, toujours contextualisés."
+    },
+    {
+      "id": "cours",
+      "kind": "cours",
+      "label": "Cours Ekole",
+      "description": "Un cours peut référencer un Kristal autonome sans recopier ses faits."
+    },
+    {
+      "id": "personne-demo",
+      "kind": "person",
+      "label": "Personne de démonstration",
+      "description": "Personne fictive servant uniquement à vérifier la fiche standardisée et ses liens.",
+      "period": "Période de démonstration",
+      "aliases": [
+        "Sujet fictif A"
+      ]
+    },
+    {
+      "id": "lieu-demo",
+      "kind": "location",
+      "label": "Lieu de démonstration",
+      "description": "Lieu fictif servant uniquement à afficher un portrait de lieu.",
+      "location": "Région fictive"
+    },
+    {
+      "id": "institution-demo",
+      "kind": "institution",
+      "label": "Institution de démonstration",
+      "description": "Exemple fictif de fiche institutionnelle."
+    },
+    {
+      "id": "personne-secondaire",
+      "kind": "person",
+      "label": "Autre personne de démonstration",
+      "description": "Voisin de second niveau du sujet fictif."
+    }
+  ],
+  "edges": [
+    {
+      "from": "organisation",
+      "to": "societe",
+      "relation": "decrit"
+    },
+    {
+      "from": "organisation",
+      "to": "role",
+      "relation": "analyse"
+    },
+    {
+      "from": "organisation",
+      "to": "tache",
+      "relation": "analyse"
+    },
+    {
+      "from": "organisation",
+      "to": "ressource",
+      "relation": "analyse"
+    },
+    {
+      "from": "organisation",
+      "to": "regle",
+      "relation": "analyse"
+    },
+    {
+      "from": "organisation",
+      "to": "decision",
+      "relation": "analyse"
+    },
+    {
+      "from": "organisation",
+      "to": "periode",
+      "relation": "contextualise"
+    },
+    {
+      "from": "organisation",
+      "to": "territoire",
+      "relation": "contextualise"
+    },
+    {
+      "from": "organisation",
+      "to": "source",
+      "relation": "documente"
+    },
+    {
+      "from": "organisation",
+      "to": "interaction",
+      "relation": "analyse"
+    },
+    {
+      "from": "organisation",
+      "to": "cours",
+      "relation": "referencie"
+    },
+    {
+      "from": "societe",
+      "to": "role",
+      "relation": "comprend"
+    },
+    {
+      "from": "role",
+      "to": "tache",
+      "relation": "contribue_a"
+    },
+    {
+      "from": "tache",
+      "to": "ressource",
+      "relation": "mobilise"
+    },
+    {
+      "from": "source",
+      "to": "regle",
+      "relation": "documente"
+    },
+    {
+      "from": "periode",
+      "to": "regle",
+      "relation": "contextualise"
+    },
+    {
+      "from": "cours",
+      "to": "societe",
+      "relation": "renvoie_a"
+    },
+    {
+      "from": "territoire",
+      "to": "ressource",
+      "relation": "associe"
+    },
+    {
+      "from": "organisation",
+      "to": "personne-demo",
+      "relation": "exemple_personne"
+    },
+    {
+      "from": "personne-demo",
+      "to": "lieu-demo",
+      "relation": "exemple_lieu"
+    },
+    {
+      "from": "personne-demo",
+      "to": "institution-demo",
+      "relation": "exemple_institution"
+    },
+    {
+      "from": "personne-demo",
+      "to": "personne-secondaire",
+      "relation": "exemple_voisin_secondaire"
+    }
+  ]
+}

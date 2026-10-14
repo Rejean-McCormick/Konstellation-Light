@@ -33,6 +33,7 @@ class Console(tk.Tk):
         self.collection = tk.StringVar(value="")
         self.revision = tk.StringVar(value="public-v1")
         self.append = tk.BooleanVar(value=False)
+        self.discovery = tk.BooleanVar(value=False)
         self.intent = tk.BooleanVar(value=False)
         self.repository = tk.StringVar(value="")
         self.commit = tk.StringVar(value="")
@@ -109,6 +110,8 @@ class Console(tk.Tk):
         self._field(f,"URL GitHub de la collection (optionnel)",self.repository)
         self._field(f,"SHA complet du commit GitHub (optionnel, avec URL)",self.commit)
         ttk.Checkbutton(f,text="Conserver les révisions déjà présentes",variable=self.append).pack(anchor="w",pady=7)
+        ttk.Checkbutton(f,text="Inclure le résumé Discovery / Arketype (données inspectées ; divulgation explicite)",
+                        variable=self.discovery).pack(anchor="w",pady=7)
         ttk.Checkbutton(f,text="Je confirme que les fichiers de cette collection peuvent être diffusés PUBLICEMENT.",
                         variable=self.intent).pack(anchor="w",pady=9)
         ttk.Button(f,text="Compiler et vérifier",command=self._build).pack(anchor="w",pady=7)
@@ -275,10 +278,12 @@ class Console(tk.Tk):
             messagebox.showwarning("Publication publique", "Cocher explicitement la confirmation PUBLIC avant la compilation.")
             return
         collection=self.collection.get(); revision=self.revision.get()
-        append=self.append.get(); repository=self.repository.get().strip(); commit=self.commit.get().strip()
-        if not messagebox.askyesno("Export PUBLIC", "Les bundles produits pourront être publiés sur un site accessible à tous. Continuer ?"):
+        append=self.append.get(); include_discovery=self.discovery.get(); repository=self.repository.get().strip(); commit=self.commit.get().strip()
+        if not messagebox.askyesno("Export PUBLIC", "Les bundles produits pourront être publiés sur un site accessible à tous.\n" +
+            ("Le résumé Discovery et Arketype sera visible dans le bundle.\n" if include_discovery else "") +
+            "Cette confirmation ne constitue pas une autorisation C2/C4. Continuer ?"):
             return
-        self._worker("Compilation Kristal v10",lambda:build_public_collection(Path(collection),revision,append=append,repository=repository,commit=commit))
+        self._worker("Compilation Kristal v10",lambda:build_public_collection(Path(collection),revision,append=append,repository=repository,commit=commit,include_discovery=include_discovery))
 
     def _preview(self):
         try:

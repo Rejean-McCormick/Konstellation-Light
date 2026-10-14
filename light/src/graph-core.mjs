@@ -27,3 +27,26 @@ export function navigationPath(path, next, limit = 30) {
   if (path.at(-1)===next) return [...path];
   return [...path.slice(-(limit-1)),next];
 }
+
+
+// Build once per render rather than scanning the entire edge list for each hover.
+export function buildNeighborIndex(nodes, edges) {
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const adjacent = new Map([...byId.keys()].map(id => [id, new Map()]));
+  for (const e of edges) {
+    if (!byId.has(e.from) || !byId.has(e.to) || e.from === e.to) continue;
+    adjacent.get(e.from).set(e.to, (adjacent.get(e.from).get(e.to) || 0) + 1);
+    adjacent.get(e.to).set(e.from, (adjacent.get(e.to).get(e.from) || 0) + 1);
+  }
+  return { byId, adjacent };
+}
+export function previewNeighbors(index, focus, excludedIds = [], limit = 6) {
+  const excluded = new Set([focus, ...excludedIds]);
+  return [...(index.adjacent.get(focus) || [])]
+    .filter(([id]) => !excluded.has(id))
+    .sort((a, b) => b[1] - a[1] ||
+      String(index.byId.get(a[0]).label).localeCompare(String(index.byId.get(b[0]).label), 'fr') ||
+      a[0].localeCompare(b[0]))
+    .slice(0, Math.max(0, Math.min(6, limit)))
+    .map(([id]) => index.byId.get(id));
+}

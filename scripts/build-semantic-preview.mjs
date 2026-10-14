@@ -18,11 +18,35 @@ const d=JSON.parse(fs.readFileSync(input,'utf8'));
 const text=(x,max)=>typeof x==='string'&&x.trim().length>0&&x.length<=max;
 const simple=(x)=>typeof x==='string'&&/^[a-z0-9][a-z0-9._:-]{0,119}$/i.test(x);
 if(d.format!=='konstellation.semantic-curation/1.0'||d.visibility!=='local-preview'||!text(d.title,180)||!simple(d.slug)||!Array.isArray(d.nodes)||!Array.isArray(d.edges)||d.nodes.length<1||d.nodes.length>3000||d.edges.length>6000)throw Error('Format de curation invalide.');
-const kinds=new Set(['notion','societe','role','tache','ressource','territoire','periode','evenement','source','cours','competence','pratique','institution']);
+const kinds=new Set(['notion','societe','role','tache','ressource','territoire','periode','evenement','source','cours','competence','pratique','institution','person','personne','human','place','location','lieu','city','country','region']);
+// Only explicitly supplied local raster files are copied. No network requests,
+// untrusted SVG/HTML, symbolic-link traversal or parent-directory traversal.
+const portraitFiles = new Map();
+function readPortrait(reference) {
+  if (typeof reference !== 'string' || !/^portraits\/[a-z0-9][a-z0-9_.-]{0,100}\.(png|jpg|jpeg|webp|gif)$/i.test(reference))
+    throw Error('Portrait local invalide : utiliser portraits/nom.png (JPG, PNG, WEBP, GIF).');
+  const declared = path.resolve(path.dirname(input), reference);
+  if (fs.lstatSync(declared).isSymbolicLink() || !fs.statSync(declared).isFile() || fs.statSync(declared).size > 2 * 1024 * 1024)
+    throw Error('Portrait absent, lié ou trop volumineux.');
+  const physical = fs.realpathSync(declared);
+  const inputDir = fs.realpathSync(path.dirname(input));
+  if (!physical.startsWith(inputDir + path.sep)) throw Error('Portrait hors de la curation.');
+  const bytes = fs.readFileSync(physical);
+  const ext = path.extname(reference).slice(1).toLowerCase();
+  const jpg = bytes.length > 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  const png = bytes.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
+  const gif = ['GIF87a','GIF89a'].includes(bytes.toString('ascii',0,6));
+  const webp = bytes.toString('ascii',0,4) === 'RIFF' && bytes.toString('ascii',8,12) === 'WEBP';
+  if (!((['jpg','jpeg'].includes(ext) && jpg) || (ext==='png' && png) || (ext==='gif' && gif) || (ext==='webp' && webp)))
+    throw Error('Signature du fichier image incompatible avec son extension.');
+  const name = `images/${createHash('sha256').update(bytes).digest('hex')}.${ext}`;
+  portraitFiles.set(name,bytes);
+  return `./${name}`;
+}
 const ids=new Set();const nodes=d.nodes.map(n=>{
- if(!simple(n.id)||ids.has(n.id)||!kinds.has(n.kind)||!text(n.label,220)||!text(n.description,1500)|| (n.period!==undefined&&!text(n.period,120))||(n.source!==undefined&&!text(n.source,250)))throw Error('Nœud invalide, doublonné ou sans description.');
+ if(!simple(n.id)||ids.has(n.id)||!kinds.has(n.kind)||!text(n.label,220)||!text(n.description,1500)|| (n.period!==undefined&&!text(n.period,120))||(n.source!==undefined&&!text(n.source,250))||(n.disambiguation!==undefined&&!text(n.disambiguation,250))||(n.location!==undefined&&!text(n.location,250))||(n.aliases!==undefined&&(!Array.isArray(n.aliases)||n.aliases.length>8||!n.aliases.every(a=>text(a,150)))))throw Error('Nœud invalide, doublonné ou sans description.');
  ids.add(n.id);
- return {id:n.id,kind:n.kind,label:n.label,description:n.description,...(n.period?{period:n.period}:{}),...(n.source?{source:n.source}:{})};
+ return {id:n.id,kind:n.kind,label:n.label,description:n.description,...(n.period?{period:n.period}:{}),...(n.source?{source:n.source}:{}),...(n.disambiguation?{disambiguation:n.disambiguation}:{}),...(n.location?{location:n.location}:{}),...(n.aliases?{aliases:n.aliases}:{}),...(n.portrait!==undefined?{portrait:readPortrait(n.portrait)}:{})};
 });
 const edges=d.edges.map(e=>{
  if(!ids.has(e.from)||!ids.has(e.to)||!simple(e.relation)||e.from===e.to)throw Error('Relation invalide ou référence manquante.');
@@ -43,7 +67,9 @@ if(fs.existsSync(out))throw Error('Destination déjà présente. Choisir un nouv
 fs.mkdirSync(path.dirname(out),{recursive:true});const tmp=fs.mkdtempSync(path.join(path.dirname(out),'.konstellation-preview-'));
 try {
  fs.mkdirSync(path.join(tmp,'data'));
- for(const name of ['index.html','app.js','style.css','sw.js','graph-core.mjs'])fs.copyFileSync(path.join(root,'light/src',name),path.join(tmp,name));
+ if(portraitFiles.size)fs.mkdirSync(path.join(tmp,'images'));
+ for(const [name,bytes] of portraitFiles)fs.writeFileSync(path.join(tmp,name),bytes);
+ for(const name of ['index.html','app.js','style.css','sw.js','graph-core.mjs','profile.mjs'])fs.copyFileSync(path.join(root,'light/src',name),path.join(tmp,name));
  fs.writeFileSync(path.join(tmp,row.path),bytes);fs.writeFileSync(path.join(tmp,'data/catalog.json'),json(catalog));fs.writeFileSync(path.join(tmp,'.nojekyll'),'');
  fs.renameSync(tmp,out);
 }finally{if(fs.existsSync(tmp))fs.rmSync(tmp,{recursive:true,force:true});}

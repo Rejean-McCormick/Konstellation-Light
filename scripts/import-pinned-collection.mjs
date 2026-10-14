@@ -7,7 +7,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { listGithubKristals, inspectGithubKristal } from '../server/integrations/kristal-v10.mjs';
+import { listGithubKristals, inspectGithubKristal } from '../shared/kristal-v10.mjs';
 
 const COMMIT = /^[a-f0-9]{40}$/;
 const DIGEST = /^sha256:[a-f0-9]{64}$/;
