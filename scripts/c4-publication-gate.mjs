@@ -10,6 +10,7 @@ import { createHash } from 'node:crypto';
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = b => createHash('sha256').update(b).digest('hex');
 const PACK = /^data\/pack-([a-f0-9]{64})\.json$/;
+const optionalLocal = new Set(['semantic-display.mjs']);
 const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'profile.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
 const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
 export class C4GateError extends Error { constructor(code,message) {super(message);this.name='C4GateError';this.code=code;} }
@@ -63,6 +64,9 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
        reject('BUNDLE_INVALID','Bundle identity or representation invalid.');
     allowed.add(entry.path);
   }
+  // Recognize one additional JS presentation asset for review-only local builds.
+  // Its presence always prevents the Pages-demo pin from matching.
+  for (const file of fileList) if (optionalLocal.has(file)) allowed.add(file);
   const unexpected=fileList.filter(name=>!allowed.has(name));
   const missing=[...allowed].filter(name=>!fileList.includes(name));
   if(unexpected.length||missing.length) reject('UNDECLARED_FILE','Static payload contains undeclared or missing files.');
@@ -74,7 +78,7 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
   const assetHashesOK = pin.site_assets_sha256 && [...fixed].filter((file)=>file!=='data/catalog.json')
     .every((file)=>typeof pin.site_assets_sha256[file]==='string' &&
       sha(fs.readFileSync(path.join(root,file)))===pin.site_assets_sha256[file]);
-  const demo = Boolean(assetHashesOK) && catalog.entries.length===1 && entry.slug===pin.slug && entry.revision===pin.revision &&
+  const demo = Boolean(assetHashesOK) && !fileList.some(file=>optionalLocal.has(file)) && catalog.entries.length===1 && entry.slug===pin.slug && entry.revision===pin.revision &&
     entry.state_ref===pin.state_ref && b.state_ref===pin.state_ref && b.view_kind==='derived-hosting-navigation' &&
     b.source===null && !own(entry,'mode') && sha(catalogBytes)===pin.catalog_sha256 &&
     sha(fs.readFileSync(entryFile))===pin.bundle_sha256;

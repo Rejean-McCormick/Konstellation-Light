@@ -25,6 +25,7 @@ SHA256 = re.compile(r"sha256:[0-9a-f]{64}\Z")
 PACK_PATH = re.compile(r"data/pack-[0-9a-f]{64}\.json\Z")
 IMAGE_PATH = re.compile(r"\./images/([0-9a-f]{64})\.(png|jpg|jpeg|webp|gif)\Z")
 SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "profile.mjs", "style.css", "sw.js", "data/catalog.json"}
+SITE_OPTIONAL = {"semantic-display.mjs"}  # New local builds only; not bundled C4 demo.
 
 
 class LightError(ValueError):
@@ -101,6 +102,7 @@ def validated_site(site: Path) -> dict:
             if hashlib.sha256(contents).hexdigest() != m.group(1):
                 raise LightError('Image de fiche modifiée après le build.')
             permitted.add(local)
+    permitted.update(rel for rel in SITE_OPTIONAL if (site / rel).is_file())
     seen_files = set()
     for entry in site.rglob("*"):
         if entry.is_symlink():
@@ -124,6 +126,8 @@ def validate_demo_for_staging(site: Path) -> dict:
     """
     site = Path(site)
     verified = validated_site(site)
+    if any((site / rel).exists() for rel in SITE_OPTIONAL):
+        raise LightError('C4 : la démo publique épinglée ne contient pas les modules expérimentaux. Blocage. ')
     pin = _load_json(ROOT / "config" / "c4-demo-pin.json")
     catalog_file = site / "data" / "catalog.json"
     catalog = _load_json(catalog_file)

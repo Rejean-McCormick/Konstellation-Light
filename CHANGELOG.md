@@ -1,3 +1,12 @@
+## 0.5.2-semantic-presentation-preview — 2026-10-26
+
+- Alignement contrôlé de la **couche d’affichage** sur Konstellation complet (17 octobre) : propriétés Wikidata connues, terminologie documentaire prudente et recherche locale par mots en prévisualisation sémantique candidate.
+- Inspecteur : le libellé source et le prédicat brut sont conservés ; aucune mutation d'identité ou assertion.
+- Asset JS déclaré dans les builds locaux, vérificateurs de sites JS/Python, maintien du refus C4 sur les nouveaux builds, service worker et outil Ekole.
+- **C4 inchangé sur le fond :** démo publique épinglée intacte, nouvelles prévisualisations non autorisées à la publication. Régressions C4 négatives renforcées.
+- Portage des catalogues privés, du moteur KNAV et du v11 reporté explicitement : voir `docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md`.
+- Candidat local, non homologué en Windows/E2E et **pas** une solution 100× Wikipédia prête à déployer.
+
 ## 0.5.1-discovery-arketype-preview — 2026-10-13
 
 - Ajout d'une projection explicitement opt-in des trois manifestes Authoring Kit 3.3 (`--discovery YES`) avec validation SHA-256, contrôle d'identité et champs autorisés limités.

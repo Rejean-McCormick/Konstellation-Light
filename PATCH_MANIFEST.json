@@ -1,0 +1,109 @@
+{
+  "format": "konstellation.light-review-patch/1.0",
+  "base_archive_sha256": "bd648de2d6fda7133bfaa4b99b8ca5f3df15f649880e1381c2c5537dacaa396b",
+  "base_light_version": "0.5.1-discovery-arketype-preview",
+  "target_light_version": "0.5.2-semantic-presentation-preview",
+  "remote_changes": "none",
+  "automatic_installation": false,
+  "changes": [
+    {
+      "path": "CHANGELOG.md",
+      "operation": "updated",
+      "original_sha256": "4711f3a8bf299f272364273b6c067550a67351f8ebc187d10c18b6fd375245a3",
+      "sha256": "adfe4207c02128665b2a704d887edc1e6f2f6b6bb73591b19d189817e5b98030"
+    },
+    {
+      "path": "FILETREE.txt",
+      "operation": "updated",
+      "original_sha256": "1fed569c4680c038fbb7b980c22c75a580ea33e77e46dce5f5d116f4aef8c3dd",
+      "sha256": "bd74a96a9f150f1d3527b5bf10c67622001f2f432d235d8c3933461114496f4d"
+    },
+    {
+      "path": "README.md",
+      "operation": "updated",
+      "original_sha256": "600ae9ab16983bdcfaef6ef412b2af77e7a276dc18175f781dd871f6f655889e",
+      "sha256": "07d27a4cd85ba0fa5028d57f69ebb99ba936e7eed0cc95f7e49ece582ece12ac"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "operation": "updated",
+      "original_sha256": "8c48d5d43e670ef961b71cdb2f991dbe4172f65b18f3e50f732b0349a3821de6",
+      "sha256": "e1b52b2996e229864e72b38686a9cabdeb01184df6f181d20aaa3dfbf1f57e7e"
+    },
+    {
+      "path": "VERSION",
+      "operation": "updated",
+      "original_sha256": "1c642333f07575610ced54ae5dd5f834ab689d2733ad44699b92a15812513a0e",
+      "sha256": "de913de7e7c999a4625d42f0b810d9baed8f449749ddf12ef401637aef579815"
+    },
+    {
+      "path": "docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md",
+      "operation": "added",
+      "sha256": "0861e4718255aa67c9f493eb879ee02f818e95896e9125ce917c8d76446f4381"
+    },
+    {
+      "path": "light/src/app.js",
+      "operation": "updated",
+      "original_sha256": "54c8edbe20acc56473429656abde7b941ee3a2388c8ee58dc5012698b2ab68f2",
+      "sha256": "12d12e6c9d41992d1e8c42821f330d28a0e9e75475ae6d1a51693da8a6f4dfcb"
+    },
+    {
+      "path": "light/src/semantic-display.mjs",
+      "operation": "added",
+      "sha256": "27af45ed0c4db41fa79c49427d2d0db2a19b137f5b5f27e49cbfcabe9c32d426"
+    },
+    {
+      "path": "light/src/sw.js",
+      "operation": "updated",
+      "original_sha256": "1d2bed282e8480ef626c21b488ec3590b88e097d94357d026cb1384f84b751ac",
+      "sha256": "f53e37f2f0eefd53bf00340974905495290cce7d415809fb19011e6b39eac7ae"
+    },
+    {
+      "path": "scripts/build-light.mjs",
+      "operation": "updated",
+      "original_sha256": "16d849cdbedca519ca14ccf0b74b4a0e04dd087f4fb315cca0b0ed35b995b479",
+      "sha256": "ad59318fec08ffde911ba575cd26dc9615bfeba149f52713d9c26ce740322118"
+    },
+    {
+      "path": "scripts/build-semantic-preview.mjs",
+      "operation": "updated",
+      "original_sha256": "afc8bb327ede29c5d91748030881ea71ba38bfb4d55a99ab30bf23130844c517",
+      "sha256": "6e355a576638f2205825c73320da44802a4a91067b9dc8a6c4aaf08c0fc35522"
+    },
+    {
+      "path": "scripts/c4-publication-gate.mjs",
+      "operation": "updated",
+      "original_sha256": "c7411cab29be9b1d8ec2c9b3724bddbe2d8a967e8c5b7239ad6d6122c20970d9",
+      "sha256": "a528015c6e224d7c4c828d97f9d9912734e4e759b5bf4ffa01548ebd31da99b2"
+    },
+    {
+      "path": "tests/graph-navigation.test.mjs",
+      "operation": "updated",
+      "original_sha256": "4e7db1eab1538810271a7a055d3f359ba2f3e33e1928690e9aab87a7744f0e36",
+      "sha256": "c264c2fc7cc1b38816fc787e4f55de57c2490807ab4e2777a2d221ee57541a1f"
+    },
+    {
+      "path": "tests/semantic-display-alignment.test.mjs",
+      "operation": "added",
+      "sha256": "388fa856b9f5242004e64be8f1fae943f7f769db59c846afeb7436e915ebf6c6"
+    },
+    {
+      "path": "tests/test_ekole_auto_preview.py",
+      "operation": "updated",
+      "original_sha256": "fb2a6471e707f3c29e1cadc52a721ffa45d5f5f7fb796998fdf826827212c9a5",
+      "sha256": "1140f8f604a7f21ed923535f06ae96fa84c455c2b9f56d30e21a751c85abb85c"
+    },
+    {
+      "path": "tools/ekole_auto_preview.py",
+      "operation": "updated",
+      "original_sha256": "76c79feade83c328b26f35b2ae3cc4b201842686b5ff351eb5fe69a6bc72daca",
+      "sha256": "c5f6c5d6ded2d00cdf7248c1a9d18941a289d4d6ed56685f7a2c36213698a8e4"
+    },
+    {
+      "path": "tools/light_core.py",
+      "operation": "updated",
+      "original_sha256": "dceac86fa2ccebfc4a83498af435b44579a8ebfb665e6a0f1134ae707d0cc7e8",
+      "sha256": "a91f6fe7b2d4203fef3ae9e97fc1c58e2cb5498e27e90a7ce3268b376718a5ac"
+    }
+  ]
+}

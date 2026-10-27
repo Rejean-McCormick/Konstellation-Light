@@ -1,5 +1,6 @@
 import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors} from './graph-core.mjs';
 import {portraitFor, orbitPreview} from './profile.mjs';
+import {semanticLabel, readableNodeLabel, semanticQueryMatch} from './semantic-display.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
 // All untrusted labels are inserted with textContent; no semantic authority is inferred.
 const $ = (id) => document.getElementById(id);
@@ -15,6 +16,9 @@ const svgElement = (tag, attributes = {}) => {
   return e;
 };
 const short = (s, n = 34) => String(s).length > n ? `${String(s).slice(0, n - 1)}…` : String(s);
+// Human-readable labels are ONLY a rendering function; node IDs and predicates are unchanged.
+const displayNode = n => state.bundle?.view_kind === 'derived-semantic-preview' ? readableNodeLabel(n.label, n.kind) : n.label;
+const displayRelation = relation => state.bundle?.view_kind === 'derived-semantic-preview' ? semanticLabel(relation) : relation.replaceAll('_', ' ');
 const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null };
 let toastTimeout;
 let portraitOpener = null;
@@ -112,6 +116,7 @@ function filteredNodes() {
   const q = state.query.toLocaleLowerCase('fr').trim();
   if (!q) return state.bundle.nodes;
   const terms = q.split(/\s+/).filter(Boolean);
+  if (state.bundle.view_kind === 'derived-semantic-preview') return state.bundle.nodes.filter(n => semanticQueryMatch(n, q));
   return state.bundle.nodes.filter(n => terms.every(t => `${n.label} ${n.description || ''} ${n.kind}`.toLocaleLowerCase('fr').includes(t)));
 }
 function focusOn(id) {
@@ -151,7 +156,7 @@ function render() {
 }
 function profileCard(target, node, opener = null) {
   target.querySelector('.node-portrait-card')?.remove();
-  const profile=portraitFor(node);
+  const profile=portraitFor(node,displayNode(node));
   if (!profile) return;
   const card=element('section','node-portrait-card');
   card.setAttribute('role','dialog');card.setAttribute('aria-label',`Fiche de ${profile.title}`);
@@ -186,7 +191,7 @@ function drawGraph(target, visible) {
   for(const edge of view.edges){const a=xy.get(edge.from),b=xy.get(edge.to);
     if(!a||!b)continue;
     const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link'});
-    const tooltip=svgElement('title');tooltip.textContent=edge.relation.replaceAll('_',' ');line.append(tooltip);svg.append(line);
+    const tooltip=svgElement('title');tooltip.textContent=displayRelation(edge.relation);line.append(tooltip);svg.append(line);
   }
   let previewGroup=null;
   const clearPreview=()=>{previewGroup?.remove();previewGroup=null;};
@@ -205,16 +210,16 @@ function drawGraph(target, visible) {
       previewGroup.append(svgElement('line',{x1:anchor.x,y1:anchor.y,x2:child.x,y2:child.y}));
       previewGroup.append(svgElement('circle',{cx:child.x,cy:child.y,r:18}));
       const name=svgElement('text',{x:child.x,y:child.y+31,class:'preview-label'});
-      name.textContent=short(child.label,19);previewGroup.append(name);
+      name.textContent=short(displayNode(child),19);previewGroup.append(name);
     }
     svg.append(previewGroup);
   };
   for(const n of shown){const p=xy.get(n.id),central=n.id===selected.id;
-    const group=svgElement('g',{class:'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${n.label}`});
+    const group=svgElement('g',{class:'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${displayNode(n)}`});
     group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?43:23}));
     const sym=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});sym.textContent=central?'✳':'◇';group.append(sym);
-    const label=svgElement('text',{x:p.x,y:p.y+(central?59:38)});label.textContent=short(n.label,central?32:24);group.append(label);
-    const tip=svgElement('title');tip.textContent=n.description||n.label;group.append(tip);
+    const label=svgElement('text',{x:p.x,y:p.y+(central?59:38)});label.textContent=short(displayNode(n),central?32:24);group.append(label);
+    const tip=svgElement('title');tip.textContent=n.description||displayNode(n);group.append(tip);
     group.addEventListener('click',()=>focusOn(n.id));
     group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(n.id);}});
     if(!central){group.addEventListener('mouseenter',()=>showPreview(n));group.addEventListener('mouseleave',clearPreview);
@@ -225,7 +230,7 @@ function drawGraph(target, visible) {
   for(const n of shown){const profile=portraitFor(n);if(!profile)continue;
     const p=xy.get(n.id),central=n.id===selected.id;
     const badge=svgElement('g',{class:'graph-portrait-indicator',role:'button',tabindex:'0',
-      'aria-label':`Ouvrir la fiche de ${n.label}`});
+      'aria-label':`Ouvrir la fiche de ${displayNode(n)}`});
     const x=p.x+(central?33:19),y=p.y-(central?31:18);
     badge.append(svgElement('circle',{cx:x,cy:y,r:central?12:10}));
     const mark=svgElement('text',{x,y:y+4});mark.textContent='i';badge.append(mark);
@@ -246,7 +251,7 @@ function drawRegistry(target, nodes) {
   if (!pageItems.length) target.append(element('div','empty','Aucun élément dans cette page.'));
   for(const n of pageItems) {
     const btn=element('button',`record ${state.selection===n.id?'selected':''}`);btn.type='button';
-    const content=element('main');content.append(element('strong','',n.label),element('small','',short(n.description||n.id,140)));
+    const content=element('main');content.append(element('strong','',displayNode(n)),element('small','',short(n.description||n.id,140)));
     btn.append(content,element('em','',n.kind.replaceAll('_',' ')));btn.addEventListener('click',()=>focusOn(n.id));container.append(btn);
   }
   target.append(container);
@@ -299,8 +304,9 @@ function drawInspection(){
   const target=$('inspection');target.replaceChildren();const d=state.bundle;
   const n=d.nodes.find(x=>x.id===state.selection);
   if (!n){target.append(element('p','','Sélectionnez un élément.'));return;}
-  target.append(element('span','kind',n.kind.replaceAll('_',' ')),element('h3','',n.label),element('p','',n.description||'Aucune description déclarée.'));
+  target.append(element('span','kind',n.kind.replaceAll('_',' ')),element('h3','',displayNode(n)),element('p','',n.description||'Aucune description déclarée.'));
   const dl=element('dl');addDefinition(dl,'Identifiant de navigation',n.id);
+  if (displayNode(n) !== n.label) addDefinition(dl,'Libellé source inchangé',n.label);
   addDefinition(dl,'Type de projection',n.kind);
   addDefinition(dl,'Relations entrantes',d.edges.filter(e=>e.to===n.id).length);
   addDefinition(dl,'State ref',short(d.state_ref,100));
@@ -321,7 +327,7 @@ function drawInspection(){
   if(d.view_kind==='derived-semantic-preview') {
     const related=d.edges.filter(e=>e.from===n.id||e.to===n.id).slice(0,30);
     for(const e of related) {const other=d.nodes.find(x=>x.id===(e.from===n.id?e.to:e.from));
-      if(other)addDefinition(dl,e.relation.replaceAll('_',' '),other.label);}
+      if(other)addDefinition(dl,`${displayRelation(e.relation)} · [${e.relation}]`,displayNode(other));}
   }
   target.append(dl);
   const href=gitFileLink(d,n);

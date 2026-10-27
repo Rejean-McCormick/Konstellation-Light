@@ -6,6 +6,10 @@
 
 **Standalone Windows-oriented toolkit and static website for browsing v10 collection read surfaces with byte-integrity checks.** Actual publication authorization is **not** inferred by Light. This project is separate from the full Konstellation server. It uses a v10 collection reader, a navigation compiler and a lightweight static interface; it does not alter Kristal semantic state.
 
+## Alignement ciblé avec Konstellation complet — 0.5.2 (26 octobre 2026)
+
+Cette révision transfère **uniquement les aides de présentation française et la recherche par mots** du lecteur complet vers les prévisualisations sémantiques locales de Light. Aucun lecteur privé, pouvoir d'autorisation ou décodage Framework v11 n'a été ajouté. La démo C4 épinglée reste identique; les sites locaux nouvellement construits incluent `semantic-display.mjs` et sont **non publiables** via le garde C4 actuel. Voir [le rapport de compatibilité](docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md) pour la matrice des écarts et les tests.
+
 ## Installation
 
 Reference folder: `C:\mycode\Konstellation\Konstellation-Light`. Extract project files directly into this directory, so `Konstellation-Light.pyw`, `light/`, `server/`, `scripts/` and `tools/` are visible at its root.

@@ -35,7 +35,7 @@ test('curation explicite produit site statique vérifiable, jamais un bundle v10
  assert.equal(pack.semantic_authority,false);
  assert.equal(pack.revision,'candidate-local');
  assert(pack.nodes.length>=10);assert(pack.edges.length>=10);
- for(const name of ['index.html','app.js','graph-core.mjs','profile.mjs','style.css','sw.js'])assert(fs.existsSync(path.join(out,name)));
+ for(const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','style.css','sw.js'])assert(fs.existsSync(path.join(out,name)));
  const second=spawnSync(process.execPath,['scripts/build-semantic-preview.mjs','--input',fixture,'--out',out,'--local','YES'],{cwd:root,encoding:'utf8'});
  assert.notEqual(second.status,0);assert.match(second.stderr,/Destination déjà présente/);
 });

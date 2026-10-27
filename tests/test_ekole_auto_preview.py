@@ -38,7 +38,7 @@ class OneClickTests(unittest.TestCase):
         self.project=self.base/'Konstellation'/'Konstellation-Light'
         self.project.mkdir(parents=True)
         for asset in ('scripts/project-ekole-encyclopedia.mjs','scripts/build-semantic-preview.mjs',
-                      'light/src/app.js','light/src/graph-core.mjs', 'light/src/profile.mjs','light/src/index.html',
+                      'light/src/app.js','light/src/graph-core.mjs', 'light/src/profile.mjs','light/src/semantic-display.mjs','light/src/index.html',
                       'light/src/style.css','light/src/sw.js'):
             dest=self.project/asset
             dest.parent.mkdir(parents=True,exist_ok=True)

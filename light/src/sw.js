@@ -1,6 +1,6 @@
 // Offline mode is opt-in from the UI. Only same-origin static public assets are cached.
-const CACHE = 'konstellation-light-public-v4';
-const SHELL = ['./','./index.html','./app.js','./graph-core.mjs','./profile.mjs','./style.css','./data/catalog.json'];
+const CACHE = 'konstellation-light-public-v5';
+const SHELL = ['./','./index.html','./app.js','./graph-core.mjs','./profile.mjs','./semantic-display.mjs','./style.css','./data/catalog.json'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil((async () => {
   for(const key of await caches.keys()) if(key.startsWith('konstellation-light-public-') && key !== CACHE) await caches.delete(key);
