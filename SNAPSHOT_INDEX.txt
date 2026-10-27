@@ -1,27 +1,13 @@
-Konstellation Light — updated snapshot index
-Baseline: znapshot_Konstellation-Light_10131043.zip
-Files listed: 67 (generated indices excluded)
+ZmartZnap snapshot file index
+Files included: 71
 
 .github/workflows/konstellation-light-intake.yml
 .github/workflows/konstellation-light-pages.yml
 .gitignore
 CHANGELOG.md
+config/c4-demo-pin.json
 Construire-Light.pyw
 Deployer-Light.pyw
-Explorer-Ekole-Autochtones.pyw
-GitBook-Light.pyw
-GitSink.bat
-Konstellation-Light.pyw
-Nettoyer_Mise_A_Jour.pyw
-Previsualiser-Ekole.pyw
-Previsualiser-Light.pyw
-README.md
-README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md
-README_KONSTELLATION_LIGHT_EKOLE_NEXT.md
-README_LANCEUR_EKOLE_AUTOMATIQUE.md
-VERSION
-ZmartZnap.pyw
-config/c4-demo-pin.json
 docs/ALIGNEMENT_DISCOVERY_3_3.md
 docs/ARCHITECTURE.md
 docs/C4_PUBLICATION_INTAKE.md
@@ -30,6 +16,11 @@ docs/SATELLITES-ET-FICHES.md
 docs/UPDATE_REPORT_C4_2026-10-12.md
 examples/ekole-curation-demo.json
 examples/portraits-et-survol-demo.json
+Explorer-Ekole-Autochtones.pyw
+FILETREE.txt
+GitBook-Light.pyw
+GitSink.bat
+Konstellation-Light.pyw
 light/site/.nojekyll
 light/site/app.js
 light/site/data/catalog.json
@@ -45,6 +36,13 @@ light/src/index.html
 light/src/profile.mjs
 light/src/style.css
 light/src/sw.js
+Nettoyer_Mise_A_Jour.pyw
+Previsualiser-Ekole.pyw
+Previsualiser-Light.pyw
+README.md
+README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md
+README_KONSTELLATION_LIGHT_EKOLE_NEXT.md
+README_LANCEUR_EKOLE_AUTOMATIQUE.md
 scripts/build-light.mjs
 scripts/build-semantic-preview.mjs
 scripts/c4-publication-gate.mjs
@@ -52,8 +50,11 @@ scripts/import-pinned-collection.mjs
 scripts/project-ekole-encyclopedia.mjs
 scripts/serve-light.mjs
 server/errors.mjs
+server/integrations/kristal-v10.mjs
+SHA256SUMS.txt
 shared/discovery.mjs
 shared/kristal-v10.mjs
+SMARTDUMP_INDEX.txt
 tests/c4-gate.test.mjs
 tests/discovery.test.mjs
 tests/graph-navigation.test.mjs
@@ -69,3 +70,7 @@ tools/cleanup_update.py
 tools/ekole_auto_preview.py
 tools/light_core.py
 tools/light_gui.py
+VERSION
+ZmartZnap.pyw
+
+Index file: SNAPSHOT_INDEX.txt
