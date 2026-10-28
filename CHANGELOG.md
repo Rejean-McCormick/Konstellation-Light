@@ -1,19 +1,19 @@
 ## 0.5.2-semantic-presentation-preview — 2026-10-26
 
-- Alignement contrôlé de la **couche d’affichage** sur Konstellation complet (17 octobre) : propriétés Wikidata connues, terminologie documentaire prudente et recherche locale par mots en prévisualisation sémantique candidate.
-- Inspecteur : le libellé source et le prédicat brut sont conservés ; aucune mutation d'identité ou assertion.
-- Asset JS déclaré dans les builds locaux, vérificateurs de sites JS/Python, maintien du refus C4 sur les nouveaux builds, service worker et outil Ekole.
-- **C4 inchangé sur le fond :** démo publique épinglée intacte, nouvelles prévisualisations non autorisées à la publication. Régressions C4 négatives renforcées.
-- Portage des catalogues privés, du moteur KNAV et du v11 reporté explicitement : voir `docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md`.
-- Candidat local, non homologué en Windows/E2E et **pas** une solution 100× Wikipédia prête à déployer.
+- Controlled alignment of the **display layer** with full Konstellation (October 17): known Wikidata properties, cautious documentary terminology and local word-based search in candidate semantic previews.
+- Inspector retains source label and raw predicate; no identity or assertion mutation.
+- JS asset declared in local builds, JS/Python site validators, C4 rejection preserved on new builds, Service Worker and Ekole tool updated.
+- **C4 fundamentally unchanged:** pinned public demo is intact; new previews are not authorized for publication. Negative C4 regression tests strengthened.
+- Private catalogs, KNAV engine and v11 are explicitly deferred: see `docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md`.
+- Local candidate, not qualified on Windows/E2E and **not** a deployable 100× Wikipedia solution.
 
 ## 0.5.1-discovery-arketype-preview — 2026-10-13
 
-- Ajout d'une projection explicitement opt-in des trois manifestes Authoring Kit 3.3 (`--discovery YES`) avec validation SHA-256, contrôle d'identité et champs autorisés limités.
-- Ajout de l'affichage Arketype / profil de lecture dans l'inspecteur, uniquement si les métadonnées ont été projetées.
-- Déplacement du lecteur v10 interne vers `shared/kristal-v10.mjs` ; mise à jour des imports et des tests.
-- Ajout d'un nettoyeur Windows graphique `Nettoyer_Mise_A_Jour.pyw` à sauvegarde extérieure, empreintes figées et confirmation explicite.
-- Le site de démonstration C4 et son épinglage ne sont pas modifiés ; aucune publication de vrai Kristal n'est autorisée.
+- Added an explicit opt-in projection of the three Authoring Kit 3.3 manifests (`--discovery YES`) with SHA-256 validation, identity checks and restricted allowed fields.
+- Added Arketype / reader-profile display in the inspector, only when metadata was projected.
+- Moved the internal v10 reader into `shared/kristal-v10.mjs`; imports and tests updated.
+- Added the graphical Windows cleanup tool `Nettoyer_Mise_A_Jour.pyw` with external backups, pinned fingerprints and explicit confirmation.
+- The C4 demo site and pin are unchanged; no real Kristal publication is authorized.
 
 ## 0.5.0-c4-demo-gate-preview — Kristal v10 C4 boundaries (2026-10-12)
 
@@ -24,39 +24,40 @@
 - The existing v10 adapter, Ekole local previews, append-only revision integrity, and Source Pin transport checks remain in place. No C1/C2/C3 receipt verifier has been added; real publication stays blocked.
 - Added JS/Python regression tests, source-pinning documentation, regenerated site, and file manifest. **No live deployment or private collection exposure.**
 
-## v0.4 — Diagnostic des chemins et restauration non destructive
-- La racine Ekole est reconnue même lorsque le Kristal autochtone v4 manque.
-- L’onglet Ekole affiche l’état de la source, son chemin canonique et les cas d’extraction imbriquée.
-- Bouton de restauration sélective depuis un ZIP Ekole; refuse de remplacer un dossier existant.
-- Les chemins recommandés et le rôle des projections sont décrits dans README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md.
-- Les compilations locales, la navigation en bulles et le contrat v10/v9 ne changent pas.
+## v0.4 — Path diagnostics and non-destructive restoration
 
-## v0.3 — Lanceur Ekole autochtone en un clic
+- Ekole root is recognized even when the Indigenous Peoples v4 Kristal is missing.
+- Ekole tab shows source status, canonical path and nested-extraction cases.
+- Selective restoration button from an Ekole ZIP; refuses to replace an existing directory.
+- Recommended paths and projection roles documented in `README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md`.
+- Local builds, bubble navigation and the v10/v9 contract are unchanged.
 
-- Ajout `Explorer-Ekole-Autochtones.pyw` (génère et ouvre automatiquement) et `Previsualiser-Ekole.pyw` (ouvre l’onglet).
-- Onglet « Ekole · Graphe » intégré dans `Previsualiser-Light.pyw` : détection du dépôt Ekole, conversion/compilation sans commandes Node visibles, port local libre, cache par empreinte et journal.
-- Intégration à Ekole Élève facultative et soumise à confirmation humaine; refus d’écraser un répertoire existant. Aucune publication officielle v10.
-- Tests de construction, nouvelle version de source, cache, HTTP, limites d’export et conservation des fichiers.
+## v0.3 — One-click Ekole Indigenous Peoples launcher
+
+- Added `Explorer-Ekole-Autochtones.pyw` (automatic build/open) and `Previsualiser-Ekole.pyw` (opens tab).
+- Integrated “Ekole · Graph” tab into `Previsualiser-Light.pyw`: Ekole repository discovery, conversion/build without visible Node commands, free local port, fingerprint cache, and logging.
+- Optional Ekole Student integration subject to human confirmation; refuses to overwrite existing directories. No official v10 publication.
+- Tests cover build, new source versions, caching, HTTP, export limits and file preservation.
 
 # Konstellation Light Standalone — 0.1.0-standalone.1
 
-- Distribution autonome à destination de `C:\mycode\Konstellation\Konstellation-Light`.
-- Reprise des sources et bundles du prototype Light déjà qualifié (lecteur v10 et compilation de navigation dérivée).
-- Ajout de cinq entrées Windows `.pyw`, interface graphique Python standard-library sans dépendances pip.
-- Prévisualisation locale avec serveur Python HTTP en boucle locale ; Node.js inutile pour consulter le site.
-- Export ZIP statique avec contrôle SHA-256 avant expédition.
-- Préparation GitHub Pages dans un clone Git existant sous `docs/konstellation-light` ; version antérieure sauvegardée hors du dépôt Git ; pas de git push automatique.
-- Génération d'une fiche GitBook avec URL `embed=1`.
-- Compilation de collections publiques v10 possible avec Node.js, conservation optionnelle des révisions, rattachement GitHub à un commit complet.
-- Livraison de la workflow Pages manuelle, de la documentation et des tests.
+- Standalone distribution targeted at `C:\mycode\Konstellation\Konstellation-Light`.
+- Reuses sources and bundles from the previously qualified Light prototype (v10 reader and derived navigation builds).
+- Added five Windows `.pyw` entry points, a Python standard-library GUI without pip dependencies.
+- Local preview using a Python loopback HTTP server; Node.js is not required to view the site.
+- Static ZIP export with SHA-256 check before shipment.
+- Prepares GitHub Pages in an existing Git clone at `docs/konstellation-light`; previous edition backed up outside the Git repository; no automatic git push.
+- Generates GitBook instructions with `embed=1` URL.
+- Supports public v10 collection builds with Node.js, optional retention of revisions and full-commit GitHub pinning.
+- Includes manual Pages workflow, docs and tests.
 
-**Limites** : ne transforme pas les Lens sémantiques du serveur complet. Aucun déploiement distant ni test natif Windows ou GitBook n'a été réalisé.
+**Limitations:** does not transform the full server's semantic Lenses. No remote deployment or native Windows/GitBook testing was performed.
 
 ## 0.2.0-ekole-next.1 — Konstellation Light × Ekole
 
-- Curseur 3–25 bulles, huit par défaut, voisins réels et navigation par recentrage.
-- Historique Précédent / Départ et retour optionnel vers Ekole.
-- Prévisualisation sémantique candidate isolée des collections v10 publiables.
-- Adaptateur facultatif au Kristal encyclopédique autonome v4, export sans corrigés.
-- Graphes statiques vérifiables par SHA-256 et consultables sans Internet avec un serveur local.
-- 30 tests JS et 7 tests Python lors de la réalisation.
+- 3–25 bubble slider, default eight, genuine neighbors and recentering navigation.
+- Back/Home history and optional return to Ekole.
+- Candidate semantic preview isolated from publishable v10 collections.
+- Optional standalone v4 encyclopedia Kristal adapter; exports no answer keys.
+- SHA-256-verifiable static graphs accessible offline through a local server.
+- 30 JS and seven Python tests at implementation time.

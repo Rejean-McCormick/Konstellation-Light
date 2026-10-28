@@ -1,14 +1,14 @@
-> **Windows / Ekole :** voir [Chemins canoniques et restauration du Kristal v4](README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md).
+> **Windows / Ekole:** see [Canonical paths and Kristal restoration, v0.4](README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md).
 
-> **Nouveau v0.3 : exploration Ekole sans terminal.** Extrais la mise à jour dans Konstellation-Light, puis double-clique sur `Explorer-Ekole-Autochtones.pyw` pour détecter le Kristal, préparer le graphe et l’ouvrir automatiquement. Guide : [README_LANCEUR_EKOLE_AUTOMATIQUE.md](README_LANCEUR_EKOLE_AUTOMATIQUE.md).
+> **New in v0.3: explore Ekole without a terminal.** Extract the update into Konstellation-Light, then double-click `Explorer-Ekole-Autochtones.pyw` to locate the Kristal, prepare its graph, and open it automatically. Guide: [README_LANCEUR_EKOLE_AUTOMATIQUE.md](README_LANCEUR_EKOLE_AUTOMATIQUE.md).
 
 # Konstellation Light
 
 **Standalone Windows-oriented toolkit and static website for browsing v10 collection read surfaces with byte-integrity checks.** Actual publication authorization is **not** inferred by Light. This project is separate from the full Konstellation server. It uses a v10 collection reader, a navigation compiler and a lightweight static interface; it does not alter Kristal semantic state.
 
-## Alignement ciblé avec Konstellation complet — 0.5.2 (26 octobre 2026)
+## Targeted alignment with full Konstellation — 0.5.2 (October 26, 2026)
 
-Cette révision transfère **uniquement les aides de présentation française et la recherche par mots** du lecteur complet vers les prévisualisations sémantiques locales de Light. Aucun lecteur privé, pouvoir d'autorisation ou décodage Framework v11 n'a été ajouté. La démo C4 épinglée reste identique; les sites locaux nouvellement construits incluent `semantic-display.mjs` et sont **non publiables** via le garde C4 actuel. Voir [le rapport de compatibilité](docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md) pour la matrice des écarts et les tests.
+This revision brings **only the French-language display aids and keyword search** from the full reader into Light's local semantic previews. It adds no private reader, authorization powers, or Framework v11 decoding. The pinned C4 demo remains unchanged; newly built local sites include `semantic-display.mjs` and are **not publishable** under the current C4 gate. See the [compatibility report](docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md) for the gap matrix and test results.
 
 ## Installation
 
@@ -35,22 +35,18 @@ python -m unittest discover -s tests
 
 The Windows **Preview** tab now includes a C4 check. `Deployer-Light.pyw` may stage **only the exact pinned demo** in a Git checkout; ZIP export of other verified previews requires explicit review and does not prove public authorization.
 
+## Version 0.5.1 update — Discovery 3.3 / Arketype 1.4
 
-## Mise à jour 0.5.1 — Discovery 3.3 / Arketype 1.4
+This update aligns **local site builds** with the three optional Kristal Authoring Kit 3.3 manifests: `kristal.discovery.json`, `derived/reader-inventory.json`, and `derived/reader-profile.json`. Arketype classification is *declarative* and never constitutes authorization.
 
-Cette mise à jour aligne la **construction de sites locaux** sur les trois manifestes
-facultatifs du Kristal Authoring Kit 3.3 : `kristal.discovery.json`,
-`derived/reader-inventory.json` et `derived/reader-profile.json`.
-La classification Arketype est *déclarative* et n'est jamais une autorisation.
+- In the **“Construire” (Build)** tab, explicitly check “Inclure le résumé Discovery / Arketype” (Include Discovery / Arketype summary) only when classification information and measured volumes may be disclosed. Default: **disabled**.
+- From the CLI: `node scripts/build-light.mjs --collection PATH --out previews/site --public YES --revision test --discovery YES`.
+- All three manifests must be **referenced and validated by the v10 synchronization surface**. A Discovery file outside this surface is never imported. A partial or inconsistent set causes a requested projection to fail. Without these metadata, the legacy reader works normally.
+- Only a summary of allowed fields (ARK/PRF, organization, profile, and referenced class/volume) enters the static bundle. No artifact paths, detailed inventory, or parser instruction list is exported in the summary. Bytes are verified, but advice freshness and classification are **not independently verified**.
+- The **v10 reader** used by the build now lives in `shared/kristal-v10.mjs`, instead of `server/integrations/kristal-v10.mjs`. This does not yet consolidate the copies owned by the two Konstellation repositories.
+- If extracting the ZIP over an existing repository, open **`Nettoyer_Mise_A_Jour.pyw`** at its root. It displays recognized legacy files, removes only versions matching their original fingerprints, asks for confirmation, and backs up their bytes beside the repository before removal. It does not scan private Kristals.
 
-- Dans l'onglet **Construire**, cocher explicitement « Inclure le résumé Discovery / Arketype » si le contenu de classification et les volumes mesurés peuvent être divulgués. Par défaut : **désactivé**.
-- En CLI : `node scripts/build-light.mjs --collection CHEMIN --out previews/site --public YES --revision essai --discovery YES`.
-- Les trois manifestes doivent être **référencés et validés par la surface de synchronisation v10** ; un fichier Discovery placé hors de cette surface n'est jamais aspiré. En cas d'ensemble partiel ou incohérent, la projection demandée échoue. Sans métadonnées, le lecteur historique fonctionne normalement.
-- Seul un résumé de champs autorisés (ARK/PRF, organisation, profil et classe/volume référencés) entre dans le bundle statique. Aucun chemin d'artefact, inventaire détaillé ou liste d'instructions parseur n'est exporté dans le résumé. Les octets sont vérifiés, mais la fraîcheur des conseils et la classification ne sont **pas vérifiées indépendamment**.
-- Le **lecteur v10** utilisé par la compilation se trouve maintenant dans `shared/kristal-v10.mjs`, et non plus dans `server/integrations/kristal-v10.mjs`. Ceci ne centralise pas encore les copies détenues par les deux dépôts Konstellation.
-- Si tu extrais le ZIP dans un dépôt existant, ouvre **`Nettoyer_Mise_A_Jour.pyw`** à la racine. Il montre les anciens fichiers reconnus, ne retire que des versions correspondant à leurs empreintes d'origine, demande confirmation et sauvegarde leurs octets à côté du dépôt avant de les retirer. Il ne parcourt pas les Kristals privés.
-
-**Publication :** le site synthétique épinglé `light/site` est conservé **sans modification** ; le garde C4 n'autorise toujours que ce jeu de démonstration. Reconstruire `light/site` avec une vraie collection, même validée ou même avec `--discovery YES`, **bloque** les Pages. Pour les essais locaux, utilise `--out previews/site` ou un répertoire de prévisualisation. Voir [le guide de migration](docs/ALIGNEMENT_DISCOVERY_3_3.md).
+**Publication:** the pinned synthetic site at `light/site` is retained **unchanged**; the C4 gate still authorizes only that demo. Rebuilding `light/site` with a real collection, even a validated one or with `--discovery YES`, **blocks** Pages. For local tests, use `--out previews/site` or another preview directory. See the [migration guide](docs/ALIGNEMENT_DISCOVERY_3_3.md).
 
 ## Three deployment paths
 
@@ -95,6 +91,6 @@ python -m unittest discover -s tests -p "test_windows_tools.py"
 
 `light/` contains the static app and demo site; `tools/` provides Windows GUI operations; `scripts/` builds collections and supports local preview; `server/` reads v10 manifests; `tests/` covers regressions; `docs/` contains architecture and deployment guides.
 
-## Évolution Ekole : graphe de connaissances
+## Ekole evolution: knowledge graph
 
-Lire **[README_KONSTELLATION_LIGHT_EKOLE_NEXT.md](README_KONSTELLATION_LIGHT_EKOLE_NEXT.md)** pour le curseur 3–25 bulles, le recentrage, les graphes locaux candidats et l’installateur optionnel vers Ekole Élève. La navigation v10 publique reste distincte des prévisualisations v9.
+Read **[README_KONSTELLATION_LIGHT_EKOLE_NEXT.md](README_KONSTELLATION_LIGHT_EKOLE_NEXT.md)** for the 3–25 bubble slider, recentering, candidate local graphs, and the optional installation into Ekole Student. Public v10 navigation remains separate from v9 previews.

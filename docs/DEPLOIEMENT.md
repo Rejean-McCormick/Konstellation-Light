@@ -1,50 +1,50 @@
-# Déployer Konstellation Light
+# Deploy Konstellation Light
 
-## Porte de diffusion C4 (v0.5)
+## C4 publication gate (v0.5)
 
-**Seule la démonstration synthétique épinglée peut être préparée pour GitHub Pages aujourd’hui.** Le GUI, le workflow Pages et le contrôle Node interdisent toute collection réelle dans ce flux tant que les preuves C1/C2/C3 ne sont pas adoptées et validées. Pour un build d'une collection personnelle, reste en **prévisualisation locale** ou export de revue; ne publie pas ses octets dans un repo public.
+**Only the pinned synthetic demo may be prepared for GitHub Pages at present.** The GUI, Pages workflow and Node gate reject all real collections in this flow until C1/C2/C3 evidence is adopted and validated. When building a personal collection, use a **local preview** or review export; do not publish its bytes to a public repository.
 
-Pour inspecter l'admissibilité de la démo : `node scripts/c4-publication-gate.mjs --site light/site`. Statut `BLOCK_REAL_COLLECTION` = intégrité technique mais aucune autorisation publique établie.
+Check demo eligibility: `node scripts/c4-publication-gate.mjs --site light/site`. Status `BLOCK_REAL_COLLECTION` means technical integrity passed but no public authorization has been established.
 
-## Préparer
+## Preparation
 
-Utiliser l'application graphique `Konstellation-Light.pyw`. Le dossier `light/site` contient initialement une **démonstration publique** ; il ne reflète pas automatiquement tes vrais Kristals. Pour d'autres données, sélectionner une collection synchronisée v10 et confirmer explicitement la diffusion publique.
+Use the `Konstellation-Light.pyw` GUI. The `light/site` directory initially contains a **public demonstration**; it does not automatically reflect your actual Kristals. For other data, select a synchronized v10 collection and explicitly confirm your intent to expose it publicly.
 
-## Méthode la plus simple : clone GitHub + Pages `/docs`
+## Easiest method: GitHub clone + Pages `/docs`
 
-1. Cloner un dépôt GitHub autorisé sur ton PC (ou utiliser un clone existant).
-2. Ouvrir `Deployer-Light.pyw`, sélectionner la racine du clone (avec `.git`), puis choisir **Préparer GitHub Pages dans ce dépôt**.
-3. L'outil place les fichiers sous `docs/konstellation-light` ; aucune commande Git n'est lancée automatiquement.
-4. Examiner les fichiers ajoutés, réaliser `git add`, `git commit`, `git push` manuellement.
-5. Sur GitHub, dans **Settings → Pages**, choisir **Deploy from a branch**, la branche concernée et le dossier `/docs`.
-6. URL typique : `https://OWNER.github.io/REPO/konstellation-light/` (ou domaine personnalisé selon configuration).
+1. Clone an authorized GitHub repository onto your PC (or use an existing clone).
+2. Open `Deployer-Light.pyw`, select the clone root (containing `.git`), and choose **“Préparer GitHub Pages dans ce dépôt” (Prepare GitHub Pages in this repository)**.
+3. The tool places files under `docs/konstellation-light`; no Git command is run automatically.
+4. Review the added files and manually run `git add`, `git commit`, and `git push`.
+5. On GitHub, under **Settings → Pages**, choose **Deploy from a branch**, the relevant branch, and `/docs`.
+6. Typical URL: `https://OWNER.github.io/REPO/konstellation-light/` (or a custom domain, depending on configuration).
 
-Si `docs/` héberge déjà un site, la nouvelle application se place dans son sous-dossier, sans remplacer l'accueil. Si une précédente édition Light est présente, l'outil la sauvegarde **en dehors du dépôt**, dans `.<nom-du-dépôt>-Konstellation-Light-backups/` sous le dossier parent du clone. Les sauvegardes ne doivent pas être ajoutées au dépôt Git.
+If `docs/` already hosts a site, the new app goes into a subdirectory without replacing the home page. If an earlier Light edition is present, the tool backs it up **outside the repository**, in `.<repository-name>-Konstellation-Light-backups/` under the clone's parent directory. Do not add backups to Git.
 
-## Variante : dépôt dédié + GitHub Actions
+## Alternative: dedicated repository + GitHub Actions
 
-La workflow incluse sous `.github/workflows/konstellation-light-pages.yml` utilise `workflow_dispatch`, non les pushes automatiques, afin d'éviter une publication inattendue. Sur le dépôt GitHub :
+The included `.github/workflows/konstellation-light-pages.yml` uses `workflow_dispatch`, not automatic pushes, to prevent unintended publication. In the GitHub repository:
 
-1. Copier le **projet autonome** dans la racine d'un dépôt destiné à Pages (ou adapter les chemins de la workflow).
-2. Configurer **Settings → Pages → Source: GitHub Actions**.
-3. Dans **Actions**, déclencher manuellement `Konstellation Light — opt-in public Pages`.
-4. Sans collection spécifiée, la workflow publie uniquement la démonstration déjà générée ; une collection réelle est **bloquée**, même versionnée dans le dépôt, jusqu’à la réception vérifiée des preuves C3.
-5. Surveiller les contrôles CI et la protection d'environnement `github-pages`.
+1. Copy the **standalone project** into the root of a repository intended for Pages (or adapt workflow paths).
+2. Set **Settings → Pages → Source: GitHub Actions**.
+3. In **Actions**, manually run `Konstellation Light — opt-in public Pages`.
+4. Without a specified collection, the workflow publishes only the prebuilt demo; a real collection is **blocked**, even if versioned in the repository, until C3 evidence is received and verified.
+5. Monitor CI checks and the `github-pages` environment protection.
 
-Attention : un dépôt privé ne rend pas automatiquement le site Pages privé. Ne pas y déposer des surfaces sensibles. Les versions et commits Github ne créent pas d'autorité sémantique.
+Warning: a private repository does not automatically make its Pages site private. Do not put sensitive surfaces there. GitHub versions and commits do not create semantic authority.
 
-## Hébergeur statique quelconque
+## Any static host
 
-Utiliser `Deployer-Light.pyw` → **Exporter un ZIP du site**, puis envoyer son contenu (et non le ZIP lui-même, sauf si l'hébergeur l'extrait) dans le dossier public de l'hébergeur. Servir en HTTPS pour le Service Worker.
+Use `Deployer-Light.pyw` → **“Exporter un ZIP du site” (Export site as ZIP)**, then upload the ZIP's contents (rather than the ZIP itself, unless the host extracts it) to the host's public directory. Serve over HTTPS for the Service Worker.
 
 ## GitBook
 
-Utiliser `GitBook-Light.pyw`, fournir l'URL complète du site et récupérer `exports/GitBook-Embed.md`. Favoriser le bloc Embed/Webframe de GitBook. L'intégration par iframe dépend des en-têtes de sécurité du site, de GitBook et du domaine cible ; le plein écran par lien doit rester disponible.
+Use `GitBook-Light.pyw`, enter the full site URL, and obtain `exports/GitBook-Embed.md`. Prefer GitBook's Embed/Webframe block. Iframe embedding depends on the site's security headers, GitBook, and the target domain; a full-screen link must remain available.
 
-## Vérifications après publication
+## Post-publication checks
 
-- Charger le catalogue et un bundle depuis le navigateur ; vérifier qu'aucune API GitHub n'est nécessaire au chargement normal.
-- Vérifier les liens partagés incluant `lens`, `k`, `revision` et `focus` selon les paramètres disponibles.
-- Tester une URL avec `?embed=1`.
-- Tester un écran mobile et les politiques CSP d'intégration avant de communiquer le lien GitBook.
-- Ne pas confondre un contrôle SHA-256 du transport avec une validation de signatures et d'autorité.
+- Load the catalog and a bundle in the browser; confirm normal loading does not require a GitHub API.
+- Check shared links with `lens`, `k`, `revision`, and `focus` as available.
+- Test a `?embed=1` URL.
+- Test a mobile screen and embedding CSP policies before sharing the GitBook link.
+- Do not confuse SHA-256 transport integrity with signature or authority validation.

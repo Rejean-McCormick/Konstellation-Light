@@ -1,5 +1,5 @@
 ZmartZnap snapshot file index
-Files included: 71
+Files included: 74
 
 .github/workflows/konstellation-light-intake.yml
 .github/workflows/konstellation-light-pages.yml
@@ -9,6 +9,7 @@ config/c4-demo-pin.json
 Construire-Light.pyw
 Deployer-Light.pyw
 docs/ALIGNEMENT_DISCOVERY_3_3.md
+docs/ALIGNEMENT_KONSTELLATION_2026-10-26.md
 docs/ARCHITECTURE.md
 docs/C4_PUBLICATION_INTAKE.md
 docs/DEPLOIEMENT.md
@@ -19,7 +20,6 @@ examples/portraits-et-survol-demo.json
 Explorer-Ekole-Autochtones.pyw
 FILETREE.txt
 GitBook-Light.pyw
-GitSink.bat
 Konstellation-Light.pyw
 light/site/.nojekyll
 light/site/app.js
@@ -34,12 +34,15 @@ light/src/app.js
 light/src/graph-core.mjs
 light/src/index.html
 light/src/profile.mjs
+light/src/semantic-display.mjs
 light/src/style.css
 light/src/sw.js
 Nettoyer_Mise_A_Jour.pyw
+PATCH_MANIFEST.json
 Previsualiser-Ekole.pyw
 Previsualiser-Light.pyw
 README.md
+README_APPLIQUER_CORRECTIF.md
 README_CHEMINS_EKOLE_KONSTELLATION_v0.4.md
 README_KONSTELLATION_LIGHT_EKOLE_NEXT.md
 README_LANCEUR_EKOLE_AUTOMATIQUE.md
@@ -62,6 +65,7 @@ tests/helpers/light-fixture.mjs
 tests/kristal-v10.test.mjs
 tests/light.test.mjs
 tests/pinned-intake.test.mjs
+tests/semantic-display-alignment.test.mjs
 tests/test_cleanup_update.py
 tests/test_ekole_auto_preview.py
 tests/test_windows_tools.py
@@ -71,6 +75,5 @@ tools/ekole_auto_preview.py
 tools/light_core.py
 tools/light_gui.py
 VERSION
-ZmartZnap.pyw
 
 Index file: SNAPSHOT_INDEX.txt

@@ -1,6 +1,6 @@
-# Konstellation Light v0.4 — chemins canoniques Ekole et diagnostic
+# Konstellation Light v0.4 — canonical Ekole paths and diagnostics
 
-## Disposition recommandée (Windows)
+## Recommended Windows layout
 
 ```text
 C:\mycode\
@@ -11,58 +11,39 @@ C:\mycode\
 │   │   │   └── canon\domain\encyclopedie-v4.json
 │   │   ├── rencontres-coloniales-quebec\
 │   │   ├── modele-organisation-humaine\
-│   │   └── qc-pri-ma-028\            (et les 201 autres cours)
+│   │   └── qc-pri-ma-028\            (and the other 201 courses)
 │   ├── site\eleve\
-│   │   └── konstellation\             (PROJECTION facultative, pas une source)
-│   ├── modules\qc-pri-us-009\         (références pédagogiques)
+│   │   └── konstellation\             (optional DERIVED PROJECTION, not a source)
+│   ├── modules\qc-pri-us-009\         (educational references)
 │   └── LANCER_EKOLE_3_APPS.bat
 └── Konstellation\
-    ├── Konstellation\                (moteur complet, si présent)
+    ├── Konstellation\                (full engine, if present)
     └── Konstellation-Light\
         ├── Previsualiser-Light.pyw
         ├── Explorer-Ekole-Autochtones.pyw
-        └── previews\ekole-autochtones-local\  (CACHE local)
+        └── previews\ekole-autochtones-local\  (local CACHE)
 ```
 
-**Ne pas déplacer les Kristals dans Konstellation.** Le Kristal autonome
-reste la propriété de `Ekole/kristals/societes-autochtones-quebec/` ;
-Konstellation ne consomme que sa représentation dérivée. Un Kristal de cours
-comme `qc-pri-us-009` le référence sans lui appartenir.
+**Do not move Kristals into Konstellation.** The standalone Kristal remains owned by `Ekole/kristals/societes-autochtones-quebec/`; Konstellation only consumes its derived representation. A course Kristal such as `qc-pri-us-009` references it but does not own it.
 
-## Pourquoi « introuvable » sur le poste
+## Why Windows reports “not found”
 
-Le ZIP `znapshot_Ekole_10101537.zip` contient bien 45 fichiers sous
-`kristals/societes-autochtones-quebec/`, dont `canon/domain/encyclopedie-v4.json`.
-Le poste Windows a affiché une absence sous `C:\mycode\Ekole\...` :
-les fichiers du ZIP ne sont donc pas forcément extraits à cet emplacement.
+The ZIP `znapshot_Ekole_10101537.zip` does contain 45 files under `kristals/societes-autochtones-quebec/`, including `canon/domain/encyclopedie-v4.json`. Windows reported that they were missing under `C:\mycode\Ekole\...`; ZIP contents are therefore not necessarily extracted to that location.
 
-Le lanceur v0.4 :
-- reconnaît Ekole même si le Kristal v4 est absent ;
-- montre l’emplacement attendu, et repère un ZIP extrait sous un sous-dossier ;
-- peut restaurer le Kristal manquant depuis **le ZIP existant**, sans écraser
-  ni déplacer les autres fichiers (bouton « Restaurer … depuis un ZIP Ekole ») ;
-- refuse toute restauration si un dossier Kristal est déjà présent, même partiel ;
-- conserve l’ouverture locale et les protections contre la publication implicite.
+The v0.4 launcher:
+- recognizes Ekole even if the v4 Kristal is missing;
+- shows the expected location and detects a ZIP extracted under a subdirectory;
+- can restore the missing Kristal from **an existing ZIP**, without overwriting or moving other files (the “Restaurer le Kristal manquant depuis un ZIP Ekole…” (Restore from an Ekole ZIP) button);
+- refuses restoration if any Kristal directory is already present, even if incomplete;
+- preserves local access and protections against implicit publication.
 
-## Installation en deux étapes
+## Two-step installation
 
-1. Extraire `Konstellation_Light_Chemins_Autoreparation_v0.4.zip` **dans**
-   `C:\mycode\Konstellation\Konstellation-Light` (base v0.3 requise).
-   Fermer auparavant tout lanceur encore ouvert.
-2. Double-cliquer `Previsualiser-Light.pyw` → « Ekole · Graphe ».
-   Le champ racine devrait afficher `C:\mycode\Ekole`, même si le fichier manque.
-   Si l’état indique un Kristal manquant, cliquer « Restaurer … depuis un ZIP
-   Ekole » et choisir ton fichier `znapshot_Ekole_10101537.zip`.
-   Confirmer. Puis « Créer / actualiser et OUVRIR le graphe ».
+1. Extract `Konstellation_Light_Chemins_Autoreparation_v0.4.zip` **into** `C:\mycode\Konstellation\Konstellation-Light` (requires the v0.3 base). Close any open launcher first.
+2. Double-click `Previsualiser-Light.pyw` → “Ekole · Graphe” (Ekole · Graph). The root field should display `C:\mycode\Ekole`, even when the file is missing. If a Kristal is reported missing, click “Restaurer le Kristal manquant depuis un ZIP Ekole…” (Restore from an Ekole ZIP) and select `znapshot_Ekole_10101537.zip`. Confirm, then select “Créer / actualiser et OUVRIR le graphe” (Create/update and OPEN graph).
 
-*Alternative manuelle :* extraire seulement le sous-dossier
-`kristals/societes-autochtones-quebec/` du snapshot ZIP à la racine Ekole,
-si le dossier n’existe pas déjà. Faire une sauvegarde avant toute opération.
+*Manual alternative:* extract only `kristals/societes-autochtones-quebec/` from the snapshot ZIP into the Ekole root, if the directory does not already exist. Make a backup before proceeding.
 
-## Sécurité et politique documentaire
+## Security and document policy
 
-La restauration est non destructive et spécifique au Kristal autonome. Elle
-n’installe ni corrigé, ni matière d’un autre cours, ni publication v10.
-L’encyclopédie v4 reste un corpus **candidat**, à relire culturellement et
-historiquement avant l’option facultative de copie dans `site/eleve/konstellation/`.
-Une prévisualisation privée n’est pas une preuve d’approbation du contenu.
+Restoration is non-destructive and specific to the standalone Kristal. It does not install answer keys, content from other courses, or any v10 publication. The v4 encyclopedia remains a **candidate** corpus requiring cultural and historical review before the optional copy into `site/eleve/konstellation/`. A private preview is not evidence of content approval.

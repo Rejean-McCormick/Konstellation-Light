@@ -1,61 +1,61 @@
-# Konstellation → Konstellation Light : alignement contrôlé (26 octobre 2026)
+# Konstellation → Konstellation Light: controlled alignment (October 26, 2026)
 
-## Décision
+## Decision
 
-Conserver **deux produits complémentaires**. Konstellation complet = lecteur local/partagé contrôlé avec politiques d'accès, explorateurs et moteurs de projection. Light = visualisation autonome de *représentations dérivées, explicitement sélectionnées*, utile pour les aperçus locaux et, seulement après qualification indépendante, de futures publications statiques. Le but **n'est pas** de porter aveuglément toute la logique serveur dans un navigateur statique.
+Keep **two complementary products**. Full Konstellation is a controlled local/shared reader with access policies, explorers and projection engines. Light independently visualizes *explicitly selected derived representations*, for local previews and, only following independent qualification, future static publications. The goal is **not** to blindly port all server logic into a static browser.
 
-Les cinq snapshots d'origine ont été examinés localement : `znapshot_Konstellation_10261813.zip`, `znapshot_Konstellation-Light_10261813.zip`, `znapshot_Kristal-Integration-Pack_10261812.zip`, `znapshot_Kristal-Manager_10261812.zip`, `Kristal-GitHub-Bootstrap(1).zip`. Aucun appel distant ni modification GitHub n'a été effectué.
+Five original snapshots were examined locally: `znapshot_Konstellation_10261813.zip`, `znapshot_Konstellation-Light_10261813.zip`, `znapshot_Kristal-Integration-Pack_10261812.zip`, `znapshot_Kristal-Manager_10261812.zip`, `Kristal-GitHub-Bootstrap(1).zip`. No remote requests or GitHub modifications were made.
 
-## Delta constaté dans les snapshots
+## Gaps observed in snapshots
 
-| Fonctionnalité | Konstellation complet | Light avant | Traitement dans 0.5.2 |
+| Feature | Full Konstellation | Light before | Treatment in 0.5.2 |
 |---|---|---|---|
-| Présentation sémantique française du 17/10 (`P138`, `P50`, relations explicitement connues) | `src/lib/semantic-display.mjs` | Absente | **Portée**, affichage des arêtes de prévisualisation candidate seulement ; prédicat brut conservé dans l'inspecteur |
-| Recherche par mots entiers, sans `aquin` → `Joaquín` | Astrolabe et libellés avec désambiguïsation | Recherche par sous-chaînes | **Portée** aux curations candidates uniquement ; ne fusionne aucun identifiant |
-| Libellé technique/valeur brute et provenance | Inspecteur avancé | Inspector minimal | **Partiellement porté** : identifiant de navigation + libellé source et prédicat brut visibles |
-| Navigation adaptive KNAV, Lens et registres de renderers 1.0 | Serveur + projections & renderers | Quatre vues légères seulement | **Non porté** ; une traduction contractuelle de projections publiques serait nécessaire |
-| Lecteur local v10, catalogue privé et sélection neutre | Expérimental, depuis le 16/10 | Lecteur de *surface synchronisée* v10 et prévisualisation locale Ekole | **Non porté** : ne pas exposer d'emplacements locaux ou de catalogues privés dans un site public |
-| Export Manager + politiques d'accès | My Kristals, opt-in / local | Aucun navigateur de fleet privé | **Non porté** ; Manager ne délivre aucune autorisation à Light |
-| Discovery 3.3 / Arketype | Optionnel, lecture consultative | Présent dans Light 0.5.1, opt-in | **Préservé**, classification non autoritaire |
-| Framework v11 / diK / dictionnaires | Pack d'intégration v11 séparé, alpha.1 et checkout Framework épinglé | Aucun décodeur v11 | **Non porté** : exige une nouvelle projection, un format/version propres et qualification distincte |
-| C2/C4 publication | Garde-fous indépendants | C4 démo synthétique uniquement | **Préservé** et testé : une collection réelle reste BLOQUÉE |
+| French semantic presentation from October 17 (`P138`, `P50`, explicitly known relationships) | `src/lib/semantic-display.mjs` | Missing | **Ported**, display of candidate preview edges only; raw predicate retained in inspector |
+| Whole-word search, without `aquin` → `Joaquín` | Astrolabe and labels with disambiguation | Substring search | **Ported** only for candidate curations; no identifier merging |
+| Technical label/raw value and provenance | Advanced inspector | Minimal inspector | **Partially ported:** navigation ID, source label and raw predicate visible |
+| Adaptive KNAV navigation, Lens, and renderer registries 1.0 | Server, projections and renderers | Only four lightweight views | **Not ported**; would require a public projection contract translation |
+| Local v10 reader, private catalog and neutral selection | Experimental since October 16 | Synchronized v10 surface reader and local Ekole preview | **Not ported**; never expose local paths or private catalogs in public sites |
+| Manager export and access policies | My Kristals, opt-in/local | No private fleet browser | **Not ported**; Manager grants no authorization to Light |
+| Discovery 3.3 / Arketype | Optional, advisory read | Present in Light 0.5.1, opt-in | **Preserved**; classification is not authoritative |
+| Framework v11 / diK / dictionaries | Separate v11 Integration Pack, alpha.1, pinned Framework checkout | No v11 decoder | **Not ported**; requires a distinct new projection, format/version, and qualification |
+| C2/C4 publication | Independent safeguards | C4 synthetic demo only | **Preserved and tested**; a real collection remains BLOCKED |
 
-## Correctif fonctionnel livré
+## Delivered functional fix
 
-1. `light/src/semantic-display.mjs` reprend **comme affichage non canonique** les fonctions de présentation françaises de Konstellation du 17 octobre, plus une fonction de recherche locale bornée.
-2. `light/src/app.js` applique ces libellés dans les graphes, la liste, les fiches et l'inspecteur **uniquement** pour `derived-semantic-preview`, pas aux données v10 d'hébergement. La structure `nodes` / `edges`, les SHA-256, le `surface_digest`, la sélection et les IDs de source ne changent pas.
-3. Les scripts de build de prévisualisation et de collection incluent désormais le module autonome, et le service worker du code source le précharge dans un nouveau cache `v5`.
-4. Les vérificateurs JS/Python reconnaissent l'asset explicitement autorisé pour les **prévisualisations locales**, mais le C4 JavaScript ne l'accepte **jamais** comme contenu de la démo épinglée. Un build contenant cet asset est classé `BLOCK_REAL_COLLECTION`. L'intégrité annoncée est celle des bundles JSON et ne garantit pas une signature ou une qualification de tout JavaScript arbitraire.
-5. L'outil Ekole tient compte de cet asset dans son empreinte de cache et ses tests de reproduction.
-6. `light/site/` et `config/c4-demo-pin.json` n'ont **pas** été changés. La démo publique existante est donc volontairement inchangée : les nouveaux libellés seront visibles seulement dans des prévisualisations reconstruites par les scripts locaux.
+1. `light/src/semantic-display.mjs` reproduces the October 17 French presentation functions from Konstellation **for non-canonical display**, plus a bounded local search function.
+2. `light/src/app.js` applies these labels in graphs, lists, cards and the inspector **only** for `derived-semantic-preview`, not v10 hosted data. The `nodes` / `edges` structure, SHA-256 values, `surface_digest`, selection and source IDs remain unchanged.
+3. Preview and collection build scripts now include the standalone module, and the source service worker precaches it in a new `v5` cache.
+4. JS/Python validators recognize the explicitly allowed asset for **local previews**, but the JavaScript C4 gate **never** accepts it in the pinned demo. A build with this asset is classified `BLOCK_REAL_COLLECTION`. The declared integrity relates to JSON bundles and does not ensure a signature or qualification for arbitrary JavaScript.
+5. The Ekole tool includes this asset in its cache fingerprint and reproducibility tests.
+6. `light/site/` and `config/c4-demo-pin.json` were **not** changed. The existing public demo is intentionally unchanged: new labels appear only in previews rebuilt by local scripts.
 
-### Frontière de sécurité non négociable
+### Non-negotiable security boundary
 
-`--public YES` est une **déclaration d'intention d'export**, jamais une validation C1/C2/C3 ni une autorisation de publier une collection réelle. Le flux GitHub Pages autorise la démo exacte et rien d'autre. La vérification de transport SHA-256 n'établit pas une preuve de vérité sémantique. Aucune synchronisation GitHub distante n'a été faite.
+`--public YES` is a **declaration of export intent**, never C1/C2/C3 qualification or permission to publish a real collection. The GitHub Pages flow authorizes the exact demo and nothing else. SHA-256 transport verification is not proof of semantic truth. No remote GitHub synchronization occurred.
 
-## Évidence et limites
+## Evidence and limitations
 
-Tests locaux : Node.js 22.16.0 / Python 3.13.5 sous Linux.
+Local tests: Node.js 22.16.0 / Python 3.13.5 on Linux.
 
-- Snapshot original Light : **47/47** tests JavaScript, **21/21** Python ; C4 `ALLOW_DEMO_ONLY`.
-- Light aligné : **51/51** tests JavaScript, **21/21** Python ; C4 `ALLOW_DEMO_ONLY` sur la démo d'origine ; vérification explicite de `BLOCK_REAL_COLLECTION` avec l'asset ajouté.
-- Tests référentiels de présentation de Konstellation complet : **5/5**.
-- Contrôle syntaxique Node sur l'interface et le nouveau module : réussi.
+- Original Light snapshot: **47/47** JavaScript tests, **21/21** Python; C4 `ALLOW_DEMO_ONLY`.
+- Aligned Light: **51/51** JavaScript tests, **21/21** Python; C4 `ALLOW_DEMO_ONLY` on the original demo; explicit `BLOCK_REAL_COLLECTION` verification with the added asset.
+- Full Konstellation semantic-presentation reference tests: **5/5**.
+- Node syntax check on UI and new module: passed.
 
-Non exécutés ou non qualifiés : interface navigateur E2E Light, Windows GUI sur machine physique, installateur Windows, dépendances/build Astro/Svelte du Konstellation complet, Framework v11 externe (non fourni), environnement de production, C1/C2/C3 et performances au niveau de Wikipédia. La navigation statique actuelle est bornée (catalogue 1 000 entrées, bundles de 8 Mio max, graphe de 12 000 nœuds maximum, garde C4 <=1 006 fichiers) : **elle ne convient pas directement à 100× le contenu et 20× le trafic de Wikipédia**.
+Not run or not qualified: Light browser E2E UI, Windows GUI on a physical machine, Windows installer, full Konstellation Astro/Svelte dependencies/build, external Framework v11 (not supplied), production environment, C1/C2/C3, and Wikipedia-scale performance. Current static navigation has bounds (catalog of 1,000 entries, maximum 8 MiB bundles, graph of at most 12,000 nodes, C4 guard ≤ 1,006 files): **it is not directly suitable for 100× Wikipedia's content and 20× its traffic**.
 
-## Prochaines étapes proposées
+## Proposed next steps
 
-**A. Contrat de projection commun, sans fusion des runtimes.** Faire émettre à Konstellation complet une projection documentaire bornée, stable, en lecture seule et explicitement qualifiée. Light doit pouvoir l'inspecter sans reconstruire les décisions de Reader Policy.
+**A. Shared projection contract, without runtime merger.** Have full Konstellation emit a bounded, stable, read-only, explicitly qualified document projection. Light should inspect it without reconstructing Reader Policy decisions.
 
-**B. Chaîne C1/C2/C3 → C4 distincte.** À convenir avant toute publication de contenu réel : preuves de qualification, autorisations d'ayant droit, release immuable, traitement des retraits et révocations. Les empreintes de transport ne sont pas des certificats de publication.
+**B. Separate C1/C2/C3 → C4 pipeline.** Agree before any publication of real content: qualification evidence, rights-holder authorization, immutable releases, handling of withdrawal and revocation. Transport fingerprints are not publication certificates.
 
-**C. Framework v11 multilingue.** À partir du Pack v11 alpha.1, concevoir une nouvelle projection tenant compte des statuts `direct`/`fallback`/`missing`, des KQ/KP et de la provenance des couches lexicales. Ne pas faire croire à une traduction validée en cas de repli. Ne pas modifier le lecteur historique Light v10.
+**C. Multilingual Framework v11.** Using Pack v11 alpha.1, design a new projection that reflects `direct`/`fallback`/`missing` states, KQ/KP identities, and lexical-layer provenance. Do not present fallback as validated translation. Do not modify the legacy Light v10 reader.
 
-**D. Light à très grande échelle.** Nouveau moteur de routage et d'indexation par fragments, stockage objet/CDN indépendants, métadonnées paginées, génération incrémentale, budget vérifié de coût/capacité. Dépôts GitHub réservés au code, contrats, CI de taille limitée et gouvernance; **jamais** à des milliards de pages ou au trafic des lecteurs.
+**D. Light at very large scale.** New fragment-based indexing and routing, independent object storage/CDN, paginated metadata, incremental generation, and verified cost/capacity budgets. Use GitHub repositories for code, contracts, size-limited CI and governance; **never** billions of pages or user traffic.
 
-**E. Qualification complète.** Validation Windows (GUI, lanceurs), E2E navigateur, comparaison visuelle des prédicats reconnus et inconnus, simulation d'absence de sources, tests de cache/invalidation, revue sécurité et tests d'échelle avant un tag stable.
+**E. Full qualification.** Validate Windows GUI/launchers, browser E2E, visual comparison of recognized/unknown predicates, missing-source simulations, cache/invalidation tests, security review and scale testing before a stable tag.
 
-## Mode d'application
+## Applying the candidate
 
-Cette archive est un **candidat de travail**. Faire une sauvegarde de Konstellation Light, examiner les différences des sources, ne pas écraser un checkout avec des modifications personnelles non fusionnées, tester `node --test tests/*.test.mjs`, `python -m unittest discover -s tests -p 'test_*.py'`, `node scripts/c4-publication-gate.mjs --site light/site`. Ne pas remplacer `light/site` par une collection réelle ni pousser un déploiement public.
+This archive is a **working candidate**. Back up Konstellation Light, review source diffs, do not overwrite a checkout containing unmerged personal changes, then run `node --test tests/*.test.mjs`, `python -m unittest discover -s tests -p 'test_*.py'`, and `node scripts/c4-publication-gate.mjs --site light/site`. Never replace `light/site` with a real collection or push a public deployment.

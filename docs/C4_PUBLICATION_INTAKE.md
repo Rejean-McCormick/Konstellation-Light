@@ -1,86 +1,86 @@
-# C4 — Import GitHub public épinglé et porte de publication
+# C4 — Pinned public GitHub intake and publication gate
 
-Statut : **0.5.0-c4-demo-gate-preview — préparation / preview uniquement; aucune collection réelle autorisée sur Pages.**
+Status: **0.5.0-c4-demo-gate-preview — preparation / preview only; no real collection authorized on Pages.**
 
-## 1. Frontières et responsabilités
+## 1. Boundaries and responsibilities
 
-- C3 (`kristal-public`) possède la publication publique et son reçu de qualification/autorisation.
-- C4 (Konstellation Light) **consomme** une surface GitHub v10 publiée, vérifie ses octets et produit une navigation dérivée ; il **ne décide pas** si le Kristal a le droit d'être publié, si sa sémantique est valide ou s'il est activé.
-- La vérification locale SHA-256 et le SHA complet d'un commit ne prouvent **ni qualification indépendante, ni licence, ni autorisation, ni immutabilité d'une release**.
-- `konstellation.light-source-pin/1.0` (fichier local `LIGHT_SOURCE_PIN.json`) est **uniquement un reçu de transfert technique non normatif**. Il porte `qualification_verified=false` et `publication_verified=false`.
+- C3 (`kristal-public`) owns public publication and its qualification/authorization receipt.
+- C4 (Konstellation Light) **consumes** a published v10 GitHub surface, verifies its bytes and generates derived navigation. It **does not decide** whether a Kristal may be published, whether its semantics are valid, or whether it is activated.
+- Local SHA-256 verification and a complete Git commit SHA prove **neither independent qualification, license, authorization, nor immutable release status**.
+- `konstellation.light-source-pin/1.0` (local file `LIGHT_SOURCE_PIN.json`) is **only a non-normative technical transfer receipt**. It specifies `qualification_verified=false` and `publication_verified=false`.
 
-## 2. Ce qui marche maintenant : importer un état *déjà public*, pour aperçu isolé
+## 2. What works now: import an *already public* state for isolated preview
 
-À exécuter seulement sur une révision dont l'exposition publique a déjà été approuvée en amont. Le dépôt doit être exactement `Rejean-McCormick/kristal-public` (liste de confiance C4 volontairement limitée).
+Run only against a revision already approved upstream for public exposure. The repository must be exactly `Rejean-McCormick/kristal-public` (the C4 allowlist is intentionally limited).
 
 ```bash
 node scripts/import-pinned-collection.mjs \
   --repository Rejean-McCormick/kristal-public \
-  --commit <SHA_GIT_40_CARACTERES> \
-  --expected-index-digest sha256:<INDEX_DIGEST_64_HEX> \
+  --commit <40_CHARACTER_GIT_SHA> \
+  --expected-index-digest sha256:<64_HEX_INDEX_DIGEST> \
   --out /tmp/public-collection
 
 node scripts/build-light.mjs \
   --collection /tmp/public-collection \
   --out /tmp/light-preview \
   --public YES \
-  --revision <SHA_GIT_40_CARACTERES> \
+  --revision <40_CHARACTER_GIT_SHA> \
   --repository https://github.com/Rejean-McCormick/kristal-public \
-  --commit <SHA_GIT_40_CARACTERES>
+  --commit <40_CHARACTER_GIT_SHA>
 ```
 
-Remplacer les placeholders par les valeurs exactes du commit et de l'index **déjà publics**. Un échec entraîne un refus sans création du dossier destination. Les scripts n'exécutent aucun programme du dépôt téléchargé, ne téléchargent pas automatiquement d'autres dépôts et rejettent les liens symboliques de la collection. `--out` de l'import doit pointer sur un dossier **non existant**, avec parent existant.
+Replace placeholders with the exact commit/index values that are **already public**. Failure is closed and does not create the destination directory. Scripts do not execute code from the downloaded repository, automatically fetch other repositories or accept collection symlinks. Import `--out` must be a **nonexistent directory** whose parent already exists.
 
-Le build Light respecte l'intégrité octet-à-octet de la surface v10, crée des packs immuables `pack-<SHA-256>.json` et refuse qu'une même paire `(slug, revision)` désigne un contenu différent ; sa sortie est assemblée avant remplacement, afin que les erreurs préalables ne remplacent pas l'ancien site.
+The Light build enforces byte-by-byte integrity of the v10 surface, creates immutable `pack-<SHA-256>.json` bundles and refuses a different payload for the same `(slug, revision)` pair. Output is assembled before replacement so earlier failures cannot replace the old site.
 
-## 2bis. Porte de contrôle C4 effectivement appliquée au site
+## 2a. C4 gate actually enforced on the site
 
-Le fichier `config/c4-demo-pin.json` enregistre **les empreintes du catalogue, du bundle et des six fichiers statiques de la démonstration synthétique** (non une autorité de publication). `scripts/c4-publication-gate.mjs` vérifie la liste de fichiers, l’absence de symlinks, le digest/format de chaque bundle et cette référence exacte. Il produit un diagnostic `konstellation.light-c4-preflight/1.0` :
+`config/c4-demo-pin.json` records **the catalog, bundle and six static-file fingerprints of the synthetic demo** (not publication authority). `scripts/c4-publication-gate.mjs` checks file inventory, absence of symlinks, each bundle's format/digest and the exact baseline. It emits a `konstellation.light-c4-preflight/1.0` diagnostic:
 
-- `ALLOW_DEMO_ONLY` (code 0) : **démo épinglée uniquement**; `qualification`, `authorization` et `publication` restent `NOT_VERIFIED`.
-- `BLOCK_REAL_COLLECTION` (code 3) : site octet-conforme mais non-démo; interdit au workflow Pages malgré `--public YES`, `repository_dispatch`, `git SHA` ou `index_digest`.
-- `BLOCK` (code 2) : format, fichiers ou empreintes invalides; refuser même un aperçu.
+- `ALLOW_DEMO_ONLY` (exit code 0): **pinned demo only**; `qualification`, `authorization`, and `publication` remain `NOT_VERIFIED`.
+- `BLOCK_REAL_COLLECTION` (exit code 3): site is byte-consistent but not the demo; Pages deployment prohibited despite `--public YES`, `repository_dispatch`, `git SHA`, or `index_digest`.
+- `BLOCK` (exit code 2): invalid format, file inventory or fingerprints; even preview must be refused.
 
-La porte de contrôle Pages exécute ce script **après** les tests et **avant** `upload-pages-artifact`. L'import pinned exécute le même script et exige le code 3 : ses octets peuvent être prévisualisés mais jamais interprétés comme une publication qualifiée. Le GUI Python valide indépendamment la démonstration avant préparation d'un checkout Git. **La référence de démo est modifiable par les mainteneurs du dépôt**, donc des règles de branches et une revue des PR sont nécessaires : ce mécanisme évite surtout les substitutions accidentelles; il ne prouve pas la légitimité de son émetteur.
+The Pages gate runs the script **after** tests and **before** `upload-pages-artifact`. Pinned intake runs the same script and requires exit code 3: its bytes may be previewed but cannot be mistaken for qualified publication. The Python GUI independently validates the demo before preparing a Git checkout. **Repository maintainers can change the demo baseline**, so branch protection and PR review are needed: this mechanism mainly prevents accidental substitution; it does not prove issuer legitimacy.
 
 ```bash
 node scripts/c4-publication-gate.mjs --site light/site
 node --test tests/c4-gate.test.mjs tests/pinned-intake.test.mjs
 ```
 
-**La séquence C1 → C2 → C3 → C4 de production reste BLOQUÉE**, car le dépôt ne contient pas de format de reçu et de racines de confiance adoptés par les parties. Le déploiement manuel de la démonstration **ne certifie pas** son contenu en tant qu'état Kristal.
+**The production C1 → C2 → C3 → C4 sequence remains BLOCKED** because jointly adopted receipt formats and trust roots are missing. Manually deploying the demo **does not certify** its content as Kristal state.
 
-## 3. Workflows GitHub fournis
+## 3. Provided GitHub workflows
 
-- `.github/workflows/konstellation-light-intake.yml` : `workflow_dispatch` ou `repository_dispatch` de type `kristal-qualified-release-v1`, télécharge **uniquement** à un commit complet depuis le dépôt fixe, contrôle l'index et les octets, prépare le site statique puis **dépose un artefact d'aperçu de sept jours**. Il ne possède ni permission `pages:write`, ni permission `id-token:write`, ni étape `deploy-pages`.
-- `.github/workflows/konstellation-light-pages.yml` : le déploiement manuel de la **démo existante** demeure possible. Une valeur non vide de `collection_directory` fait échouer explicitement le workflow jusqu'au raccordement de la qualification C3.
+- `.github/workflows/konstellation-light-intake.yml`: `workflow_dispatch` or `repository_dispatch` of type `kristal-qualified-release-v1`; fetches **only at a full commit** from the fixed repository, checks index and bytes, prepares a static site and **uploads a seven-day preview artifact**. It has neither `pages:write` nor `id-token:write` nor a `deploy-pages` step.
+- `.github/workflows/konstellation-light-pages.yml`: manual deployment of the **existing demo** remains possible. A nonempty `collection_directory` explicitly fails until C3 qualification is integrated.
 
-**La réception authentifiée d'un `repository_dispatch` ne prouve pas l'identité du producteur de la qualification** : tout acteur possédant l'autorisation d'envoyer cet événement peut choisir son contenu. Il est donc insuffisant pour ouvrir les droits de déploiement.
+**Authenticated receipt of `repository_dispatch` does not prove the identity of the qualification issuer**: anyone authorized to send the event can choose its contents. It cannot grant deployment rights.
 
-## 4. Contrat de coordination demandé à C3 (proposition, non accepté)
+## 4. Proposed coordination contract with C3 (not accepted)
 
-Avant de créer un déploiement automatisé, C3 doit produire un événement **après release effectivement vérifiée**, accompagné de références vers les preuves **autorisées** :
+Before automated deployment, C3 must send an event **after an actually verified release**, with references to **authorized** evidence:
 
-| Champ / preuve demandée | Validation C4 attendue |
+| Required field / evidence | Expected C4 verification |
 |---|---|
-| Dépôt source fixé à `Rejean-McCormick/kristal-public` | Identité du dépôt confirmée côté plateforme, pas seulement dans le payload |
-| SHA Git de 40 caractères et tag de release | Tag résolu **au SHA exact**, pas à `main` ou une branche mutable |
-| `kristals/index.json` et `index_digest` | Digest du schéma Framework et entrées vérifiés |
-| Manifeste de sync v10 par Kristal | Rôles, empreintes, tailles, chemin, état et surface concordants |
-| Reçu de qualification **indépendante** | Attestation vérifiable et reliée au même commit/manifeste/engagement logique |
-| Autorisation initiale active et périmètre public | Reçu de C2, contrôlé à la version publiée (y compris exclusions) |
-| Publication/release immuable C3 | Existence, statut et preuve d'immuabilité vérifiés par une source de confiance |
-| Événement post-publication idempotent | Relecture/rejeu ne doit pas produire un nouveau résultat divergent |
+| Source repository pinned to `Rejean-McCormick/kristal-public` | Repository identity confirmed by the platform, not only the payload |
+| 40-character Git SHA and release tag | Tag resolves to the **exact SHA**, not mutable `main` or branch |
+| `kristals/index.json` and `index_digest` | Framework schema digest and entries verified |
+| Per-Kristal v10 sync manifest | Roles, hashes, sizes, paths, state, and surface consistent |
+| **Independent** qualification receipt | Verifiable attestation tied to the same commit/manifest/logical commitment |
+| Active initial authorization and public scope | C2 receipt checked against published version, including exclusions |
+| Immutable C3 publication/release | Existence, status and immutability proof verified by a trusted source |
+| Idempotent post-publication event | Replays must not generate divergent new results |
 
-**Tant que les formats et racines de confiance de ces reçus ne sont pas acceptés conjointement par C1/C2/C3/C4, le pipeline Pages reste fermé aux collections réelles.** Ce document n'invente pas un schéma normatif `publication_receipt/1.0`.
+**Until receipt formats and trust roots are jointly accepted by C1/C2/C3/C4, the Pages pipeline remains closed to real collections.** This document does not invent a normative `publication_receipt/1.0` schema.
 
-## 5. Historique de versions / catalogue
+## 5. Version history / catalog
 
-- `--append YES` garde les révisions existantes seulement si leurs anciens packs ont encore la bonne taille et le bon SHA-256.
-- La même `(slug, revision)` ne peut pas être remplacée silencieusement.
-- En l'absence d'horodatage/séquence **provenant de C3**, les révisions sont triées lexicalement. L'interface **ne peut pas garantir** que la dernière entrée est la révision chronologiquement la plus récente. Les liens directs `?k=<slug>&r=<revision>&lens=trace` restent déterministes.
-- Le site publié ne contient pas de secret ; les archives et artefacts GitHub Actions peuvent être accessibles selon la configuration du dépôt.
-- Aucun changement n'est apporté aux fichiers canon zoologiques, aux sources de vérité, aux engagements v9 ou à Kompiler.
+- `--append YES` retains existing revisions only if their old packs still have matching sizes and SHA-256.
+- The same `(slug, revision)` cannot silently be replaced.
+- Without a timestamp/sequence **supplied by C3**, revisions are sorted lexically. The interface **cannot guarantee** the last item is chronologically most recent. Direct links `?k=<slug>&r=<revision>&lens=trace` remain deterministic.
+- The published site contains no secrets; GitHub Actions archives/artifacts may be accessible depending on repository configuration.
+- Canonical files, sources of truth, v9 commitments and Kompiler are not changed.
 
 ## 6. Tests
 
@@ -89,4 +89,4 @@ node --test tests/kristal-v10.test.mjs tests/light.test.mjs tests/pinned-intake.
 python -m unittest discover -s tests -p 'test_windows_tools.py' -v
 ```
 
-Les tests GitHub distants, le comportement natif Windows, l'attestation C3 et l'interface web hébergée n'ont **pas** été validés par ces tests locaux.
+Remote GitHub tests, native Windows behavior, C3 attestation and the hosted web interface were **not** validated by these local tests.

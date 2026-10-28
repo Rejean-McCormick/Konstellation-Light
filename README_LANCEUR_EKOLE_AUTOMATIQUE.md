@@ -1,52 +1,51 @@
-# Konstellation Light — Explorer Ekole en un double-clic (v0.3)
+# Konstellation Light — explore Ekole with a double-click (v0.3)
 
-## Pour toi — sans terminal
+## For you — no terminal required
 
-1. **Ferme** l’ancien `Previsualiser-Light.pyw` s’il est ouvert.
-2. **Sauvegarde** le dossier `C:\mycode\Konstellation\Konstellation-Light` et extrais le ZIP v0.3 dedans. Ne l’extrais pas dans Ekole.
-3. Double-clique sur **`Explorer-Ekole-Autochtones.pyw`**.
-4. Le programme cherche `C:\mycode\Ekole` (ou le dossier frère de Konstellation), puis **construit et ouvre automatiquement** la carte du Kristal autonome.
-5. Si Ekole n’est pas trouvé, clique sur **Parcourir** et sélectionne **la racine du dossier Ekole**, pas le fichier JSON.
+1. **Close** the old `Previsualiser-Light.pyw` if open.
+2. **Back up** `C:\mycode\Konstellation\Konstellation-Light` and extract the v0.3 ZIP into it. Do not extract it into Ekole.
+3. Double-click **`Explorer-Ekole-Autochtones.pyw`**.
+4. The program searches `C:\mycode\Ekole` (or the directory next to Konstellation), then **automatically builds and opens** the standalone Kristal map.
+5. If Ekole is not found, click **Browse** and select the **root Ekole directory**, not the JSON file.
 
-L’application originale **`Previsualiser-Light.pyw` fonctionne aussi** : onglet **« Ekole · Graphe »**, bouton **« Créer / actualiser et OUVRIR le graphe »**.
-`Previsualiser-Ekole.pyw` ouvre directement cet onglet, sans préparation automatique tant que tu ne cliques pas.
+The original **`Previsualiser-Light.pyw` still works**: choose the **“Ekole · Graphe” (Ekole · Graph)** tab and click **“Créer / actualiser et OUVRIR le graphe” (Create/update and OPEN graph)**. `Previsualiser-Ekole.pyw` directly opens this tab, without automatic preparation until you click.
 
-Le curseur **3 à 25 bulles**, le recentrage et les boutons Précédent / Départ restent ceux de la version Light v0.2.
+The **3–25 bubbles** slider, recentering, and Back/Home buttons remain as in Light v0.2.
 
-## Ce qui est automatisé
+## What is automated
 
-- Détection du fichier `kristals/societes-autochtones-quebec/canon/domain/encyclopedie-v4.json`.
-- Vérification du chemin et appel local de **Node.js** : projection sémantique puis construction d’un site statique. Aucune commande à taper.
-- Stockage sous `previews/ekole-autochtones-local/<empreinte>/` ; un second lancement réutilise les fichiers tant que le Kristal et le code n’ont pas changé.
-- Le programme n’efface **jamais** une projection modifiée ou existante et n’altère pas les fichiers du Kristal.
-- Démarrage d’un serveur HTTP **sur 127.0.0.1 uniquement** (port 4177, puis 4178 et suivants si occupé) et ouverture du navigateur.
-- Affichage d’une mention **prévisualisation candidate locale, non publiée v10**.
+- Detects `kristals/societes-autochtones-quebec/canon/domain/encyclopedie-v4.json`.
+- Validates the path and runs **Node.js locally**: semantic projection followed by static site build. No commands to type.
+- Stores output under `previews/ekole-autochtones-local/<fingerprint>/`; subsequent launches reuse it as long as the Kristal and code remain unchanged.
+- The program **never deletes** an existing or modified projection and does not alter Kristal files.
+- Starts an HTTP server **bound to 127.0.0.1 only** (port 4177, then 4178 and up if needed) and opens the browser.
+- Displays a **local candidate preview, not published v10** notice.
 
-**Prérequis** : Windows, Python 3.10+ avec tkinter (lanceurs .pyw de Konstellation Light) et **Node.js** installé. Connexion Internet non nécessaire.
+**Requirements:** Windows, Python 3.10+ with tkinter (Konstellation Light `.pyw` launchers), and installed **Node.js**. Internet access is not required.
 
-Le serveur reste disponible pendant que la fenêtre du lanceur est ouverte. Fermer la fenêtre arrête son serveur; relancer ouvre à nouveau les mêmes données mises en cache.
+The server stays available while the launcher window is open. Closing the window stops its server; relaunching reopens the same cached data.
 
-## Optionnel — ajouter à Ekole Élève
+## Optional — add to Ekole Student
 
-Depuis l’onglet Ekole, après avoir **relu et validé le contenu destiné aux élèves**, cocher la confirmation et cliquer **« Copier le site dans Ekole »**. Le site statique est copié dans `Ekole/site/eleve/konstellation` **uniquement si ce dossier n’existe pas**. Aucun remplacement automatique, aucun changement des Kristals ni des cours. Démarrer séparément Ekole sur 8765 et ouvrir :
+In the Ekole tab, after **reviewing and approving content intended for students**, check the confirmation box and click **“Copier le site dans Ekole (sans rien écraser)” (Copy site into Ekole)**. The static site is copied into `Ekole/site/eleve/konstellation` **only if the directory does not exist**. No automatic replacement or changes to Kristals or courses. Start Ekole separately on port 8765 and open:
 
 `http://127.0.0.1:8765/eleve/konstellation/`
 
-**Attention** : installer sur le serveur Ekole peut rendre le contenu accessible sur un réseau local. Une projection candidate ne devient pas culturellement ou historiquement approuvée simplement parce qu’elle est navigable. Pour une école entière, utiliser un export Élève isolé plutôt que le serveur Core.
+**Warning:** installing on the Ekole server may expose content on a local network. A candidate projection does not become culturally or historically approved simply because it can be browsed. For an entire school, use an isolated Student export rather than the Core server.
 
-## En cas de problème
+## Troubleshooting
 
-- **Node.js introuvable** : installer Node.js, puis rouvrir le `.pyw`.
-- **Dossier Ekole introuvable** : choisir manuellement `C:\mycode\Ekole` (racine contenant `kristals`).
-- **Destination déjà présente** : le système protège tes données. Déplacer l’ancien dossier de sortie pour conserver une sauvegarde; aucun écrasement forcé.
-- **Fenêtre ouverte mais rien dans le navigateur** : regarder le journal en bas, puis saisir l’URL `http://127.0.0.1:4177/` ou le port indiqué.
-- **Ancien Previsualiser déjà démarré** : ce n’est pas bloquant; la carte choisit un autre port libre.
+- **Node.js not found:** install Node.js, then reopen the `.pyw`.
+- **Ekole directory not found:** manually select `C:\mycode\Ekole` (root containing `kristals`).
+- **Destination already exists:** the system protects your data. Move the old output directory to keep a backup; there is no forced overwrite.
+- **Window open, nothing in browser:** check the log below, then enter `http://127.0.0.1:4177/` or the indicated port.
+- **Old Previsualiser already running:** this is not blocking; the map chooses another free port.
 
-## Tests de validation
+## Validation tests
 
 ```powershell
 py -3 -m unittest discover -s tests -p "test*.py" -v
 node --test tests/*.test.mjs
 ```
 
-Le `.pyw` utilise les deux compilateurs de la v0.2 ; le curseur de bulles et le moteur de rendu ne sont pas remplacés.
+The `.pyw` uses both v0.2 compilers; the bubble slider and rendering engine are not replaced.
