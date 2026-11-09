@@ -1,0 +1,19 @@
+{
+  "format": "konstellation.light-local-bundle-transport-hotfix/1.0",
+  "date": "2026-11-08",
+  "changes": [
+    {
+      "path": "light/src/app.js",
+      "sha256": "75a7850f3336a49d13b07fa1039e26924208985b50c91418e106fedefafaddb0",
+      "expected_previous_sha256": "69724a484d0f03b64115dedc24c00be2f012619a88475bbb9a39eab00f042888",
+      "size": 36052
+    },
+    {
+      "path": "tools/light_core.py",
+      "sha256": "63c4b4b259296e1250c2160df3a1740f11621e2d89f3f037e0cc734d86b38a26",
+      "expected_previous_sha256": "a91f6fe7b2d4203fef3ae9e97fc1c58e2cb5498e27e90a7ce3268b376718a5ac",
+      "size": 15924
+    }
+  ],
+  "scope": "Local preview only: no source Kristals, Git or Pages changes."
+}

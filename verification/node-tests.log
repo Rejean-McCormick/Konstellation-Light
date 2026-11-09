@@ -1,0 +1,358 @@
+TAP version 13
+# Subtest: C4 preflight: pins only bundled demonstration, without treating it as qualified
+ok 1 - C4 preflight: pins only bundled demonstration, without treating it as qualified
+  ---
+  duration_ms: 3.113942
+  type: 'test'
+  ...
+# Subtest: C4 preflight: integrity-valid REAL collection remains publication BLOCKED
+ok 2 - C4 preflight: integrity-valid REAL collection remains publication BLOCKED
+  ---
+  duration_ms: 103.22952
+  type: 'test'
+  ...
+# Subtest: C4 preflight: detects bytes changed, unlisted files and missing content
+ok 3 - C4 preflight: detects bytes changed, unlisted files and missing content
+  ---
+  duration_ms: 4.970075
+  type: 'test'
+  ...
+# Subtest: C4 preflight: accidental edits to static site assets block Pages, even when catalog bundles still pass
+ok 4 - C4 preflight: accidental edits to static site assets block Pages, even when catalog bundles still pass
+  ---
+  duration_ms: 2.100912
+  type: 'test'
+  ...
+# Subtest: C4 preflight: symlinks rejected before publication
+ok 5 - C4 preflight: symlinks rejected before publication
+  ---
+  duration_ms: 1.783693
+  type: 'test'
+  ...
+# Subtest: C4 preflight: workflow enforces Pages demo-only and preview never deploys
+ok 6 - C4 preflight: workflow enforces Pages demo-only and preview never deploys
+  ---
+  duration_ms: 0.417691
+  type: 'test'
+  ...
+# Subtest: Discovery absent: optional reading keeps legacy build valid
+ok 7 - Discovery absent: optional reading keeps legacy build valid
+  ---
+  duration_ms: 54.126465
+  type: 'test'
+  ...
+# Subtest: Discovery available: opt-in projects only bounded allow-listed metadata
+ok 8 - Discovery available: opt-in projects only bounded allow-listed metadata
+  ---
+  duration_ms: 103.810613
+  type: 'test'
+  ...
+# Subtest: Discovery opt-in rejects incomplete groups and preserves existing build
+ok 9 - Discovery opt-in rejects incomplete groups and preserves existing build
+  ---
+  duration_ms: 82.296179
+  type: 'test'
+  ...
+# Subtest: Discovery fails closed for conflicting identity, inconsistent fingerprint and invalid authority
+ok 10 - Discovery fails closed for conflicting identity, inconsistent fingerprint and invalid authority
+  ---
+  duration_ms: 157.843507
+  type: 'test'
+  ...
+# Subtest: Discovery opt-in rejects source modifications even if the original manifest stays unchanged
+ok 11 - Discovery opt-in rejects source modifications even if the original manifest stays unchanged
+  ---
+  duration_ms: 50.850644
+  type: 'test'
+  ...
+# Subtest: curseur borné entre 3 et 25 et 8 par défaut
+ok 12 - curseur borné entre 3 et 25 et 8 par défaut
+  ---
+  duration_ms: 0.845997
+  type: 'test'
+  ...
+# Subtest: navigation centrée sur les voisins réels, sans ajout artificiel
+ok 13 - navigation centrée sur les voisins réels, sans ajout artificiel
+  ---
+  duration_ms: 7.588097
+  type: 'test'
+  ...
+# Subtest: navigation sans mutation et retour
+ok 14 - navigation sans mutation et retour
+  ---
+  duration_ms: 0.293523
+  type: 'test'
+  ...
+# Subtest: curation explicite produit site statique vérifiable, jamais un bundle v10
+ok 15 - curation explicite produit site statique vérifiable, jamais un bundle v10
+  ---
+  duration_ms: 80.352338
+  type: 'test'
+  ...
+# Subtest: curation rejette les relations inventées et empêche la publication publique implicite
+ok 16 - curation rejette les relations inventées et empêche la publication publique implicite
+  ---
+  duration_ms: 82.520378
+  type: 'test'
+  ...
+# Subtest: adaptateur Kristal v4: extrait des faits et leurs sources, pas les exercices/corrigés
+ok 17 - adaptateur Kristal v4: extrait des faits et leurs sources, pas les exercices/corrigés
+  ---
+  duration_ms: 77.234781
+  type: 'test'
+  ...
+# Subtest: fiches pour personne et lieu, jamais pour une notion générique
+ok 18 - fiches pour personne et lieu, jamais pour une notion générique
+  ---
+  duration_ms: 1.162475
+  type: 'test'
+  ...
+# Subtest: aperçu secondaire borné et sans mutation des voisins
+ok 19 - aperçu secondaire borné et sans mutation des voisins
+  ---
+  duration_ms: 1.897125
+  type: 'test'
+  ...
+# Subtest: prévisualisation autorise personne et lieu avec champs de fiche déclarés
+ok 20 - prévisualisation autorise personne et lieu avec champs de fiche déclarés
+  ---
+  duration_ms: 40.760735
+  type: 'test'
+  ...
+# Subtest: survol indexé : 6 voisins hors centre, tri stable, arêtes inchangées
+ok 21 - survol indexé : 6 voisins hors centre, tri stable, arêtes inchangées
+  ---
+  duration_ms: 0.465402
+  type: 'test'
+  ...
+# Subtest: images de fiche : seules les ressources raster locales non encodées sont autorisées
+ok 22 - images de fiche : seules les ressources raster locales non encodées sont autorisées
+  ---
+  duration_ms: 0.288936
+  type: 'test'
+  ...
+# Subtest: prévisualisation locale copie les images déclarées et refuse leur falsification
+ok 23 - prévisualisation locale copie les images déclarées et refuse leur falsification
+  ---
+  duration_ms: 75.72415
+  type: 'test'
+  ...
+# Subtest: v10: collection index, byte digests and derived operational navigation
+ok 24 - v10: collection index, byte digests and derived operational navigation
+  ---
+  duration_ms: 13.771423
+  type: 'test'
+  ...
+# Subtest: v10: refuses tampered byte contents, no trust by filename
+ok 25 - v10: refuses tampered byte contents, no trust by filename
+  ---
+  duration_ms: 4.237238
+  type: 'test'
+  ...
+# Subtest: v10: refuses index digest mismatch
+ok 26 - v10: refuses index digest mismatch
+  ---
+  duration_ms: 2.130937
+  type: 'test'
+  ...
+# Subtest: v10: refuses unmanaged file or symlink
+ok 27 - v10: refuses unmanaged file or symlink
+  ---
+  duration_ms: 3.863273
+  type: 'test'
+  ...
+# Subtest: v10: refuses budget exhaustion and missing required files
+ok 28 - v10: refuses budget exhaustion and missing required files
+  ---
+  duration_ms: 3.883815
+  type: 'test'
+  ...
+# Subtest: v10: refuses manifest/index disagreement, even with file digests unchanged
+ok 29 - v10: refuses manifest/index disagreement, even with file digests unchanged
+  ---
+  duration_ms: 1.878777
+  type: 'test'
+  ...
+# Subtest: v10: rejects malicious relative paths in declared files
+ok 30 - v10: rejects malicious relative paths in declared files
+  ---
+  duration_ms: 2.114333
+  type: 'test'
+  ...
+# Subtest: light: refuses build without explicit public intention
+ok 31 - light: refuses build without explicit public intention
+  ---
+  duration_ms: 47.171119
+  type: 'test'
+  ...
+# Subtest: light: build verifies v10 and generates a deterministic static bundle
+ok 32 - light: build verifies v10 and generates a deterministic static bundle
+  ---
+  duration_ms: 97.690282
+  type: 'test'
+  ...
+# Subtest: light: refuses tampered source before publishing
+ok 33 - light: refuses tampered source before publishing
+  ---
+  duration_ms: 39.426159
+  type: 'test'
+  ...
+# Subtest: light: append retains verified previous revisions and allows comparison
+ok 34 - light: append retains verified previous revisions and allows comparison
+  ---
+  duration_ms: 111.739174
+  type: 'test'
+  ...
+# Subtest: light: tampered previous bundle is not silently carried forward
+ok 35 - light: tampered previous bundle is not silently carried forward
+  ---
+  duration_ms: 98.014121
+  type: 'test'
+  ...
+# Subtest: light: commit links require pinned GitHub URL and full SHA
+ok 36 - light: commit links require pinned GitHub URL and full SHA
+  ---
+  duration_ms: 148.260237
+  type: 'test'
+  ...
+# Subtest: light: append refuses mutation of the same slug@revision and preserves the old output
+ok 37 - light: append refuses mutation of the same slug@revision and preserves the old output
+  ---
+  duration_ms: 96.025588
+  type: 'test'
+  ...
+# Subtest: light: failed append leaves previously published files unchanged
+ok 38 - light: failed append leaves previously published files unchanged
+  ---
+  duration_ms: 91.649075
+  type: 'test'
+  ...
+# Subtest: light: imported source pin cannot be relabeled as another GitHub commit
+ok 39 - light: imported source pin cannot be relabeled as another GitHub commit
+  ---
+  duration_ms: 39.873244
+  type: 'test'
+  ...
+# Subtest: interruption réseau temporaire : un réessai, puis validation SHA-256
+ok 40 - interruption réseau temporaire : un réessai, puis validation SHA-256
+  ---
+  duration_ms: 5.725404
+  type: 'test'
+  ...
+# Subtest: intégrité brisée : refus sans masquer le problème ni réessayer
+ok 41 - intégrité brisée : refus sans masquer le problème ni réessayer
+  ---
+  duration_ms: 1.17226
+  type: 'test'
+  ...
+# Subtest: connexion inaccessible : diagnostic lisible plutôt que fausse corruption
+ok 42 - connexion inaccessible : diagnostic lisible plutôt que fausse corruption
+  ---
+  duration_ms: 0.81498
+  type: 'test'
+  ...
+# Subtest: intake: exact SHA import of synthetic public-like collection, no qualification claim
+ok 43 - intake: exact SHA import of synthetic public-like collection, no qualification claim
+  ---
+  duration_ms: 143.92114
+  type: 'test'
+  ...
+# Subtest: intake: rejects unexpected repository, SHA, missing index digest
+ok 44 - intake: rejects unexpected repository, SHA, missing index digest
+  ---
+  duration_ms: 23.239078
+  type: 'test'
+  ...
+# Subtest: intake: refuses index pin mismatch without a leftover destination
+ok 45 - intake: refuses index pin mismatch without a leftover destination
+  ---
+  duration_ms: 56.968697
+  type: 'test'
+  ...
+# Subtest: intake: refuses a tampered public-like surface pinned at a new exact SHA
+ok 46 - intake: refuses a tampered public-like surface pinned at a new exact SHA
+  ---
+  duration_ms: 70.522175
+  type: 'test'
+  ...
+# Subtest: intake: refuses unlisted collection subdirectories and symlinks
+ok 47 - intake: refuses unlisted collection subdirectories and symlinks
+  ---
+  duration_ms: 66.026643
+  type: 'test'
+  ...
+# Subtest: intake: refuses a committed symbolic link in public-like tree
+ok 48 - intake: refuses a committed symbolic link in public-like tree
+  ---
+  duration_ms: 73.471969
+  type: 'test'
+  ...
+# Subtest: intake: workflow cannot deploy to Pages, no write token
+ok 49 - intake: workflow cannot deploy to Pages, no write token
+  ---
+  duration_ms: 0.512013
+  type: 'test'
+  ...
+# Subtest: intake: main Pages workflow refuses all collection paths pending C3 qualification gate
+ok 50 - intake: main Pages workflow refuses all collection paths pending C3 qualification gate
+  ---
+  duration_ms: 0.223678
+  type: 'test'
+  ...
+# Subtest: public semantic projection takes latest canonical graph, keeps literal, ID and provenance
+ok 51 - public semantic projection takes latest canonical graph, keeps literal, ID and provenance
+  ---
+  duration_ms: 10.243727
+  type: 'test'
+  ...
+# Subtest: verified public collection builds searchable knowledge without faking qualification
+ok 52 - verified public collection builds searchable knowledge without faking qualification
+  ---
+  duration_ms: 60.52444
+  type: 'test'
+  ...
+# Subtest: mismatched dictionary digest blocks generation without replacing destination
+ok 53 - mismatched dictionary digest blocks generation without replacing destination
+  ---
+  duration_ms: 54.834083
+  type: 'test'
+  ...
+# Subtest: native state without v11 graph stays hosting-navigation; no inferred concepts
+ok 54 - native state without v11 graph stays hosting-navigation; no inferred concepts
+  ---
+  duration_ms: 1.950475
+  type: 'test'
+  ...
+# Subtest: présentation française de Konstellation, identifiant original conservé
+ok 55 - présentation française de Konstellation, identifiant original conservé
+  ---
+  duration_ms: 1.027061
+  type: 'test'
+  ...
+# Subtest: recherche locale par mots, désambiguïsation sans fusion d’identités
+ok 56 - recherche locale par mots, désambiguïsation sans fusion d’identités
+  ---
+  duration_ms: 1.018989
+  type: 'test'
+  ...
+# Subtest: le C4 refuse le nouveau runtime même si le bundle et catalogue sont valides
+ok 57 - le C4 refuse le nouveau runtime même si le bundle et catalogue sont valides
+  ---
+  duration_ms: 10.25945
+  type: 'test'
+  ...
+# Subtest: prévisualisation candidate inclut son module; jamais publication ni canon
+ok 58 - prévisualisation candidate inclut son module; jamais publication ni canon
+  ---
+  duration_ms: 49.543386
+  type: 'test'
+  ...
+1..58
+# tests 58
+# suites 0
+# pass 58
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1094.078667

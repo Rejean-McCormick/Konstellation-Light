@@ -13,6 +13,7 @@ const WIKIDATA_FR = Object.freeze({
   P1066: 'A étudié auprès de', P710: 'Participant', P674: 'Personnages',
 });
 const RELATIONS_FR = Object.freeze({
+  decrit:'Décrit',analyse:'Analyse',contextualise:'Met en contexte',
   academicien_sur_liste_publiee: 'Source attestant une inscription sur une liste d’académiciens',
   membre_liste_historique: 'Mention dans une liste historique',
   membre_quinquennat: 'Membre pendant un quinquennat',
@@ -140,4 +141,73 @@ export function semanticQueryMatch(entity, rawQuery) {
   const tokens = corpus.flatMap(value => normalizeTerm(value).split(' ').filter(Boolean));
   return query.split(' ').every(term => tokens.some(token =>
     token === term || (term.length >= 3 && token.startsWith(term))));
+}
+
+// Public-facing labels. Pure presentation: original titles, IDs, paths and graph
+// relations stay byte-for-byte unchanged in the verified static bundle.
+const PUBLIC_KRISTALS_FR = Object.freeze({
+  accounting:'Comptabilité',aerospace:'Aérospatiale',aging:'Vieillissement',
+  ai:'Intelligence artificielle',anthropology:'Anthropologie',astronomy:'Astronomie',
+  atmosphere:'Atmosphère',biodiversity:'Biodiversité',biology:'Biologie',botany:'Botanique',
+  cartography:'Cartographie',chemistry:'Chimie',civilengineering:'Génie civil',
+  climate:'Climat',computing:'Informatique',controlsystems:'Systèmes de contrôle',
+  cosmology:'Cosmologie',craft:'Artisanat',cybersecurity:'Cybersécurité',
+  data:'Données',demography:'Démographie',development:'Développement',
+  disasters:'Catastrophes',earth:'Terre',ecology:'Écologie',economics:'Économie',
+  education:'Éducation',electricalengineering:'Génie électrique',
+  electronics:'Électronique',energy:'Énergie',engineeringconstraints:'Contraintes d’ingénierie',
+  epistemology:'Épistémologie',ethics:'Éthique',evolution:'Évolution',
+  foodscience:'Sciences alimentaires',forensics:'Sciences judiciaires',forestry:'Foresterie',
+  fungi:'Champignons',genetics:'Génétique',geology:'Géologie',governance:'Gouvernance',
+  history:'Histoire',historytech:'Histoire des technologies',homecare:'Soins à domicile',
+  humanbody:'Corps humain',hydrology:'Hydrologie',infrastructure:'Infrastructures',
+  law:'Droit',linguistics:'Linguistique',literature:'Littérature',logic:'Logique',
+  logistics:'Logistique',manufacturing:'Fabrication',materials:'Matériaux',
+  mechanicalengineering:'Génie mécanique',media:'Médias',medicine:'Médecine',
+  metrology:'Métrologie',microbiology:'Microbiologie',mineralogy:'Minéralogie',
+  mythology:'Mythologie',naturalhazards:'Risques naturels',neuroscience:'Neurosciences',
+  nutrition:'Nutrition',ocean:'Océans',organizations:'Organisations',
+  paleontology:'Paléontologie',pharmacology:'Pharmacologie',philosophy:'Philosophie',
+  physics:'Physique',policeops:'Opérations policières','prime-numbers':'Nombres premiers',
+  publichealth:'Santé publique',recipes:'Recettes',robotics:'Robotique',
+  sociology:'Sociologie',software:'Logiciels',soil:'Sols',solarsystem:'Système solaire',
+  standards:'Normes',technology:'Technologies',telecommunications:'Télécommunications',
+  theatre:'Théâtre',time:'Temps',transportation:'Transport',urbanism:'Urbanisme',
+  veterinary:'Médecine vétérinaire',virology:'Virologie',visualarts:'Arts visuels',
+  weather:'Météo',work:'Travail',zoology:'Zoologie',
+});
+export function publicKristalTitle(slug, originalTitle) {
+  return PUBLIC_KRISTALS_FR[String(slug || '').toLowerCase()] || String(originalTitle ?? slug ?? 'Kristal');
+}
+export function isUnlabeledKnowledge(node) {
+  return Boolean(node && node.kind === 'notion' && /^(?:Q[1-9]\d{0,12}|KQ[1-9]\d{0,35})$/i.test(String(node.label || '').trim()));
+}
+export function publicNodeKind(kind) {
+  return ({notion:'Notion',valeur:'Valeur',hosted_state:'Collection',logical_artifact:'Élément',hosted_file:'Fichier',
+    person:'Personne',personne:'Personne',lieu:'Lieu',territoire:'Lieu',source:'Source'})[kind] || readableCode(kind || 'Élément');
+}
+export function publicDescription(raw) {
+  const s = String(raw || '').trim();
+  if (/^(?:Notion|Valeur|Élément|Fichier) déclaré(?:e)? dans (?:canon|\.kristal)\//i.test(s) ||
+      /^canon\/(?:[A-Za-z0-9._-]+\/)*[A-Za-z0-9._-]+\.(?:json|jsonl)$/i.test(s)) return '';
+  return s;
+}
+export function publicRelationLabel(id, configured) {
+  const raw=String(id || '');const label=String(configured || '').trim();
+  if (label && label !== raw && !/sans libellé/i.test(label) && !/^K[PQAS]\d+\b/i.test(label)) return label;
+  if (/^K[PQAS]\d+$/i.test(raw)) return 'Lien déclaré';
+  if (/^P[1-9]\d+$/i.test(raw) && !WIKIDATA_FR[raw]) return 'Lien déclaré';
+  return semanticLabel(raw) || 'Lien déclaré';
+}
+
+// Only a few unambiguous everyday scientific terms are translated. Unknown
+// canonical labels remain unchanged; no automatic factual interpretation.
+const CONCEPT_FR = Object.freeze({
+  Earth:'Terre',Moon:'Lune',Sun:'Soleil',
+  'Solar System':'Système solaire','Black hole':'Trou noir',
+  Galaxy:'Galaxie',Universe:'Univers',
+});
+export function publicConceptLabel(label) {
+  const original=String(label ?? '');
+  return Object.prototype.hasOwnProperty.call(CONCEPT_FR,original) ? CONCEPT_FR[original] : original;
 }

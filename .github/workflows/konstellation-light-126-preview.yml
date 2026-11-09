@@ -1,0 +1,47 @@
+name: Konstellation Light - 126 Kristals, preview only
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: "SHA complet du commit deja public de kristal-public"
+        type: string
+        required: true
+      index_digest:
+        description: "Empreinte sha256: de l'index public (126 Kristals)"
+        type: string
+        required: true
+permissions:
+  contents: read
+jobs:
+  verified-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import exact public commit and validate 126 surfaces
+        env:
+          SOURCE_COMMIT: ${{ inputs.commit }}
+          INDEX_DIGEST: ${{ inputs.index_digest }}
+        run: |
+          node scripts/import-pinned-collection.mjs \
+            --repository Rejean-McCormick/kristal-public \
+            --commit "$SOURCE_COMMIT" \
+            --expected-index-digest "$INDEX_DIGEST" \
+            --out "$RUNNER_TEMP/kristal-public-pinned"
+      - name: Build and validate technical Light preview
+        run: |
+          node scripts/preparer-site-web-126.mjs \
+            --collection "$RUNNER_TEMP/kristal-public-pinned" \
+            --out "$RUNNER_TEMP/light-web-preview" \
+            --expected-count 126
+      - name: Upload preview artifact - NOT Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: konstellation-light-126-preview-${{ github.run_id }}
+          path: ${{ runner.temp }}/light-web-preview
+          retention-days: 7
+# No pages:write, id-token:write, git add, commit or push.
+# C1/C2/C3 qualification and publication authorizations remain mandatory for Pages.

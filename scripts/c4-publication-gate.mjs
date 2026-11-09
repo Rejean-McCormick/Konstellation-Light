@@ -10,7 +10,7 @@ import { createHash } from 'node:crypto';
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = b => createHash('sha256').update(b).digest('hex');
 const PACK = /^data\/pack-([a-f0-9]{64})\.json$/;
-const optionalLocal = new Set(['semantic-display.mjs']);
+const optionalLocal = new Set(['semantic-display.mjs','assets/logo_k.svg']);
 const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'profile.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
 const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
 export class C4GateError extends Error { constructor(code,message) {super(message);this.name='C4GateError';this.code=code;} }
@@ -60,13 +60,22 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
     let bundle;try{bundle=JSON.parse(contents);}catch{reject('BUNDLE_INVALID','Invalid bundle JSON.');}
     if(bundle.format!=='konstellation.light-navigation/1.0'||bundle.semantic_authority!==false||
        bundle.slug!==entry.slug||bundle.revision!==entry.revision||bundle.surface_digest!==entry.surface_digest||
-       !['derived-hosting-navigation','derived-semantic-preview'].includes(bundle.view_kind))
+       !['derived-hosting-navigation','derived-semantic-preview','derived-public-knowledge'].includes(bundle.view_kind))
        reject('BUNDLE_INVALID','Bundle identity or representation invalid.');
     allowed.add(entry.path);
   }
   // Recognize one additional JS presentation asset for review-only local builds.
   // Its presence always prevents the Pages-demo pin from matching.
   for (const file of fileList) if (optionalLocal.has(file)) allowed.add(file);
+  // A brand asset is allowed for local preview only, and must match this repository's
+  // reviewed SVG exactly. It never makes a collection eligible for Pages.
+  if (fileList.includes('assets/logo_k.svg')) {
+    const brandPath = path.join(root,'assets/logo_k.svg');
+    const expectedBrand = path.join(project,'light/src/assets/logo_k.svg');
+    if (!fs.existsSync(expectedBrand) || fs.statSync(brandPath).size > 8192 ||
+        sha(fs.readFileSync(brandPath)) !== sha(fs.readFileSync(expectedBrand)))
+      reject('BRAND_ASSET_INVALID','Brand SVG differs from the reviewed local asset.');
+  }
   const unexpected=fileList.filter(name=>!allowed.has(name));
   const missing=[...allowed].filter(name=>!fileList.includes(name));
   if(unexpected.length||missing.length) reject('UNDECLARED_FILE','Static payload contains undeclared or missing files.');

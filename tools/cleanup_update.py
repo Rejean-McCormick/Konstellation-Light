@@ -18,7 +18,7 @@ LEGACY = {
         'sha256': '0accd51e00ed5ff721778fa152e90c14dd8912e8ed9410ec7abe5c28b876f56e',
         'reason': 'Lecteur déplacé vers shared/kristal-v10.mjs ; anciens imports remplacés.',
         'replacement': 'shared/kristal-v10.mjs',
-        'replacement_sha256': 'c4fdb864cef3f3b38200a88bb1108d48eb40f654c6e49bbc532f2700b02fb71c',
+        'replacement_sha256': 'd1cb2632b44f2a307061dbeb860573fa0c1310d829659303f8c80a8ef79124b1',
     }
 }
 

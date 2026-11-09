@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-// Fetch a *public* Kristal GitHub collection at one exact commit. This checks
+// Fetch a *public* Kristal GitHub collection at one exact commit.
+// Budgets: up to 20k surface files / 1.5 GiB of published bytes, to handle 126 Kristals.
+// This checks
 // transport + v10 byte integrity, NOT qualification, publication or rights.
 // No GitHub checkout/release may itself be treated as a publishing permit.
 import fs from 'node:fs';
@@ -15,7 +17,7 @@ const TRUSTED_REPOSITORY = 'Rejean-McCormick/kristal-public';
 const base = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 function runGit(args, cwd) {
   const r = spawnSync('git', ['-c', 'protocol.file.allow=always', '-c', 'core.hooksPath=/dev/null', ...args],
-    { cwd, encoding:'utf8', timeout:30000, env: { ...process.env, GIT_TERMINAL_PROMPT:'0', GIT_CONFIG_NOSYSTEM:'1' } });
+    { cwd, encoding:'utf8', timeout:600000, env: { ...process.env, GIT_TERMINAL_PROMPT:'0', GIT_CONFIG_NOSYSTEM:'1' } });
   if (r.error || r.status !== 0) throw Error(`Échec Git (${args[0]}) : ${(r.stderr || r.error?.message || '').slice(0,400)}`);
   return r.stdout.trim();
 }
@@ -31,7 +33,7 @@ function checkCollectionTree(parent) {
       else if (!d.isFile()) throw Error('Fichier spécial interdit dans la collection.');
       else {
         fileCount += 1; bytesCount += fs.statSync(p).size;
-        if (fileCount > 8192 || bytesCount > 256*1024*1024) throw Error('Budget d’import de la collection dépassé.');
+        if (fileCount > 20000 || bytesCount > 1536*1024*1024) throw Error('Budget d’import de la collection dépassé.');
       }
     }
   }

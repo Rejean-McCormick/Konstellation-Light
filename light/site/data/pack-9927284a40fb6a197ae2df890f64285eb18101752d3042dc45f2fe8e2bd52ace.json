@@ -1,0 +1,346 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "Manufacturing",
+  "slug": "manufacturing",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:manufacturing",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:ab83dfd868d40f90d057cacf5b1955dcee90a11a915a867525eb53cbeada269f"
+  },
+  "surface_digest": "sha256:d74c606f8554e81d6fea5851c70ddcff5ed15703a06543d5f98004e9f86a7eba",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 27,
+    "bytes": 922746
+  },
+  "nodes": [
+    {
+      "id": "state:68e6040e5b6c0a113a742c47",
+      "kind": "hosted_state",
+      "label": "Manufacturing",
+      "description": "Navigation dérivée ; état urn:kristal:state:manufacturing ; engagement déclaré sha256:ab83dfd868d40f90d057cacf5b1955dcee90a11a915a867525eb53cbeada269f"
+    },
+    {
+      "id": "artifact:dabd3e465d1d13ff44ed2eb6",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:manufacturing:artifact:canonical-knowledge",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:9736e272363ea19412a592436dfa09106620aa43ed7c2f66f56f9135325513fc"
+    },
+    {
+      "id": "file:49ab3410c8a048328690734b",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 1969 octets ; sha256:55a8949d0b8734e30df87306fca8f7b4b01ae3f8fd0cb66ee362926df5f8a7ca"
+    },
+    {
+      "id": "file:553e5f336993f7f3307ac3c8",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1937 octets ; sha256:500690d88ae987b8e9c02cddcaeb905a51127b87d9368d45aac4d142dbaac980"
+    },
+    {
+      "id": "file:3c4129b927c4494b2cb9c537",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:3c44d0ae6b617ddd7cbd849e",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 1499 octets ; sha256:761563a34b3893b56f14c8fec8ccfe2fe3d11b1d9d3e685001e79ab5640baf97"
+    },
+    {
+      "id": "file:dfbde964fc21652f8fef62b9",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 5787 octets ; sha256:b2037acc76753cf5fe23653769016c1668b2dce3fda013fc5c4a6d95e7f69ba1"
+    },
+    {
+      "id": "file:906e53b53ae173b9b261b5c9",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1597 octets ; sha256:9bb8ea6de4cc4a04d0fe15f132293630516e2eae1ea25915c404d09cd77b83c7"
+    },
+    {
+      "id": "file:e0aa770cecb6c48ad28c8bda",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 485 octets ; sha256:f9d8c1708168cc8777df0c3e9b1427fbb6b38253914c6a9d6a36983f9a0ddc84"
+    },
+    {
+      "id": "file:7ac6181eb52b733217366e27",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 4127 octets ; sha256:3b0e5efd0f5803b7f82352308c685d5a9213f8f1056c8dbef45beb64828b3a02"
+    },
+    {
+      "id": "file:ec8111c6caec446b44d4071c",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 585 octets ; sha256:48f154124f106008273aa2c75b1765c0a71dac4533455b0a85cbfd504300f469"
+    },
+    {
+      "id": "file:1601628f833277be0ff164c6",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 745 octets ; sha256:a662bcc6557c7ef7d9c3253cca68a196985915e032639dabafd39a49f12d3d4a"
+    },
+    {
+      "id": "file:7a1c2ae20b087064c711de23",
+      "kind": "hosted_file",
+      "label": "canon/domain/legacy-v6-logical-payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 866699 octets ; sha256:ffec8e47b63abaeeffd235f638ecad15bf73b91ae93313c0a9205c980b0befb6"
+    },
+    {
+      "id": "file:9f66888fdfea165773753e93",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1046 octets ; sha256:e0397a8e4318d79f2b3ac4e550259b5363a37d3a366400deff5ffce73d5c01b9"
+    },
+    {
+      "id": "file:481ddbf55bb3b0e91d69d14c",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1886 octets ; sha256:22986bf912b16df43e90bb293f1b97734e4765f64536bc29afebbaa35e2f57be"
+    },
+    {
+      "id": "file:e071e9a463874312339fed34",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2691 octets ; sha256:c890aacddfb5d09d2b581604cb56d0f5e49559899b6eef7fbf7f9d4930c66fed"
+    },
+    {
+      "id": "file:84d21c61aaf867f830768c4f",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 633 octets ; sha256:096bccf3d9066d3ef483d97cbe86c5f7add355c8a58743661e66cf8f8ad5b6c2"
+    },
+    {
+      "id": "file:2816808db48a245d7fa84f57",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 965 octets ; sha256:477e4f5be804bb19c7d5264cbae01fa7c87ccffefdaf8b53a6a12c2f37f48f76"
+    },
+    {
+      "id": "file:a65679d6c1ee9f2060141dd0",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 877 octets ; sha256:b43be75ad247313e0404ee919eacdaa8ec9a1daed26d542aa28479312d40716d"
+    },
+    {
+      "id": "file:01334e15421cb241bf164264",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 799 octets ; sha256:7e31136331651d5c756bdb0e2d380953dc29fa40a5d40d47c4d028f6ccd0a830"
+    },
+    {
+      "id": "file:9f5aa993af7bfaa550a68c93",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 1299 octets ; sha256:8da358a4dc1adb4b06193ddd1faf9700820546694604fa78a00f8c0757234e82"
+    },
+    {
+      "id": "file:dfe9dad44be3aa07ef62bde9",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 468 octets ; sha256:48af8d9457528b892274480e0954ab06227694666cdf7afc1d21ee5dafb5bb57"
+    },
+    {
+      "id": "file:af7d432e8206e712b7ec68e8",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 653 octets ; sha256:ca1e7002c285918fdd72769027fe45bbaba84f840819e98bf0cd3675d0074851"
+    },
+    {
+      "id": "file:218cc3b4a997044832f0db39",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 429 octets ; sha256:a4f3b75993aca95da97184c8b94c92118e86f67da20e412aa4fb42a4b95eee2c"
+    },
+    {
+      "id": "file:9dd7523c7158149619908f64",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 4082 octets ; sha256:c781e4c4bce3eb88ff2244a8fab172513a2ebf1b041efb46c6e44766e4305855"
+    },
+    {
+      "id": "file:7c699eae16278b3f040c5cf1",
+      "kind": "hosted_file",
+      "label": "docs/08_GLOSSARY.md",
+      "description": "Fichier dérivé (documentation) ; 485 octets ; sha256:f9d8c1708168cc8777df0c3e9b1427fbb6b38253914c6a9d6a36983f9a0ddc84"
+    },
+    {
+      "id": "file:f27c2f1c5ea47a5622236258",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1957 octets ; sha256:e0f01b9c33593a6277f0bf72285279df1fe36449ac79e8ec1cee9c3f2f8d717f"
+    },
+    {
+      "id": "file:64111198108aec10842ab594",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 15514 octets ; sha256:74d20503230ab0ad271e4b358f33aff8e9ef099ffbc77c325471b1e7f73e51ee"
+    },
+    {
+      "id": "file:7ebf7f61f7ee03ced376ac7f",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 905 octets ; sha256:849f8d0dca9ac946e9c1eac7fbdb105273495c0aff4cc15f976523523ed89494"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "artifact:dabd3e465d1d13ff44ed2eb6",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:49ab3410c8a048328690734b",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:553e5f336993f7f3307ac3c8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:3c4129b927c4494b2cb9c537",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:3c44d0ae6b617ddd7cbd849e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:dfbde964fc21652f8fef62b9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:906e53b53ae173b9b261b5c9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:e0aa770cecb6c48ad28c8bda",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:7ac6181eb52b733217366e27",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:ec8111c6caec446b44d4071c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:1601628f833277be0ff164c6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:7a1c2ae20b087064c711de23",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:9f66888fdfea165773753e93",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:481ddbf55bb3b0e91d69d14c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:e071e9a463874312339fed34",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:84d21c61aaf867f830768c4f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:2816808db48a245d7fa84f57",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:a65679d6c1ee9f2060141dd0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:01334e15421cb241bf164264",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:9f5aa993af7bfaa550a68c93",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:dfe9dad44be3aa07ef62bde9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:af7d432e8206e712b7ec68e8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:218cc3b4a997044832f0db39",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:9dd7523c7158149619908f64",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:7c699eae16278b3f040c5cf1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:f27c2f1c5ea47a5622236258",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:64111198108aec10842ab594",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:68e6040e5b6c0a113a742c47",
+      "to": "file:7ebf7f61f7ee03ced376ac7f",
+      "relation": "lists_file"
+    }
+  ]
+}

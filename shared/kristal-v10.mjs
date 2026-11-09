@@ -145,6 +145,19 @@ function verifyFiles(root, prefix, entries, maxFiles, maxBytes) {
   }
   walk(safePath(root, prefix, { file: false }));
 }
+// The portable AI read order can name a directory (with a trailing slash),
+// notably '.kristal/v9/materializations/'. Sync manifests list the files
+// inside that directory, not the directory itself. Require a safe, existing
+// directory backed by declared files; never accept undeclared file paths.
+function declaredAiReadTarget(name, entries, root, prefix) {
+  if (typeof name !== 'string') return false;
+  if (entries.has(name)) return true;
+  if (!name.endsWith('/')) return false;
+  const dir = name.slice(0, -1);
+  if (!safeRel(dir) || ![...entries.keys()].some((rel) => rel.startsWith(name))) return false;
+  safePath(root, `${prefix}/${dir}`, { file: false });
+  return true;
+}
 function projectionDigest(sync, index) {
   return hashJson({
     format: 'kristal.github-read-surface/1.0', slug: sync.slug,
@@ -176,7 +189,7 @@ export function inspectGithubKristal(config, base) {
     state.artifact_type === 'kristal_state_snapshot' && state.schema_version === '9.0',
     'Profils AI/v9 de la surface non supportés.');
   requireValid(Array.isArray(aiManifest.read_order) &&
-    aiManifest.read_order.every((name) => files.has(name)), 'Fichier de lecture AI non déclaré.');
+    aiManifest.read_order.every((name) => declaredAiReadTarget(name, files, root, prefix)), 'Fichier ou répertoire de lecture AI non déclaré.');
   requireValid(aiManifest.state_snapshot === undefined ||
     aiManifest.state_snapshot === 'state/state-snapshot.json', 'Pointeur State Snapshot AI incohérent.');
   for (const item of [aiManifest, aiIndex]) requireValid(item.state_ref === sync.state_ref &&

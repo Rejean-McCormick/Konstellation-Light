@@ -1,0 +1,5835 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-public-knowledge",
+  "semantic_authority": false,
+  "title": "VaticanOps",
+  "slug": "vaticanops",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:vaticanops",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:0af3674eef560da6d3e91f56d12feca3b0dc0b56447b13ec1c314dc8dc7a4575"
+  },
+  "surface_digest": "sha256:c118711d529592a1578e3f579dfce16444c705a61ce5390ad1bc3e789723009e",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 22,
+    "files": 580,
+    "bytes": 9039766
+  },
+  "nodes": [
+    {
+      "id": "KQ10137",
+      "kind": "notion",
+      "label": "Administration des biens ecclésiastiques",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10141",
+      "kind": "notion",
+      "label": "Aliénation et opérations patrimoniales à risque",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10123",
+      "kind": "notion",
+      "label": "Archives diocésaines : conservation et accès",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10081",
+      "kind": "notion",
+      "label": "Cardinaux électeurs",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10075",
+      "kind": "notion",
+      "label": "Chef du dicastère premier saisi",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10145",
+      "kind": "notion",
+      "label": "Choix de la voie pénale canonique",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10214",
+      "kind": "notion",
+      "label": "Clôture et transmission de l’enquête préalable",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10015",
+      "kind": "notion",
+      "label": "Code de droit canonique (CIC)",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10082",
+      "kind": "notion",
+      "label": "Collège des cardinaux",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10076",
+      "kind": "notion",
+      "label": "Commission interdicastérielle",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10193",
+      "kind": "notion",
+      "label": "Compétences de la Pénitencerie apostolique",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10003",
+      "kind": "notion",
+      "label": "Conflit de compétence entre institutions curiales",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10230",
+      "kind": "notion",
+      "label": "Congrégations pendant la vacance du Siège",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10089",
+      "kind": "notion",
+      "label": "Conservation et transfert des archives curiales",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10190",
+      "kind": "notion",
+      "label": "Consultation des représentants pontificaux",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10180",
+      "kind": "notion",
+      "label": "Convocation et session interdicastérielle dans la Curie",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10183",
+      "kind": "notion",
+      "label": "Coordination des responsables institutionnels",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10071",
+      "kind": "notion",
+      "label": "Curie romaine",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10083",
+      "kind": "notion",
+      "label": "Célébrant",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10177",
+      "kind": "notion",
+      "label": "Demande de décret et absence de réponse",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10086",
+      "kind": "notion",
+      "label": "Demande d’approbation pontificale en forme spécifique",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10078",
+      "kind": "notion",
+      "label": "Dicastère pour la doctrine de la foi",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10074",
+      "kind": "notion",
+      "label": "Dicastères",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10115",
+      "kind": "notion",
+      "label": "Dispense par l’évêque diocésain",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10090",
+      "kind": "notion",
+      "label": "Détermination des procédures propres de rescrits et dispenses",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10133",
+      "kind": "notion",
+      "label": "Enquête préalable au mariage",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10207",
+      "kind": "notion",
+      "label": "Enquête préalable et coordination civile",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10163",
+      "kind": "notion",
+      "label": "Enquête pénale préalable selon le CIC",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10008",
+      "kind": "notion",
+      "label": "Examen d’une contestation administrative dans le cadre curial",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10009",
+      "kind": "notion",
+      "label": "Gouvernance et administration de la Curie",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10073",
+      "kind": "notion",
+      "label": "Institutions curiales",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10153",
+      "kind": "notion",
+      "label": "Instruction et publication des actes du procès",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10149",
+      "kind": "notion",
+      "label": "Introduction d’une cause contentieuse",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10187",
+      "kind": "notion",
+      "label": "Limites des actes curiaux",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10261",
+      "kind": "notion",
+      "label": "Liturgie de la Parole",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10079",
+      "kind": "notion",
+      "label": "Ordinaire",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10197",
+      "kind": "notion",
+      "label": "Orientation Signature apostolique / Rote",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10092",
+      "kind": "notion",
+      "label": "Orientation des questions judiciaires dans la Curie",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10072",
+      "kind": "notion",
+      "label": "Pontife romain",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10016",
+      "kind": "notion",
+      "label": "Praedicate Evangelium (2022)",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10013",
+      "kind": "notion",
+      "label": "Pratiques liturgiques",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10274",
+      "kind": "notion",
+      "label": "Prière eucharistique et acclamation",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10217",
+      "kind": "notion",
+      "label": "Procès pénal extrajudiciaire DDF",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10010",
+      "kind": "notion",
+      "label": "Procédures de droit canonique latin",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10011",
+      "kind": "notion",
+      "label": "Procédures documentées par le DDF",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10268",
+      "kind": "notion",
+      "label": "Préparation des dons",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10088",
+      "kind": "notion",
+      "label": "Préparation des visites ad limina",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10002",
+      "kind": "notion",
+      "label": "Préparation d’un document général par une institution curiale",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10129",
+      "kind": "notion",
+      "label": "Préparation et licéité du baptême",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10251",
+      "kind": "notion",
+      "label": "Préparation matérielle de la messe",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10019",
+      "kind": "notion",
+      "label": "Présentation générale du Missel romain",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10204",
+      "kind": "notion",
+      "label": "Qualification et transmission d’une notitia de delicto",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10223",
+      "kind": "notion",
+      "label": "Recours et appels selon le rite et le for",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10004",
+      "kind": "notion",
+      "label": "Recours hiérarchique contre un décret administratif dans le CIC",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10112",
+      "kind": "notion",
+      "label": "Renonciation à un office ecclésiastique",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10084",
+      "kind": "notion",
+      "label": "Requérant",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10255",
+      "kind": "notion",
+      "label": "Rites d’entrée de la messe",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10014",
+      "kind": "notion",
+      "label": "Règlement général de la Curie romaine (2025)",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10245",
+      "kind": "notion",
+      "label": "Répartition des rôles liturgiques",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10167",
+      "kind": "notion",
+      "label": "Révocation d’un curé : cadre procédural",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10068",
+      "kind": "notion",
+      "label": "Saint-Siège",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10006",
+      "kind": "notion",
+      "label": "Schéma de l’élection pontificale selon Universi Dominici Gregis",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10211",
+      "kind": "notion",
+      "label": "Secret d’office et mesure conservatoire",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10236",
+      "kind": "notion",
+      "label": "Secret et protections des opérations",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10158",
+      "kind": "notion",
+      "label": "Sentence et voies de contestation",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10085",
+      "kind": "notion",
+      "label": "Session interdicastérielle de plusieurs dicastères",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10077",
+      "kind": "notion",
+      "label": "Signature apostolique",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10007",
+      "kind": "notion",
+      "label": "Structure générale de la célébration de la messe",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10080",
+      "kind": "notion",
+      "label": "Supérieur hiérarchique",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10201",
+      "kind": "notion",
+      "label": "Surveillance des activités économiques",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10118",
+      "kind": "notion",
+      "label": "Synode diocésain : convocation et décrets",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10240",
+      "kind": "notion",
+      "label": "Séquences documentées du scrutin",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10001",
+      "kind": "notion",
+      "label": "Traitement collégial des questions de compétence mixte",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10091",
+      "kind": "notion",
+      "label": "Traitement documentaire après transmission d’une enquête préalable au DDF",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10005",
+      "kind": "notion",
+      "label": "Traitement initial d’une notitia et enquête préalable (DDF)",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10227",
+      "kind": "notion",
+      "label": "Traitement particulier d’un signalement après décès",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10173",
+      "kind": "notion",
+      "label": "Transfert d’un curé : examen contradictoire",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10018",
+      "kind": "notion",
+      "label": "Universi Dominici Gregis (1996)",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10012",
+      "kind": "notion",
+      "label": "Vacance du Siège et élection",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10017",
+      "kind": "notion",
+      "label": "Vademecum DDF v2.0 (2022)",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10134",
+      "kind": "notion",
+      "label": "cic-1983 canon:1066",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10135",
+      "kind": "notion",
+      "label": "cic-1983 canon:1067",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10136",
+      "kind": "notion",
+      "label": "cic-1983 canon:1071",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10138",
+      "kind": "notion",
+      "label": "cic-1983 canon:1277",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10139",
+      "kind": "notion",
+      "label": "cic-1983 canon:1281",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10140",
+      "kind": "notion",
+      "label": "cic-1983 canon:1284",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10142",
+      "kind": "notion",
+      "label": "cic-1983 canon:1291",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10143",
+      "kind": "notion",
+      "label": "cic-1983 canon:1292",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10144",
+      "kind": "notion",
+      "label": "cic-1983 canon:1295",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10146",
+      "kind": "notion",
+      "label": "cic-1983 canon:1341",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10147",
+      "kind": "notion",
+      "label": "cic-1983 canon:1342",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10150",
+      "kind": "notion",
+      "label": "cic-1983 canon:1501",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10151",
+      "kind": "notion",
+      "label": "cic-1983 canon:1505",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10152",
+      "kind": "notion",
+      "label": "cic-1983 canon:1513",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10154",
+      "kind": "notion",
+      "label": "cic-1983 canon:1526",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10155",
+      "kind": "notion",
+      "label": "cic-1983 canon:1547",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10156",
+      "kind": "notion",
+      "label": "cic-1983 canon:1558",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10157",
+      "kind": "notion",
+      "label": "cic-1983 canon:1598",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10159",
+      "kind": "notion",
+      "label": "cic-1983 canon:1607",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10160",
+      "kind": "notion",
+      "label": "cic-1983 canon:1614",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10161",
+      "kind": "notion",
+      "label": "cic-1983 canon:1628",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10162",
+      "kind": "notion",
+      "label": "cic-1983 canon:1645",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10108",
+      "kind": "notion",
+      "label": "cic-1983 canon:165",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10109",
+      "kind": "notion",
+      "label": "cic-1983 canon:167",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10164",
+      "kind": "notion",
+      "label": "cic-1983 canon:1717",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10165",
+      "kind": "notion",
+      "label": "cic-1983 canon:1718",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10166",
+      "kind": "notion",
+      "label": "cic-1983 canon:1719",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10148",
+      "kind": "notion",
+      "label": "cic-1983 canon:1720",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10020",
+      "kind": "notion",
+      "label": "cic-1983 canon:1732",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10021",
+      "kind": "notion",
+      "label": "cic-1983 canon:1733",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10022",
+      "kind": "notion",
+      "label": "cic-1983 canon:1734",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10023",
+      "kind": "notion",
+      "label": "cic-1983 canon:1735",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10024",
+      "kind": "notion",
+      "label": "cic-1983 canon:1736",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10025",
+      "kind": "notion",
+      "label": "cic-1983 canon:1737",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10026",
+      "kind": "notion",
+      "label": "cic-1983 canon:1738",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10027",
+      "kind": "notion",
+      "label": "cic-1983 canon:1739",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10168",
+      "kind": "notion",
+      "label": "cic-1983 canon:1740",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10169",
+      "kind": "notion",
+      "label": "cic-1983 canon:1742",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10170",
+      "kind": "notion",
+      "label": "cic-1983 canon:1744",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10171",
+      "kind": "notion",
+      "label": "cic-1983 canon:1745",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10172",
+      "kind": "notion",
+      "label": "cic-1983 canon:1747",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10174",
+      "kind": "notion",
+      "label": "cic-1983 canon:1748",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10175",
+      "kind": "notion",
+      "label": "cic-1983 canon:1750",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10176",
+      "kind": "notion",
+      "label": "cic-1983 canon:1752",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10110",
+      "kind": "notion",
+      "label": "cic-1983 canon:177",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10111",
+      "kind": "notion",
+      "label": "cic-1983 canon:179",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10113",
+      "kind": "notion",
+      "label": "cic-1983 canon:187",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10114",
+      "kind": "notion",
+      "label": "cic-1983 canon:189",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10119",
+      "kind": "notion",
+      "label": "cic-1983 canon:461",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10120",
+      "kind": "notion",
+      "label": "cic-1983 canon:463",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10121",
+      "kind": "notion",
+      "label": "cic-1983 canon:466",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10122",
+      "kind": "notion",
+      "label": "cic-1983 canon:467",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10124",
+      "kind": "notion",
+      "label": "cic-1983 canon:486",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10125",
+      "kind": "notion",
+      "label": "cic-1983 canon:488",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10126",
+      "kind": "notion",
+      "label": "cic-1983 canon:489",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10127",
+      "kind": "notion",
+      "label": "cic-1983 canon:490",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10128",
+      "kind": "notion",
+      "label": "cic-1983 canon:491",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10178",
+      "kind": "notion",
+      "label": "cic-1983 canon:57",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10179",
+      "kind": "notion",
+      "label": "cic-1983 canon:58",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10130",
+      "kind": "notion",
+      "label": "cic-1983 canon:850",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10131",
+      "kind": "notion",
+      "label": "cic-1983 canon:851",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10132",
+      "kind": "notion",
+      "label": "cic-1983 canon:868",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10116",
+      "kind": "notion",
+      "label": "cic-1983 canon:87",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10117",
+      "kind": "notion",
+      "label": "cic-1983 canon:90",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10181",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:1",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10028",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:14",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10029",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:15",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10184",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:3",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10096",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:31",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10106",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:34",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10030",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:35",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10031",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:37",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10101",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:39",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10185",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:4",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10032",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:40",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10033",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:41",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10034",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:42",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10035",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:43",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10097",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:46",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10098",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:47",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10099",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:48",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10182",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:5",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10100",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:51",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10186",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:6",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10093",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:7",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10094",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:8",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10095",
+      "kind": "notion",
+      "label": "curie-reglement-2025 article:9",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10246",
+      "kind": "notion",
+      "label": "missel-general numero:111",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10252",
+      "kind": "notion",
+      "label": "missel-general numero:117",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10253",
+      "kind": "notion",
+      "label": "missel-general numero:118",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10254",
+      "kind": "notion",
+      "label": "missel-general numero:119",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10256",
+      "kind": "notion",
+      "label": "missel-general numero:120",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10257",
+      "kind": "notion",
+      "label": "missel-general numero:122",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10258",
+      "kind": "notion",
+      "label": "missel-general numero:124",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10259",
+      "kind": "notion",
+      "label": "missel-general numero:125",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10260",
+      "kind": "notion",
+      "label": "missel-general numero:127",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10262",
+      "kind": "notion",
+      "label": "missel-general numero:128",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10263",
+      "kind": "notion",
+      "label": "missel-general numero:129",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10264",
+      "kind": "notion",
+      "label": "missel-general numero:131",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10265",
+      "kind": "notion",
+      "label": "missel-general numero:134",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10266",
+      "kind": "notion",
+      "label": "missel-general numero:136",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10267",
+      "kind": "notion",
+      "label": "missel-general numero:138",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10269",
+      "kind": "notion",
+      "label": "missel-general numero:139",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10270",
+      "kind": "notion",
+      "label": "missel-general numero:140",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10271",
+      "kind": "notion",
+      "label": "missel-general numero:141",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10272",
+      "kind": "notion",
+      "label": "missel-general numero:142",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10273",
+      "kind": "notion",
+      "label": "missel-general numero:146",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10275",
+      "kind": "notion",
+      "label": "missel-general numero:147",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10276",
+      "kind": "notion",
+      "label": "missel-general numero:148",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10277",
+      "kind": "notion",
+      "label": "missel-general numero:149",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10278",
+      "kind": "notion",
+      "label": "missel-general numero:151",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10036",
+      "kind": "notion",
+      "label": "missel-general numero:46",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10037",
+      "kind": "notion",
+      "label": "missel-general numero:50",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10038",
+      "kind": "notion",
+      "label": "missel-general numero:51",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10039",
+      "kind": "notion",
+      "label": "missel-general numero:52",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10040",
+      "kind": "notion",
+      "label": "missel-general numero:53",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10041",
+      "kind": "notion",
+      "label": "missel-general numero:54",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10042",
+      "kind": "notion",
+      "label": "missel-general numero:55",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10043",
+      "kind": "notion",
+      "label": "missel-general numero:72",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10044",
+      "kind": "notion",
+      "label": "missel-general numero:80",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10045",
+      "kind": "notion",
+      "label": "missel-general numero:90",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10247",
+      "kind": "notion",
+      "label": "missel-general numero:92",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10248",
+      "kind": "notion",
+      "label": "missel-general numero:94",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10249",
+      "kind": "notion",
+      "label": "missel-general numero:98",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10250",
+      "kind": "notion",
+      "label": "missel-general numero:99",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10194",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:190",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10195",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:191",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10196",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:193",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10198",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:194",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10199",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:198",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10200",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:200",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10202",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:205",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10203",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:206",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10046",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:22",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10188",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:23",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10047",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:28",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10048",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:29",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10189",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:30",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10191",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:36",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10192",
+      "kind": "notion",
+      "label": "praedicate-evangelium-2022 article:37",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10231",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:1",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10232",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:13",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10049",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:33",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10050",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:37",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10235",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:38",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10051",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:52",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10052",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:53",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10053",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:54",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10237",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:55",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10238",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:56",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10239",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:59",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10054",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:62",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10241",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:64",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10242",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:65",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10243",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:66",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10233",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:7",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10244",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:70",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10055",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:87",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10056",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:88",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10057",
+      "kind": "notion",
+      "label": "universi-dominici-gregis-1996 numero:89",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10205",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:10",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10218",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:105",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10219",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:112",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10220",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:122",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10224",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:145",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10225",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:150",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10226",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:155",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10058",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:16",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10228",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:160",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10229",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:161",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10059",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:18",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10060",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:19",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10061",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:21",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10062",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:26",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10063",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:30",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10206",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:31",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10064",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:34",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10208",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:38",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10209",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:41",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10210",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:49",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10065",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:55",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10212",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:62",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10213",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:65",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10215",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:68",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10066",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:69",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10216",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:72",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10102",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:74",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10103",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:75",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10104",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:76",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10105",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:77",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10221",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:85",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10067",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:9",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10222",
+      "kind": "notion",
+      "label": "vademecum-ddf-2022 numero:95",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10070",
+      "kind": "notion",
+      "label": "Église latine",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10087",
+      "kind": "notion",
+      "label": "Élaboration et examen d’un document curial destiné à publication",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10107",
+      "kind": "notion",
+      "label": "Élection canonique et acceptation",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10234",
+      "kind": "notion",
+      "label": "Éligibilité et convocation des électeurs",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    },
+    {
+      "id": "KQ10069",
+      "kind": "notion",
+      "label": "État de la Cité du Vatican",
+      "description": "Notion déclarée dans canon/domain/v11/graph.json."
+    }
+  ],
+  "edges": [
+    {
+      "from": "KQ10001",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30001",
+      "source_refs": [
+        "KS40001",
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10001",
+      "to": "KQ10028",
+      "relation": "KP20002",
+      "assertion_id": "KA30002",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10001",
+      "to": "KQ10029",
+      "relation": "KP20002",
+      "assertion_id": "KA30003",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10001",
+      "to": "KQ10047",
+      "relation": "KP20002",
+      "assertion_id": "KA30004",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10002",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30005",
+      "source_refs": [
+        "KS40001",
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10002",
+      "to": "KQ10031",
+      "relation": "KP20002",
+      "assertion_id": "KA30006",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10002",
+      "to": "KQ10048",
+      "relation": "KP20002",
+      "assertion_id": "KA30007",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10003",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30008",
+      "source_refs": [
+        "KS40001",
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10003",
+      "to": "KQ10030",
+      "relation": "KP20002",
+      "assertion_id": "KA30009",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10003",
+      "to": "KQ10046",
+      "relation": "KP20002",
+      "assertion_id": "KA30010",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30011",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10020",
+      "relation": "KP20002",
+      "assertion_id": "KA30012",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10021",
+      "relation": "KP20002",
+      "assertion_id": "KA30013",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10022",
+      "relation": "KP20002",
+      "assertion_id": "KA30014",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10023",
+      "relation": "KP20002",
+      "assertion_id": "KA30015",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10024",
+      "relation": "KP20002",
+      "assertion_id": "KA30016",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10025",
+      "relation": "KP20002",
+      "assertion_id": "KA30017",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10026",
+      "relation": "KP20002",
+      "assertion_id": "KA30018",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10004",
+      "to": "KQ10027",
+      "relation": "KP20002",
+      "assertion_id": "KA30019",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30020",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10058",
+      "relation": "KP20002",
+      "assertion_id": "KA30021",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10059",
+      "relation": "KP20002",
+      "assertion_id": "KA30022",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10060",
+      "relation": "KP20002",
+      "assertion_id": "KA30023",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10061",
+      "relation": "KP20002",
+      "assertion_id": "KA30024",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10062",
+      "relation": "KP20002",
+      "assertion_id": "KA30025",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10063",
+      "relation": "KP20002",
+      "assertion_id": "KA30026",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10064",
+      "relation": "KP20002",
+      "assertion_id": "KA30027",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10065",
+      "relation": "KP20002",
+      "assertion_id": "KA30028",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10066",
+      "relation": "KP20002",
+      "assertion_id": "KA30029",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10005",
+      "to": "KQ10067",
+      "relation": "KP20002",
+      "assertion_id": "KA30030",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10012",
+      "relation": "KP20001",
+      "assertion_id": "KA30031",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10049",
+      "relation": "KP20002",
+      "assertion_id": "KA30032",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10050",
+      "relation": "KP20002",
+      "assertion_id": "KA30033",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10051",
+      "relation": "KP20002",
+      "assertion_id": "KA30034",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10052",
+      "relation": "KP20002",
+      "assertion_id": "KA30035",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10053",
+      "relation": "KP20002",
+      "assertion_id": "KA30036",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10054",
+      "relation": "KP20002",
+      "assertion_id": "KA30037",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10055",
+      "relation": "KP20002",
+      "assertion_id": "KA30038",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10056",
+      "relation": "KP20002",
+      "assertion_id": "KA30039",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10006",
+      "to": "KQ10057",
+      "relation": "KP20002",
+      "assertion_id": "KA30040",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10013",
+      "relation": "KP20001",
+      "assertion_id": "KA30041",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10036",
+      "relation": "KP20002",
+      "assertion_id": "KA30042",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10037",
+      "relation": "KP20002",
+      "assertion_id": "KA30043",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10038",
+      "relation": "KP20002",
+      "assertion_id": "KA30044",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10039",
+      "relation": "KP20002",
+      "assertion_id": "KA30045",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10040",
+      "relation": "KP20002",
+      "assertion_id": "KA30046",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10041",
+      "relation": "KP20002",
+      "assertion_id": "KA30047",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10042",
+      "relation": "KP20002",
+      "assertion_id": "KA30048",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10043",
+      "relation": "KP20002",
+      "assertion_id": "KA30049",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10044",
+      "relation": "KP20002",
+      "assertion_id": "KA30050",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10007",
+      "to": "KQ10045",
+      "relation": "KP20002",
+      "assertion_id": "KA30051",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10008",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30052",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10008",
+      "to": "KQ10032",
+      "relation": "KP20002",
+      "assertion_id": "KA30053",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10008",
+      "to": "KQ10033",
+      "relation": "KP20002",
+      "assertion_id": "KA30054",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10008",
+      "to": "KQ10034",
+      "relation": "KP20002",
+      "assertion_id": "KA30055",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10008",
+      "to": "KQ10035",
+      "relation": "KP20002",
+      "assertion_id": "KA30056",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10085",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30105",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10085",
+      "to": "KQ10093",
+      "relation": "KP20002",
+      "assertion_id": "KA30106",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10085",
+      "to": "KQ10094",
+      "relation": "KP20002",
+      "assertion_id": "KA30107",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10085",
+      "to": "KQ10095",
+      "relation": "KP20002",
+      "assertion_id": "KA30108",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10086",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30109",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10086",
+      "to": "KQ10096",
+      "relation": "KP20002",
+      "assertion_id": "KA30110",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10087",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30111",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10087",
+      "to": "KQ10031",
+      "relation": "KP20002",
+      "assertion_id": "KA30112",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10088",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30113",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10088",
+      "to": "KQ10097",
+      "relation": "KP20002",
+      "assertion_id": "KA30114",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10088",
+      "to": "KQ10098",
+      "relation": "KP20002",
+      "assertion_id": "KA30115",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10088",
+      "to": "KQ10099",
+      "relation": "KP20002",
+      "assertion_id": "KA30116",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10089",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30117",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10089",
+      "to": "KQ10100",
+      "relation": "KP20002",
+      "assertion_id": "KA30118",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10090",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30119",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10090",
+      "to": "KQ10101",
+      "relation": "KP20002",
+      "assertion_id": "KA30120",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10091",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30121",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10091",
+      "to": "KQ10102",
+      "relation": "KP20002",
+      "assertion_id": "KA30122",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10091",
+      "to": "KQ10103",
+      "relation": "KP20002",
+      "assertion_id": "KA30123",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10091",
+      "to": "KQ10104",
+      "relation": "KP20002",
+      "assertion_id": "KA30124",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10091",
+      "to": "KQ10105",
+      "relation": "KP20002",
+      "assertion_id": "KA30125",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10092",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30126",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10092",
+      "to": "KQ10106",
+      "relation": "KP20002",
+      "assertion_id": "KA30127",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10092",
+      "to": "KQ10030",
+      "relation": "KP20002",
+      "assertion_id": "KA30128",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10020",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30057",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10021",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30058",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10022",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30059",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10023",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30060",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10024",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30061",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10025",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30062",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10026",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30063",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10027",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30064",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10028",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30065",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10029",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30066",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10030",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30067",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10031",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30068",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10032",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30069",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10033",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30070",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10034",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30071",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10035",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30072",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10036",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30073",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10037",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30074",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10038",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30075",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10039",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30076",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10040",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30077",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10041",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30078",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10042",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30079",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10043",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30080",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10044",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30081",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10045",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30082",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10046",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30083",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10047",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30084",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10048",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30085",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10049",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30086",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10050",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30087",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10051",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30088",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10052",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30089",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10053",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30090",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10054",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30091",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10055",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30092",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10056",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30093",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10057",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30094",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10058",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30095",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10059",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30096",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10060",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30097",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10061",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30098",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10062",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30099",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10063",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30100",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10064",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30101",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10065",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30102",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10066",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30103",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10067",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30104",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10093",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30129",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10094",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30130",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10095",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30131",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10096",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30132",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10097",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30133",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10098",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30134",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10099",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30135",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10100",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30136",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10101",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30137",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10102",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30138",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10103",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30139",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10104",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30140",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10105",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30141",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10106",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30142",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10107",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30143",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10107",
+      "to": "KQ10108",
+      "relation": "KP20002",
+      "assertion_id": "KA30144",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10108",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30145",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10107",
+      "to": "KQ10109",
+      "relation": "KP20002",
+      "assertion_id": "KA30146",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10109",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30147",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10107",
+      "to": "KQ10110",
+      "relation": "KP20002",
+      "assertion_id": "KA30148",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10110",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30149",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10107",
+      "to": "KQ10111",
+      "relation": "KP20002",
+      "assertion_id": "KA30150",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10111",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30151",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10112",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30152",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10112",
+      "to": "KQ10113",
+      "relation": "KP20002",
+      "assertion_id": "KA30153",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10113",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30154",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10112",
+      "to": "KQ10114",
+      "relation": "KP20002",
+      "assertion_id": "KA30155",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10114",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30156",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10115",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30157",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10115",
+      "to": "KQ10116",
+      "relation": "KP20002",
+      "assertion_id": "KA30158",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10116",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30159",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10115",
+      "to": "KQ10117",
+      "relation": "KP20002",
+      "assertion_id": "KA30160",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10117",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30161",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10118",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30162",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10118",
+      "to": "KQ10119",
+      "relation": "KP20002",
+      "assertion_id": "KA30163",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10119",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30164",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10118",
+      "to": "KQ10120",
+      "relation": "KP20002",
+      "assertion_id": "KA30165",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10120",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30166",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10118",
+      "to": "KQ10121",
+      "relation": "KP20002",
+      "assertion_id": "KA30167",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10121",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30168",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10118",
+      "to": "KQ10122",
+      "relation": "KP20002",
+      "assertion_id": "KA30169",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10122",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30170",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10123",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30171",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10123",
+      "to": "KQ10124",
+      "relation": "KP20002",
+      "assertion_id": "KA30172",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10124",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30173",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10123",
+      "to": "KQ10125",
+      "relation": "KP20002",
+      "assertion_id": "KA30174",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10125",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30175",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10123",
+      "to": "KQ10126",
+      "relation": "KP20002",
+      "assertion_id": "KA30176",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10126",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30177",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10123",
+      "to": "KQ10127",
+      "relation": "KP20002",
+      "assertion_id": "KA30178",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10127",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30179",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10123",
+      "to": "KQ10128",
+      "relation": "KP20002",
+      "assertion_id": "KA30180",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10128",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30181",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10129",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30182",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10129",
+      "to": "KQ10130",
+      "relation": "KP20002",
+      "assertion_id": "KA30183",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10130",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30184",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10129",
+      "to": "KQ10131",
+      "relation": "KP20002",
+      "assertion_id": "KA30185",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10131",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30186",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10129",
+      "to": "KQ10132",
+      "relation": "KP20002",
+      "assertion_id": "KA30187",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10132",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30188",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10133",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30189",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10133",
+      "to": "KQ10134",
+      "relation": "KP20002",
+      "assertion_id": "KA30190",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10134",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30191",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10133",
+      "to": "KQ10135",
+      "relation": "KP20002",
+      "assertion_id": "KA30192",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10135",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30193",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10133",
+      "to": "KQ10136",
+      "relation": "KP20002",
+      "assertion_id": "KA30194",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10136",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30195",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10137",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30196",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10137",
+      "to": "KQ10138",
+      "relation": "KP20002",
+      "assertion_id": "KA30197",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10138",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30198",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10137",
+      "to": "KQ10139",
+      "relation": "KP20002",
+      "assertion_id": "KA30199",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10139",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30200",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10137",
+      "to": "KQ10140",
+      "relation": "KP20002",
+      "assertion_id": "KA30201",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10140",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30202",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10141",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30203",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10141",
+      "to": "KQ10142",
+      "relation": "KP20002",
+      "assertion_id": "KA30204",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10142",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30205",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10141",
+      "to": "KQ10143",
+      "relation": "KP20002",
+      "assertion_id": "KA30206",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10143",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30207",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10141",
+      "to": "KQ10144",
+      "relation": "KP20002",
+      "assertion_id": "KA30208",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10144",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30209",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10145",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30210",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10145",
+      "to": "KQ10146",
+      "relation": "KP20002",
+      "assertion_id": "KA30211",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10146",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30212",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10145",
+      "to": "KQ10147",
+      "relation": "KP20002",
+      "assertion_id": "KA30213",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10147",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30214",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10145",
+      "to": "KQ10148",
+      "relation": "KP20002",
+      "assertion_id": "KA30215",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10148",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30216",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10149",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30217",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10149",
+      "to": "KQ10150",
+      "relation": "KP20002",
+      "assertion_id": "KA30218",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10150",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30219",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10149",
+      "to": "KQ10151",
+      "relation": "KP20002",
+      "assertion_id": "KA30220",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10151",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30221",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10149",
+      "to": "KQ10152",
+      "relation": "KP20002",
+      "assertion_id": "KA30222",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10152",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30223",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10153",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30224",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10153",
+      "to": "KQ10154",
+      "relation": "KP20002",
+      "assertion_id": "KA30225",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10154",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30226",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10153",
+      "to": "KQ10155",
+      "relation": "KP20002",
+      "assertion_id": "KA30227",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10155",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30228",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10153",
+      "to": "KQ10156",
+      "relation": "KP20002",
+      "assertion_id": "KA30229",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10156",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30230",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10153",
+      "to": "KQ10157",
+      "relation": "KP20002",
+      "assertion_id": "KA30231",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10157",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30232",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10158",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30233",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10158",
+      "to": "KQ10159",
+      "relation": "KP20002",
+      "assertion_id": "KA30234",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10159",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30235",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10158",
+      "to": "KQ10160",
+      "relation": "KP20002",
+      "assertion_id": "KA30236",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10160",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30237",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10158",
+      "to": "KQ10161",
+      "relation": "KP20002",
+      "assertion_id": "KA30238",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10161",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30239",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10158",
+      "to": "KQ10162",
+      "relation": "KP20002",
+      "assertion_id": "KA30240",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10162",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30241",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10163",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30242",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10163",
+      "to": "KQ10164",
+      "relation": "KP20002",
+      "assertion_id": "KA30243",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10164",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30244",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10163",
+      "to": "KQ10165",
+      "relation": "KP20002",
+      "assertion_id": "KA30245",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10165",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30246",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10163",
+      "to": "KQ10166",
+      "relation": "KP20002",
+      "assertion_id": "KA30247",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10166",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30248",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10167",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30249",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10167",
+      "to": "KQ10168",
+      "relation": "KP20002",
+      "assertion_id": "KA30250",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10168",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30251",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10167",
+      "to": "KQ10169",
+      "relation": "KP20002",
+      "assertion_id": "KA30252",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10169",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30253",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10167",
+      "to": "KQ10170",
+      "relation": "KP20002",
+      "assertion_id": "KA30254",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10170",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30255",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10167",
+      "to": "KQ10171",
+      "relation": "KP20002",
+      "assertion_id": "KA30256",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10171",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30257",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10167",
+      "to": "KQ10172",
+      "relation": "KP20002",
+      "assertion_id": "KA30258",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10172",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30259",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10173",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30260",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10173",
+      "to": "KQ10174",
+      "relation": "KP20002",
+      "assertion_id": "KA30261",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10174",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30262",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10173",
+      "to": "KQ10175",
+      "relation": "KP20002",
+      "assertion_id": "KA30263",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10175",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30264",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10173",
+      "to": "KQ10176",
+      "relation": "KP20002",
+      "assertion_id": "KA30265",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10176",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30266",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10177",
+      "to": "KQ10010",
+      "relation": "KP20001",
+      "assertion_id": "KA30267",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10177",
+      "to": "KQ10178",
+      "relation": "KP20002",
+      "assertion_id": "KA30268",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10178",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30269",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10177",
+      "to": "KQ10179",
+      "relation": "KP20002",
+      "assertion_id": "KA30270",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10179",
+      "to": "KQ10015",
+      "relation": "KP20003",
+      "assertion_id": "KA30271",
+      "source_refs": [
+        "KS40002"
+      ]
+    },
+    {
+      "from": "KQ10180",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30272",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10180",
+      "to": "KQ10181",
+      "relation": "KP20002",
+      "assertion_id": "KA30273",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10181",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30274",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10180",
+      "to": "KQ10182",
+      "relation": "KP20002",
+      "assertion_id": "KA30275",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10182",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30276",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10180",
+      "to": "KQ10093",
+      "relation": "KP20002",
+      "assertion_id": "KA30277",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10183",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30278",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10183",
+      "to": "KQ10184",
+      "relation": "KP20002",
+      "assertion_id": "KA30279",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10184",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30280",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10183",
+      "to": "KQ10185",
+      "relation": "KP20002",
+      "assertion_id": "KA30281",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10185",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30282",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10183",
+      "to": "KQ10186",
+      "relation": "KP20002",
+      "assertion_id": "KA30283",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10186",
+      "to": "KQ10014",
+      "relation": "KP20003",
+      "assertion_id": "KA30284",
+      "source_refs": [
+        "KS40001"
+      ]
+    },
+    {
+      "from": "KQ10187",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30285",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10187",
+      "to": "KQ10188",
+      "relation": "KP20002",
+      "assertion_id": "KA30286",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10188",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30287",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10187",
+      "to": "KQ10048",
+      "relation": "KP20002",
+      "assertion_id": "KA30288",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10187",
+      "to": "KQ10189",
+      "relation": "KP20002",
+      "assertion_id": "KA30289",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10189",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30290",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10190",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30291",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10190",
+      "to": "KQ10191",
+      "relation": "KP20002",
+      "assertion_id": "KA30292",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10191",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30293",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10190",
+      "to": "KQ10192",
+      "relation": "KP20002",
+      "assertion_id": "KA30294",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10192",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30295",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10193",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30296",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10193",
+      "to": "KQ10194",
+      "relation": "KP20002",
+      "assertion_id": "KA30297",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10194",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30298",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10193",
+      "to": "KQ10195",
+      "relation": "KP20002",
+      "assertion_id": "KA30299",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10195",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30300",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10193",
+      "to": "KQ10196",
+      "relation": "KP20002",
+      "assertion_id": "KA30301",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10196",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30302",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10197",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30303",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10197",
+      "to": "KQ10198",
+      "relation": "KP20002",
+      "assertion_id": "KA30304",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10198",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30305",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10197",
+      "to": "KQ10199",
+      "relation": "KP20002",
+      "assertion_id": "KA30306",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10199",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30307",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10197",
+      "to": "KQ10200",
+      "relation": "KP20002",
+      "assertion_id": "KA30308",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10200",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30309",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10201",
+      "to": "KQ10009",
+      "relation": "KP20001",
+      "assertion_id": "KA30310",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10201",
+      "to": "KQ10202",
+      "relation": "KP20002",
+      "assertion_id": "KA30311",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10202",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30312",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10201",
+      "to": "KQ10203",
+      "relation": "KP20002",
+      "assertion_id": "KA30313",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10203",
+      "to": "KQ10016",
+      "relation": "KP20003",
+      "assertion_id": "KA30314",
+      "source_refs": [
+        "KS40003"
+      ]
+    },
+    {
+      "from": "KQ10204",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30315",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10204",
+      "to": "KQ10205",
+      "relation": "KP20002",
+      "assertion_id": "KA30316",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10205",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30317",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10204",
+      "to": "KQ10061",
+      "relation": "KP20002",
+      "assertion_id": "KA30318",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10204",
+      "to": "KQ10206",
+      "relation": "KP20002",
+      "assertion_id": "KA30319",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10206",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30320",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10207",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30321",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10207",
+      "to": "KQ10062",
+      "relation": "KP20002",
+      "assertion_id": "KA30322",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10207",
+      "to": "KQ10064",
+      "relation": "KP20002",
+      "assertion_id": "KA30323",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10207",
+      "to": "KQ10208",
+      "relation": "KP20002",
+      "assertion_id": "KA30324",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10208",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30325",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10207",
+      "to": "KQ10209",
+      "relation": "KP20002",
+      "assertion_id": "KA30326",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10209",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30327",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10207",
+      "to": "KQ10210",
+      "relation": "KP20002",
+      "assertion_id": "KA30328",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10210",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30329",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10211",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30330",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10211",
+      "to": "KQ10063",
+      "relation": "KP20002",
+      "assertion_id": "KA30331",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10211",
+      "to": "KQ10212",
+      "relation": "KP20002",
+      "assertion_id": "KA30332",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10212",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30333",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10211",
+      "to": "KQ10213",
+      "relation": "KP20002",
+      "assertion_id": "KA30334",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10213",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30335",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10214",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30336",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10214",
+      "to": "KQ10215",
+      "relation": "KP20002",
+      "assertion_id": "KA30337",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10215",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30338",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10214",
+      "to": "KQ10066",
+      "relation": "KP20002",
+      "assertion_id": "KA30339",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10214",
+      "to": "KQ10216",
+      "relation": "KP20002",
+      "assertion_id": "KA30340",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10216",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30341",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10214",
+      "to": "KQ10103",
+      "relation": "KP20002",
+      "assertion_id": "KA30342",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10217",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30343",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10217",
+      "to": "KQ10218",
+      "relation": "KP20002",
+      "assertion_id": "KA30344",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10218",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30345",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10217",
+      "to": "KQ10219",
+      "relation": "KP20002",
+      "assertion_id": "KA30346",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10219",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30347",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10217",
+      "to": "KQ10220",
+      "relation": "KP20002",
+      "assertion_id": "KA30348",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10220",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30349",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10217",
+      "to": "KQ10221",
+      "relation": "KP20002",
+      "assertion_id": "KA30350",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10221",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30351",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10217",
+      "to": "KQ10222",
+      "relation": "KP20002",
+      "assertion_id": "KA30352",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10222",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30353",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10223",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30354",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10223",
+      "to": "KQ10224",
+      "relation": "KP20002",
+      "assertion_id": "KA30355",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10224",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30356",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10223",
+      "to": "KQ10225",
+      "relation": "KP20002",
+      "assertion_id": "KA30357",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10225",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30358",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10223",
+      "to": "KQ10226",
+      "relation": "KP20002",
+      "assertion_id": "KA30359",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10226",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30360",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10227",
+      "to": "KQ10011",
+      "relation": "KP20001",
+      "assertion_id": "KA30361",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10227",
+      "to": "KQ10228",
+      "relation": "KP20002",
+      "assertion_id": "KA30362",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10228",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30363",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10227",
+      "to": "KQ10229",
+      "relation": "KP20002",
+      "assertion_id": "KA30364",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10229",
+      "to": "KQ10017",
+      "relation": "KP20003",
+      "assertion_id": "KA30365",
+      "source_refs": [
+        "KS40004"
+      ]
+    },
+    {
+      "from": "KQ10230",
+      "to": "KQ10012",
+      "relation": "KP20001",
+      "assertion_id": "KA30366",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10230",
+      "to": "KQ10231",
+      "relation": "KP20002",
+      "assertion_id": "KA30367",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10231",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30368",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10230",
+      "to": "KQ10232",
+      "relation": "KP20002",
+      "assertion_id": "KA30369",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10232",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30370",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10230",
+      "to": "KQ10233",
+      "relation": "KP20002",
+      "assertion_id": "KA30371",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10233",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30372",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10234",
+      "to": "KQ10012",
+      "relation": "KP20001",
+      "assertion_id": "KA30373",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10234",
+      "to": "KQ10049",
+      "relation": "KP20002",
+      "assertion_id": "KA30374",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10234",
+      "to": "KQ10050",
+      "relation": "KP20002",
+      "assertion_id": "KA30375",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10234",
+      "to": "KQ10235",
+      "relation": "KP20002",
+      "assertion_id": "KA30376",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10235",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30377",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10236",
+      "to": "KQ10012",
+      "relation": "KP20001",
+      "assertion_id": "KA30378",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10236",
+      "to": "KQ10053",
+      "relation": "KP20002",
+      "assertion_id": "KA30379",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10236",
+      "to": "KQ10237",
+      "relation": "KP20002",
+      "assertion_id": "KA30380",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10237",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30381",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10236",
+      "to": "KQ10238",
+      "relation": "KP20002",
+      "assertion_id": "KA30382",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10238",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30383",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10236",
+      "to": "KQ10239",
+      "relation": "KP20002",
+      "assertion_id": "KA30384",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10239",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30385",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10240",
+      "to": "KQ10012",
+      "relation": "KP20001",
+      "assertion_id": "KA30386",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10240",
+      "to": "KQ10054",
+      "relation": "KP20002",
+      "assertion_id": "KA30387",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10240",
+      "to": "KQ10241",
+      "relation": "KP20002",
+      "assertion_id": "KA30388",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10241",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30389",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10240",
+      "to": "KQ10242",
+      "relation": "KP20002",
+      "assertion_id": "KA30390",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10242",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30391",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10240",
+      "to": "KQ10243",
+      "relation": "KP20002",
+      "assertion_id": "KA30392",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10243",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30393",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10240",
+      "to": "KQ10244",
+      "relation": "KP20002",
+      "assertion_id": "KA30394",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10244",
+      "to": "KQ10018",
+      "relation": "KP20003",
+      "assertion_id": "KA30395",
+      "source_refs": [
+        "KS40005"
+      ]
+    },
+    {
+      "from": "KQ10245",
+      "to": "KQ10013",
+      "relation": "KP20001",
+      "assertion_id": "KA30396",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10245",
+      "to": "KQ10246",
+      "relation": "KP20002",
+      "assertion_id": "KA30397",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10246",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30398",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10245",
+      "to": "KQ10247",
+      "relation": "KP20002",
+      "assertion_id": "KA30399",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10247",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30400",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10245",
+      "to": "KQ10248",
+      "relation": "KP20002",
+      "assertion_id": "KA30401",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10248",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30402",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10245",
+      "to": "KQ10249",
+      "relation": "KP20002",
+      "assertion_id": "KA30403",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10249",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30404",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10245",
+      "to": "KQ10250",
+      "relation": "KP20002",
+      "assertion_id": "KA30405",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10250",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30406",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10251",
+      "to": "KQ10013",
+      "relation": "KP20001",
+      "assertion_id": "KA30407",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10251",
+      "to": "KQ10252",
+      "relation": "KP20002",
+      "assertion_id": "KA30408",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10252",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30409",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10251",
+      "to": "KQ10253",
+      "relation": "KP20002",
+      "assertion_id": "KA30410",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10253",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30411",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10251",
+      "to": "KQ10254",
+      "relation": "KP20002",
+      "assertion_id": "KA30412",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10254",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30413",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10255",
+      "to": "KQ10013",
+      "relation": "KP20001",
+      "assertion_id": "KA30414",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10255",
+      "to": "KQ10256",
+      "relation": "KP20002",
+      "assertion_id": "KA30415",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10256",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30416",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10255",
+      "to": "KQ10257",
+      "relation": "KP20002",
+      "assertion_id": "KA30417",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10257",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30418",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10255",
+      "to": "KQ10258",
+      "relation": "KP20002",
+      "assertion_id": "KA30419",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10258",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30420",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10255",
+      "to": "KQ10259",
+      "relation": "KP20002",
+      "assertion_id": "KA30421",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10259",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30422",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10255",
+      "to": "KQ10260",
+      "relation": "KP20002",
+      "assertion_id": "KA30423",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10260",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30424",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10261",
+      "to": "KQ10013",
+      "relation": "KP20001",
+      "assertion_id": "KA30425",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10261",
+      "to": "KQ10262",
+      "relation": "KP20002",
+      "assertion_id": "KA30426",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10262",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30427",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10261",
+      "to": "KQ10263",
+      "relation": "KP20002",
+      "assertion_id": "KA30428",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10263",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30429",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10261",
+      "to": "KQ10264",
+      "relation": "KP20002",
+      "assertion_id": "KA30430",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10264",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30431",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10261",
+      "to": "KQ10265",
+      "relation": "KP20002",
+      "assertion_id": "KA30432",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10265",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30433",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10261",
+      "to": "KQ10266",
+      "relation": "KP20002",
+      "assertion_id": "KA30434",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10266",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30435",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10261",
+      "to": "KQ10267",
+      "relation": "KP20002",
+      "assertion_id": "KA30436",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10267",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30437",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10268",
+      "to": "KQ10013",
+      "relation": "KP20001",
+      "assertion_id": "KA30438",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10268",
+      "to": "KQ10269",
+      "relation": "KP20002",
+      "assertion_id": "KA30439",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10269",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30440",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10268",
+      "to": "KQ10270",
+      "relation": "KP20002",
+      "assertion_id": "KA30441",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10270",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30442",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10268",
+      "to": "KQ10271",
+      "relation": "KP20002",
+      "assertion_id": "KA30443",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10271",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30444",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10268",
+      "to": "KQ10272",
+      "relation": "KP20002",
+      "assertion_id": "KA30445",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10272",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30446",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10268",
+      "to": "KQ10273",
+      "relation": "KP20002",
+      "assertion_id": "KA30447",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10273",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30448",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10274",
+      "to": "KQ10013",
+      "relation": "KP20001",
+      "assertion_id": "KA30449",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10274",
+      "to": "KQ10275",
+      "relation": "KP20002",
+      "assertion_id": "KA30450",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10275",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30451",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10274",
+      "to": "KQ10276",
+      "relation": "KP20002",
+      "assertion_id": "KA30452",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10276",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30453",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10274",
+      "to": "KQ10277",
+      "relation": "KP20002",
+      "assertion_id": "KA30454",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10277",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30455",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10274",
+      "to": "KQ10278",
+      "relation": "KP20002",
+      "assertion_id": "KA30456",
+      "source_refs": [
+        "KS40006"
+      ]
+    },
+    {
+      "from": "KQ10278",
+      "to": "KQ10019",
+      "relation": "KP20003",
+      "assertion_id": "KA30457",
+      "source_refs": [
+        "KS40006"
+      ]
+    }
+  ],
+  "knowledge": {
+    "graph_path": "canon/domain/v11/graph.json",
+    "dictionaries": [
+      "canon/domain/v11/dictionaries/curated-fr.json"
+    ],
+    "declared_assertions": 457,
+    "displayed_assertions": 457,
+    "omitted_assertions": 0,
+    "declared_sources": 6,
+    "referenced_sources": 6,
+    "unlisted_source_references": 0,
+    "graph_versions_omitted": 0,
+    "note": "Projection d’un seul graphe canonique v11. Sources référencées = identifiants déclarés, non sources indépendamment authentifiées."
+  },
+  "relation_labels": {
+    "KP20001": "part of domain",
+    "KP20002": "cites passage",
+    "KP20003": "passage from work"
+  }
+}

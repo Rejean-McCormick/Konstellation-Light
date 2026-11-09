@@ -1,0 +1,1622 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "K Monetary System — Socio-Monetary Transition Model",
+  "slug": "k-monetary-system",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:k-monetary-system",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:53cdf568c0a7fee24d2993968b09a25fd522cdafc6dc96877864023fb1982c9b"
+  },
+  "surface_digest": "sha256:1b0b26e4710188b302e81fc1d514e9d9bb93d8971b21d7ac91cfba1323d7c543",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 36,
+    "files": 108,
+    "bytes": 1181142
+  },
+  "nodes": [
+    {
+      "id": "state:863418e5114c956f33f160d5",
+      "kind": "hosted_state",
+      "label": "K Monetary System — Socio-Monetary Transition Model",
+      "description": "Navigation dérivée ; état urn:kristal:state:k-monetary-system ; engagement déclaré sha256:53cdf568c0a7fee24d2993968b09a25fd522cdafc6dc96877864023fb1982c9b"
+    },
+    {
+      "id": "artifact:00c6addb813d4adf8f92bf4b",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:system",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:9d69baae73d6e85463fd24058c0e6a4a822ea6259dab4d10df87c42c11bf245b"
+    },
+    {
+      "id": "artifact:39088c4b53e15729320f5109",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:constitution",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:32bba9578b56041412201dc9af730d5f345a0fd86e81e25a7fad2b298497414c"
+    },
+    {
+      "id": "artifact:b8738e536a0f135871373201",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:statechart",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:f817f6f964974a3819cbc3dc516e4bf81de40306603ce83a8f37d39d7319f6b7"
+    },
+    {
+      "id": "artifact:56aaeb4abec6717c2b15ac91",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:causal-model",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:af5587dc100057c71d45f3b1d97417145827ed82ad287217d9fcc4eab474940d"
+    },
+    {
+      "id": "artifact:1a30db95080fc2d13f585e83",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:distribution-model",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:9fcaeab6446b2b3e8c92e036c440a8ee1f83f38dca6beb30a273944a24f7cfc3"
+    },
+    {
+      "id": "artifact:9de9278b5196321ebac3290c",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:event-ledger",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:b188cbb3b29331dfae825dc57bb48f707e8dd3853cb6863171b058605c98cf68"
+    },
+    {
+      "id": "artifact:9023e46e408a148aa3883829",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:smart-vote-interface",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:3a8fa95360c59aa2cc48686b5011fc843ffcd1320f52f1d513b34d122d853130"
+    },
+    {
+      "id": "artifact:95ad4379cad30d9210c8ce6f",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:monetary-policy",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:ef32d87a758a939ceb2c8c66000f399db27e257478a8c1d1de11ca661e03a593"
+    },
+    {
+      "id": "artifact:65b60a47edafbc69e916a686",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:payment-settlement",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:ea5f2fa628b96007ecc067a96f54ad89dadf43271d9789dbc679bedb1ec2a0de"
+    },
+    {
+      "id": "artifact:936351d2b76172debfa350f8",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:social-dividend",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:238aac03de1deaa2383cf0a6cd18444e5c6623d3bedafe74ce032d1f549e228c"
+    },
+    {
+      "id": "artifact:7214dd67912a6d6c90601848",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:debt-transition",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:c56480d613a441a918ad6935661a2679c6c1e55eed646e3ca4ea0e3301c83af4"
+    },
+    {
+      "id": "artifact:ec78e4ace42ca8041fae6389",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:simulation-model",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:cddfd942aac7ce4fe70a4f4604a7cb33f4ddd49d7c351c8f3c308db9d28a3d94"
+    },
+    {
+      "id": "artifact:0dc6105aaf87f85b914e3e1d",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:assumptions",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:aa54aa8c8fc343348c7218e408fc560643446ec42e426f177fe3ddbe346f9df2"
+    },
+    {
+      "id": "artifact:429eb9978cecf1ccb7dee6b1",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:hypotheses",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:ae0c80e5c00518691b25c8785bec38f9ccb00bf8aea6edb8b27a340cf0fa5c56"
+    },
+    {
+      "id": "artifact:b781baf50f864f23b4d7468f",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:counterarguments",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:aac824f8105fd6e6235239086f7d10bcfddca21d139f584113a87fa65ae691b8"
+    },
+    {
+      "id": "artifact:f22e5efac158d813d9773125",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:evidence-register",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:f18bfcd0860ca7430741fecf7bb2961e5da08ea0013eb0f6b46529d3c76eec05"
+    },
+    {
+      "id": "artifact:b96f3afaa897c476766e9e94",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:validation-state",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:6a52672870d7844b766084ae4d970d859aca65a84c63a68fda6808c821aec02c"
+    },
+    {
+      "id": "artifact:877150cba2f7915e75248767",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d01",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:b4b1f00ff5abc26f811362e81d73c288c47d02bb0ca58283bc03f3f0ef6b05d5"
+    },
+    {
+      "id": "artifact:24c95fe718bf04ba38a4da0d",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d02",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:226427f05563ac6d461915f7e836dc87906b0d9f37e31d55bd76e1f4b2b5e39d"
+    },
+    {
+      "id": "artifact:960b820d8fb5c96d26f12eb4",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d03",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:b0b5dfd85f5d5130fdaa1b755270ef048b3ae31122e4a84c3db7faaea70c2536"
+    },
+    {
+      "id": "artifact:3e60e1f237e227782f2ecb97",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d04",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:0c014c34a5e893f18f84c0bd80b0e905fdae217cf8049217bdb26d41081c32ab"
+    },
+    {
+      "id": "artifact:a63dea25fa22ac30ce71e3dc",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d05",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:09c7b9543fa5a807a2484bd49181a73795a6f26fc4c85b77a10e539a3a242853"
+    },
+    {
+      "id": "artifact:c3a4a5f00ce779f8f990a348",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d06",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:cfceb4fb8d02d41a58283593eae2d392cf303eaf0014c55ba7c0d71e27a2a1fd"
+    },
+    {
+      "id": "artifact:5e315c577a41393eca489d94",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d07",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:93d621444a03ec368614962a519dc7c01b3842bd018eee7da639caefc5e302fe"
+    },
+    {
+      "id": "artifact:fdd3bbb7cfbcb1e1746e446f",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d08",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:acb091ba0bd7197f9c3025f925dd72a16c157cd165309971fa5f438cb011bc89"
+    },
+    {
+      "id": "artifact:705ae9fbd18c365d9a7c2080",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d09",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:dc85d1bb6ca3dc28bf2fc08f3194f9fcf5e5f7c7aca3ca5aac6d594edaa9c527"
+    },
+    {
+      "id": "artifact:684869c37c805494fd403fed",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d10",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:73a6b365c9ba5bee641f77d7325792f6212af83c4fa50b763d7e1463f6fb680e"
+    },
+    {
+      "id": "artifact:a0a0ec8f60033ecd93904ee0",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d11",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:b90315f5129abbbab13da3d0d0f61e8110d309e6f816ca9d0ed161e69c36b538"
+    },
+    {
+      "id": "artifact:697f68c50b1b5fb92be7a788",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d12",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:94b1dcd629976072d038f4741434428359905f132bff50f824c1f6d48e1797dd"
+    },
+    {
+      "id": "artifact:b6ee939fd16ddd1be73aa8c2",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d13",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:22eccd1678f151314ff8d1c76a6b6ee3efe19699809dbc3452bca8fdeeb20f46"
+    },
+    {
+      "id": "artifact:66644028bfdca8b7c731b635",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-d14",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:5ce5f11a4d1163a22d5113cf00d2dcbc4542d44098fe1919490dc24590f96d23"
+    },
+    {
+      "id": "artifact:0895fefe8e547c9ef4b8618a",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-provenance",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:fe02d10cef87fe87de8c67478f49f5c88b360837b7951ef49c25f36b3133b934"
+    },
+    {
+      "id": "artifact:44ff61ec02db7f79a5bb3eb8",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-claims",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:bcc01e2684f02bb96cb7d5e02ff556ed915f3212d45b34df7e6872c4f32ae4c1"
+    },
+    {
+      "id": "artifact:b1d46de95a24ed409f016e17",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-arbitrages",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:f12a1279cc9957909b42e60d9b10c301e1e19fa4c3a847597e704fc554e8ca7d"
+    },
+    {
+      "id": "artifact:c319edb52d173ee8ea7f05ba",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-risques",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:c9a7163051e3f86759907c7d7695f0322fd630965d071eadf13722e8a1f058cf"
+    },
+    {
+      "id": "artifact:5557470a40e385622be709b7",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:k-monetary-system:artifact:multiangle-graph",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:63fb470a00211b441a5334508e2fb5ac94133001a39e1e00d6db2e4ed4d057db"
+    },
+    {
+      "id": "file:0d63e852b597b640937e32a1",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 1197 octets ; sha256:e5cec1e2df3a57b6f10c6f538e908c48a6c41d829e487b6f129b25cb00d1b86b"
+    },
+    {
+      "id": "file:d56d813852f1e4e322d3688e",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1963 octets ; sha256:6a900efa07b1c0fc78e8d0df4a189c5523b1b9907a69627ae07c40aa5bddf523"
+    },
+    {
+      "id": "file:fa78e7e53a51dcd936e7466d",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:f1b9485a7f593dd0399e73cc",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 2868 octets ; sha256:06b417cf54538c54504eb6b9e52c3b8667c4cf29fa13b914a6019cc6042a606b"
+    },
+    {
+      "id": "file:f2cc32d18b78fd0c7423c0ae",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 5073 octets ; sha256:4c3c979c86b4125b1eafa0e30a7d6cc9648c7d4c771e92834e3da4fac1ff1142"
+    },
+    {
+      "id": "file:7f4767d0809a2d679e387872",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1941 octets ; sha256:8fc143440a23ab8d8f5b75825d5750f4c3a8d071acc607873d597cc9a9dbc53b"
+    },
+    {
+      "id": "file:92b1a2e9cd77189f2546053e",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 218 octets ; sha256:1f6375e83316f360dc9e98383876a5cea39f9d826293c9a9ee4dbb22a7928c01"
+    },
+    {
+      "id": "file:18026cd0ba77f688e134b4ca",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 32027 octets ; sha256:0a895478fa9bdda93417241b45ecd26e153c60e5cd029b56f6e7987f42d2bb96"
+    },
+    {
+      "id": "file:3c3e676978c54fdb2c08ce5a",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 625 octets ; sha256:c80af9a89ed15e7ea2b13a046c251ef8e1c6bca778f41958b02083df7516cc5c"
+    },
+    {
+      "id": "file:d4112db4c4638ee5faec49f7",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 14072 octets ; sha256:542426f5cdffc5153cd03d30a0ec028b6c7b7a215de5c0ff26307612cfb8f689"
+    },
+    {
+      "id": "file:41bafb6e45dcdc29aa791b20",
+      "kind": "hosted_file",
+      "label": "canon/domain/causal-model.json",
+      "description": "Fichier dérivé (canonical_content) ; 5212 octets ; sha256:5849d470538794c8b791854c9ca3b3c339112fb31dba5be44f62aa0a3b94bdad"
+    },
+    {
+      "id": "file:3fddc4a9be1eb75cfa90af49",
+      "kind": "hosted_file",
+      "label": "canon/domain/distribution-model.json",
+      "description": "Fichier dérivé (canonical_content) ; 2224 octets ; sha256:5ba03ab1b751beb28b05b57c48cb3dab4f43499f1955cfd78b553dd0d85d59c3"
+    },
+    {
+      "id": "file:9428f272cde4a9e867a2fad9",
+      "kind": "hosted_file",
+      "label": "canon/domain/event-ledger.json",
+      "description": "Fichier dérivé (canonical_content) ; 715 octets ; sha256:521399eb65fe1b8958fb11dcbae8e981c69b5aa4a0489340343176d0b13ab205"
+    },
+    {
+      "id": "file:da3c14801e984057ead7681e",
+      "kind": "hosted_file",
+      "label": "canon/domain/monetary-constitution.json",
+      "description": "Fichier dérivé (canonical_content) ; 2351 octets ; sha256:e09f03cb93e54d0c41d226a0fadc37233b8bde424abfc64cc339d43473839201"
+    },
+    {
+      "id": "file:c40049d5a1df0559bddbf806",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d01-strategie-d-influence-et-contrepouvoirs.json",
+      "description": "Fichier dérivé (canonical_content) ; 3804 octets ; sha256:e0aed5d9490b754a2e484034b8061a68c5919d9d034173d062f2937d838c5f34"
+    },
+    {
+      "id": "file:18b76c28325ffdc8e1239051",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d02-desjardins-mandat-et-processus.json",
+      "description": "Fichier dérivé (canonical_content) ; 5156 octets ; sha256:5197d6963df088466fea96def512f5befd4282de4bcd5aba0159ea0c387cd434"
+    },
+    {
+      "id": "file:80254141989b4290597c8a28",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d04-lingots-brandes-art-et-reserves.json",
+      "description": "Fichier dérivé (canonical_content) ; 4210 octets ; sha256:240ebb043f165fce92dbe4911418996b0347dd6a40104deb6c57cfb62eb77ce2"
+    },
+    {
+      "id": "file:26b619b681ec74bb2b43600a",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d05-km-regimes-et-regles-monetaires.json",
+      "description": "Fichier dérivé (canonical_content) ; 4833 octets ; sha256:debbeda52b0e9052bf97b7b7d3f454473122d2fc6aae960c27431aeae637626d"
+    },
+    {
+      "id": "file:b3165b4e621c443628cda07f",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d06-kc-participation-productive.json",
+      "description": "Fichier dérivé (canonical_content) ; 3518 octets ; sha256:4c43b215f49273c91797a48a211232c263940f2858e3b5a1b906d9043ca8b5c5"
+    },
+    {
+      "id": "file:bd7dfa3966ed51f8c363b01a",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d11-transition-scenarios-et-sorties.json",
+      "description": "Fichier dérivé (canonical_content) ; 3555 octets ; sha256:889b897c9134c25daf7142f8bc046596a9a4e1a009a34d90e07d1e962222824a"
+    },
+    {
+      "id": "file:e777791d63f8a45d2f3d62a6",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d13-medias-marque-et-conflits.json",
+      "description": "Fichier dérivé (canonical_content) ; 1005 octets ; sha256:b8d97f3344eea9bf698e53cca88ae84421fb718b238f2389a0620653d19f4de1"
+    },
+    {
+      "id": "file:179a54fe7c766c0db74207e6",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/d14-clauses-invariantes.json",
+      "description": "Fichier dérivé (canonical_content) ; 912 octets ; sha256:c2f45a1de47e1706c6202a004682562108495dc0b10e9d098a1e204bbc4af1d7"
+    },
+    {
+      "id": "file:0afa63fe965d35c8fcd2a8c3",
+      "kind": "hosted_file",
+      "label": "canon/domain/multiangle/graph.json",
+      "description": "Fichier dérivé (canonical_content) ; 29607 octets ; sha256:62b00c21dcd15ac4a09e4eafb652a512b9810e3e77f0072496bfe6056aca3c55"
+    },
+    {
+      "id": "file:a485bf2f1651cf4bb0431ffa",
+      "kind": "hosted_file",
+      "label": "canon/domain/system.json",
+      "description": "Fichier dérivé (canonical_content) ; 4428 octets ; sha256:64cad563a8db13ca0219d58a8caab9eba8ed47bb40f74b0b12eb63e7860cb127"
+    },
+    {
+      "id": "file:0da808db5d87b0748f6a374c",
+      "kind": "hosted_file",
+      "label": "canon/domain/transition-statechart.json",
+      "description": "Fichier dérivé (canonical_content) ; 6234 octets ; sha256:be244f712dcd3ee586cd48ba827792d0fdf8122b525a47a04db8873470fcad1b"
+    },
+    {
+      "id": "file:e6fea4a25e94c4969ba7c31a",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/assumptions.json",
+      "description": "Fichier dérivé (canonical_content) ; 1404 octets ; sha256:c2bd14ff95e252dc9fe3d9a80c998ebd1ae086de1e33ea975ee24efdc91f559f"
+    },
+    {
+      "id": "file:0d126e45038494129dc2f6fd",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/counterarguments.json",
+      "description": "Fichier dérivé (canonical_content) ; 2282 octets ; sha256:f8924cca897bc0de40eabc128243fa4d88097d6155aa0018ffaf43d1ab8ec951"
+    },
+    {
+      "id": "file:38c014e33d229a29ff8d29d1",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/evidence-register.json",
+      "description": "Fichier dérivé (canonical_content) ; 2248 octets ; sha256:4658c2d4c7c92922a79f6faa798d54a2ae8ad20eb6dd658b4b59651af1c0ad41"
+    },
+    {
+      "id": "file:5dd8e17fd343627d0ac00acc",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/hypotheses.json",
+      "description": "Fichier dérivé (canonical_content) ; 2271 octets ; sha256:e64e9e1e910e04155d08f3f1ebde8a68d9e750c047d5938d7416f2c647d2e6e1"
+    },
+    {
+      "id": "file:99955f9b3684e962e397f4a0",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/multiangle/arbitrages.json",
+      "description": "Fichier dérivé (canonical_content) ; 4363 octets ; sha256:c60568f08455e4e3cad1c4d259af2f707415d029e5ca219b00af511d277adf0c"
+    },
+    {
+      "id": "file:5236f5e98fd1185b8ef42315",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/multiangle/claims.json",
+      "description": "Fichier dérivé (canonical_content) ; 7445 octets ; sha256:c35e4fc26bd0abc4e4186f9345f03cacb7dec91d3d1d4ef8791919690379747e"
+    },
+    {
+      "id": "file:5f8d1c1411f284b0349a5ef9",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/multiangle/provenance.json",
+      "description": "Fichier dérivé (canonical_content) ; 18668 octets ; sha256:ee2b3db47985b9627d3fa37b15ccb61542eba9bed08b6884b3af757869c7728d"
+    },
+    {
+      "id": "file:1096951580c7b07f1a8533a1",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/multiangle/risques.json",
+      "description": "Fichier dérivé (canonical_content) ; 6153 octets ; sha256:da4c098dd56bf3e9c675245e3aa0bc2c59225cad9152b9801362648c696c181c"
+    },
+    {
+      "id": "file:e2608591603b241722144cd3",
+      "kind": "hosted_file",
+      "label": "canon/epistemic/validation-state.json",
+      "description": "Fichier dérivé (canonical_content) ; 1328 octets ; sha256:754832e3085e174e1d9ee0510e5caf95c584e35936aaa9dd84733083d43637c6"
+    },
+    {
+      "id": "file:1442d102f2ba0cd15f1d2344",
+      "kind": "hosted_file",
+      "label": "canon/operations/debt-transition.json",
+      "description": "Fichier dérivé (canonical_content) ; 1969 octets ; sha256:ced93ddd8ed134ea606c13da5b759a32fe487b69b39fb1dc112e83119ee13e8c"
+    },
+    {
+      "id": "file:f43f5c8d7851a13b8cc0058d",
+      "kind": "hosted_file",
+      "label": "canon/operations/monetary-policy.json",
+      "description": "Fichier dérivé (canonical_content) ; 1469 octets ; sha256:e80a6750b5577316d28b98ed96fce1fe58e6de671b96541b32f17f7e42446647"
+    },
+    {
+      "id": "file:e71d03fb8b98736490e4eaf5",
+      "kind": "hosted_file",
+      "label": "canon/operations/multiangle/d03-ristournes-et-biens-collectifs.json",
+      "description": "Fichier dérivé (canonical_content) ; 4449 octets ; sha256:258db6dad69838a95823db8ea748833c7f8a3301eb1e12fd56db2c62d6334119"
+    },
+    {
+      "id": "file:9b44cd627248304770cad713",
+      "kind": "hosted_file",
+      "label": "canon/operations/multiangle/d07-dette-finances-publiques.json",
+      "description": "Fichier dérivé (canonical_content) ; 4078 octets ; sha256:ec23fde8617ef33bb56e02ed71049a8cc78930c883f786612ec30a7536fd1a4f"
+    },
+    {
+      "id": "file:d42727f30a17faf8b33a380f",
+      "kind": "hosted_file",
+      "label": "canon/operations/multiangle/d08-philanthropie-et-reddition.json",
+      "description": "Fichier dérivé (canonical_content) ; 3501 octets ; sha256:c5a3ababd41c5cb3ea901b26c727356a390b422afdd0f78a851c55f382474067"
+    },
+    {
+      "id": "file:990a04226b771b753d394f7d",
+      "kind": "hosted_file",
+      "label": "canon/operations/multiangle/d09-identite-ethikos-konnaxion.json",
+      "description": "Fichier dérivé (canonical_content) ; 2886 octets ; sha256:4a10b9b23cfa37d39b123537aaaf855788522c85776cb262be62336c608b3449"
+    },
+    {
+      "id": "file:dbcaff042f5a51cfb0dfee35",
+      "kind": "hosted_file",
+      "label": "canon/operations/multiangle/d10-pme-education-innovation-territoires.json",
+      "description": "Fichier dérivé (canonical_content) ; 3116 octets ; sha256:b6215a77d7e33d05018bfebe634221cc1ac72c6497ae6600d0893c7054710db7"
+    },
+    {
+      "id": "file:426c3390ca6058125a4edc73",
+      "kind": "hosted_file",
+      "label": "canon/operations/multiangle/d12-banque-credit-risques.json",
+      "description": "Fichier dérivé (canonical_content) ; 3033 octets ; sha256:6c4041ddfb7a37ac395553d9bc8134cf29e13f60af73c10ea021c1c42f315973"
+    },
+    {
+      "id": "file:72622d7832ae7b0ac5ec9fe5",
+      "kind": "hosted_file",
+      "label": "canon/operations/payment-settlement.json",
+      "description": "Fichier dérivé (canonical_content) ; 1482 octets ; sha256:6c5fdf11c9bec5ba8ba91636a3bfb0174212040ca72aaea9a432d538a7099e78"
+    },
+    {
+      "id": "file:5ccddeafed45d660156d8798",
+      "kind": "hosted_file",
+      "label": "canon/operations/simulation-model.json",
+      "description": "Fichier dérivé (canonical_content) ; 2387 octets ; sha256:0e35cf8fe02b1dbaaaaecb92a681b7d1ed37cad5c60923c0428cc07d44a0bbfa"
+    },
+    {
+      "id": "file:6f774652ab072cc41b678972",
+      "kind": "hosted_file",
+      "label": "canon/operations/smart-vote-policy-interface.json",
+      "description": "Fichier dérivé (canonical_content) ; 1670 octets ; sha256:887bd9a6009f9930d288c4f574247995c27814d957bed14e1cf98adcaf2b4f22"
+    },
+    {
+      "id": "file:ae59425a5b461ad8d296e6d9",
+      "kind": "hosted_file",
+      "label": "canon/operations/social-dividend.json",
+      "description": "Fichier dérivé (canonical_content) ; 1344 octets ; sha256:e949da9a1b93c51ebd4921facfd209691ad48d8c9d96823e48c089aaa3d61d06"
+    },
+    {
+      "id": "file:1fd2fe6f8a23a48a035f3eaa",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 14001 octets ; sha256:92cb5e65bd9384eb23f5e610f20458c0e8e1aa86710c029d1be4c41246fd259e"
+    },
+    {
+      "id": "file:370bd64dee7fd48d720a1218",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 23052 octets ; sha256:5016bbab785236303c2857ad5bdf2b9bd5955b1c62a11b73a61b84bf9aa9bfe9"
+    },
+    {
+      "id": "file:6630f9b3111fb13829666b13",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 39551 octets ; sha256:ea751f224478a7928cbf16c76dc723076a6090ad0c9455863fa0ca9b25529e93"
+    },
+    {
+      "id": "file:84a75012442d64402e79a090",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 913 octets ; sha256:24b6d242e707cdff47054c7d47549b35210b621ae2683be769a085b0647f6247"
+    },
+    {
+      "id": "file:9acc29cc89e0873b8dc6f617",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 725 octets ; sha256:6ba16158fed9356dd9127f9992784fd629fb30b2b690c0a6ac49fae8cb275126"
+    },
+    {
+      "id": "file:c9bc7177af442b1815894dfb",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 812 octets ; sha256:8b7f29c1637c69822278e4b51070b5287cd268136c096cb2125ea879a841b52e"
+    },
+    {
+      "id": "file:84a9259e9f1fd0b73c022cf1",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 645 octets ; sha256:b6fdca28b94722cf164efa3fc5126de8c6be26db24ed6f9465b8f5bd7a7d6151"
+    },
+    {
+      "id": "file:b8fa3709543ce8a665eb78f0",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 697 octets ; sha256:61939dde09458c811f9f541c7620738e1e2b1da3e67482c2d36bd9c0f49fc4cd"
+    },
+    {
+      "id": "file:58343410db681b957e0e1f3c",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 403 octets ; sha256:f3ebab93b49855d76167b04cc06aaaade78188516681c049ee7814e9e6ce2857"
+    },
+    {
+      "id": "file:6d16febc500523f622a63338",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 736 octets ; sha256:4cc9069a6f356ed096d3eb0ded6dcd305b240681f885e9ce109d10f40e0f3855"
+    },
+    {
+      "id": "file:6bb9818fbc2eefbe4499cca9",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 576 octets ; sha256:c4bd5c58b714d6929789a9d70c181e38a8094ddc62eadaeae0163f54de78b2cb"
+    },
+    {
+      "id": "file:12565f4a41e1afd0f5cf3e4f",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 4299 octets ; sha256:1bedca2d46e3f6ebacb257dc5eae11426930d61731e38371860b90b43dc8e95a"
+    },
+    {
+      "id": "file:ab45581b043c64ca0de04f61",
+      "kind": "hosted_file",
+      "label": "docs/08_GLOSSARY.md",
+      "description": "Fichier dérivé (documentation) ; 218 octets ; sha256:1f6375e83316f360dc9e98383876a5cea39f9d826293c9a9ee4dbb22a7928c01"
+    },
+    {
+      "id": "file:5269cfa30ae09c6fffad46d2",
+      "kind": "hosted_file",
+      "label": "docs/PROFILE_NOTES.md",
+      "description": "Fichier dérivé (documentation) ; 281 octets ; sha256:d300e3dab8bb2c5dee62b779fb88c0290763b0b175b677ed600f8b881cd57ca9"
+    },
+    {
+      "id": "file:66a35093e1017ae040c693d0",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/00_CADRAGE/00_LIRE_EN_PREMIER.md",
+      "description": "Fichier dérivé (documentation) ; 2317 octets ; sha256:a5b42fa9a591f1f6e5958b3ba6658007fea552c78b20b5a4921543bafc090c64"
+    },
+    {
+      "id": "file:f2fff082bbcd6d1411e5f06c",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/00_CADRAGE/STATUTS_ET_VOCABULAIRE.md",
+      "description": "Fichier dérivé (documentation) ; 1736 octets ; sha256:347b3606585435529226a458aebd9ee3e0040ffd2b78406647409a135b22fc26"
+    },
+    {
+      "id": "file:4d6458cab56cc5729fed7a94",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/00_CADRAGE/SYNTHESE_EXECUTIVE.md",
+      "description": "Fichier dérivé (documentation) ; 8784 octets ; sha256:2ce0627690d9e203c029df13f1e81f1a5367169744142d05aadc32bacf46d56e"
+    },
+    {
+      "id": "file:c15017c4063f790ea4637f9c",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/01_ARCHITECTURE/GRAPHE_LISIBILITE.md",
+      "description": "Fichier dérivé (documentation) ; 1227 octets ; sha256:9d77ffde1f0b60df6090b2bc8cb416c2b0816b8b944761703195154ffb4501c4"
+    },
+    {
+      "id": "file:23aafdbba4525819d761989e",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/01_ARCHITECTURE/INTERFACES_ET_DEPENDANCES.md",
+      "description": "Fichier dérivé (documentation) ; 3212 octets ; sha256:946274170ebf66df97b56c6cb0c7f20a2bd611dd120d0aa49419ad2f30cfbb92"
+    },
+    {
+      "id": "file:77e9f00ea6ef1ef482209f71",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/01_ARCHITECTURE/THESE_ET_SYSTEME.md",
+      "description": "Fichier dérivé (documentation) ; 4645 octets ; sha256:3c4089d45fd4630fbe5f258b438a20e0ce3d10437e0f545ec23cb4c82f2e80a9"
+    },
+    {
+      "id": "file:c4ee069b87e238fc829cb8d4",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/03_RECHERCHE/ASSERTIONS_ET_PREUVES.md",
+      "description": "Fichier dérivé (documentation) ; 3970 octets ; sha256:565e08ea0bd204f294cdbb2ba56eebba4dc59f5430997be13c92a6e6b048b108"
+    },
+    {
+      "id": "file:2df0339ca0e68ac77b034ba6",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/03_RECHERCHE/REFERENCES_VERIFIEES.md",
+      "description": "Fichier dérivé (documentation) ; 7865 octets ; sha256:84ca2a05b5dafa448ad9b79cb99c8b492f9c99e555bdae9fd13af5a263c4542b"
+    },
+    {
+      "id": "file:f28964b0961fe7b017ffaeca",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/04_MODELES/HYPOTHESES_ET_IDENTITES.md",
+      "description": "Fichier dérivé (documentation) ; 1829 octets ; sha256:99d9edc3146870856485952e81059ae84c275f53042979ff86235f532161512d"
+    },
+    {
+      "id": "file:491f0332e871accc2fb692ec",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/05_VALIDATION/RESULTATS_EXECUTION.md",
+      "description": "Fichier dérivé (documentation) ; 509 octets ; sha256:a2f85270bfe64b89802ad7847c277d6e9b76bdcdc6d4673033d5f4bab1bfedd1"
+    },
+    {
+      "id": "file:390fed5147f712668535472a",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/05_VALIDATION/RISQUES_ET_MESURES.md",
+      "description": "Fichier dérivé (documentation) ; 2259 octets ; sha256:1c537e2450432a09b14c7294de5ca6185d8ba53b73945b69681f53c573fdf57d"
+    },
+    {
+      "id": "file:e6f092cfe265aa70fac9f91c",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/06_DECISIONS/ARBITRAGES.md",
+      "description": "Fichier dérivé (documentation) ; 1714 octets ; sha256:85f1ff748b8060144c4da576a824fc3f1c45ac37a25730c784661028893823d6"
+    },
+    {
+      "id": "file:9c7ca2dccdc8b94d8dae86d5",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/06_DECISIONS/PLAN_D_EXECUTION_ET_PREUVES.md",
+      "description": "Fichier dérivé (documentation) ; 2366 octets ; sha256:7f97ab89ad69c34eaee8d80c7273fa3a9f4d8bb4a26dd7c22ab49e13fad00d5b"
+    },
+    {
+      "id": "file:aeab409aa5fce795e63f7b1f",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/07_SOURCE_ANCHORS/INDEX_SOURCES.md",
+      "description": "Fichier dérivé (documentation) ; 2178 octets ; sha256:6722aa7f7f7c623f167dab5f2371a3b4d9af919f104a16c0e85fc6fbcad754d4"
+    },
+    {
+      "id": "file:14b179000ea6ca2f2a0fe36e",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/dossier/README.md",
+      "description": "Fichier dérivé (documentation) ; 2020 octets ; sha256:a61fa11373c2bfac0a4321ad007790c5ee818242d31a4f0cf4bacc8b91b5e6d8"
+    },
+    {
+      "id": "file:13345b62ded0e81e4bca46d8",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D01_STRATEGIE_D_INFLUENCE_ET_CONTREPOUVOIRS.md",
+      "description": "Fichier dérivé (documentation) ; 2300 octets ; sha256:4f4ebd30d7f4743ffafe5a2d0802c68f7552f6349e3ff8059a582349ea0e1669"
+    },
+    {
+      "id": "file:7ba3f3a5978e84d69863b80f",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D02_DESJARDINS_MANDAT_ET_PROCESSUS.md",
+      "description": "Fichier dérivé (documentation) ; 3700 octets ; sha256:e5ca3eea5b55c03c8e62699ed79cb4036b36195a0fbd8a041ba6c00a82250be0"
+    },
+    {
+      "id": "file:841c1b51914cf513cd865d61",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D03_RISTOURNES_ET_BIENS_COLLECTIFS.md",
+      "description": "Fichier dérivé (documentation) ; 3004 octets ; sha256:f5938a9ef18305539dda2aeb9ab514df7685f65fdd44d3ddf38beb4d85171c55"
+    },
+    {
+      "id": "file:65923dd69bf4ae8c83a92ec6",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D04_LINGOTS_BRANDES_ART_ET_RESERVES.md",
+      "description": "Fichier dérivé (documentation) ; 2839 octets ; sha256:1c1d92a1821f0887e868211ca2143d8bf709f4c5957439a39080ab302d4668ba"
+    },
+    {
+      "id": "file:2210a6509f1b41d776e494e1",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D05_KM_REGIMES_ET_REGLES_MONETAIRES.md",
+      "description": "Fichier dérivé (documentation) ; 3360 octets ; sha256:3a35ec6be405927a02b55b6a1efbaa88f868242b45f9ef62d0d9b78835363be7"
+    },
+    {
+      "id": "file:8db07a269302562687b10976",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D06_KC_PARTICIPATION_PRODUCTIVE.md",
+      "description": "Fichier dérivé (documentation) ; 2228 octets ; sha256:5ca2374c72f4b36158b167504a1a754879cdb8554ca04809c3cde894a4208e60"
+    },
+    {
+      "id": "file:fe5b554a33c3d61020397974",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D07_DETTE_FINANCES_PUBLIQUES.md",
+      "description": "Fichier dérivé (documentation) ; 2712 octets ; sha256:22301e553c6c1bd0c6699338e77e12f686e6e531889805c020b0bd65c4cff380"
+    },
+    {
+      "id": "file:2bdf0692f9c948d3b59faf7b",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D08_PHILANTHROPIE_ET_REDDITION.md",
+      "description": "Fichier dérivé (documentation) ; 2083 octets ; sha256:d1cbdd5fcf62b6b88862e956214b1f2461a7cf8b568a0a85b8de2eba8d52130f"
+    },
+    {
+      "id": "file:4cac1b34c32286fff63968dc",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D09_IDENTITE_ETHIKOS_KONNAXION.md",
+      "description": "Fichier dérivé (documentation) ; 1689 octets ; sha256:4027f5ad4bc4af2bf5cd888eb68a94b6b74adf6926772a16d3d0690e70c9bf58"
+    },
+    {
+      "id": "file:ad3fbeda5b11d8019577e257",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D10_PME_EDUCATION_INNOVATION_TERRITOIRES.md",
+      "description": "Fichier dérivé (documentation) ; 1847 octets ; sha256:064db4943126d9886d9b2356ee0cabd21da3e06a0ccd6a7c8abc5ccaeab85c8b"
+    },
+    {
+      "id": "file:0e4a33e57caf6e73e6086a87",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D11_TRANSITION_SCENARIOS_ET_SORTIES.md",
+      "description": "Fichier dérivé (documentation) ; 2282 octets ; sha256:b4e153be41aee412e60aee6855fd13f333e0c02bbe0280c9c61195a99199222a"
+    },
+    {
+      "id": "file:9834f3741210204d085ca63f",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D12_BANQUE_CREDIT_RISQUES.md",
+      "description": "Fichier dérivé (documentation) ; 1687 octets ; sha256:ded657971d0cf27d75d1ee58be4f18bb3d7888444d154f4def661a6604c0d7a0"
+    },
+    {
+      "id": "file:1b68bb442dc5077b2c77671c",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D13_MEDIAS_MARQUE_ET_CONFLITS.md",
+      "description": "Fichier dérivé (documentation) ; 1370 octets ; sha256:71e6e289e55f143974cff63e7d688f8f1c1556becb45bbf6514297bce4431274"
+    },
+    {
+      "id": "file:de085543795da165203819b2",
+      "kind": "hosted_file",
+      "label": "docs/multiangle/protocoles/D14_CLAUSES_INVARIANTES.md",
+      "description": "Fichier dérivé (documentation) ; 1586 octets ; sha256:75ce3161e60fe33400f673c70c05e3440359c32c33344591836f47c85c3abe6a"
+    },
+    {
+      "id": "file:66d9350dcf19412a45ce8fea",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 2139 octets ; sha256:3200bf746cf21b1891439704513ce45c48e5135c9bbb9540978c39b3c90c24d5"
+    },
+    {
+      "id": "file:c04e78bd2401d19ec5014ecb",
+      "kind": "hosted_file",
+      "label": "projections/recipes/transition-view.projection.json",
+      "description": "Fichier dérivé (projection_recipe) ; 806 octets ; sha256:7070ee3c9eb95405314bfd2fa7bf576c5906e6672a6e178249b0a05cec484711"
+    },
+    {
+      "id": "file:cc9f7f8399b83f3a1f7854bf",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/anciennes_assertions.json",
+      "description": "Fichier dérivé (source_material) ; 7192 octets ; sha256:5a05f3a3c5a841281a2218442e7e555b837411ddfb9eb1609568d0b1e8cace64"
+    },
+    {
+      "id": "file:d8a88ebac45c0d30097bc382",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S01.docx",
+      "description": "Fichier dérivé (source_material) ; 11355 octets ; sha256:bccd1ef2f120b7980c0651c3872db7a809e4ed29f4c73ddea67298178ebb8f72"
+    },
+    {
+      "id": "file:cbc045da331d0ddf55b4be56",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S02.docx",
+      "description": "Fichier dérivé (source_material) ; 10132 octets ; sha256:6984e912033ef029b9bcfb21177d4ef61f3acc66a65b8e5083becd556e0b9b75"
+    },
+    {
+      "id": "file:1a331457b184af78286f4174",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S03.docx",
+      "description": "Fichier dérivé (source_material) ; 13507 octets ; sha256:42fcf780c347e65268424035b8392ca41abb2cf2bf1d838439362d96b39146e9"
+    },
+    {
+      "id": "file:99d033629aadfbb45db87de7",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S04.docx",
+      "description": "Fichier dérivé (source_material) ; 13305 octets ; sha256:5c82bd2cc1be822e516a40e5c908f142d23d2f651f73aec16efc292dc19cf42b"
+    },
+    {
+      "id": "file:e470b31de2472dd1facdaec6",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S05.docx",
+      "description": "Fichier dérivé (source_material) ; 9671 octets ; sha256:4cc1c0e51c853ca0d1c012abef63aa5fed7dadb4688eea99ac9a01d4689b9d7f"
+    },
+    {
+      "id": "file:3fc2f610dcd40bbe6abd85a8",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S06.docx",
+      "description": "Fichier dérivé (source_material) ; 136916 octets ; sha256:72f1e1d6d95ce0e57bff7c59f7b18db613cc0fa6c36b18760bf7a86dbda0a2c1"
+    },
+    {
+      "id": "file:bba431588791d838391c6d22",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S07.docx",
+      "description": "Fichier dérivé (source_material) ; 9338 octets ; sha256:c40c8a59261093563a4613ef2c005be2dfcd0cb115e1dc24d5cb69c18ad6b4af"
+    },
+    {
+      "id": "file:62d2da9ebddbefabb90dbaac",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S08.docx",
+      "description": "Fichier dérivé (source_material) ; 143969 octets ; sha256:62ead29428be7fb84b6a40bf6b8c23cf602c07702e312de5639da0e969565c41"
+    },
+    {
+      "id": "file:6facf9714731213a4bf6d10e",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S09.docx",
+      "description": "Fichier dérivé (source_material) ; 255151 octets ; sha256:c6a3e8552342cd55ac760f7387f63487db8984be1e39a4e7fd8bc20421b6c11b"
+    },
+    {
+      "id": "file:93a3d71bb461ce402f7cbe7a",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S10.docx",
+      "description": "Fichier dérivé (source_material) ; 116929 octets ; sha256:6f0d88febfc29cf0c0ee62e260db43db7901033c92bc3858b6294704ec80b3ba"
+    },
+    {
+      "id": "file:f58934ff4eea9a1264ef6ecc",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/originaux/S11.docx",
+      "description": "Fichier dérivé (source_material) ; 11069 octets ; sha256:6ee57b008427cab7b5337e18e35c0bcb79f691449ffd57bf7296c904d8e4f9a5"
+    },
+    {
+      "id": "file:55620abadc79239d0d92de88",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/references_publiques.json",
+      "description": "Fichier dérivé (source_material) ; 13542 octets ; sha256:1a3e1d416adc6d92dc201639d2e6862394bef47df0e19b8c322b37ad86e93cb8"
+    },
+    {
+      "id": "file:43e6dc909f7238c5e12c4e1d",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/registre_documents.json",
+      "description": "Fichier dérivé (source_material) ; 6991 octets ; sha256:f371dfe1421877346684347a263f414ab0cb83486e7bad6919c0533e766b3681"
+    },
+    {
+      "id": "file:4b4dc66cdc72582a5f1862ad",
+      "kind": "hosted_file",
+      "label": "sources/multiangle/registre_sources_liees.json",
+      "description": "Fichier dérivé (source_material) ; 345 octets ; sha256:8629f9cd83fda1131dd4e335d1381927114cebf4f8a32a6d31b74f9f5a1de6f6"
+    },
+    {
+      "id": "file:ca7c2589a17136a9250c4442",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 20548 octets ; sha256:f7bf8cf6788902ce156b9d93edda18ed4d26af3640a562548b5552fb3c5c702e"
+    },
+    {
+      "id": "file:75967376018868310e147df8",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 14089 octets ; sha256:92e35e165f629ea9b67364edada0be93f646ccb56984721e2c48bd1e0b7d5463"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:00c6addb813d4adf8f92bf4b",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:39088c4b53e15729320f5109",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:b8738e536a0f135871373201",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:56aaeb4abec6717c2b15ac91",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:1a30db95080fc2d13f585e83",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:9de9278b5196321ebac3290c",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:9023e46e408a148aa3883829",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:95ad4379cad30d9210c8ce6f",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:65b60a47edafbc69e916a686",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:936351d2b76172debfa350f8",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:7214dd67912a6d6c90601848",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:ec78e4ace42ca8041fae6389",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:0dc6105aaf87f85b914e3e1d",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:429eb9978cecf1ccb7dee6b1",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:b781baf50f864f23b4d7468f",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:f22e5efac158d813d9773125",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:b96f3afaa897c476766e9e94",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:877150cba2f7915e75248767",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:24c95fe718bf04ba38a4da0d",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:960b820d8fb5c96d26f12eb4",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:3e60e1f237e227782f2ecb97",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:a63dea25fa22ac30ce71e3dc",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:c3a4a5f00ce779f8f990a348",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:5e315c577a41393eca489d94",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:fdd3bbb7cfbcb1e1746e446f",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:705ae9fbd18c365d9a7c2080",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:684869c37c805494fd403fed",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:a0a0ec8f60033ecd93904ee0",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:697f68c50b1b5fb92be7a788",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:b6ee939fd16ddd1be73aa8c2",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:66644028bfdca8b7c731b635",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:0895fefe8e547c9ef4b8618a",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:44ff61ec02db7f79a5bb3eb8",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:b1d46de95a24ed409f016e17",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:c319edb52d173ee8ea7f05ba",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "artifact:5557470a40e385622be709b7",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:0d63e852b597b640937e32a1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:d56d813852f1e4e322d3688e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:fa78e7e53a51dcd936e7466d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:f1b9485a7f593dd0399e73cc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:f2cc32d18b78fd0c7423c0ae",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:7f4767d0809a2d679e387872",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:92b1a2e9cd77189f2546053e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:18026cd0ba77f688e134b4ca",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:3c3e676978c54fdb2c08ce5a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:d4112db4c4638ee5faec49f7",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:41bafb6e45dcdc29aa791b20",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:3fddc4a9be1eb75cfa90af49",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:9428f272cde4a9e867a2fad9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:da3c14801e984057ead7681e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:c40049d5a1df0559bddbf806",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:18b76c28325ffdc8e1239051",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:80254141989b4290597c8a28",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:26b619b681ec74bb2b43600a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:b3165b4e621c443628cda07f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:bd7dfa3966ed51f8c363b01a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:e777791d63f8a45d2f3d62a6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:179a54fe7c766c0db74207e6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:0afa63fe965d35c8fcd2a8c3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:a485bf2f1651cf4bb0431ffa",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:0da808db5d87b0748f6a374c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:e6fea4a25e94c4969ba7c31a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:0d126e45038494129dc2f6fd",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:38c014e33d229a29ff8d29d1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:5dd8e17fd343627d0ac00acc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:99955f9b3684e962e397f4a0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:5236f5e98fd1185b8ef42315",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:5f8d1c1411f284b0349a5ef9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:1096951580c7b07f1a8533a1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:e2608591603b241722144cd3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:1442d102f2ba0cd15f1d2344",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:f43f5c8d7851a13b8cc0058d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:e71d03fb8b98736490e4eaf5",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:9b44cd627248304770cad713",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:d42727f30a17faf8b33a380f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:990a04226b771b753d394f7d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:dbcaff042f5a51cfb0dfee35",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:426c3390ca6058125a4edc73",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:72622d7832ae7b0ac5ec9fe5",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:5ccddeafed45d660156d8798",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:6f774652ab072cc41b678972",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:ae59425a5b461ad8d296e6d9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:1fd2fe6f8a23a48a035f3eaa",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:370bd64dee7fd48d720a1218",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:6630f9b3111fb13829666b13",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:84a75012442d64402e79a090",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:9acc29cc89e0873b8dc6f617",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:c9bc7177af442b1815894dfb",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:84a9259e9f1fd0b73c022cf1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:b8fa3709543ce8a665eb78f0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:58343410db681b957e0e1f3c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:6d16febc500523f622a63338",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:6bb9818fbc2eefbe4499cca9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:12565f4a41e1afd0f5cf3e4f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:ab45581b043c64ca0de04f61",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:5269cfa30ae09c6fffad46d2",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:66a35093e1017ae040c693d0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:f2fff082bbcd6d1411e5f06c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:4d6458cab56cc5729fed7a94",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:c15017c4063f790ea4637f9c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:23aafdbba4525819d761989e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:77e9f00ea6ef1ef482209f71",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:c4ee069b87e238fc829cb8d4",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:2df0339ca0e68ac77b034ba6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:f28964b0961fe7b017ffaeca",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:491f0332e871accc2fb692ec",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:390fed5147f712668535472a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:e6f092cfe265aa70fac9f91c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:9c7ca2dccdc8b94d8dae86d5",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:aeab409aa5fce795e63f7b1f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:14b179000ea6ca2f2a0fe36e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:13345b62ded0e81e4bca46d8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:7ba3f3a5978e84d69863b80f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:841c1b51914cf513cd865d61",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:65923dd69bf4ae8c83a92ec6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:2210a6509f1b41d776e494e1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:8db07a269302562687b10976",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:fe5b554a33c3d61020397974",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:2bdf0692f9c948d3b59faf7b",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:4cac1b34c32286fff63968dc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:ad3fbeda5b11d8019577e257",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:0e4a33e57caf6e73e6086a87",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:9834f3741210204d085ca63f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:1b68bb442dc5077b2c77671c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:de085543795da165203819b2",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:66d9350dcf19412a45ce8fea",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:c04e78bd2401d19ec5014ecb",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:cc9f7f8399b83f3a1f7854bf",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:d8a88ebac45c0d30097bc382",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:cbc045da331d0ddf55b4be56",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:1a331457b184af78286f4174",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:99d033629aadfbb45db87de7",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:e470b31de2472dd1facdaec6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:3fc2f610dcd40bbe6abd85a8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:bba431588791d838391c6d22",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:62d2da9ebddbefabb90dbaac",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:6facf9714731213a4bf6d10e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:93a3d71bb461ce402f7cbe7a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:f58934ff4eea9a1264ef6ecc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:55620abadc79239d0d92de88",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:43e6dc909f7238c5e12c4e1d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:4b4dc66cdc72582a5f1862ad",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:ca7c2589a17136a9250c4442",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:863418e5114c956f33f160d5",
+      "to": "file:75967376018868310e147df8",
+      "relation": "lists_file"
+    }
+  ]
+}

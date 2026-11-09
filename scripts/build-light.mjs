@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { inspectGithubKristal, listGithubKristals, toNavigationPack } from '../shared/kristal-v10.mjs';
 import { discoveryProjection } from '../shared/discovery.mjs';
+import { projectPublicKnowledge } from '../shared/public-knowledge.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const digest = (x) => createHash('sha256').update(x).digest('hex');
@@ -54,15 +55,17 @@ const staged = new Map();
 const entries = previous ? [...previous.entries] : [];
 const listed = listGithubKristals({ directory: collection }, root);
 const maxRecords = 6000;
-for (const item of listed) {
+for (const [i, item] of listed.entries()) {
+  console.log(`Light : ${i + 1}/${listed.length} — ${item.id}`);
   const checked = inspectGithubKristal({ directory: collection, kristal: item.id, maxBytes: 128 * 1024 * 1024, maxFiles: 4096 }, root);
   const pack = toNavigationPack(checked, maxRecords);
-  const nodes = pack.entities.map((e) => ({ id: e.id, kind: e.type, label: e.label, description: e.description }));
-  const edges = pack.assertions.map((a) => ({ from: a.subject, to: a.value, relation: a.relation }));
+  const knowledge = projectPublicKnowledge(checked, collection);
+  const nodes = knowledge ? knowledge.nodes : pack.entities.map((e) => ({ id: e.id, kind: e.type, label: e.label, description: e.description }));
+  const edges = knowledge ? knowledge.edges : pack.assertions.map((a) => ({ from: a.subject, to: a.value, relation: a.relation }));
   const selectedDiscovery = includeDiscovery ? discoveryProjection(checked, collection) : null;
   const bundle = {
     format: 'konstellation.light-navigation/1.0',
-    view_kind: 'derived-hosting-navigation',
+    view_kind: knowledge ? 'derived-public-knowledge' : 'derived-hosting-navigation',
     semantic_authority: false,
     title: item.label, slug: item.id, revision,
     state_ref: checked.sync.state_ref,
@@ -72,6 +75,7 @@ for (const item of listed) {
     source: repoURL ? { repository: repoURL.replace(/\/$/, ''), commit: gitSHA } : null,
     metrics: { members: checked.state.members.length, files: checked.files.length, bytes: checked.sync.total_bytes },
     nodes, edges,
+    ...(knowledge ? { knowledge: knowledge.knowledge, relation_labels: knowledge.relation_labels } : {}),
     ...(selectedDiscovery ? { discovery: selectedDiscovery } : {}),
   };
   const bytes = json(bundle), sha256 = digest(bytes);
@@ -109,6 +113,8 @@ const catalog = { format:'konstellation.light-catalog/1.0',
   entries };
 staged.set('data/catalog.json', json(catalog));
 for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','style.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
+// Same SVG supplied for the brand and the favicon; static, local and no external requests.
+staged.set('assets/logo_k.svg', fs.readFileSync(path.join(root, 'light/src/assets/logo_k.svg')));
 staged.set('.nojekyll', Buffer.from(''));
 // Compose a complete site in a sibling directory and swap only after success.
 // Existing deployments must not be left half-updated if source checks or disk I/O fail.
@@ -129,7 +135,7 @@ const backup = path.join(outputParent, `.light-backup-${path.basename(temp)}`);
 let backedUp = false;
 try {
   for (const [rel, bytes] of staged) {
-    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|style\.css|sw\.js|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
+    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|style\.css|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
     const target = path.join(temp, rel);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, bytes);

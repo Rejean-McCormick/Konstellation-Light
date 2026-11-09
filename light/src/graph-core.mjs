@@ -50,3 +50,12 @@ export function previewNeighbors(index, focus, excludedIds = [], limit = 6) {
     .slice(0, Math.max(0, Math.min(6, limit)))
     .map(([id]) => index.byId.get(id));
 }
+
+// Presentation only: skip external-ID literal spokes in the default scientific map.
+// Keep all canonical edges in the bundle, inspector and traceability. A focused
+// identifier may still navigate back to the notion that owns its assertion.
+export function readableKnowledgeEdges(nodes, edges, focus) {
+  const byId = new Map(nodes.map(n=>[n.id,n]));
+  if (byId.get(focus)?.technical_identifier) return edges;
+  return edges.filter(e=>!byId.get(e.from)?.technical_identifier && !byId.get(e.to)?.technical_identifier);
+}

@@ -25,7 +25,7 @@ SHA256 = re.compile(r"sha256:[0-9a-f]{64}\Z")
 PACK_PATH = re.compile(r"data/pack-[0-9a-f]{64}\.json\Z")
 IMAGE_PATH = re.compile(r"\./images/([0-9a-f]{64})\.(png|jpg|jpeg|webp|gif)\Z")
 SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "profile.mjs", "style.css", "sw.js", "data/catalog.json"}
-SITE_OPTIONAL = {"semantic-display.mjs"}  # New local builds only; not bundled C4 demo.
+SITE_OPTIONAL = {"semantic-display.mjs", "assets/logo_k.svg"}  # New local builds only; not bundled C4 demo.
 
 
 class LightError(ValueError):
@@ -103,6 +103,16 @@ def validated_site(site: Path) -> dict:
                 raise LightError('Image de fiche modifiée après le build.')
             permitted.add(local)
     permitted.update(rel for rel in SITE_OPTIONAL if (site / rel).is_file())
+    # Logo local: autoriser uniquement le SVG exact fourni avec Light.
+    # Cette vérification n'autorise jamais un déploiement public C4.
+    logo_path = site / "assets/logo_k.svg"
+    if logo_path.exists():
+        reviewed_logo = ROOT / "light/src/assets/logo_k.svg"
+        if (logo_path.is_symlink() or not logo_path.is_file() or
+                logo_path.stat().st_size > 8192 or not reviewed_logo.is_file() or
+                logo_path.read_bytes() != reviewed_logo.read_bytes()):
+            raise LightError("Logo du site absent de la source de confiance ou modifié.")
+
     seen_files = set()
     for entry in site.rglob("*"):
         if entry.is_symlink():

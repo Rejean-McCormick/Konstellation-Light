@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
+import re
 import subprocess
 import threading
 import tkinter as tk
@@ -25,6 +27,7 @@ class Console(tk.Tk):
         self.ekole_url = None
         self.ekole_result = None
         self.ekole_busy = False
+        self.public_explore_busy = False
         auto_ekole = find_ekole()
         self.ekole_folder = tk.StringVar(value=str(auto_ekole) if auto_ekole else "")
         self.ekole_status = tk.StringVar(value="")
@@ -93,7 +96,12 @@ class Console(tk.Tk):
         f=self._frame("Accueil", "Site Light autonome — lecture de surfaces Kristal v10, sans serveur de production.")
         ttk.Label(f,text="Destination Windows prévue :",font=("Segoe UI",10,"bold")).pack(anchor="w")
         ttk.Label(f,text=r"C:\mycode\Konstellation\Konstellation-Light",font=("Consolas",11)).pack(anchor="w",pady=8)
-        for line in ["1. Prévisualiser : ouvre le site de démonstration en local.",
+        ttk.Separator(f,orient="horizontal").pack(fill="x",pady=(3,14))
+        ttk.Label(f,text="Explorer les Kristals publics",font=("Segoe UI",12,"bold")).pack(anchor="w",pady=(0,6))
+        ttk.Label(f,text="Ouvre directement les notions et les relations des Kristals publiés dans le dossier local. Aucun Git ni upload.",wraplength=650).pack(anchor="w",pady=(0,8))
+        ttk.Button(f,text="Explorer mes Kristals publics",command=self._explore_public).pack(anchor="w",pady=(0,16))
+        ttk.Separator(f,orient="horizontal").pack(fill="x",pady=(0,10))
+        for line in ["1. Prévisualiser : ouvre le dernier site généré en local.",
                      "2. Ekole : génère et ouvre le graphe autochtone en un clic, en local.",
                      "3. Construire : sélectionne une collection publique v10 vérifiée (Node.js requis).",
                      "4. Déployer : exporte un ZIP ou prépare un dépôt Git local sous docs/konstellation-light.",
@@ -102,6 +110,52 @@ class Console(tk.Tk):
         ttk.Label(f,text="Aucun outil ne pousse de code sur GitHub, n'active un Kristal, ni ne publie secrètement une collection privée.",
                   foreground="#905a20",wraplength=650).pack(anchor="w",pady=20)
         ttk.Button(f,text="Ouvrir le guide d'installation",command=lambda: self._open_file(ROOT/'README.md')).pack(anchor="w")
+
+    def _explore_public(self):
+        """Single-click, local-only reader of an existing public collection."""
+        if self.public_explore_busy:
+            return
+        # Auto-detect user's known checkout; allow choosing a different one.
+        collection=Path(self.collection.get().strip()) if self.collection.get().strip() else ROOT.parents[1]/"Kristal"/"kristal-public"
+        if not (collection/"kristals"/"index.json").is_file():
+            selected=filedialog.askdirectory(parent=self,title="Choisir le dossier kristal-public (avec kristals/index.json)")
+            if not selected:
+                return
+            collection=Path(selected)
+        index_file=collection/"kristals"/"index.json"
+        try:
+            if not index_file.is_file():
+                raise LightError("Ce dossier ne contient pas kristals/index.json.")
+            index=json.loads(index_file.read_text(encoding="utf-8"))
+            value=index.get("index_digest","")
+            if not re.fullmatch(r"sha256:[a-f0-9]{64}",value):
+                raise LightError("Empreinte de la collection invalide.")
+            revision="collection-"+value[7:23]
+        except (OSError,ValueError,TypeError,LightError) as exc:
+            messagebox.showerror("Collection invalide",str(exc))
+            return
+        self.collection.set(str(collection))
+        self.public_explore_busy=True
+        self._write("▶ Lecture locale de "+str(collection))
+        def work():
+            try:
+                report=build_public_collection(collection,revision,project=ROOT)
+                self.after(0,lambda:self._explore_public_done(report))
+            except Exception as exc:
+                msg=str(exc)
+                self.after(0,lambda:self._explore_public_failed(msg))
+        threading.Thread(target=work,daemon=True).start()
+
+    def _explore_public_done(self,report):
+        self.public_explore_busy=False
+        self._write("✓ "+report)
+        self.tabs.select(2)
+        self._preview()
+
+    def _explore_public_failed(self,message):
+        self.public_explore_busy=False
+        self._write("✖ " + message)
+        messagebox.showerror("Exploration impossible",message)
 
     def _make_build(self):
         f=self._frame("Construire", "Compiler une collection synchronisée au format Kristal v10 en bundle de navigation statique.")

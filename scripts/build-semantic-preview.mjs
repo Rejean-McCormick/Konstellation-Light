@@ -70,6 +70,7 @@ try {
  if(portraitFiles.size)fs.mkdirSync(path.join(tmp,'images'));
  for(const [name,bytes] of portraitFiles)fs.writeFileSync(path.join(tmp,name),bytes);
  for(const name of ['index.html','app.js','style.css','sw.js','graph-core.mjs','profile.mjs','semantic-display.mjs'])fs.copyFileSync(path.join(root,'light/src',name),path.join(tmp,name));
+ fs.mkdirSync(path.join(tmp,'assets'));fs.copyFileSync(path.join(root,'light/src/assets/logo_k.svg'),path.join(tmp,'assets/logo_k.svg'));
  fs.writeFileSync(path.join(tmp,row.path),bytes);fs.writeFileSync(path.join(tmp,'data/catalog.json'),json(catalog));fs.writeFileSync(path.join(tmp,'.nojekyll'),'');
  fs.renameSync(tmp,out);
 }finally{if(fs.existsSync(tmp))fs.rmSync(tmp,{recursive:true,force:true});}

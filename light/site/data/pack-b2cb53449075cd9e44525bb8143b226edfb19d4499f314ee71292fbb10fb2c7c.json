@@ -1,0 +1,3569 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-public-knowledge",
+  "semantic_authority": false,
+  "title": "Architecture",
+  "slug": "architecture",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:architecture:state",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:09d7e283f66c5c414f8a345c8c14329f68c2348587998f1343771bb394ab33b1"
+  },
+  "surface_digest": "sha256:92693df91c7906bd8ab0bb25940fc5b0b18b5e0891be6670df212c5efcb48d15",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 10,
+    "files": 78,
+    "bytes": 2826809
+  },
+  "nodes": [
+    {
+      "id": "KQ521628724715997185495808",
+      "kind": "notion",
+      "label": "architecture",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ29734631712524364573055",
+      "kind": "notion",
+      "label": "connaissance de référence",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ564760348008919799121897",
+      "kind": "notion",
+      "label": "connu",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ425815080398968290083729",
+      "kind": "notion",
+      "label": "documenté par une source",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ651248022917048472631605",
+      "kind": "notion",
+      "label": "enregistrement structurel",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ404126139621057903393537",
+      "kind": "notion",
+      "label": "envelope",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ562810859138383021569786",
+      "kind": "notion",
+      "label": "envelope",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ1178879860150990133965889",
+      "kind": "notion",
+      "label": "espace",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ146601066070241489195992",
+      "kind": "notion",
+      "label": "espace",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ205351504265379188965574",
+      "kind": "notion",
+      "label": "noyau",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ298684140285536841671465",
+      "kind": "notion",
+      "label": "ordinal",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ301297973675565460159837",
+      "kind": "notion",
+      "label": "performance temporelle",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ315693760148942724195451",
+      "kind": "notion",
+      "label": "performance temporelle",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ1080742944085656244615167",
+      "kind": "notion",
+      "label": "programme",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ219019215986812165981059",
+      "kind": "notion",
+      "label": "programme",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ1172217288942993121227681",
+      "kind": "notion",
+      "label": "racine",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ502978386450805595428877",
+      "kind": "notion",
+      "label": "racine",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ474081753461443867145991",
+      "kind": "notion",
+      "label": "révisé",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ506138166047844754552087",
+      "kind": "notion",
+      "label": "sans objet",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ1043787526917695589613829",
+      "kind": "notion",
+      "label": "site-context",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ773511487975667879282894",
+      "kind": "notion",
+      "label": "site-context",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ1047887271435511247906728",
+      "kind": "notion",
+      "label": "structure",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ516037675479002061534511",
+      "kind": "notion",
+      "label": "structure",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ481556827848450698164816",
+      "kind": "notion",
+      "label": "usage",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ721640881461065048384482",
+      "kind": "notion",
+      "label": "usage",
+      "description": "Notion déclarée dans canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json."
+    },
+    {
+      "id": "KQ1001456764768980054211428",
+      "kind": "notion",
+      "label": "KQ1001456764768980054211428",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1004192147176718271490209",
+      "kind": "notion",
+      "label": "KQ1004192147176718271490209",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ10083054873401020597196",
+      "kind": "notion",
+      "label": "KQ10083054873401020597196",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ100948559599830155878122",
+      "kind": "notion",
+      "label": "KQ100948559599830155878122",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ104420969257477399775962",
+      "kind": "notion",
+      "label": "KQ104420969257477399775962",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1050462490655982750801399",
+      "kind": "notion",
+      "label": "KQ1050462490655982750801399",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1053193548132797032728118",
+      "kind": "notion",
+      "label": "KQ1053193548132797032728118",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ105398527361602454213820",
+      "kind": "notion",
+      "label": "KQ105398527361602454213820",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1055319574140075090815558",
+      "kind": "notion",
+      "label": "KQ1055319574140075090815558",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1060449606765193384844137",
+      "kind": "notion",
+      "label": "KQ1060449606765193384844137",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1066563471829604963731851",
+      "kind": "notion",
+      "label": "KQ1066563471829604963731851",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1077809712146881906385868",
+      "kind": "notion",
+      "label": "KQ1077809712146881906385868",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1080004270354868757255209",
+      "kind": "notion",
+      "label": "KQ1080004270354868757255209",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1093497258397392824924083",
+      "kind": "notion",
+      "label": "KQ1093497258397392824924083",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1095186681554495223367396",
+      "kind": "notion",
+      "label": "KQ1095186681554495223367396",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1095945832717690166619125",
+      "kind": "notion",
+      "label": "KQ1095945832717690166619125",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1098479003437971593507369",
+      "kind": "notion",
+      "label": "KQ1098479003437971593507369",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ111136177361438040212757",
+      "kind": "notion",
+      "label": "KQ111136177361438040212757",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1120602156300272352142859",
+      "kind": "notion",
+      "label": "KQ1120602156300272352142859",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1121881940236212081858965",
+      "kind": "notion",
+      "label": "KQ1121881940236212081858965",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1144403393053992450628521",
+      "kind": "notion",
+      "label": "KQ1144403393053992450628521",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1159062885816860898245548",
+      "kind": "notion",
+      "label": "KQ1159062885816860898245548",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1160258994240759556955781",
+      "kind": "notion",
+      "label": "KQ1160258994240759556955781",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1165674179971384162019704",
+      "kind": "notion",
+      "label": "KQ1165674179971384162019704",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1176923522086651626461987",
+      "kind": "notion",
+      "label": "KQ1176923522086651626461987",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1189366184951423834451533",
+      "kind": "notion",
+      "label": "KQ1189366184951423834451533",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1194503714765711503720625",
+      "kind": "notion",
+      "label": "KQ1194503714765711503720625",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1195834530466980171272261",
+      "kind": "notion",
+      "label": "KQ1195834530466980171272261",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1200875511490543742473989",
+      "kind": "notion",
+      "label": "KQ1200875511490543742473989",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ1203200891262460905048111",
+      "kind": "notion",
+      "label": "KQ1203200891262460905048111",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ128310391651248938148695",
+      "kind": "notion",
+      "label": "KQ128310391651248938148695",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ130137285133311872578067",
+      "kind": "notion",
+      "label": "KQ130137285133311872578067",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ138564703254145984984085",
+      "kind": "notion",
+      "label": "KQ138564703254145984984085",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ145815146417633279663425",
+      "kind": "notion",
+      "label": "KQ145815146417633279663425",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ146390562481207533343140",
+      "kind": "notion",
+      "label": "KQ146390562481207533343140",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ158346784389644550464623",
+      "kind": "notion",
+      "label": "KQ158346784389644550464623",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ160751728607029132886073",
+      "kind": "notion",
+      "label": "KQ160751728607029132886073",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ197300622028423820307658",
+      "kind": "notion",
+      "label": "KQ197300622028423820307658",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ197349845569875987036763",
+      "kind": "notion",
+      "label": "KQ197349845569875987036763",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ209347556602593896196204",
+      "kind": "notion",
+      "label": "KQ209347556602593896196204",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ215839971756636414454147",
+      "kind": "notion",
+      "label": "KQ215839971756636414454147",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ21793849853860724538116",
+      "kind": "notion",
+      "label": "KQ21793849853860724538116",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ223196216376876332510397",
+      "kind": "notion",
+      "label": "KQ223196216376876332510397",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ223422295973292777846262",
+      "kind": "notion",
+      "label": "KQ223422295973292777846262",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ224012936520835969813667",
+      "kind": "notion",
+      "label": "KQ224012936520835969813667",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ230614341513216455221870",
+      "kind": "notion",
+      "label": "KQ230614341513216455221870",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ23483697766747469788443",
+      "kind": "notion",
+      "label": "KQ23483697766747469788443",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ236144874205206246062377",
+      "kind": "notion",
+      "label": "KQ236144874205206246062377",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ257186353525868076943810",
+      "kind": "notion",
+      "label": "KQ257186353525868076943810",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ259065362423039879371699",
+      "kind": "notion",
+      "label": "KQ259065362423039879371699",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ26251513460294935462801",
+      "kind": "notion",
+      "label": "KQ26251513460294935462801",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ275001690643420239376144",
+      "kind": "notion",
+      "label": "KQ275001690643420239376144",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ278221715345908082500047",
+      "kind": "notion",
+      "label": "KQ278221715345908082500047",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ284218319100029514764347",
+      "kind": "notion",
+      "label": "KQ284218319100029514764347",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ290037899366762280836358",
+      "kind": "notion",
+      "label": "KQ290037899366762280836358",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ307749912780982684785484",
+      "kind": "notion",
+      "label": "KQ307749912780982684785484",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ326532676640319701180774",
+      "kind": "notion",
+      "label": "KQ326532676640319701180774",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ334293694279316207415374",
+      "kind": "notion",
+      "label": "KQ334293694279316207415374",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ354325435651505917507315",
+      "kind": "notion",
+      "label": "KQ354325435651505917507315",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ358480459895673903815515",
+      "kind": "notion",
+      "label": "KQ358480459895673903815515",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ369932154447782942259865",
+      "kind": "notion",
+      "label": "KQ369932154447782942259865",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ38829759414591010897435",
+      "kind": "notion",
+      "label": "KQ38829759414591010897435",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ392959376193292280888427",
+      "kind": "notion",
+      "label": "KQ392959376193292280888427",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ394668506537679191266954",
+      "kind": "notion",
+      "label": "KQ394668506537679191266954",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ398441426049686806295513",
+      "kind": "notion",
+      "label": "KQ398441426049686806295513",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ398890496975549433069618",
+      "kind": "notion",
+      "label": "KQ398890496975549433069618",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ406892130584698930829761",
+      "kind": "notion",
+      "label": "KQ406892130584698930829761",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ41255087884440833618848",
+      "kind": "notion",
+      "label": "KQ41255087884440833618848",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ427996902447539940937784",
+      "kind": "notion",
+      "label": "KQ427996902447539940937784",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ434724217166266139003712",
+      "kind": "notion",
+      "label": "KQ434724217166266139003712",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ440278516424143395046048",
+      "kind": "notion",
+      "label": "KQ440278516424143395046048",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ44041446474415672385173",
+      "kind": "notion",
+      "label": "KQ44041446474415672385173",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ44696171991696576070951",
+      "kind": "notion",
+      "label": "KQ44696171991696576070951",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ460064656226407459411789",
+      "kind": "notion",
+      "label": "KQ460064656226407459411789",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ465953434538742259896348",
+      "kind": "notion",
+      "label": "KQ465953434538742259896348",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ466876440535899278762678",
+      "kind": "notion",
+      "label": "KQ466876440535899278762678",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ482099004512059007406519",
+      "kind": "notion",
+      "label": "KQ482099004512059007406519",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ482520652560264843704606",
+      "kind": "notion",
+      "label": "KQ482520652560264843704606",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ488172748482064854211045",
+      "kind": "notion",
+      "label": "KQ488172748482064854211045",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ503176085461450902425603",
+      "kind": "notion",
+      "label": "KQ503176085461450902425603",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ509396647731110797111521",
+      "kind": "notion",
+      "label": "KQ509396647731110797111521",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ517000234154981499524988",
+      "kind": "notion",
+      "label": "KQ517000234154981499524988",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ522042018303199667056044",
+      "kind": "notion",
+      "label": "KQ522042018303199667056044",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ53405776126075375397806",
+      "kind": "notion",
+      "label": "KQ53405776126075375397806",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ540460742901606059603246",
+      "kind": "notion",
+      "label": "KQ540460742901606059603246",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ549908303748776750649572",
+      "kind": "notion",
+      "label": "KQ549908303748776750649572",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ556991544326751297981655",
+      "kind": "notion",
+      "label": "KQ556991544326751297981655",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ564360478377149387203536",
+      "kind": "notion",
+      "label": "KQ564360478377149387203536",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ576779586731993430618038",
+      "kind": "notion",
+      "label": "KQ576779586731993430618038",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ58909780729734981392255",
+      "kind": "notion",
+      "label": "KQ58909780729734981392255",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ589915367109908188923269",
+      "kind": "notion",
+      "label": "KQ589915367109908188923269",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ615116588094174269048898",
+      "kind": "notion",
+      "label": "KQ615116588094174269048898",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ62331687591267309899088",
+      "kind": "notion",
+      "label": "KQ62331687591267309899088",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ634068041379284837590101",
+      "kind": "notion",
+      "label": "KQ634068041379284837590101",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ636282983494458332517903",
+      "kind": "notion",
+      "label": "KQ636282983494458332517903",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ643150831938915216081534",
+      "kind": "notion",
+      "label": "KQ643150831938915216081534",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ6439395054452398538614",
+      "kind": "notion",
+      "label": "KQ6439395054452398538614",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ647647742352000688967481",
+      "kind": "notion",
+      "label": "KQ647647742352000688967481",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ648278744188345438616708",
+      "kind": "notion",
+      "label": "KQ648278744188345438616708",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ668305822901114185323264",
+      "kind": "notion",
+      "label": "KQ668305822901114185323264",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ699602215930442288316009",
+      "kind": "notion",
+      "label": "KQ699602215930442288316009",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ709426036664616485753385",
+      "kind": "notion",
+      "label": "KQ709426036664616485753385",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ71734703879383335358966",
+      "kind": "notion",
+      "label": "KQ71734703879383335358966",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ728183982103751180483144",
+      "kind": "notion",
+      "label": "KQ728183982103751180483144",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ733226794798978264862447",
+      "kind": "notion",
+      "label": "KQ733226794798978264862447",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ745296533026190836368063",
+      "kind": "notion",
+      "label": "KQ745296533026190836368063",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ750600406313405949740503",
+      "kind": "notion",
+      "label": "KQ750600406313405949740503",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ754368512776726499807689",
+      "kind": "notion",
+      "label": "KQ754368512776726499807689",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ774072634330125290276652",
+      "kind": "notion",
+      "label": "KQ774072634330125290276652",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ782181480868029138668074",
+      "kind": "notion",
+      "label": "KQ782181480868029138668074",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ792149109141716005679614",
+      "kind": "notion",
+      "label": "KQ792149109141716005679614",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ799298870136080346509606",
+      "kind": "notion",
+      "label": "KQ799298870136080346509606",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ808274386489488136718771",
+      "kind": "notion",
+      "label": "KQ808274386489488136718771",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ817600649498604452025114",
+      "kind": "notion",
+      "label": "KQ817600649498604452025114",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ824076729664995636793958",
+      "kind": "notion",
+      "label": "KQ824076729664995636793958",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ836862816407016931021863",
+      "kind": "notion",
+      "label": "KQ836862816407016931021863",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ857703401077508395857600",
+      "kind": "notion",
+      "label": "KQ857703401077508395857600",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ890345271525400929967982",
+      "kind": "notion",
+      "label": "KQ890345271525400929967982",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ900242853717152397355385",
+      "kind": "notion",
+      "label": "KQ900242853717152397355385",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ90139678784643765906658",
+      "kind": "notion",
+      "label": "KQ90139678784643765906658",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ929379134663287066417870",
+      "kind": "notion",
+      "label": "KQ929379134663287066417870",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ930203997376856259900152",
+      "kind": "notion",
+      "label": "KQ930203997376856259900152",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ941347055436020302336505",
+      "kind": "notion",
+      "label": "KQ941347055436020302336505",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ951509670089638674040472",
+      "kind": "notion",
+      "label": "KQ951509670089638674040472",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ956056904196766406773069",
+      "kind": "notion",
+      "label": "KQ956056904196766406773069",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ95753711729211426657453",
+      "kind": "notion",
+      "label": "KQ95753711729211426657453",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ958514967642848262454642",
+      "kind": "notion",
+      "label": "KQ958514967642848262454642",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ971504557221542102769669",
+      "kind": "notion",
+      "label": "KQ971504557221542102769669",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ998594380251198593342178",
+      "kind": "notion",
+      "label": "KQ998594380251198593342178",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "value:KA14452001102913229579563589798039",
+      "kind": "valeur",
+      "label": "https://www.wikidata.org/wiki/Q10327296",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA200597286888290227610774717",
+      "kind": "valeur",
+      "label": "https://www.wikidata.org/wiki/Q1367353",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA263498937170650902095853541",
+      "kind": "valeur",
+      "label": "https://www.wikidata.org/wiki/Q1379672",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA32070720727400747790784010",
+      "kind": "valeur",
+      "label": "https://www.wikidata.org/wiki/Q2547819",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA44867815545548462748313519",
+      "kind": "valeur",
+      "label": "https://www.wikidata.org/wiki/Q811679",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA213618139213137338731231101",
+      "kind": "valeur",
+      "label": "https://www.wikidata.org/wiki/Q811979",
+      "description": "Valeur littérale déclarée; type : uri."
+    }
+  ],
+  "edges": [
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ774072634330125290276652",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1001727655547309305149371",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS841409266533451192828191"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ1200875511490543742473989",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1003737524032170527145705",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS71982454331384019485094"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ540460742901606059603246",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1004349254583860491034239",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS898207843387992082999566"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ998594380251198593342178",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1004905554359113646736087",
+      "source_refs": [
+        "KS324719055428220952383233",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ23483697766747469788443",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA1011004979868282319803066",
+      "source_refs": [
+        "KS312464723979336133697790",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ223422295973292777846262",
+      "to": "KQ503176085461450902425603",
+      "relation": "KP138717828867659102415152",
+      "assertion_id": "KA1013104184089396747248686",
+      "source_refs": [
+        "KS615922076162338383979499",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ890345271525400929967982",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP13416669460975488635369",
+      "assertion_id": "KA1024630622532439695911758",
+      "source_refs": [
+        "KS545366026933286371918669",
+        "KS566650094726319955079117",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ111136177361438040212757",
+      "to": "KQ53405776126075375397806",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA1026383807126464019826886",
+      "source_refs": [
+        "KS539011568916929187221830",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1159062885816860898245548",
+      "to": "KQ128310391651248938148695",
+      "relation": "KP61870588703046484788377",
+      "assertion_id": "KA1030275255598776414285344",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS658167427703523034145730",
+        "KS69480929241519737820048"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ434724217166266139003712",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1031369492062223290999696",
+      "source_refs": [
+        "KS1183379655981968330372915",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ754368512776726499807689",
+      "to": "KQ1160258994240759556955781",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1035055729699759137268061",
+      "source_refs": [
+        "KS1079732621585206889223886",
+        "KS658167427703523034145730",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ636282983494458332517903",
+      "to": "KQ482520652560264843704606",
+      "relation": "KP140879723085705460751346",
+      "assertion_id": "KA1035653983419236331038214",
+      "source_refs": [
+        "KS127616879300170452378385",
+        "KS658167427703523034145730",
+        "KS94968254106509337380358"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ517000234154981499524988",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1045157766330093337206925",
+      "source_refs": [
+        "KS14576530840411997024023",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ636282983494458332517903",
+      "to": "KQ509396647731110797111521",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA1046069238020751919723049",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS697704170874305669665341"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ398890496975549433069618",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1047369738305118318479975",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS849444727996388058732979"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ62331687591267309899088",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1051750801808597093556514",
+      "source_refs": [
+        "KS122268768951838037598031",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ589915367109908188923269",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1051879778801563388832504",
+      "source_refs": [
+        "KS1089630813248167759223340",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ817600649498604452025114",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1054528149235979990857342",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS703969795482841975062818"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ750600406313405949740503",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1054684384922124142671728",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS901456083034135158370773"
+      ]
+    },
+    {
+      "from": "KQ10083054873401020597196",
+      "to": "KQ549908303748776750649572",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA1059522381748429051341006",
+      "source_refs": [
+        "KS252125080544116036848630",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ1195834530466980171272261",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1061971379790728181816060",
+      "source_refs": [
+        "KS649361136712288617606711",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ733226794798978264862447",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1063198717819340714414820",
+      "source_refs": [
+        "KS213210508434284165186312",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ709426036664616485753385",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1066004700537511195302121",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS70411602288949435542835"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ111136177361438040212757",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA106756661026177598533124",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS755681165315779588958439"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ549908303748776750649572",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1072723709235430966174417",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS669204612293821842481313"
+      ]
+    },
+    {
+      "from": "KQ6439395054452398538614",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP741800780235431505497877",
+      "assertion_id": "KA1075898017569342342513973",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS801147672260196663123558"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ929379134663287066417870",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1079591549049606520927055",
+      "source_refs": [
+        "KS220220189458893842968052",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ257186353525868076943810",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1079678171143204720080270",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS775108682994784294601020"
+      ]
+    },
+    {
+      "from": "KQ90139678784643765906658",
+      "to": "KQ26251513460294935462801",
+      "relation": "KP17263719569748255741588",
+      "assertion_id": "KA1083267176972125944485526",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS827435214117167626796801",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ930203997376856259900152",
+      "to": "KQ334293694279316207415374",
+      "relation": "KP784220943672340511171528",
+      "assertion_id": "KA1087174524960234715973162",
+      "source_refs": [
+        "KS345742648587325114987617",
+        "KS545366026933286371918669",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ326532676640319701180774",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA1090984623411044421952646",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS911846755438010452223433",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ792149109141716005679614",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1092958888542744260916197",
+      "source_refs": [
+        "KS578879995884202565618795",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ956056904196766406773069",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1095100176073444149715777",
+      "source_refs": [
+        "KS65353365213326821124480",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ1095945832717690166619125",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1098472871002060314327806",
+      "source_refs": [
+        "KS614454152702798305622585",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1200875511490543742473989",
+      "to": "KQ1001456764768980054211428",
+      "relation": "KP546788997984766314554358",
+      "assertion_id": "KA1100320303238595823238585",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS168465927661365457514152",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ465953434538742259896348",
+      "to": "KQ209347556602593896196204",
+      "relation": "KP1196261406848412388051263",
+      "assertion_id": "KA1107706500322651784152187",
+      "source_refs": [
+        "KS383016302120008769095053",
+        "KS658167427703523034145730",
+        "KS921029047734437911644532"
+      ]
+    },
+    {
+      "from": "KQ754368512776726499807689",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA1121147106855498747645705",
+      "source_refs": [
+        "KS485064068172101322744511",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ224012936520835969813667",
+      "to": "KQ358480459895673903815515",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA1124247447312716080216013",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS805371738980249850163382"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ564360478377149387203536",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1125122624777781118449962",
+      "source_refs": [
+        "KS651977669078829877029263",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ615116588094174269048898",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP694502756153447104865204",
+      "assertion_id": "KA1138942927085302416947587",
+      "source_refs": [
+        "KS1137361894369838992554113",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ1053193548132797032728118",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1139762506939607131505718",
+      "source_refs": [
+        "KS1198108261976144397727190",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ1189366184951423834451533",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1143436893467694576721053",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS702284873740377893960191"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ951509670089638674040472",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1145017320512147848414713",
+      "source_refs": [
+        "KS626798209833961795152776",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ334293694279316207415374",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA114697337886338071574210",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS863681295309223821261786"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ503176085461450902425603",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1157532657917446000502676",
+      "source_refs": [
+        "KS539979444257972386940193",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ100948559599830155878122",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1157965645800885569142960",
+      "source_refs": [
+        "KS442171607378451199540164",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ465953434538742259896348",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1159568023480042471749702",
+      "source_refs": [
+        "KS385721216451297006027144",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ23483697766747469788443",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA116024304069881869411535",
+      "source_refs": [
+        "KS446964265482764523454055",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ145815146417633279663425",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1165248848882303086877370",
+      "source_refs": [
+        "KS38776692990081994644474",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ503176085461450902425603",
+      "to": "KQ95753711729211426657453",
+      "relation": "KP806309614752245334124352",
+      "assertion_id": "KA1167069662568599111433609",
+      "source_refs": [
+        "KS1190706451675742996507484",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ23483697766747469788443",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA1167559989598246288155542",
+      "source_refs": [
+        "KS254137742914547186969691",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ398441426049686806295513",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA117312278155881511746788",
+      "source_refs": [
+        "KS222182619249443822167482",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ398441426049686806295513",
+      "to": "KQ1120602156300272352142859",
+      "relation": "KP959824175808214973097971",
+      "assertion_id": "KA1173963033302036870917590",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS818025742216465847499004"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ1176923522086651626461987",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1175300352499896091264076",
+      "source_refs": [
+        "KS547918499190382263501453",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1165674179971384162019704",
+      "to": "KQ517000234154981499524988",
+      "relation": "KP985777443430342202920020",
+      "assertion_id": "KA1175948808687494818912188",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS94993934497078362269700"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ44041446474415672385173",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA118545128469700273581821",
+      "source_refs": [
+        "KS147371535684626523572615",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ460064656226407459411789",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA1199971639062452697729455",
+      "source_refs": [
+        "KS1128074957408613950649646",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ1095186681554495223367396",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA145168266596368472802962",
+      "source_refs": [
+        "KS39097044989878556116270",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ668305822901114185323264",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA145887329715404795695429",
+      "source_refs": [
+        "KS348694323066244346055406",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ71734703879383335358966",
+      "to": "KQ307749912780982684785484",
+      "relation": "KP730020244099146034894741",
+      "assertion_id": "KA147983691794927124537176",
+      "source_refs": [
+        "KS354559951848276826925127",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ1160258994240759556955781",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA148595030170480965348696",
+      "source_refs": [
+        "KS317573525612694801224704",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ576779586731993430618038",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA150562113114434290544079",
+      "source_refs": [
+        "KS13958212970746565402847",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ326532676640319701180774",
+      "to": "KQ556991544326751297981655",
+      "relation": "KP676687107740732683991346",
+      "assertion_id": "KA153133038483143555065737",
+      "source_refs": [
+        "KS316559530164351878246682",
+        "KS658167427703523034145730",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ1060449606765193384844137",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP13416669460975488635369",
+      "assertion_id": "KA157518984754685759854417",
+      "source_refs": [
+        "KS122879164053536708498486",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ1121881940236212081858965",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA157804113664817882452304",
+      "source_refs": [
+        "KS1060678249733486110209467",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1077809712146881906385868",
+      "to": "KQ799298870136080346509606",
+      "relation": "KP1082089947764042319754147",
+      "assertion_id": "KA164824339703963624316366",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS70304603657999573341321"
+      ]
+    },
+    {
+      "from": "KQ1176923522086651626461987",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP13416669460975488635369",
+      "assertion_id": "KA171712447687121010204",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS710449046969493569806626"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ440278516424143395046048",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA17588039173131860500432",
+      "source_refs": [
+        "KS1180555202209107147583887",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1004192147176718271490209",
+      "to": "KQ197349845569875987036763",
+      "relation": "KP735466741976202736637354",
+      "assertion_id": "KA176137985338990213600385",
+      "source_refs": [
+        "KS374743630998582030629318",
+        "KS658167427703523034145730",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ146390562481207533343140",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA177775403572124982659027",
+      "source_refs": [
+        "KS1161527825822689090396415",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ105398527361602454213820",
+      "to": "KQ782181480868029138668074",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA181657950135623843574799",
+      "source_refs": [
+        "KS1014611669367578689984715",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ275001690643420239376144",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA191768730874754893264276",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS800185568853724849288836"
+      ]
+    },
+    {
+      "from": "KQ460064656226407459411789",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA220662571074043057714830",
+      "source_refs": [
+        "KS115669495540320172459148",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ782181480868029138668074",
+      "to": "KQ95753711729211426657453",
+      "relation": "KP806309614752245334124352",
+      "assertion_id": "KA231917521577599530498570",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS770416868104956592069814"
+      ]
+    },
+    {
+      "from": "KQ465953434538742259896348",
+      "to": "KQ257186353525868076943810",
+      "relation": "KP91945981947927479651302",
+      "assertion_id": "KA234573587070967164635774",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS921029047734437911644532",
+        "KS930871326145012293871291"
+      ]
+    },
+    {
+      "from": "KQ1055319574140075090815558",
+      "to": "KQ634068041379284837590101",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA242043067203490505196806",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS748144036435635028443909"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ160751728607029132886073",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA243604271984279720521018",
+      "source_refs": [
+        "KS345811784664068445651101",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ104420969257477399775962",
+      "to": "KQ482520652560264843704606",
+      "relation": "KP659855953226126104383344",
+      "assertion_id": "KA243686059387065740883234",
+      "source_refs": [
+        "KS1163547407528756092480340",
+        "KS658167427703523034145730",
+        "KS94968254106509337380358"
+      ]
+    },
+    {
+      "from": "KQ836862816407016931021863",
+      "to": "KQ709426036664616485753385",
+      "relation": "KP1027870417351317323928649",
+      "assertion_id": "KA254286742742024910298307",
+      "source_refs": [
+        "KS167504003972445238652797",
+        "KS658167427703523034145730",
+        "KS895606349334906954000856"
+      ]
+    },
+    {
+      "from": "KQ754368512776726499807689",
+      "to": "KQ197300622028423820307658",
+      "relation": "KP421851613590393065696530",
+      "assertion_id": "KA257198613254039651544024",
+      "source_refs": [
+        "KS622362847060524169699836",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ634068041379284837590101",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA259261859921645891089682",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS9031143460652574937267"
+      ]
+    },
+    {
+      "from": "KQ278221715345908082500047",
+      "to": "KQ576779586731993430618038",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA259912604796417695083014",
+      "source_refs": [
+        "KS1006169286663752002201330",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ26251513460294935462801",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA263102761653106414118417",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS866518557207308064917044"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ105398527361602454213820",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA267500206884787830823065",
+      "source_refs": [
+        "KS1087625518272474573276593",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ1120602156300272352142859",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA267980323314681772944893",
+      "source_refs": [
+        "KS1107866884189906636062010",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ259065362423039879371699",
+      "to": "KQ128310391651248938148695",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA275005580252953865884574",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS658167427703523034145730",
+        "KS718320468106910784617922"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ1144403393053992450628521",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA276664072947115756624284",
+      "source_refs": [
+        "KS28185030777892114714131",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ998594380251198593342178",
+      "to": "KQ44696171991696576070951",
+      "relation": "KP61870588703046484788377",
+      "assertion_id": "KA280164743965859335082876",
+      "source_refs": [
+        "KS1093911946720951359115795",
+        "KS1123488871318429351770002",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ90139678784643765906658",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA281747009475337232686037",
+      "source_refs": [
+        "KS1173175690550222745441316",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ1060449606765193384844137",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA286698690978313975306599",
+      "source_refs": [
+        "KS430843436527440317418586",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ482099004512059007406519",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA286768971750147945929295",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS797577451335437458194143"
+      ]
+    },
+    {
+      "from": "KQ145815146417633279663425",
+      "to": "KQ224012936520835969813667",
+      "relation": "KP86958065390631489337116",
+      "assertion_id": "KA300049730016536766242102",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS658167427703523034145730",
+        "KS81061657562222839873630"
+      ]
+    },
+    {
+      "from": "KQ71734703879383335358966",
+      "to": "KQ488172748482064854211045",
+      "relation": "KP730020244099146034894741",
+      "assertion_id": "KA305537809933626511028614",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS987493474843526503097872"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ824076729664995636793958",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA307658888735800281875367",
+      "source_refs": [
+        "KS197431961845180055844043",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ482520652560264843704606",
+      "to": "KQ326532676640319701180774",
+      "relation": "KP359831386033057386248144",
+      "assertion_id": "KA317632017295272786037223",
+      "source_refs": [
+        "KS322080007675941753731468",
+        "KS658167427703523034145730",
+        "KS94968254106509337380358"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ576779586731993430618038",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA326888319336871220257950",
+      "source_refs": [
+        "KS303778802219024296842718",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ26251513460294935462801",
+      "to": "KQ90139678784643765906658",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA331862550099707785051078",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS96420064512676429592076"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ21793849853860724538116",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA341451026123956351413684",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS98087881434352257424095"
+      ]
+    },
+    {
+      "from": "KQ223196216376876332510397",
+      "to": "KQ1004192147176718271490209",
+      "relation": "KP501151382900771257231551",
+      "assertion_id": "KA349647044304992182036449",
+      "source_refs": [
+        "KS429763538554784571756601",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ259065362423039879371699",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA353349119529078137750415",
+      "source_refs": [
+        "KS1113332326151968501704685",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ406892130584698930829761",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA357240859628844731433383",
+      "source_refs": [
+        "KS231090390496804444323485",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ728183982103751180483144",
+      "to": "KQ398441426049686806295513",
+      "relation": "KP694502756153447104865204",
+      "assertion_id": "KA35916012647117913827420",
+      "source_refs": [
+        "KS175015926872321843247256",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ53405776126075375397806",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA369923648785543903045739",
+      "source_refs": [
+        "KS417004907988463787410059",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ482520652560264843704606",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA370755388009509785496114",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS974549482119516324367687"
+      ]
+    },
+    {
+      "from": "KQ236144874205206246062377",
+      "to": "KQ1121881940236212081858965",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA371709426412650482805128",
+      "source_refs": [
+        "KS40719014397407472475382",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ427996902447539940937784",
+      "to": "KQ503176085461450902425603",
+      "relation": "KP439860288172886280619719",
+      "assertion_id": "KA373814243749867101375065",
+      "source_refs": [
+        "KS130329016617395235216300",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ326532676640319701180774",
+      "to": "KQ792149109141716005679614",
+      "relation": "KP498616357040525764294603",
+      "assertion_id": "KA37762103380224993796590",
+      "source_refs": [
+        "KS359525830441874980038526",
+        "KS658167427703523034145730",
+        "KS895606349334906954000856"
+      ]
+    },
+    {
+      "from": "KQ100948559599830155878122",
+      "to": "KQ576779586731993430618038",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA378101057946813168166591",
+      "source_refs": [
+        "KS186828094342815422579178",
+        "KS658167427703523034145730",
+        "KS921029047734437911644532"
+      ]
+    },
+    {
+      "from": "KQ930203997376856259900152",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP694502756153447104865204",
+      "assertion_id": "KA378967636402241097728881",
+      "source_refs": [
+        "KS629561476822593900479435",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ1098479003437971593507369",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA384776208165183794523775",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS970269313601532899159288"
+      ]
+    },
+    {
+      "from": "KQ699602215930442288316009",
+      "to": "KQ1144403393053992450628521",
+      "relation": "KP579297930035718080903886",
+      "assertion_id": "KA385489167384384835273609",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS853933855834816563250033"
+      ]
+    },
+    {
+      "from": "KQ398890496975549433069618",
+      "to": "KQ774072634330125290276652",
+      "relation": "KP579297930035718080903886",
+      "assertion_id": "KA391119069554286500153656",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS312279327825157851273653",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ23483697766747469788443",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP815841791202050297984182",
+      "assertion_id": "KA391785002904185481487939",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS658167427703523034145730",
+        "KS722404217422523556432411"
+      ]
+    },
+    {
+      "from": "KQ465953434538742259896348",
+      "to": "KQ38829759414591010897435",
+      "relation": "KP579297930035718080903886",
+      "assertion_id": "KA3944590374528732042450",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS807554897075470232320525",
+        "KS921029047734437911644532"
+      ]
+    },
+    {
+      "from": "KQ930203997376856259900152",
+      "to": "KQ589915367109908188923269",
+      "relation": "KP784220943672340511171528",
+      "assertion_id": "KA399084454054488324248765",
+      "source_refs": [
+        "KS545366026933286371918669",
+        "KS658167427703523034145730",
+        "KS98670417767902657539176"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ223196216376876332510397",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA400815297514126296509391",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS983098969859042007619493"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA41347311557952524973362",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS725270274613050535097388"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ284218319100029514764347",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA415288811928604480628249",
+      "source_refs": [
+        "KS136794829897965164343673",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ58909780729734981392255",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA415692899122232671792847",
+      "source_refs": [
+        "KS318114550560616428085430",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ398441426049686806295513",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA4203183711517245153740",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS685483851658685592934195",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ215839971756636414454147",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP985777443430342202920020",
+      "assertion_id": "KA422833334953607592131170",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS691218635561936186240228",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ138564703254145984984085",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA429295503609996105780421",
+      "source_refs": [
+        "KS339279606821824578763881",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ971504557221542102769669",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA429800552243721226196199",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS691503810266565872020800"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ1194503714765711503720625",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA432164144057248339424034",
+      "source_refs": [
+        "KS64023959074518344551905",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ6439395054452398538614",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA441532284332003976651149",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS919651845231139191205575"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ857703401077508395857600",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA44189136013430211142870",
+      "source_refs": [
+        "KS171090376372392580854606",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1050462490655982750801399",
+      "to": "KQ890345271525400929967982",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA454430307766233403944536",
+      "source_refs": [
+        "KS273076509866090333380840",
+        "KS545366026933286371918669",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ224012936520835969813667",
+      "to": "KQ358480459895673903815515",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA461795453689225333275396",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS167601292923057046985321",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ53405776126075375397806",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA467490817736610488713884",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS858785761291019868513303"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ215839971756636414454147",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA471087378044949572322043",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS807703926961934720004390"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA472749436103350133685305",
+      "source_refs": [
+        "KS462784338922932757382664",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ71734703879383335358966",
+      "to": "KQ290037899366762280836358",
+      "relation": "KP730020244099146034894741",
+      "assertion_id": "KA473783710325713212104458",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS921272326441576579297663"
+      ]
+    },
+    {
+      "from": "KQ465953434538742259896348",
+      "to": "KQ100948559599830155878122",
+      "relation": "KP1196261406848412388051263",
+      "assertion_id": "KA477104346044048875331057",
+      "source_refs": [
+        "KS383535221762529438960194",
+        "KS658167427703523034145730",
+        "KS921029047734437911644532"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ648278744188345438616708",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA479304178668401350393072",
+      "source_refs": [
+        "KS548935609890118354809399",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ278221715345908082500047",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA480280730180566994494940",
+      "source_refs": [
+        "KS276538824795463232535404",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ230614341513216455221870",
+      "to": "KQ406892130584698930829761",
+      "relation": "KP20234273817110360881631",
+      "assertion_id": "KA481794385746736406228153",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS751300894698254938799703",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ1194503714765711503720625",
+      "to": "KQ23483697766747469788443",
+      "relation": "KP300240601626473168503429",
+      "assertion_id": "KA484498009719811158264955",
+      "source_refs": [
+        "KS1047936631392347555032959",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ209347556602593896196204",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA489548605024291229901571",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS790923542812679777522111"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ1050462490655982750801399",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA50368316470498109780682",
+      "source_refs": [
+        "KS53819540512091741214008",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ808274386489488136718771",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA51087288988770761365247",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS913145980131565984923275"
+      ]
+    },
+    {
+      "from": "KQ434724217166266139003712",
+      "to": "KQ326532676640319701180774",
+      "relation": "KP91945981947927479651302",
+      "assertion_id": "KA512050479868503505414480",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS702853295587895241676269",
+        "KS895606349334906954000856"
+      ]
+    },
+    {
+      "from": "KQ38829759414591010897435",
+      "to": "KQ160751728607029132886073",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA51230599928835702228718",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS961912172363654217744165"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ275001690643420239376144",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA51351750672656802309459",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS785681826165713589857631"
+      ]
+    },
+    {
+      "from": "KQ941347055436020302336505",
+      "to": "KQ648278744188345438616708",
+      "relation": "KP579297930035718080903886",
+      "assertion_id": "KA51641777338902148426740",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS493387096467671777467653",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1095186681554495223367396",
+      "to": "KQ782181480868029138668074",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA520771505463765082801031",
+      "source_refs": [
+        "KS243967621335859082134999",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ728183982103751180483144",
+      "to": "KQ41255087884440833618848",
+      "relation": "KP238637847511268534238348",
+      "assertion_id": "KA52579085685291218358493",
+      "source_refs": [
+        "KS432592398164714881098709",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1004192147176718271490209",
+      "to": "KQ406892130584698930829761",
+      "relation": "KP735466741976202736637354",
+      "assertion_id": "KA547285722997728599886957",
+      "source_refs": [
+        "KS109412388060004272495394",
+        "KS658167427703523034145730",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ394668506537679191266954",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA551133546782143416288528",
+      "source_refs": [
+        "KS1151435571971388931663992",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ1165674179971384162019704",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA555094615475556238966162",
+      "source_refs": [
+        "KS1197108679013595086561328",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ971504557221542102769669",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP694502756153447104865204",
+      "assertion_id": "KA556858568825097009620391",
+      "source_refs": [
+        "KS569080904770720558340518",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ517000234154981499524988",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP960183323470424981152755",
+      "assertion_id": "KA558180298872878574591589",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS806559845704031782865628"
+      ]
+    },
+    {
+      "from": "KQ257186353525868076943810",
+      "to": "KQ817600649498604452025114",
+      "relation": "KP421851613590393065696530",
+      "assertion_id": "KA559450392898827297031271",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS663901291567219994038057"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ197349845569875987036763",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA560179073207470173474563",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS676045064021091712839051"
+      ]
+    },
+    {
+      "from": "KQ509396647731110797111521",
+      "to": "KQ482520652560264843704606",
+      "relation": "KP140879723085705460751346",
+      "assertion_id": "KA566907545241363258537506",
+      "source_refs": [
+        "KS487071387821274741932646",
+        "KS658167427703523034145730",
+        "KS671389261508698666604148"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ41255087884440833618848",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA568786864896081717106685",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS792406903791231291103232"
+      ]
+    },
+    {
+      "from": "KQ71734703879383335358966",
+      "to": "KQ1080004270354868757255209",
+      "relation": "KP730020244099146034894741",
+      "assertion_id": "KA57332351409554236643384",
+      "source_refs": [
+        "KS519735192843503609669171",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ326532676640319701180774",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA576731927890960346605424",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS800796495306452797186048"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ1066563471829604963731851",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA578836520537002804355034",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS898739800450531260015086"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ354325435651505917507315",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA580065267553577217933585",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS89281799334832585182674"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ10083054873401020597196",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA580907661726968331297066",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS87333563789988136764038"
+      ]
+    },
+    {
+      "from": "KQ643150831938915216081534",
+      "to": "KQ394668506537679191266954",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA581240913050683265622302",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS976661305980113188091989"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ1055319574140075090815558",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA585253411076548393408917",
+      "source_refs": [
+        "KS272766619345064318183354",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ522042018303199667056044",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA599711035917563852817559",
+      "source_refs": [
+        "KS248340004039881613579392",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ509396647731110797111521",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA605566958692178760438188",
+      "source_refs": [
+        "KS1156345964749337291437917",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ104420969257477399775962",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA609828611717222687836289",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS676312201228978798073986"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ890345271525400929967982",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA612903460342064722438275",
+      "source_refs": [
+        "KS184307139023191953522545",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ224012936520835969813667",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA613511221231997241387399",
+      "source_refs": [
+        "KS101144797161796874236895",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ158346784389644550464623",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA616714819068287310314728",
+      "source_refs": [
+        "KS333564922509598528559317",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ369932154447782942259865",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA617704644552710129459934",
+      "source_refs": [
+        "KS344833186953784407007336",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ549908303748776750649572",
+      "to": "KQ1098479003437971593507369",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA621081483419423923562650",
+      "source_refs": [
+        "KS435196032542658656492095",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ354325435651505917507315",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA622712787922246355694970",
+      "source_refs": [
+        "KS1180019120687320479267745",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ326532676640319701180774",
+      "to": "KQ754368512776726499807689",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA625141532899036074820166",
+      "source_refs": [
+        "KS1055822554787535260264023",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ398441426049686806295513",
+      "to": "KQ754368512776726499807689",
+      "relation": "KP902893914773418093966210",
+      "assertion_id": "KA625564207507426664188415",
+      "source_refs": [
+        "KS1057358024058361686469223",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ130137285133311872578067",
+      "to": "KQ958514967642848262454642",
+      "relation": "KP91945981947927479651302",
+      "assertion_id": "KA626381751199822256665292",
+      "source_refs": [
+        "KS489711938523013642697755",
+        "KS658167427703523034145730",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ358480459895673903815515",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA627286590746798658768919",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS866076333541388489985083"
+      ]
+    },
+    {
+      "from": "KQ754368512776726499807689",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP694502756153447104865204",
+      "assertion_id": "KA642402462196810122990628",
+      "source_refs": [
+        "KS482747308347482288939909",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ1001456764768980054211428",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA644799794853430548844960",
+      "source_refs": [
+        "KS449647007601401430867880",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ556991544326751297981655",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA649492853567067042745840",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS812527652303675843319123"
+      ]
+    },
+    {
+      "from": "KQ440278516424143395046048",
+      "to": "KQ576779586731993430618038",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA650159219795863085010094",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS921029047734437911644532",
+        "KS997559971635659363587194"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ236144874205206246062377",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA653082548667024346091407",
+      "source_refs": [
+        "KS1093469855142075323774150",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ728183982103751180483144",
+      "to": "KQ95753711729211426657453",
+      "relation": "KP1190289663126302745092880",
+      "assertion_id": "KA662813467448995802142728",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS723960115450791230612897"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ38829759414591010897435",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA666524095968065087294480",
+      "source_refs": [
+        "KS467195400667869752807788",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ522042018303199667056044",
+      "to": "KQ648278744188345438616708",
+      "relation": "KP866856681232662269546488",
+      "assertion_id": "KA667542365175109997080063",
+      "source_refs": [
+        "KS131542238896707832469245",
+        "KS658167427703523034145730",
+        "KS94968254106509337380358"
+      ]
+    },
+    {
+      "from": "KQ71734703879383335358966",
+      "to": "KQ900242853717152397355385",
+      "relation": "KP730020244099146034894741",
+      "assertion_id": "KA671988674322904289343010",
+      "source_refs": [
+        "KS1174692255677660339061958",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ369932154447782942259865",
+      "to": "KQ890345271525400929967982",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA680842403463366803154382",
+      "source_refs": [
+        "KS38647275435801921812650",
+        "KS545366026933286371918669",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ23483697766747469788443",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP815841791202050297984182",
+      "assertion_id": "KA691698002900489263849056",
+      "source_refs": [
+        "KS1169988603764341121537161",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ754368512776726499807689",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA69422625849884492564713",
+      "source_refs": [
+        "KS653042901773389550153307",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ929379134663287066417870",
+      "to": "KQ224012936520835969813667",
+      "relation": "KP61870588703046484788377",
+      "assertion_id": "KA702634826423772387929235",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS658167427703523034145730",
+        "KS699971506402315647391438"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ223422295973292777846262",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA705786427345603660527642",
+      "source_refs": [
+        "KS556168841526032275826941",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ540460742901606059603246",
+      "to": "KQ503176085461450902425603",
+      "relation": "KP138717828867659102415152",
+      "assertion_id": "KA705874499092989130374296",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS817077082776888749085093"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ958514967642848262454642",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA706353036318962879201694",
+      "source_refs": [
+        "KS1083720458703170418786909",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ745296533026190836368063",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA711799273707998655140505",
+      "source_refs": [
+        "KS1015017675355983091289177",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ128310391651248938148695",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA714604667478449929216061",
+      "source_refs": [
+        "KS333252820024842901817615",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ643150831938915216081534",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA714682575400377026499836",
+      "source_refs": [
+        "KS467353442709855157705634",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1121881940236212081858965",
+      "to": "KQ576779586731993430618038",
+      "relation": "KP760030887536090560721463",
+      "assertion_id": "KA720854466096325149487393",
+      "source_refs": [
+        "KS477909915424104217935860",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ509396647731110797111521",
+      "to": "KQ1144403393053992450628521",
+      "relation": "KP919776587034274212049179",
+      "assertion_id": "KA723517441905174771709716",
+      "source_refs": [
+        "KS145697160557587269559677",
+        "KS658167427703523034145730",
+        "KS671389261508698666604148"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ427996902447539940937784",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA731971029106458579111302",
+      "source_refs": [
+        "KS11700635050669839580104",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ636282983494458332517903",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA742341957785731000535649",
+      "source_refs": [
+        "KS113536560119360918096550",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1093497258397392824924083",
+      "to": "KQ941347055436020302336505",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA742891418719644428614280",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS979472825988921895816697"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ230614341513216455221870",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA743838294214849845514689",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS885642694357144217943782"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ44696171991696576070951",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA744359520860704497632541",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS74152491509964645747608"
+      ]
+    },
+    {
+      "from": "KQ1120602156300272352142859",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA747231892746446563139755",
+      "source_refs": [
+        "KS1193390567421561954226805",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ197300622028423820307658",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA748089907344578845492933",
+      "source_refs": [
+        "KS126407061593906398135376",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ111136177361438040212757",
+      "to": "KQ951509670089638674040472",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA757776553996124816725395",
+      "source_refs": [
+        "KS504271097058721468682724",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ951509670089638674040472",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP13416669460975488635369",
+      "assertion_id": "KA761329907562317431886177",
+      "source_refs": [
+        "KS255011243604746822852361",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ699602215930442288316009",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA762060188095020052796508",
+      "source_refs": [
+        "KS321492273347063188655450",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ466876440535899278762678",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA767926219588055965133749",
+      "source_refs": [
+        "KS1015521543666132179436561",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1066563471829604963731851",
+      "to": "KQ1144403393053992450628521",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA769860815840249200960031",
+      "source_refs": [
+        "KS254630314737514945890028",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ956056904196766406773069",
+      "to": "KQ95753711729211426657453",
+      "relation": "KP844429907239273317639722",
+      "assertion_id": "KA77411052612305851330050",
+      "source_refs": [
+        "KS1048261476653272351349072",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ394668506537679191266954",
+      "to": "KQ160751728607029132886073",
+      "relation": "KP579297930035718080903886",
+      "assertion_id": "KA777954472395211736485333",
+      "source_refs": [
+        "KS1141945841047727167165577",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ138564703254145984984085",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP694502756153447104865204",
+      "assertion_id": "KA78056676152163064350839",
+      "source_refs": [
+        "KS256566051407809833193591",
+        "KS658167427703523034145730",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ71734703879383335358966",
+      "to": "KQ647647742352000688967481",
+      "relation": "KP730020244099146034894741",
+      "assertion_id": "KA790560013840199468411409",
+      "source_refs": [
+        "KS216809449084912107314218",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ369932154447782942259865",
+      "to": "KQ466876440535899278762678",
+      "relation": "KP1029412147137596512917524",
+      "assertion_id": "KA794566133718960099525663",
+      "source_refs": [
+        "KS165136330479080301340073",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ836862816407016931021863",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA79889131813486811025689",
+      "source_refs": [
+        "KS150752503349625888325911",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1066563471829604963731851",
+      "to": "KQ1195834530466980171272261",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA798907655868124982959852",
+      "source_refs": [
+        "KS1047513591267763751770449",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ1053193548132797032728118",
+      "to": "KQ754368512776726499807689",
+      "relation": "KP19230582635687932627705",
+      "assertion_id": "KA806224046407256191725955",
+      "source_refs": [
+        "KS592858151601602222830773",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ307749912780982684785484",
+      "to": "KQ130137285133311872578067",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA82640712319160176912658",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS749017707606719422103202"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ95753711729211426657453",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA831541449986333527149667",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS962783121188849489981399"
+      ]
+    },
+    {
+      "from": "KQ326532676640319701180774",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA832099516543331243381587",
+      "source_refs": [
+        "KS213660671584846597063005",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ1144403393053992450628521",
+      "to": "KQ482520652560264843704606",
+      "relation": "KP659855953226126104383344",
+      "assertion_id": "KA832673143221940928984871",
+      "source_refs": [
+        "KS521740352548492830379426",
+        "KS658167427703523034145730",
+        "KS671389261508698666604148"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA856509823584745332435222",
+      "source_refs": [
+        "KS561349502344214657409934",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ930203997376856259900152",
+      "to": "KQ58909780729734981392255",
+      "relation": "KP784220943672340511171528",
+      "assertion_id": "KA860279357187796294829727",
+      "source_refs": [
+        "KS18015827302601047207853",
+        "KS545366026933286371918669",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ158346784389644550464623",
+      "to": "KQ728183982103751180483144",
+      "relation": "KP13416669460975488635369",
+      "assertion_id": "KA863469162172789870013244",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS787784489414389411625570"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ1159062885816860898245548",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA869933237047546795664748",
+      "source_refs": [
+        "KS621481852299447069295453",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ733226794798978264862447",
+      "to": "KQ774072634330125290276652",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA8733237456716060878812",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS430638530506489159807619",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ392959376193292280888427",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA873449646768631419441420",
+      "source_refs": [
+        "KS397641814048069211258173",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ1203200891262460905048111",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA89301377292115972814160",
+      "source_refs": [
+        "KS1063346736927048413645493",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ398441426049686806295513",
+      "to": "KQ754368512776726499807689",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA8955067581518035159712",
+      "source_refs": [
+        "KS500334257006286385299555",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ21793849853860724538116",
+      "to": "KQ615116588094174269048898",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA897345356832020579358305",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS895133488814119251240613"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ1077809712146881906385868",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA904170756811694543326924",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS803343347601398954236407"
+      ]
+    },
+    {
+      "from": "KQ647647742352000688967481",
+      "to": "KQ782181480868029138668074",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA910391092035449928642684",
+      "source_refs": [
+        "KS1046637580510864203248054",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ488172748482064854211045",
+      "to": "KQ146390562481207533343140",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA915687476088561692029505",
+      "source_refs": [
+        "KS21866076637303078568411",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ1195834530466980171272261",
+      "to": "KQ648278744188345438616708",
+      "relation": "KP579297930035718080903886",
+      "assertion_id": "KA920874964730436541888402",
+      "source_refs": [
+        "KS251533382391802010352402",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ71734703879383335358966",
+      "to": "KQ1093497258397392824924083",
+      "relation": "KP730020244099146034894741",
+      "assertion_id": "KA939176752467695955066256",
+      "source_refs": [
+        "KS245367217544310100213727",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ392959376193292280888427",
+      "to": "KQ398441426049686806295513",
+      "relation": "KP1125222748981220300824156",
+      "assertion_id": "KA957692415598758869923157",
+      "source_refs": [
+        "KS505623925684965799332699",
+        "KS658167427703523034145730",
+        "KS971479269986132904592557"
+      ]
+    },
+    {
+      "from": "KQ209347556602593896196204",
+      "to": "KQ576779586731993430618038",
+      "relation": "KP265884114638946253854675",
+      "assertion_id": "KA96219702573626942663161",
+      "source_refs": [
+        "KS1161710730203692239211891",
+        "KS658167427703523034145730",
+        "KS921029047734437911644532"
+      ]
+    },
+    {
+      "from": "KQ326532676640319701180774",
+      "to": "KQ808274386489488136718771",
+      "relation": "KP676687107740732683991346",
+      "assertion_id": "KA963350515368065208108577",
+      "source_refs": [
+        "KS658167427703523034145730",
+        "KS780478361220499562906867",
+        "KS83263919422988557625413"
+      ]
+    },
+    {
+      "from": "KQ1080004270354868757255209",
+      "to": "KQ1004192147176718271490209",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA963944862013632406184093",
+      "source_refs": [
+        "KS39714092248461093701593",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ930203997376856259900152",
+      "to": "KQ549908303748776750649572",
+      "relation": "KP1118641103878063612643706",
+      "assertion_id": "KA977050892410502078688856",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS658167427703523034145730",
+        "KS82150886054398806281165"
+      ]
+    },
+    {
+      "from": "KQ668305822901114185323264",
+      "to": "KQ930203997376856259900152",
+      "relation": "KP13416669460975488635369",
+      "assertion_id": "KA981846269850064498560756",
+      "source_refs": [
+        "KS1123488871318429351770002",
+        "KS493041768911874717407307",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ290037899366762280836358",
+      "to": "KQ6439395054452398538614",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA991474936308135824297842",
+      "source_refs": [
+        "KS490990054459576556753914",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ900242853717152397355385",
+      "to": "KQ799298870136080346509606",
+      "relation": "KP1020193551145685229411982",
+      "assertion_id": "KA994195988819460978193838",
+      "source_refs": [
+        "KS592774682472528938989454",
+        "KS658167427703523034145730"
+      ]
+    },
+    {
+      "from": "KQ951509670089638674040472",
+      "to": "value:KA14452001102913229579563589798039",
+      "relation": "KP4250222331457218992742897275003",
+      "assertion_id": "KA14452001102913229579563589798039",
+      "source_refs": [
+        "KS18950082772657050922909836595905"
+      ]
+    },
+    {
+      "from": "KQ392959376193292280888427",
+      "to": "value:KA263498937170650902095853541",
+      "relation": "KP193769735460219063809942852",
+      "assertion_id": "KA263498937170650902095853541",
+      "source_refs": [
+        "KS29365166236610491137176473"
+      ]
+    },
+    {
+      "from": "KQ1176923522086651626461987",
+      "to": "value:KA32070720727400747790784010",
+      "relation": "KP193769735460219063809942852",
+      "assertion_id": "KA32070720727400747790784010",
+      "source_refs": [
+        "KS209910327132833651047795829"
+      ]
+    },
+    {
+      "from": "KQ1176923522086651626461987",
+      "to": "value:KA213618139213137338731231101",
+      "relation": "KP72696652611470514882876282",
+      "assertion_id": "KA213618139213137338731231101",
+      "source_refs": [
+        "KS8102336922535496826139533"
+      ]
+    },
+    {
+      "from": "KQ540460742901606059603246",
+      "to": "value:KA44867815545548462748313519",
+      "relation": "KP193769735460219063809942852",
+      "assertion_id": "KA44867815545548462748313519",
+      "source_refs": [
+        "KS160185060400417364366336308"
+      ]
+    },
+    {
+      "from": "KQ634068041379284837590101",
+      "to": "value:KA200597286888290227610774717",
+      "relation": "KP193769735460219063809942852",
+      "assertion_id": "KA200597286888290227610774717",
+      "source_refs": [
+        "KS125011084423928553649972176"
+      ]
+    }
+  ],
+  "knowledge": {
+    "graph_path": "canon/domain/v11/updates/wikidata-2026-10-27-v11-1/semantic-graph.json",
+    "dictionaries": [
+      "canon/domain/v11/updates/wikidata-2026-10-27-v11-1/dictionaries/metadata-fr.json",
+      "canon/domain/v11/updates/wikidata-2026-10-27-v11-1/dictionaries/metadata-und.json",
+      "canon/domain/v11/updates/wikidata-2026-10-27-v11-1/dictionaries/wikidata-domain-fr-v11-1.json",
+      "canon/domain/v11/updates/wikidata-2026-10-27-v11-1/dictionaries/wikidata-domain-und-v11-1.json",
+      "canon/domain/v11/updates/wikidata-2026-10-27-v11-1/dictionaries/wikidata-link-fr-v13.json",
+      "canon/domain/v11/updates/wikidata-2026-10-27/dictionaries/metadata-fr.json",
+      "canon/domain/v11/updates/wikidata-2026-10-27/dictionaries/metadata-und.json",
+      "canon/domain/v11/updates/wikidata-2026-10-27/dictionaries/wikidata-link-fr-v13.json"
+    ],
+    "declared_assertions": 248,
+    "displayed_assertions": 248,
+    "omitted_assertions": 0,
+    "declared_sources": 257,
+    "referenced_sources": 257,
+    "unlisted_source_references": 0,
+    "graph_versions_omitted": 1,
+    "note": "Projection d’un seul graphe canonique v11. Sources référencées = identifiants déclarés, non sources indépendamment authentifiées."
+  },
+  "relation_labels": {
+    "KP1149173081458580404025565": "langue d’applicabilité",
+    "KP1165582184751288404950544": "statut de l’assertion",
+    "KP353026584051762982499206": "évaluation : centralité dans le domaine — état de la valeur",
+    "KP443990977616997233526236": "rôle de l’assertion",
+    "KP553844890028994002582982": "sous-domaine d’applicabilité",
+    "KP63289730414880870210402": "mode d’actionnabilité",
+    "KP686412302471034556510916": "évaluation : centralité dans le domaine — valeur",
+    "KP706384801437662268107691": "domaine d’applicabilité",
+    "KP731817863962995076509568": "évaluation : centralité dans le domaine — sémantique de la valeur",
+    "KP95095264191827281883528": "coordinate:architecture_axis.value",
+    "KP4250222331457218992742897275003": "notice de référence Wikidata",
+    "KP193769735460219063809942852": "sous-classe de (Wikidata P279)",
+    "KP72696652611470514882876282": "partie de (Wikidata P361)"
+  }
+}
