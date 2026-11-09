@@ -22,8 +22,8 @@ const opts = {};
 for (let i = 2; i < process.argv.length; i += 2) {
   const option = process.argv[i];
   const value = process.argv[i + 1];
-  if (!option?.startsWith('--') || !value || !['--collection', '--out', '--expected-count', '--local-only'].includes(option)) {
-    throw Error('Usage: node scripts/preparer-site-web-126.mjs [--collection PATH] [--out PATH] [--expected-count 126] [--local-only YES]');
+  if (!option?.startsWith('--') || !value || !['--collection', '--out', '--expected-count', '--local-only', '--localizations'].includes(option)) {
+    throw Error('Usage: node scripts/preparer-site-web-126.mjs [--collection PATH] [--out PATH] [--expected-count 126] [--local-only YES] [--localizations PATH]');
   }
   if (opts[option]) throw Error(`Option dupliquée : ${option}`);
   opts[option] = value;
@@ -79,6 +79,7 @@ if (fs.existsSync(pinPath)) {
 const revision = commit || ('local-' + verifiedIndex.index_digest.slice(7, 23));
 const args = [path.join(root, 'scripts', 'build-light.mjs'), '--collection', collection,
   '--out', output, '--public', 'YES', '--revision', revision];
+if (opts['--localizations']) args.push('--localizations',path.resolve(opts['--localizations']));
 if (commit) args.push('--repository', 'https://github.com/Rejean-McCormick/kristal-public', '--commit', commit);
 console.log(`Source : ${collection}`);
 console.log(`Collection : ${count} Kristals; Prime Bridge absent; index ${verifiedIndex.index_digest}`);
@@ -103,6 +104,8 @@ const report = {
   site_directory: output,
   catalog_sha256: `sha256:${sha(contents)}`,
   catalog_entries: catalog.entries.length,
+  localized_kristals: catalog.entries.filter(x=>Object.keys(x.localizations||{}).length).length,
+  localized_language_packs: catalog.entries.reduce((n,x)=>n+Object.keys(x.localizations||{}).length,0),
   c4: preflight,
   git_add: false, git_commit: false, git_push: false, github_pages_deploy: false,
   publication_authorization: 'NOT_VERIFIED',

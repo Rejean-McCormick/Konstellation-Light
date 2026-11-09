@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Konstellation optional, derived multilingual reader sidecar",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "slug",
+    "state_ref",
+    "surface_digest",
+    "locale",
+    "authority",
+    "entries"
+  ],
+  "properties": {
+    "format": {
+      "const": "konstellation.multilingual-read/1.0"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,99}$"
+    },
+    "state_ref": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "surface_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,8}(-[A-Za-z0-9]{1,8})*$"
+    },
+    "authority": {
+      "const": "derived_non_authoritative"
+    },
+    "entries": {
+      "type": "array",
+      "maxItems": 12000,
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "maxItems": 5000,
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "provenance"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "label"
+          ]
+        },
+        {
+          "required": [
+            "definition"
+          ]
+        }
+      ],
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "definition": {
+          "$ref": "#/$defs/text"
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "definition"
+            ]
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/provenance"
+                  },
+                  {
+                    "properties": {
+                      "source_refs": {
+                        "minItems": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "source_refs",
+        "review_status"
+      ],
+      "properties": {
+        "provider": {
+          "enum": [
+            "dik",
+            "semantik_architect",
+            "spek",
+            "editorial"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "maxItems": 80,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "review_status": {
+          "enum": [
+            "candidate",
+            "reviewed"
+          ]
+        },
+        "review_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "runtime_set_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      }
+    },
+    "relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relation_id",
+        "label",
+        "provenance"
+      ],
+      "properties": {
+        "relation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 180
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        }
+      }
+    }
+  }
+}

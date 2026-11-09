@@ -1,6 +1,6 @@
 // Offline mode is opt-in from the UI. Only same-origin static public assets are cached.
-const CACHE = 'konstellation-light-public-v8';
-const SHELL = ['./','./index.html','./app.js','./graph-core.mjs','./profile.mjs','./semantic-display.mjs','./style.css','./assets/logo_k.svg','./data/catalog.json'];
+const CACHE = 'konstellation-light-public-v9';
+const SHELL = ['./','./index.html','./app.js','./graph-core.mjs','./profile.mjs','./semantic-display.mjs','./multilingual-read.mjs','./style.css','./assets/logo_k.svg','./data/catalog.json'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil((async () => {
   for(const key of await caches.keys()) if(key.startsWith('konstellation-light-public-') && key !== CACHE) await caches.delete(key);
@@ -13,5 +13,5 @@ self.addEventListener('fetch', e => {
 });
 self.addEventListener('message', e => {
   if (!e.data || e.data.type !== 'KEEP' || !Array.isArray(e.data.urls)) return;
-  e.waitUntil(caches.open(CACHE).then(async cache => {for (const rel of e.data.urls.slice(0,30)) { if(typeof rel !== 'string' || !/^\.\/data\/(catalog\.json|pack-[a-f0-9]{64}\.json)$/.test(rel)) continue; await cache.add(rel); }}));
+  e.waitUntil(caches.open(CACHE).then(async cache => {for (const rel of e.data.urls.slice(0,30)) { if(typeof rel !== 'string' || !/^\.\/data\/(catalog\.json|pack-[a-f0-9]{64}\.json|lang-[a-f0-9]{64}\.json)$/.test(rel)) continue; await cache.add(rel); }}));
 });

@@ -8,6 +8,7 @@ import { createHash } from 'node:crypto';
 import { inspectGithubKristal, listGithubKristals, toNavigationPack } from '../shared/kristal-v10.mjs';
 import { discoveryProjection } from '../shared/discovery.mjs';
 import { projectPublicKnowledge } from '../shared/public-knowledge.mjs';
+import { validateLocalization, validateLocaleDescriptor, localeRE } from '../shared/multilingual-read.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const digest = (x) => createHash('sha256').update(x).digest('hex');
@@ -18,7 +19,7 @@ for (let i = 2; i < process.argv.length; i += 2) {
   if (!key.startsWith('--') || !process.argv[i + 1]) throw Error(`Argument invalide: ${key}`);
   options[key.slice(2)] = process.argv[i + 1];
 }
-if (options.help) { console.log('node scripts/build-light.mjs --collection PATH --out PATH --public YES [--revision LABEL] [--repository https://github.com/owner/repo] [--commit SHA] [--append YES] [--discovery YES]'); process.exit(0); }
+if (options.help) { console.log('node scripts/build-light.mjs --collection PATH --out PATH --public YES [--revision LABEL] [--repository https://github.com/owner/repo] [--commit SHA] [--append YES] [--discovery YES] [--localizations PATH]'); process.exit(0); }
 const publicIntent = options.public === 'YES';
 if (!publicIntent) throw Error('Export refusé : fournir explicitement --public YES (les données seront accessibles publiquement).');
 const collection = options.collection ? path.resolve(options.collection) : '';
@@ -48,6 +49,33 @@ if (!/^[a-zA-Z0-9._-]{1,70}$/.test(revision)) throw Error('Révision invalide.')
 const append = options.append === 'YES';
 if (options.discovery !== undefined && options.discovery !== 'YES' && options.discovery !== 'NO') throw Error('--discovery doit être YES ou NO.');
 const includeDiscovery = options.discovery === 'YES';
+const localizationRoot=options.localizations ? path.resolve(options.localizations) : null;
+if(localizationRoot && (!fs.existsSync(localizationRoot)||!fs.statSync(localizationRoot).isDirectory()||fs.lstatSync(localizationRoot).isSymbolicLink()))
+  throw Error('Dossier de langues absent ou lien symbolique interdit.');
+function loadLocalized(slug, base) {
+  if(!localizationRoot) return null;
+  const dir=path.join(localizationRoot,slug);
+  if(!fs.existsSync(dir))return null;
+  if(!fs.lstatSync(dir).isDirectory()||fs.lstatSync(dir).isSymbolicLink())throw Error('Dossier de langue non autorisé.');
+  const descriptors={};
+  const names=fs.readdirSync(dir).sort();
+  if(names.length>64)throw Error('Trop de langues pour un même Kristal.');
+  for(const filename of names){
+    if(!filename.endsWith('.json')||!localeRE.test(filename.slice(0,-5)))throw Error('Nom de fichier de langue invalide.');
+    const locale=filename.slice(0,-5),file=path.join(dir,filename);
+    if(!fs.lstatSync(file).isFile()||fs.lstatSync(file).isSymbolicLink())throw Error('Fichier de langue non autorisé.');
+    const stat=fs.statSync(file);
+    if(stat.size>4*1024*1024)throw Error('Fichier de langue trop volumineux.');
+    const contents=fs.readFileSync(file);
+    const doc=validateLocalization(JSON.parse(contents),base);
+    if(doc.locale!==locale)throw Error('Nom de langue et contenu incompatibles.');
+    const bytes=json(doc),hash=digest(bytes),rel=`data/lang-${hash}.json`;
+    staged.set(rel,bytes);
+    descriptors[locale]={path:rel,sha256:`sha256:${hash}`,bytes:bytes.length};
+    validateLocaleDescriptor(locale,descriptors[locale]);
+  }
+  return descriptors;
+}
 const baseCatalogFile = path.join(output, 'data/catalog.json');
 const previous = append && fs.existsSync(baseCatalogFile) ? JSON.parse(fs.readFileSync(baseCatalogFile)) : null;
 if (previous && (previous.format !== 'konstellation.light-catalog/1.0' || !Array.isArray(previous.entries))) throw Error('Ancien catalogue non supporté.');
@@ -78,17 +106,19 @@ for (const [i, item] of listed.entries()) {
     ...(knowledge ? { knowledge: knowledge.knowledge, relation_labels: knowledge.relation_labels } : {}),
     ...(selectedDiscovery ? { discovery: selectedDiscovery } : {}),
   };
+  const languages = loadLocalized(item.id,bundle);
   const bytes = json(bundle), sha256 = digest(bytes);
   const filename = `data/pack-${sha256}.json`;
   staged.set(filename, bytes);
   const row = { slug: item.id, title: item.label, revision, state_ref: bundle.state_ref,
     surface_digest: bundle.surface_digest, path: filename, sha256: `sha256:${sha256}`, bytes: bytes.length,
-    members: bundle.metrics.members, files: bundle.metrics.files };
+    members: bundle.metrics.members, files: bundle.metrics.files, ...(languages && Object.keys(languages).length ? {localizations:languages} : {}) };
   const existing = entries.findIndex(e => e.slug === row.slug && e.revision === revision);
   if (existing >= 0) {
     const old = entries[existing];
     if (old.sha256 !== row.sha256 || old.surface_digest !== row.surface_digest ||
-        old.state_ref !== row.state_ref || old.path !== row.path) {
+        old.state_ref !== row.state_ref || old.path !== row.path ||
+        JSON.stringify(old.localizations||{})!==JSON.stringify(row.localizations||{})) {
       throw Error(`Révision immuable : ${row.slug}@${revision} pointe déjà vers un autre contenu.`);
     }
     entries.splice(existing, 1);
@@ -101,6 +131,15 @@ for (const e of entries) {
   const key = `${e.slug}@${e.revision}`;
   if (names.has(key) || !/^data\/pack-[a-f\d]{64}\.json$/.test(e.path) || !/^sha256:[a-f\d]{64}$/.test(e.sha256)) throw Error('Catalogue incohérent');
   names.add(key);
+  for(const [tag,desc] of Object.entries(e.localizations||{})) {
+    validateLocaleDescriptor(tag,desc);
+    if(!staged.has(desc.path)){
+      const prev=fs.readFileSync(path.join(output,desc.path));
+      if(prev.length!==desc.bytes||`sha256:${digest(prev)}`!==desc.sha256)
+        throw Error('Ancienne traduction modifiée : '+desc.path);
+      staged.set(desc.path,prev);
+    }
+  }
   if (!staged.has(e.path)) {
     const previousFile = path.join(output, e.path);
     const bytes = fs.readFileSync(previousFile);
@@ -112,7 +151,7 @@ const catalog = { format:'konstellation.light-catalog/1.0',
   notice: 'Navigation dérivée. Aucun contrôle de signature, publication, activation ou autorité sémantique.',
   entries };
 staged.set('data/catalog.json', json(catalog));
-for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','style.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
+for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','multilingual-read.mjs','style.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
 // Same SVG supplied for the brand and the favicon; static, local and no external requests.
 staged.set('assets/logo_k.svg', fs.readFileSync(path.join(root, 'light/src/assets/logo_k.svg')));
 staged.set('.nojekyll', Buffer.from(''));
@@ -135,7 +174,7 @@ const backup = path.join(outputParent, `.light-backup-${path.basename(temp)}`);
 let backedUp = false;
 try {
   for (const [rel, bytes] of staged) {
-    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|style\.css|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
+    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|lang-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|multilingual-read\.mjs|style\.css|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
     const target = path.join(temp, rel);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, bytes);

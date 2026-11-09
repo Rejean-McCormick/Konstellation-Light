@@ -70,7 +70,21 @@ try {
  if(portraitFiles.size)fs.mkdirSync(path.join(tmp,'images'));
  for(const [name,bytes] of portraitFiles)fs.writeFileSync(path.join(tmp,name),bytes);
  for(const name of ['index.html','app.js','style.css','sw.js','graph-core.mjs','profile.mjs','semantic-display.mjs'])fs.copyFileSync(path.join(root,'light/src',name),path.join(tmp,name));
- fs.mkdirSync(path.join(tmp,'assets'));fs.copyFileSync(path.join(root,'light/src/assets/logo_k.svg'),path.join(tmp,'assets/logo_k.svg'));
+ const logo=path.join(root,'light/src/assets/uckk-logo.svg');
+ if(fs.existsSync(logo)){
+  fs.mkdirSync(path.join(tmp,'assets'));
+  fs.copyFileSync(logo,path.join(tmp,'assets/uckk-logo.svg'));
+ }else{
+  const index=path.join(tmp,'index.html'),worker=path.join(tmp,'sw.js');
+  const page=fs.readFileSync(index,'utf8').replace(/<link[^>]+uckk-logo\.svg[^>]*>\s*/g,'')
+                  .replace(/<img[^>]+uckk-logo\.svg[^>]*>/g,'');
+  fs.writeFileSync(index,page);
+  fs.writeFileSync(worker,fs.readFileSync(worker,'utf8').replace(",'./assets/uckk-logo.svg'",''));
+ }
+ const worker=path.join(tmp,'sw.js');
+ fs.writeFileSync(worker,fs.readFileSync(worker,'utf8')
+                 .replace('konstellation-light-public-v7','konstellation-light-preview-'+hash)
+                 .replace("startsWith('konstellation-light-public-')","startsWith('konstellation-light-preview-')"));
  fs.writeFileSync(path.join(tmp,row.path),bytes);fs.writeFileSync(path.join(tmp,'data/catalog.json'),json(catalog));fs.writeFileSync(path.join(tmp,'.nojekyll'),'');
  fs.renameSync(tmp,out);
 }finally{if(fs.existsSync(tmp))fs.rmSync(tmp,{recursive:true,force:true});}

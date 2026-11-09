@@ -1,6 +1,7 @@
 import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges} from './graph-core.mjs';
 import {portraitFor, orbitPreview} from './profile.mjs';
 import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, publicConceptLabel} from './semantic-display.mjs';
+import {validateLocalization, validateLocaleDescriptor, localizationMap, relationLocalizationMap} from './multilingual-read.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
 // All untrusted labels are inserted with textContent; no semantic authority is inferred.
 const $ = (id) => document.getElementById(id);
@@ -18,9 +19,10 @@ const svgElement = (tag, attributes = {}) => {
 const short = (s, n = 34) => String(s).length > n ? `${String(s).slice(0, n - 1)}…` : String(s);
 // Human-readable labels are ONLY a rendering function; node IDs and predicates are unchanged.
 const isKnowledge = () => state.bundle?.view_kind === 'derived-public-knowledge';
-const displayNode = n => isKnowledge() && n.technical_identifier ? `Identifiant externe${n.property_code ? ` (${n.property_code})` : ''}` : isKnowledge() && isUnlabeledKnowledge(n) ? 'Notion sans nom' : state.bundle?.view_kind === 'derived-semantic-preview' ? readableNodeLabel(n.label, n.kind) : isKnowledge() ? publicConceptLabel(n.label) : n.label;
-const displayRelation = relation => isKnowledge() ? publicRelationLabel(relation, state.bundle.relation_labels?.[relation]) : state.bundle?.view_kind === 'derived-semantic-preview' ? semanticLabel(relation) : relation.replaceAll('_', ' ');
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false };
+const displayNode = n => (state.localized?.get(n.id)?.label || (isKnowledge() && n.technical_identifier ? `Identifiant externe${n.property_code ? ` (${n.property_code})` : ''}` : isKnowledge() && isUnnamedForVisitor(n) ? 'Notion sans nom' : state.bundle?.view_kind === 'derived-semantic-preview' ? readableNodeLabel(n.label, n.kind) : isKnowledge() ? publicConceptLabel(n.label) : n.label));
+const isUnnamedForVisitor=n=>isUnlabeledKnowledge(n)&&!state.localized?.get(n.id)?.label;
+const displayRelation = relation => (state.localizedRelations?.get(relation)?.label || (isKnowledge() ? publicRelationLabel(relation, state.bundle.relation_labels?.[relation]) : state.bundle?.view_kind === 'derived-semantic-preview' ? semanticLabel(relation) : relation.replaceAll('_', ' ')));
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, locale:null, localized:null, localizedRelations:null, localeCache:new Map() };
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
@@ -30,6 +32,7 @@ function urlState() {
   if (state.selection) p.set('focus', state.selection); else p.delete('focus');
   if (state.query) p.set('q', state.query); else p.delete('q');
   if (state.showUnnamed) p.set('ids','1'); else p.delete('ids');
+  if(state.locale)p.set('lang',state.locale);else p.delete('lang');
   if (state.embed) p.set('embed', '1'); else p.delete('embed');
   history.replaceState(null, '', `${location.pathname}?${p.toString()}${location.hash}`);
   const full = new URL(location.href); full.searchParams.delete('embed');
@@ -124,6 +127,34 @@ function fillSelect(select, options, selected) {
   for (const [value, label] of options) { const opt = element('option', '', label); opt.value = value; select.append(opt); }
   select.value = selected;
 }
+async function loadLocalization(tag) {
+  if(!tag){state.locale=null;state.localized=null;state.localizedRelations=null;return;}
+  const desc=lookup(state.slug,state.revision)?.localizations?.[tag];
+  if(!desc) throw Error('Traduction non disponible dans cette version.');
+  validateLocaleDescriptor(tag,desc);
+  const key=desc.sha256;
+  let doc=state.localeCache.get(key);
+  if(!doc){
+    const res=await fetch(`./${desc.path}`,{cache:'no-store'});
+    if(!res.ok)throw Error('Fichier de langue indisponible.');
+    const bytes=await res.arrayBuffer();
+    if(bytes.byteLength!==desc.bytes||`sha256:${await sha256(bytes)}`!==desc.sha256)
+      throw Error('Intégrité du fichier de langue invalide.');
+    doc=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+    validateLocalization(doc,state.bundle);
+    state.localeCache.set(key,doc);
+  }
+  validateLocalization(doc,state.bundle);
+  state.locale=tag;state.localized=localizationMap(doc);state.localizedRelations=relationLocalizationMap(doc);
+}
+function renderLocalizationSelector(preferred){
+  const row=lookup(state.slug,state.revision),tags=Object.keys(row?.localizations||{}).sort();
+  $('localization-row').hidden=tags.length===0;
+  const options=[['','Texte original'],...tags.map(x=>[x,x])];
+  fillSelect($('localization'),options,tags.includes(preferred)?preferred:'');
+  $('localization-status').textContent=tags.length?'Les textes révisés disponibles sont chargés à la demande.':'Aucune traduction ajoutée.';
+  return tags.includes(preferred)?preferred:null;
+}
 async function setChoice(slug, revision, { keepFocus = false } = {}) {
   const row = lookup(slug, revision);
   if (!row) return;
@@ -132,8 +163,11 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
     const data = await loadPack(row);
     state.slug = slug; state.revision = revision; state.bundle = data; state.portraitId = null;
     const validFocus = keepFocus && data.nodes.some(n => n.id === state.selection);
-    if (!validFocus) state.selection = (data.nodes.find(n => !n.technical_identifier && !isUnlabeledKnowledge(n)) || data.nodes[0])?.id || null;
+    if (!validFocus) state.selection = (data.nodes.find(n => !n.technical_identifier && !isUnnamedForVisitor(n)) || data.nodes[0])?.id || null;
     state.history = state.selection ? [state.selection] : [];
+    state.localized=null;state.localizedRelations=null;state.locale=null;
+    const desiredLanguage=renderLocalizationSelector(state.requestedLocale);
+    if(desiredLanguage){await loadLocalization(desiredLanguage);$('localization-status').textContent=`${desiredLanguage} · contenu révisé`;}
     fillSelect($('collection'), [...new Set(state.catalog.entries.map(e => e.slug))].map(s => [s, publicKristalTitle(s,state.catalog.entries.find(e=>e.slug===s).title)]).sort((a,b)=>a[1].localeCompare(b[1],'fr')), slug);
     const versions=existingRevisions(slug);
     fillSelect($('revision'), versions.map((x,i) => [x.revision, `Version ${i+1}`]), revision);
@@ -150,11 +184,11 @@ function showFailure(err) {
   notify(/(?:SHA-256|intégrité|invalide|non conforme|incorrect)/i.test(err.message) ? 'Intégrité ou format à vérifier.' : 'Lecture interrompue : voir le message ci-dessus.');
 }
 function filteredNodes() {
-  const q = state.query.toLocaleLowerCase('fr').trim();
-  if (!q) return isKnowledge() ? state.bundle.nodes.filter(n=>!n.technical_identifier && (state.showUnnamed || !isUnlabeledKnowledge(n))) : state.bundle.nodes;
+  const q = state.query.toLocaleLowerCase(state.locale||'fr').trim();
+  if (!q) return isKnowledge() ? state.bundle.nodes.filter(n=>!n.technical_identifier && (state.showUnnamed || !isUnnamedForVisitor(n))) : state.bundle.nodes;
   const terms = q.split(/\s+/).filter(Boolean);
   if (state.bundle.view_kind === 'derived-semantic-preview') return state.bundle.nodes.filter(n => semanticQueryMatch(n, q));
-  return state.bundle.nodes.filter(n => terms.every(t => `${n.label} ${displayNode(n)} ${n.id} ${n.description || ''} ${n.kind}`.toLocaleLowerCase('fr').includes(t)));
+  return state.bundle.nodes.filter(n => terms.every(t => `${n.label} ${displayNode(n)} ${n.id} ${n.description || ''} ${state.localized?.get(n.id)?.definition||''} ${n.kind}`.toLocaleLowerCase(state.locale||'fr').includes(t)));
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
@@ -174,7 +208,7 @@ function render() {
   $('title').textContent = publicKristalTitle(data.slug,data.title);
   const semantic = data.view_kind === 'derived-semantic-preview';
   $('subtitle').textContent = isKnowledge() ? 'Explorez les notions, les valeurs et leurs liens dans ce Kristal.' : semantic ? 'Aperçu local de connaissances en cours de préparation (non publié).' : 'Explorez les fichiers et les liens disponibles dans ce Kristal.';
-  $('metric-members').textContent = Number(isKnowledge() ? data.nodes.filter(n=>!n.technical_identifier && (state.showUnnamed || !isUnlabeledKnowledge(n))).length : data.nodes.length).toLocaleString('fr-FR');
+  $('metric-members').textContent = Number(isKnowledge() ? data.nodes.filter(n=>!n.technical_identifier && (state.showUnnamed || !isUnnamedForVisitor(n))).length : data.nodes.length).toLocaleString('fr-FR');
   $('metric-relations').textContent = Number(data.edges.length).toLocaleString('fr-FR');
   $('metric-members-label').textContent = isKnowledge() ? (state.showUnnamed ? 'NOTIONS ET VALEURS' : 'ÉLÉMENTS NOMMÉS') : 'ÉLÉMENTS À EXPLORER';
   $('metric-relations-label').textContent = isKnowledge() ? 'LIENS DÉCLARÉS' : 'LIENS DISPONIBLES';
@@ -217,7 +251,7 @@ function drawGraph(target, visible) {
   const selected=all.find(n=>n.id===state.selection)||all[0];
   if (!selected) { target.append(element('div','empty','Aucun nœud disponible.'));return; }
   const matched=state.query.trim() ? new Set(visible.map(n=>n.id)) : null;
-  const unnamedIds=isKnowledge() && !state.showUnnamed && !state.query.trim() && !isUnlabeledKnowledge(selected) ? new Set(all.filter(isUnlabeledKnowledge).map(n=>n.id)) : null;
+  const unnamedIds=isKnowledge() && !state.showUnnamed && !state.query.trim() && !isUnnamedForVisitor(selected) ? new Set(all.filter(isUnnamedForVisitor).map(n=>n.id)) : null;
   const displayEdges=isKnowledge() ? readableKnowledgeEdges(all,state.bundle.edges,selected.id).filter(e=>!unnamedIds || (!unnamedIds.has(e.from) && !unnamedIds.has(e.to))) : state.bundle.edges;
   const view=graphNeighborhood(all,displayEdges,selected.id,state.satellites,matched);
   const neighborIndex=buildNeighborIndex(all,displayEdges);
@@ -260,7 +294,7 @@ function drawGraph(target, visible) {
     group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?43:23}));
     const sym=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});sym.textContent=central?'✳':'◇';group.append(sym);
     const label=svgElement('text',{x:p.x,y:p.y+(central?59:38)});label.textContent=short(displayNode(n),central?32:24);group.append(label);
-    const tip=svgElement('title');tip.textContent=publicDescription(n.description)||displayNode(n);group.append(tip);
+    const tip=svgElement('title');tip.textContent=state.localized?.get(n.id)?.definition||publicDescription(n.description)||displayNode(n);group.append(tip);
     group.addEventListener('click',()=>focusOn(n.id));
     group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(n.id);}});
     if(!central){group.addEventListener('mouseenter',()=>showPreview(n));group.addEventListener('mouseleave',clearPreview);
@@ -296,8 +330,8 @@ function drawRegistry(target, nodes) {
   if (!pageItems.length) target.append(element('div','empty','Aucun élément dans cette page.'));
   for(const n of pageItems) {
     const btn=element('button',`record ${state.selection===n.id?'selected':''}`);btn.type='button';
-    const content=element('main');content.append(element('strong','',isUnlabeledKnowledge(n) ? `Notion sans nom · ${n.label}` : displayNode(n)));
-    const description=publicDescription(n.description);if(description)content.append(element('small','',short(description,140)));
+    const content=element('main');content.append(element('strong','',isUnnamedForVisitor(n) ? `Notion sans nom · ${n.label}` : displayNode(n)));
+    const description=state.localized?.get(n.id)?.definition || publicDescription(n.description);if(description)content.append(element('small','',short(description,140)));
     btn.append(content,element('em','',publicNodeKind(n.kind)));btn.addEventListener('click',()=>focusOn(n.id));container.append(btn);
   }
   target.append(container);
@@ -362,9 +396,11 @@ function drawInspection(){
   const target=$('inspection');target.replaceChildren();const d=state.bundle;
   const n=d.nodes.find(x=>x.id===state.selection);
   if (!n){target.append(element('p','','Choisissez une notion sur la carte.'));return;}
-  target.append(element('span','kind',publicNodeKind(n.kind)),element('h3','',isUnlabeledKnowledge(n) ? `Notion sans nom (${n.label})` : displayNode(n)));
-  const description=publicDescription(n.description);
-  if(description)target.append(element('p','node-description',description));
+  target.append(element('span','kind',publicNodeKind(n.kind)),element('h3','',isUnnamedForVisitor(n) ? `Notion sans nom (${n.label})` : displayNode(n)));
+  const localizedDefinition=state.localized?.get(n.id)?.definition;
+  const description=localizedDefinition || publicDescription(n.description);
+  if(description)target.append(element('p',localizedDefinition?'node-definition':'node-description',description));
+  if(state.locale && !state.localized?.has(n.id)) target.append(element('p','subtle-hint',`Aucun texte révisé en ${state.locale} pour cette notion : affichage de la version d’origine.`));
   if(n.period||n.source){const info=element('dl','public-node-facts');
     if(n.period)addDefinition(info,'Période',n.period);
     if(n.source)addDefinition(info,'Source mentionnée',n.source);
@@ -381,7 +417,7 @@ function drawInspection(){
       const other=nodeById.get(edge.from===n.id?edge.to:edge.from);
       if(!other)return;
       const button=element('button','relation-entry');button.type='button';
-      button.append(element('strong','',isUnlabeledKnowledge(other)?`Notion sans nom (${other.label})`:displayNode(other)),
+      button.append(element('strong','',isUnnamedForVisitor(other)?`Notion sans nom (${other.label})`:displayNode(other)),
         element('small','',displayRelation(edge.relation)));
       button.addEventListener('click',()=>focusOn(other.id));list.append(button);
     };
@@ -398,7 +434,7 @@ function drawInspection(){
           const other=nodeById.get(edge.from===n.id?edge.to:edge.from);
           if(!other)continue;
           const button=element('button','relation-entry');button.type='button';
-          button.append(element('strong','',isUnlabeledKnowledge(other)?`Notion sans nom (${other.label})`:displayNode(other)),element('small','',displayRelation(edge.relation)));
+          button.append(element('strong','',isUnnamedForVisitor(other)?`Notion sans nom (${other.label})`:displayNode(other)),element('small','',displayRelation(edge.relation)));
           button.addEventListener('click',()=>focusOn(other.id));holder.append(button);
         }
         offset=limit;load.hidden=offset>=related.length;
@@ -485,6 +521,7 @@ async function main(){
   state.lens=['constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
   state.selection=params.get('focus'); state.satellites=clampSatellites(params.get('n')||8);
   state.showUnnamed=params.get('ids')==='1';$('show-unnamed').checked=state.showUnnamed;
+  state.requestedLocale=params.get('lang')||null;
   try {
     const res=await fetch('./data/catalog.json',{cache:'no-cache'});if(!res.ok)throw Error('Catalogue indisponible');
     const catalog=await res.json();
@@ -498,13 +535,21 @@ async function main(){
 }
 $('collection').addEventListener('change',()=>{const s=$('collection').value;state.page=0;state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
+$('localization').addEventListener('change',async()=>{
+  const selected=$('localization').value;
+  try{await loadLocalization(selected||null);state.requestedLocale=state.locale;
+    $('localization-status').textContent=state.locale?`${state.locale} · contenu révisé`:'Texte d’origine du Kristal';
+    state.page=0;render();urlState();
+  }catch(e){$('localization-status').textContent=e.message;notify('Fichier de langue refusé : '+e.message);
+    $('localization').value=state.locale||'';}
+});
 $('show-unnamed').addEventListener('change',()=>{state.showUnnamed=$('show-unnamed').checked;state.page=0;render();urlState();});
 for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.lens=btn.dataset.lens;state.page=0;render();urlState();});
 $('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;render();urlState();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
 $('satellites').addEventListener('input',()=>{state.satellites=clampSatellites($('satellites').value);render();urlState();});
 $('graph-back').addEventListener('click',()=>{if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();});
-$('graph-home').addEventListener('click',()=>{if(!state.bundle)return;const home=state.bundle.nodes.find(n=>!n.technical_identifier&&!isUnlabeledKnowledge(n))||state.bundle.nodes[0];if(home)focusOn(home.id);});
+$('graph-home').addEventListener('click',()=>{if(!state.bundle)return;const home=state.bundle.nodes.find(n=>!n.technical_identifier&&!isUnnamedForVisitor(n))||state.bundle.nodes[0];if(home)focusOn(home.id);});
 $('reset').addEventListener('click',()=>{state.page=0;state.query='';$('search').value='';render();urlState();});
 $('share').addEventListener('click',async()=>{urlState();try{await navigator.clipboard.writeText(location.href);notify('Lien de navigation copié.');}catch{notify(`Copiez l’URL du navigateur pour partager la vue.`);}});
 $('export').addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';
@@ -514,7 +559,7 @@ $('offline').addEventListener('click',async()=>{
  if(!('serviceWorker' in navigator)){notify('Mode hors ligne indisponible dans ce navigateur.');return;}
  try{const reg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;
  const row=lookup(state.slug,state.revision);const worker=reg.active||reg.waiting||reg.installing;
- worker?.postMessage({type:'KEEP',urls:['./data/catalog.json',`./${row.path}`]});notify('Cache local public activé. Revérifiez les versions après reconnexion.');}
+ worker?.postMessage({type:'KEEP',urls:['./data/catalog.json',`./${row.path}`,...(state.locale?[`./${row.localizations[state.locale].path}`]:[])]});notify('Cache local public activé. Revérifiez les versions après reconnexion.');}
  catch(e){notify(`Mode hors ligne non activé : ${e.message}`);}
 });
 const networkStatus = () => { $('mode-label').textContent = navigator.onLine ? 'Consultation en lecture seule' : 'Hors ligne · version enregistrée'; };

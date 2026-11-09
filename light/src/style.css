@@ -98,3 +98,10 @@
   .advanced-tools>nav {display:flex;flex-wrap:wrap;gap:6px}
   .advanced-tools .view {width:auto}
 }
+
+/* Optional, lazy multilingual reader sidecars. The rest of the UI is still French. */
+.localization-row { display:grid; gap:8px; padding:10px 0 12px; }
+.localization-row[hidden] {display:none;}
+.localization-row select {width:100%; min-width:0; padding:10px; border-radius:7px;}
+.localization-row small {color:var(--muted, #778);line-height:1.45;}
+.node-definition {white-space:pre-line;overflow-wrap:anywhere;}

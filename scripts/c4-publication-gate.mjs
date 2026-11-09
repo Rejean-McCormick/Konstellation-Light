@@ -6,11 +6,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { validateLocalization,validateLocaleDescriptor } from '../shared/multilingual-read.mjs';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = b => createHash('sha256').update(b).digest('hex');
 const PACK = /^data\/pack-([a-f0-9]{64})\.json$/;
-const optionalLocal = new Set(['semantic-display.mjs','assets/logo_k.svg']);
+const optionalLocal = new Set(['semantic-display.mjs','multilingual-read.mjs','assets/logo_k.svg']);
 const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'profile.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
 const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
 export class C4GateError extends Error { constructor(code,message) {super(message);this.name='C4GateError';this.code=code;} }
@@ -24,7 +25,7 @@ function filesUnder(root) {
       if(ent.isDirectory()) walk(absolute);
       else if(ent.isFile()) seen.push(path.relative(root,absolute).split(path.sep).join('/'));
       else reject('SPECIAL_FILE_DENIED','Special files are forbidden.');
-      if(seen.length>1006) reject('SITE_TOO_LARGE','Excessive site file count.');
+      if(seen.length>6000) reject('SITE_TOO_LARGE','Excessive site file count.');
     }
   }
   walk(root);return seen;
@@ -63,6 +64,21 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
        !['derived-hosting-navigation','derived-semantic-preview','derived-public-knowledge'].includes(bundle.view_kind))
        reject('BUNDLE_INVALID','Bundle identity or representation invalid.');
     allowed.add(entry.path);
+    const localized=entry.localizations||{};
+    if(!localized||typeof localized!=='object'||Array.isArray(localized)||Object.keys(localized).length>64)
+      reject('LOCALES_INVALID','Invalid localization descriptors.');
+    for(const [locale,descriptor] of Object.entries(localized)) {
+      try{validateLocaleDescriptor(locale,descriptor);}catch{reject('LOCALE_DESCRIPTOR_INVALID','Invalid locale reference.');}
+      const file=path.join(root,descriptor.path);
+      if(!fs.existsSync(file))reject('LOCALE_FILE_MISSING','Referenced locale missing.');
+      const data=fs.readFileSync(file);
+      if(data.length!==descriptor.bytes||`sha256:${sha(data)}`!==descriptor.sha256)
+        reject('LOCALE_TAMPERED','Locale digest or size does not match.');
+      let local;
+      try{local=JSON.parse(data);validateLocalization(local,bundle);}catch(e){reject('LOCALE_INVALID',e.message);}
+      if(local.locale!==locale)reject('LOCALE_INVALID','Language tag mismatch.');
+      allowed.add(descriptor.path);
+    }
   }
   // Recognize one additional JS presentation asset for review-only local builds.
   // Its presence always prevents the Pages-demo pin from matching.

@@ -23,9 +23,11 @@ from zipfile import ZipFile, ZIP_DEFLATED
 ROOT = Path(__file__).resolve().parents[1]
 SHA256 = re.compile(r"sha256:[0-9a-f]{64}\Z")
 PACK_PATH = re.compile(r"data/pack-[0-9a-f]{64}\.json\Z")
+LANG_PATH = re.compile(r"data/lang-([0-9a-f]{64})\.json\Z")
+LANG_TAG = re.compile(r"[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*\Z")
 IMAGE_PATH = re.compile(r"\./images/([0-9a-f]{64})\.(png|jpg|jpeg|webp|gif)\Z")
 SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "profile.mjs", "style.css", "sw.js", "data/catalog.json"}
-SITE_OPTIONAL = {"semantic-display.mjs", "assets/logo_k.svg"}  # New local builds only; not bundled C4 demo.
+SITE_OPTIONAL = {"semantic-display.mjs", "multilingual-read.mjs", "assets/logo_k.svg"}  # New local builds only; not bundled C4 demo.
 
 
 class LightError(ValueError):
@@ -85,6 +87,54 @@ def validated_site(site: Path) -> dict:
         if parsed.get("format") != "konstellation.light-navigation/1.0" or parsed.get("semantic_authority") is not False:
             raise LightError(f"Données de navigation invalides : {rel}")
         permitted.add(rel)
+        locales = entry.get('localizations', {})
+        if not isinstance(locales, dict) or len(locales)>64:raise LightError('Références des langues invalides.')
+        for tag, descriptor in locales.items():
+            if not isinstance(tag,str) or not LANG_TAG.fullmatch(tag) or not isinstance(descriptor,dict) or set(descriptor)!={'path','sha256','bytes'}:
+                raise LightError('Référence de langue invalide.')
+            lr,ld,lb=descriptor['path'],descriptor['sha256'],descriptor['bytes']
+            match=LANG_PATH.fullmatch(lr) if isinstance(lr,str) else None
+            if not match or not isinstance(ld,str) or not SHA256.fullmatch(ld) or match.group(1)!=ld[7:]:
+                raise LightError('Fichier de langue/empreinte incohérent.')
+            if not isinstance(lb,int) or isinstance(lb,bool) or lb<1 or lb>4*1024*1024:
+                raise LightError('Taille de langue invalide.')
+            filename=site/lr
+            if not filename.is_file() or filename.is_symlink():raise LightError('Fichier de langue absent ou dangereux.')
+            language_bytes=filename.read_bytes()
+            if len(language_bytes)!=lb or 'sha256:'+hashlib.sha256(language_bytes).hexdigest()!=ld:
+                raise LightError('Fichier de langue modifié.')
+            language=json.loads(language_bytes)
+            if (not isinstance(language,dict) or language.get('format')!='konstellation.multilingual-read/1.0' or
+                language.get('locale')!=tag or language.get('slug')!=entry.get('slug') or
+                language.get('state_ref')!=parsed.get('state_ref') or
+                language.get('surface_digest')!=parsed.get('surface_digest') or
+                language.get('authority')!='derived_non_authoritative' or
+                not isinstance(language.get('entries'),list) or len(language['entries'])>12000):
+                raise LightError('Lien de langue au Kristal invalide.')
+            node_ids={n['id'] for n in parsed.get('nodes',[])}
+            seen_nodes=set()
+            for item in language['entries']:
+                if not isinstance(item,dict) or item.get('node_id') not in node_ids or item['node_id'] in seen_nodes:
+                    raise LightError('Identité multilingue inconnue ou répétée.')
+                seen_nodes.add(item['node_id'])
+                pr=item.get('provenance')
+                if (not isinstance(pr,dict) or pr.get('review_status')!='reviewed' or
+                    not isinstance(pr.get('review_ref'),str) or not pr['review_ref'].strip()):
+                    raise LightError('Texte linguistique non révisé.')
+            rels=language.get('relations',[])
+            if not isinstance(rels,list) or len(rels)>5000:raise LightError('Libellés des relations invalides.')
+            rel_ids={e['relation'] for e in parsed.get('edges',[])}
+            seen_rel=set()
+            for item in rels:
+                if not isinstance(item,dict) or item.get('relation_id') not in rel_ids or item['relation_id'] in seen_rel:
+                    raise LightError('Libellé de relation inconnu ou répété.')
+                seen_rel.add(item['relation_id'])
+                if not isinstance(item.get('label'),str) or not item['label'].strip():
+                    raise LightError('Traduction de relation vide.')
+                pr=item.get('provenance')
+                if not isinstance(pr,dict) or pr.get('review_status')!='reviewed' or not pr.get('review_ref'):
+                    raise LightError('Relation non révisée.')
+            permitted.add(lr)
         for node in parsed.get('nodes', []):
             if not isinstance(node, dict):
                 raise LightError('Nœud du bundle invalide.')
