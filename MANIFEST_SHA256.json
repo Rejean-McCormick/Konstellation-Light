@@ -1,19 +1,102 @@
 {
-  "format": "konstellation.light-local-bundle-transport-hotfix/1.0",
-  "date": "2026-11-08",
-  "changes": [
-    {
-      "path": "light/src/app.js",
-      "sha256": "75a7850f3336a49d13b07fa1039e26924208985b50c91418e106fedefafaddb0",
-      "expected_previous_sha256": "69724a484d0f03b64115dedc24c00be2f012619a88475bbb9a39eab00f042888",
-      "size": 36052
+  "files": {
+    "LANCER_APERCU_CUMULATIF.cmd": {
+      "bytes": 418,
+      "sha256": "sha256:8579ae852ca1574cc0cf5ddfb7763a7748d68024a51bc7a8e241b827eb234548"
     },
-    {
-      "path": "tools/light_core.py",
-      "sha256": "63c4b4b259296e1250c2160df3a1740f11621e2d89f3f037e0cc734d86b38a26",
-      "expected_previous_sha256": "a91f6fe7b2d4203fef3ae9e97fc1c58e2cb5498e27e90a7ce3268b376718a5ac",
-      "size": 15924
+    "LANCER_APERCU_CUMULATIF_PS7.ps1": {
+      "bytes": 488,
+      "sha256": "sha256:50d1d0e97e7055dbfccfdd31855a6ded85b086b8032d89fbc5774470e7a35abc"
+    },
+    "LISEZ_MOI.md": {
+      "bytes": 5098,
+      "sha256": "sha256:8b8852fba752273371ca6cccdf21649c688213ac70f81f89e5884966fd435e0a"
+    },
+    "OUVRIR_RAPPORT.cmd": {
+      "bytes": 313,
+      "sha256": "sha256:837eef38b78befc72b4686263abb183ab3d612fce59f9425cb0a6353c881f0e3"
+    },
+    "RAPPORT_TESTS.md": {
+      "bytes": 3088,
+      "sha256": "sha256:aacf3e48a65c74b28c584c07c1b69d35f21bcdffe29700a5199c47b285e064b6"
+    },
+    "brand/logo_k.svg": {
+      "bytes": 1578,
+      "sha256": "sha256:6b02eaf8ab47803f58e8fd56c942c9438639c7a303fdb6a5ba4c5a3f9e137b28"
+    },
+    "candidate-visual.mjs": {
+      "bytes": 6588,
+      "sha256": "sha256:19ebdcefe3c56ef92dff36cf948f076828bb19298b5e9127b23c4517b6a3c3c0"
+    },
+    "definitions.html": {
+      "bytes": 5199,
+      "sha256": "sha256:0ac14ef85e2032b12a877859d39dee9ec61c0ccccb699cbdea3ad2ab9f84bdf2"
+    },
+    "definitions.mjs": {
+      "bytes": 6015,
+      "sha256": "sha256:05c239a0a6c6ebe58264165eee904326257e16d08d1238ff6ca0c4d762bcdd6c"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00001_d86232ddf515.zip": {
+      "bytes": 29895,
+      "sha256": "sha256:05dd06cb88df5acd7a643fbf900fff80369b523c74d389863f2ef1ea35caca31"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00002_d86232ddf515.zip": {
+      "bytes": 27473,
+      "sha256": "sha256:0a65db1b7eb993b55001413198825cab8eeb03c9a838469c921e1ab6f63302e4"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00003_d86232ddf515.zip": {
+      "bytes": 21280,
+      "sha256": "sha256:6478128a0e80b38bdf07513b2ed4a7516c92162a7877dad71fea73c8f0da8183"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00004_d86232ddf515.zip": {
+      "bytes": 30458,
+      "sha256": "sha256:141224e7f51a108d04f5dc35039e34f10ed3fea9c5c9360f6ff318b43b8f4785"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00005_d86232ddf515.zip": {
+      "bytes": 40884,
+      "sha256": "sha256:310be83d49ca6e4b9609fb990c0040f2dd60bbcd214b2edb5e0247c66cbfd164"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00006_d86232ddf515.zip": {
+      "bytes": 36815,
+      "sha256": "sha256:894a3188dd161e3abc18bcce2eea4e9d00ed3a9f3bf051af037ea503cdff6e06"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00007_d86232ddf515.zip": {
+      "bytes": 33725,
+      "sha256": "sha256:a1ef2f21f54b9a6b90cc7f14f3e121ca155e62efa7a74d315363302340c11c17"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00008_d86232ddf515.zip": {
+      "bytes": 28874,
+      "sha256": "sha256:0cecca6c16b1183ff38e5c40e21fc206b5feef9014499c7eb978f450e443600b"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00009_d86232ddf515.zip": {
+      "bytes": 30226,
+      "sha256": "sha256:f38b4688082dae257423cdad67eb70053d39157e467c55cedd0943c1cb8aa304"
+    },
+    "lots/A_DEPOSER_ICI_DEFINITIONS_EXISTANTES_00010_d86232ddf515.zip": {
+      "bytes": 13491,
+      "sha256": "sha256:63705575eb106ef675ee823ec2a95825eb86d4be26d286b18517b663b058d0ab"
+    },
+    "preparer_apercu.py": {
+      "bytes": 26300,
+      "sha256": "sha256:5ee452c91d51f122cccc6b676aad2a80bb9f80483f981250c7dcc48e2e30cbbf"
+    },
+    "tests/test_candidate.mjs": {
+      "bytes": 2592,
+      "sha256": "sha256:caacc93ac8e998e0877b8e4f964acab05ccb2efafef74ab944eab54d3aff351f"
+    },
+    "tests/test_preparer_apercu.py": {
+      "bytes": 7034,
+      "sha256": "sha256:550f0c0318f4069e7f63724602b4b72b635849773d84d3cef2a61f7af0cdcfde"
+    },
+    "validation/RAPPORT_VALIDATION.md": {
+      "bytes": 3326,
+      "sha256": "sha256:dcaf2cc66eb588b40e88530f2ee2eb734818721842b983cfd598852a72b7df4e"
+    },
+    "validation/REVISION_PRIORITAIRE.jsonl": {
+      "bytes": 333177,
+      "sha256": "sha256:443e9e4257f91a41df1df79b73e3a4fdbb08023244741bd79317467b4d610dd6"
     }
-  ],
-  "scope": "Local preview only: no source Kristals, Git or Pages changes."
+  },
+  "format": "konstellation.visual-candidate-package/1.1",
+  "purpose": "Local-only candidate preview; multilingual inspector compatibility and standalone fallback; no publish"
 }

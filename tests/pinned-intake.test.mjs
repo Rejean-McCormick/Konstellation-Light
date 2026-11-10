@@ -22,7 +22,7 @@ function newFixture(t){
  const indexDigest=JSON.parse(fs.readFileSync(path.join(source,'kristals/index.json'))).index_digest;
  return {root,source,commit,indexDigest,f,out:path.join(root,'result')};
 }
-const input=p=>({repository:repo,gitUrl:p.source,commit:p.commit,indexDigest:p.indexDigest,output:p.out});
+const input=p=>({repository:repo,gitUrl:p.source,allowLocalFixture:true,commit:p.commit,indexDigest:p.indexDigest,output:p.out});
 const digestTree=dir=>fs.readdirSync(dir).sort();
 test('intake: exact SHA import of synthetic public-like collection, no qualification claim',t=>{
  const p=newFixture(t);const r=importPinnedCollection(input(p));
@@ -43,6 +43,23 @@ test('intake: rejects unexpected repository, SHA, missing index digest',t=>{
  assert.throws(()=>importPinnedCollection({...input(p),commit:'f'.repeat(12)}),/SHA-1 complet/);
  assert.throws(()=>importPinnedCollection({...input(p),indexDigest:null}),/Digest exact/);
  assert(!fs.existsSync(p.out));
+});
+test('intake: a custom Git origin must be explicitly marked as a local fixture',t=>{
+ const p=newFixture(t);
+ assert.throws(()=>importPinnedCollection({...input(p),allowLocalFixture:false}),/Custom Git origin refused/);
+ assert.throws(()=>importPinnedCollection({...input(p),gitUrl:'https://example.invalid/other.git'}),/Explicit test fixture/);
+ assert(!fs.existsSync(p.out));
+});
+test('intake: rejects a symlink in the destination ancestor, with no leftover stage',t=>{
+ const p=newFixture(t);
+ const redirected=path.join(p.root,'redirected');
+ const viaLink=path.join(p.root,'link');
+ fs.mkdirSync(redirected);
+ try {fs.symlinkSync(redirected,viaLink,'dir');}
+ catch {t.skip('Symlinks unavailable on this host');return;}
+ const out=path.join(viaLink,'result');
+ assert.throws(()=>importPinnedCollection({...input(p),output:out}),/symlink component/);
+ assert.deepEqual(fs.readdirSync(redirected),[]);
 });
 test('intake: refuses index pin mismatch without a leftover destination',t=>{
  const p=newFixture(t);

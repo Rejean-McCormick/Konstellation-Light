@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Définitions candidates · Konstellation Light</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark;background:#091916;color:#f3f9f6}
+*{box-sizing:border-box}body{margin:0}a{color:#a0e8d5}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #b8fff0;outline-offset:3px}
+header{padding:19px clamp(16px,4vw,48px);border-bottom:1px solid #2b524b;background:#102722;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+header img{width:43px;height:43px;object-fit:contain}h1{font-size:clamp(20px,2.7vw,29px);margin:0}h2{font-size:20px}header p{margin:4px 0 0;color:#b2ccc1;font-size:13px}.header-actions{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap;font-size:14px}
+.summary{padding:13px clamp(16px,4vw,48px);background:#1d3c35;color:#bce0d1;line-height:1.5;font-size:13px;border-bottom:1px solid #2f5b50}
+main{display:grid;grid-template-columns:minmax(260px,340px) minmax(0,1fr);max-width:1450px;margin:auto;min-height:calc(100vh - 170px)}aside{padding:24px clamp(16px,2.2vw,32px);border-right:1px solid #25453e;background:#0e211c}section.details{padding:26px clamp(20px,4vw,60px);min-width:0}
+label{display:block;color:#b2d8c9;font-weight:600;font-size:13px;margin-bottom:8px}select,input{width:100%;font:inherit;color:#f4f9f7;background:#16352e;border:1px solid #4b7f70;border-radius:9px;padding:11px 13px;margin:0 0 18px}input::placeholder{color:#9bb8ad}
+#notions{display:flex;flex-direction:column;gap:5px;max-height:56vh;overflow-y:auto;padding:0 3px 5px 0}#notions button{font:inherit;font-size:14px;color:#e5f0eb;text-align:left;background:none;border:1px solid transparent;border-radius:8px;padding:11px 12px;cursor:pointer;overflow-wrap:anywhere}#notions button:hover{background:#20453a}#notions button[aria-current="true"]{background:#214f42;border-color:#70bba1;font-weight:700}.warning{color:#ffce8b}#counter,#status{font-size:13px;color:#b9d7ca;margin:7px 0 14px}
+#notion-title{font-size:clamp(23px,3vw,35px);font-weight:650;margin:12px 0 10px;overflow-wrap:anywhere}#candidate-body{max-width:780px}#candidate-body .candidate-definition{margin:18px 0;padding:20px 22px;border:1px solid #4d786f;border-left:4px solid #70cbb8;border-radius:12px;background:#102e27}#candidate-body .candidate-status{font-size:13px;color:#aae4d4}#candidate-body .candidate-text{font-size:clamp(17px,2vw,20px);line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}#candidate-body .candidate-disclaimer{display:block;color:#bfd6cb;line-height:1.55}#candidate-body .candidate-flags{color:#ffd4a0;line-height:1.5;padding-left:22px}#candidate-body .candidate-sources{font-size:13px;color:#c3d9d0;margin-top:18px;overflow-wrap:anywhere}#candidate-body .candidate-sources summary{cursor:pointer}
+.info{background:#183930;border:1px solid #335b4e;border-radius:10px;padding:13px 16px;color:#cee3db;line-height:1.5;margin-top:20px;max-width:780px}#domain-description{color:#a8c4b8;font-size:14px}.links{margin-top:20px;font-size:14px}#error{color:#ffba99;white-space:pre-wrap} .subtle{color:#b3c9c0;font-size:13px}
+@media(max-width:730px){main{display:block}aside{border-right:0;border-bottom:1px solid #25453e}#notions{max-height:240px}section.details{padding:20px 18px}.header-actions{margin-left:0}}
+</style>
+</head>
+<body>
+<header>
+<img src="./assets/logo_k.svg" alt="Konstellation">
+<div><h1>Définitions candidates</h1><p>Konstellation Light · aperçu local de travail</p></div>
+<nav class="header-actions"><a href="./index.html">Carte des connaissances</a><a href="./RAPPORT_PRODUCTION_VISUELLE.json" target="_blank" rel="noopener noreferrer">Rapport de qualité</a></nav>
+</header>
+<div class="summary">Les textes sont issus des Kristals, <strong>non révisés</strong>. Les alertes servent à améliorer la qualité; elles ne bloquent pas l’exploration. Aucune publication GitHub.</div>
+<main>
+<aside>
+  <label for="kristal">Kristal</label><select id="kristal" aria-label="Choisir un Kristal"></select>
+  <label for="search">Chercher une notion ou une définition</label><input id="search" type="search" placeholder="Nom, description…" autocomplete="off">
+  <div id="counter" role="status" aria-live="polite"></div>
+  <div id="notions" aria-label="Notions avec définitions"></div>
+</aside>
+<section class="details">
+  <p id="status" aria-live="polite">Ouverture du catalogue…</p>
+  <h2 id="notion-title">Choisir une notion</h2>
+  <p id="domain-description"></p>
+  <div id="candidate-body"></div>
+  <p id="error" role="alert"></p>
+  <div class="info">Ce catalogue présente les définitions explicitement déclarées dans les graphes et conservées comme <strong>candidates</strong>. Les sources de provenance sont visibles dans chaque fiche; elles ne constituent pas une validation scientifique indépendante.</div>
+  <p class="links"><a id="open-graph" href="./index.html">Explorer ce Kristal sur la carte</a></p>
+</section>
+</main>
+<script type="module" src="./definitions.mjs"></script>
+</body>
+</html>

@@ -4,6 +4,8 @@
 
 # Konstellation Light
 
+> **Supplied 2026-11-09 snapshot limitations:** `light/src/assets/logo_k.svg` is absent, so a fresh local site build fails before a complete reader test. The existing `light/site` also fails the pinned C4 demo gate (`BLOCK_REAL_COLLECTION`). No missing brand asset or C4 pin is manufactured in this branch; a trusted source asset and deliberate publisher-owner pin review are required. Target hardening and passing subset tests are documented in [Branch 03 alignment](docs/FINAL_SYSTEM_BRANCH03.md).
+
 **Standalone Windows-oriented toolkit and static website for browsing v10 collection read surfaces with byte-integrity checks.** Actual publication authorization is **not** inferred by Light. This project is separate from the full Konstellation server. It uses a v10 collection reader, a navigation compiler and a lightweight static interface; it does not alter Kristal semantic state.
 
 ## Targeted alignment with full Konstellation — 0.5.2 (October 26, 2026)
@@ -94,3 +96,5 @@ python -m unittest discover -s tests -p "test_windows_tools.py"
 ## Ekole evolution: knowledge graph
 
 Read **[README_KONSTELLATION_LIGHT_EKOLE_NEXT.md](README_KONSTELLATION_LIGHT_EKOLE_NEXT.md)** for the 3–25 bubble slider, recentering, candidate local graphs, and the optional installation into Ekole Student. Public v10 navigation remains separate from v9 previews.
+
+> **Final-system Branch 03 alignment (2026-11-09):** See [the release/distribution/exploration integration note](docs/FINAL_SYSTEM_BRANCH03.md). The seven-owner pipeline is a target with independently gated qualification, permission, packaging and readers. This source snapshot does not authorize public publication or deployment.

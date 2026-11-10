@@ -39,16 +39,36 @@ function checkCollectionTree(parent) {
   }
   walk(main);
 }
-export function importPinnedCollection({ repository, commit, output, indexDigest, gitUrl } = {}) {
+function validateSource(repository, gitUrl, allowLocalFixture) {
+  const pinned = `https://github.com/${repository}.git`;
+  if (!gitUrl || gitUrl === pinned) return pinned;
+  // A changed clone origin is not trustworthy merely because its content has
+  // a full Git SHA and matching collection digest.
+  if (!allowLocalFixture) throw Error('Custom Git origin refused for pinned public intake.');
+  if (!path.isAbsolute(gitUrl) || !fs.existsSync(path.join(gitUrl, '.git')))
+    throw Error('Explicit test fixture must be an absolute local Git checkout.');
+  return gitUrl;
+}
+function validateOutputParent(folder) {
+  // Reject links anywhere in the ancestor chain, not just the immediate
+  // parent. Without this check a path can escape through an earlier symlink.
+  for (let current = path.resolve(folder); ; current = path.dirname(current)) {
+    if (!fs.existsSync(current) || !fs.lstatSync(current).isDirectory() || fs.lstatSync(current).isSymbolicLink())
+      throw Error('Output parent must exist and contain no symlink component.');
+    const parent = path.dirname(current);
+    if (parent === current) break;
+  }
+}
+export function importPinnedCollection({ repository, commit, output, indexDigest, gitUrl, allowLocalFixture = false } = {}) {
   if (repository !== TRUSTED_REPOSITORY) throw Error('Dépôt source non approuvé pour C4.');
   if (!COMMIT.test(commit || '')) throw Error('Commit Git SHA-1 complet requis.');
   if (!DIGEST.test(indexDigest || '')) throw Error('Digest exact de l’index de collection requis.');
   if (!output || !path.isAbsolute(output)) throw Error('Dossier de destination absolu requis.');
   const dest = path.resolve(output);
   if (fs.existsSync(dest)) throw Error('Destination déjà présente : import immuable uniquement.');
-  const targetUrl = gitUrl || `https://github.com/${repository}.git`;
+  const targetUrl = validateSource(repository, gitUrl, allowLocalFixture);
+  validateOutputParent(path.dirname(dest));
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'konstellation-import-'));
-  if (!fs.existsSync(path.dirname(dest)) || fs.lstatSync(path.dirname(dest)).isSymbolicLink()) throw Error('Parent de sortie absent ou symbolique.');
   const staging = fs.mkdtempSync(path.join(path.dirname(dest), '.konstellation-import-stage-'));
   let committed = false;
   try {
