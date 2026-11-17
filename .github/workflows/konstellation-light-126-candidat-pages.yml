@@ -1,0 +1,107 @@
+name: Konstellation Light - 126 Kristals candidat HTTPS NON publie
+
+# Complement au workflow de navigation existant. Rien n'est pousse vers Pages.
+# Le resultat est un artefact de site + un dossier de controle technique.
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Konstellation Light - 126 Kristals automated read-only audit
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: konstellation-126-candidat-https
+  cancel-in-progress: false
+
+jobs:
+  candidat-https:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Prendre le code courant sans jeton persistant
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tester le dossier candidat et les contrats de navigation existants
+        run: >-
+          node --test
+          tests/auto-navigation-126.test.mjs
+          tests/candidat-pages-126.test.mjs
+          tests/pinned-intake.test.mjs
+          tests/web-126-preparation.test.mjs
+          tests/graph-navigation.test.mjs
+      - name: Resoudre commit et index publics exacts
+        id: pin
+        run: |
+          node scripts/resoudre-pin-kristals-126.mjs \
+            --report "$RUNNER_TEMP/source-pin.json" \
+            --github-output "$GITHUB_OUTPUT" \
+            --github-summary "$GITHUB_STEP_SUMMARY"
+      - name: Importer et verifier les 126 surfaces exactes
+        env:
+          SOURCE_COMMIT: ${{ steps.pin.outputs.commit }}
+          INDEX_DIGEST: ${{ steps.pin.outputs.index_digest }}
+        run: |
+          node scripts/import-pinned-collection.mjs \
+            --repository Rejean-McCormick/kristal-public \
+            --commit "$SOURCE_COMMIT" \
+            --expected-index-digest "$INDEX_DIGEST" \
+            --out "$RUNNER_TEMP/kristal-public-pinned"
+      - name: Construire un site candidat sans deployer
+        run: |
+          node scripts/preparer-site-web-126.mjs \
+            --collection "$RUNNER_TEMP/kristal-public-pinned" \
+            --out "$RUNNER_TEMP/light-web-preview" \
+            --expected-count 126
+      - name: Installer Chromium pour la verification navigateur
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Tester le site dans Chromium
+        run: |
+          node scripts/tester-navigation-navigateur-126.mjs \
+            --site "$RUNNER_TEMP/light-web-preview" \
+            --report "$RUNNER_TEMP/NAVIGATION_BROWSER_126.json" \
+            --screenshots "$RUNNER_TEMP/screenshots"
+      - name: Verifier le candidat et dresser ses empreintes
+        run: |
+          node scripts/constituer-dossier-pages-126.mjs \
+            --site "$RUNNER_TEMP/light-web-preview" \
+            --source-report "$RUNNER_TEMP/source-pin.json" \
+            --build-report "$RUNNER_TEMP/RAPPORT_PREPARATION_SITE_WEB_126.json" \
+            --browser-report "$RUNNER_TEMP/NAVIGATION_BROWSER_126.json" \
+            --output "$RUNNER_TEMP/DOSSIER_CANDIDAT_PAGES_126.json" \
+            --checksums "$RUNNER_TEMP/SITE_SHA256SUMS.txt" \
+            --summary "$GITHUB_STEP_SUMMARY"
+      - name: Publier un artefact technique (JAMAIS GitHub Pages)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kristal-126-candidat-https-${{ github.run_id }}
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/light-web-preview/
+            ${{ runner.temp }}/source-pin.json
+            ${{ runner.temp }}/RAPPORT_PREPARATION_SITE_WEB_126.json
+            ${{ runner.temp }}/NAVIGATION_BROWSER_126.json
+            ${{ runner.temp }}/DOSSIER_CANDIDAT_PAGES_126.json
+            ${{ runner.temp }}/SITE_SHA256SUMS.txt
+            ${{ runner.temp }}/screenshots/
+      - name: Rappeler les autorisations toujours necessaires
+        if: always()
+        run: |
+          echo '### Autorisation et publication HTTPS' >> "$GITHUB_STEP_SUMMARY"
+          echo '- Aucune configuration Pages, aucun deploiement, aucun push.' >> "$GITHUB_STEP_SUMMARY"
+          echo '- C1/C2/C3 doivent provenir de responsables habilites et de racines de confiance externes.' >> "$GITHUB_STEP_SUMMARY"
+          echo '- C4 demeure volontairement BLOQUE pour la collection reelle.' >> "$GITHUB_STEP_SUMMARY"
+
+# Deliberement absent : pages:write, id-token:write, deploy-pages, release, commit, push.
