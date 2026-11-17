@@ -1,0 +1,98 @@
+name: Konstellation Light - 126 Kristals automated read-only audit
+
+# Technical preview only. No Pages, Releases, publishing or C1/C2/C3 receipts.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 11 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: konstellation-light-126-technical-audit
+  cancel-in-progress: false
+
+jobs:
+  technical-preview:
+    name: Verify published bytes, build preview and smoke-test navigation
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout reader source without persistent credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run reader and C4 regression tests
+        run: >-
+          node --test
+          tests/kristal-v10.test.mjs
+          tests/light.test.mjs
+          tests/pinned-intake.test.mjs
+          tests/public-facing-ui.test.mjs
+          tests/graph-navigation.test.mjs
+          tests/web-126-preparation.test.mjs
+          tests/auto-navigation-126.test.mjs
+      - name: Resolve and verify the exact already-public source commit and index
+        id: pin
+        run: |
+          node scripts/resoudre-pin-kristals-126.mjs \
+            --report "$RUNNER_TEMP/source-pin.json" \
+            --github-output "$GITHUB_OUTPUT" \
+            --github-summary "$GITHUB_STEP_SUMMARY"
+      - name: Import and verify all 126 public surfaces (read only)
+        env:
+          SOURCE_COMMIT: ${{ steps.pin.outputs.commit }}
+          INDEX_DIGEST: ${{ steps.pin.outputs.index_digest }}
+        run: |
+          node scripts/import-pinned-collection.mjs \
+            --repository Rejean-McCormick/kristal-public \
+            --commit "$SOURCE_COMMIT" \
+            --expected-index-digest "$INDEX_DIGEST" \
+            --out "$RUNNER_TEMP/kristal-public-pinned"
+      - name: Build read-only site and enforce publication BLOCKED status
+        run: |
+          node scripts/preparer-site-web-126.mjs \
+            --collection "$RUNNER_TEMP/kristal-public-pinned" \
+            --out "$RUNNER_TEMP/light-web-preview" \
+            --expected-count 126
+      - name: Install Chromium for browser smoke test
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Exercise navigation in Chromium (no publication)
+        run: |
+          node scripts/tester-navigation-navigateur-126.mjs \
+            --site "$RUNNER_TEMP/light-web-preview" \
+            --report "$RUNNER_TEMP/NAVIGATION_BROWSER_126.json" \
+            --screenshots "$RUNNER_TEMP/screenshots"
+      - name: Summarize read-only outcome
+        if: always()
+        run: |
+          echo '### Konstellation Light - technical preview only' >> "$GITHUB_STEP_SUMMARY"
+          echo 'This run **does not** verify C1/C2/C3 authorization and **does not** deploy GitHub Pages.' >> "$GITHUB_STEP_SUMMARY"
+          if [ -f "$RUNNER_TEMP/NAVIGATION_BROWSER_126.json" ]; then
+            node -e 'let a=require(process.argv[1]); console.log("Browser navigation: **"+a.status+"**; sampled Kristals: "+a.tested_slugs.join(", "))' "$RUNNER_TEMP/NAVIGATION_BROWSER_126.json" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Browser navigation: **not completed**; check previous steps.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo 'Pages publication: **BLOCKED pending authenticated C1/C2/C3 evidence and approved C4 gate**.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload technical evidence - never Pages
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: konstellation-126-technical-audit-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            ${{ runner.temp }}/source-pin.json
+            ${{ runner.temp }}/RAPPORT_PREPARATION_SITE_WEB_126.json
+            ${{ runner.temp }}/NAVIGATION_BROWSER_126.json
+            ${{ runner.temp }}/screenshots/
+          # The complete site can also be built by the existing 126-preview workflow.
+
+# Deliberately absent: pages:write, id-token:write, deployments, push, releases.
