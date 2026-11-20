@@ -1,4 +1,4 @@
-import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges} from './graph-core.mjs';
+import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges, connectedEntry, secondaryRing} from './graph-core.mjs';
 import {portraitFor, orbitPreview} from './profile.mjs';
 import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, publicConceptLabel} from './semantic-display.mjs';
 import {validateLocalization, validateLocaleDescriptor, localizationMap, relationLocalizationMap} from './multilingual-read.mjs';
@@ -19,10 +19,10 @@ const svgElement = (tag, attributes = {}) => {
 const short = (s, n = 34) => String(s).length > n ? `${String(s).slice(0, n - 1)}…` : String(s);
 // Human-readable labels are ONLY a rendering function; node IDs and predicates are unchanged.
 const isKnowledge = () => state.bundle?.view_kind === 'derived-public-knowledge';
-const displayNode = n => (state.localized?.get(n.id)?.label || (isKnowledge() && n.technical_identifier ? `Identifiant externe${n.property_code ? ` (${n.property_code})` : ''}` : isKnowledge() && isUnnamedForVisitor(n) ? 'Notion sans nom' : state.bundle?.view_kind === 'derived-semantic-preview' ? readableNodeLabel(n.label, n.kind) : isKnowledge() ? publicConceptLabel(n.label) : n.label));
+const displayNode = n => (state.localized?.get(n.id)?.label || (isKnowledge() && n.technical_identifier ? `Identifiant externe${n.property_code ? ` (${n.property_code})` : ''}` : isKnowledge() && isUnnamedForVisitor(n) ? `Sans nom · ${n.id.slice(-10)}` : state.bundle?.view_kind === 'derived-semantic-preview' ? readableNodeLabel(n.label, n.kind) : isKnowledge() ? publicConceptLabel(n.label) : n.label));
 const isUnnamedForVisitor=n=>isUnlabeledKnowledge(n)&&!state.localized?.get(n.id)?.label;
 const displayRelation = relation => (state.localizedRelations?.get(relation)?.label || (isKnowledge() ? publicRelationLabel(relation, state.bundle.relation_labels?.[relation]) : state.bundle?.view_kind === 'derived-semantic-preview' ? semanticLabel(relation) : relation.replaceAll('_', ' ')));
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, locale:null, localized:null, localizedRelations:null, localeCache:new Map() };
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:true, autoFocus:false, locale:null, localized:null, localizedRelations:null, localeCache:new Map() };
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
@@ -163,7 +163,11 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
     const data = await loadPack(row);
     state.slug = slug; state.revision = revision; state.bundle = data; state.portraitId = null;
     const validFocus = keepFocus && data.nodes.some(n => n.id === state.selection);
-    if (!validFocus) state.selection = (data.nodes.find(n => !n.technical_identifier && !isUnnamedForVisitor(n)) || data.nodes[0])?.id || null;
+    const activeEdges = data.view_kind === 'derived-public-knowledge'
+      ? readableKnowledgeEdges(data.nodes, data.edges, '') : data.edges;
+    const connected = data.view_kind === 'derived-public-knowledge' ? connectedEntry(data.nodes, activeEdges) : null;
+    state.autoFocus = !validFocus && Boolean(connected);
+    if (!validFocus) state.selection = connected || (data.nodes.find(n => !n.technical_identifier && !isUnnamedForVisitor(n)) || data.nodes[0])?.id || null;
     state.history = state.selection ? [state.selection] : [];
     state.localized=null;state.localizedRelations=null;state.locale=null;
     const desiredLanguage=renderLocalizationSelector(state.requestedLocale);
@@ -192,12 +196,12 @@ function filteredNodes() {
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
-  state.portraitId = null; state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
+  state.portraitId = null; state.autoFocus = false; state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
 }
 function lensMeta() {
   return {
     constellation: ['Carte des connaissances', isKnowledge() ? 'Sélectionnez une notion pour découvrir ses liens avec les autres.' : 'Cliquez sur un élément pour explorer ses liens.'],
-    registry: ['Explorer les notions', isKnowledge() ? 'Les éléments sans nom sont masqués par défaut. Vous pouvez les afficher dans Options avancées.' : 'Parcourez les éléments de ce Kristal.'],
+    registry: ['Explorer les notions', isKnowledge() ? 'Les notions sans libellé sont distinguées par leur identifiant, sans interprétation ajoutée.' : 'Parcourez les éléments de ce Kristal.'],
     trace: ['Vérification des données', 'Ce qui a été vérifié, et ce qui ne l’a pas été.'],
     compare: ['Comparer les versions', 'Éléments ajoutés, retirés ou modifiés entre deux versions.'],
   }[state.lens];
@@ -219,7 +223,7 @@ function render() {
   $('view-tag').textContent = ({constellation:'CARTE',registry:'NOTIONS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
   if (state.lens==='trace' || state.lens==='compare') $('advanced-tools').open=true;
   document.querySelectorAll('[data-lens]').forEach(btn => { btn.classList.toggle('active', btn.dataset.lens === state.lens); btn.setAttribute('aria-pressed', String(btn.dataset.lens === state.lens)); });
-  const visible = filteredNodes(); $('count').textContent = state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} éléments nommés` : `${visible.length.toLocaleString('fr-FR')} éléments`;
+  const visible = filteredNodes(); $('count').textContent = state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} éléments explorables` : `${visible.length.toLocaleString('fr-FR')} éléments`;
   const view = $('visual'); view.replaceChildren();
   if (state.lens === 'constellation') drawGraph(view, visible);
   if (state.lens === 'registry') drawRegistry(view, visible);
@@ -251,11 +255,14 @@ function drawGraph(target, visible) {
   const selected=all.find(n=>n.id===state.selection)||all[0];
   if (!selected) { target.append(element('div','empty','Aucun nœud disponible.'));return; }
   const matched=state.query.trim() ? new Set(visible.map(n=>n.id)) : null;
-  const unnamedIds=isKnowledge() && !state.showUnnamed && !state.query.trim() && !isUnnamedForVisitor(selected) ? new Set(all.filter(isUnnamedForVisitor).map(n=>n.id)) : null;
+  const unnamedIds=isKnowledge() && !state.showUnnamed && !state.query.trim() ? new Set(all.filter(n=>isUnnamedForVisitor(n)&&n.id!==selected.id).map(n=>n.id)) : null;
   const displayEdges=isKnowledge() ? readableKnowledgeEdges(all,state.bundle.edges,selected.id).filter(e=>!unnamedIds || (!unnamedIds.has(e.from) && !unnamedIds.has(e.to))) : state.bundle.edges;
   const view=graphNeighborhood(all,displayEdges,selected.id,state.satellites,matched);
   const neighborIndex=buildNeighborIndex(all,displayEdges);
   const shown=view.nodes;
+  const secondaries = !state.query.trim() && isKnowledge() && state.showUnnamed && shown.length > 1
+    ? secondaryRing(all, displayEdges, shown.slice(1), selected.id, 6) : [];
+  const secondaryIds = new Set(secondaries.map(item => item.node.id));
   const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group','aria-label':'Graphe navigable : Entrée ou clic pour recentrer sur une bulle. Survolez pour voir les satellites secondaires.'});
   const xy=new Map([[selected.id,{x:380,y:226}]]);
   const count=shown.length-1;
@@ -263,10 +270,25 @@ function drawGraph(target, visible) {
     const radius=count>13 ? 174+(i%2)*24 : 162;
     xy.set(n.id,{x:380+Math.cos(angle)*radius*1.65,y:226+Math.sin(angle)*radius});
   });
+  // Second-ring satellites appear without hovering, attached to actual
+  // first-ring edges; the labels cannot be confused with qualified semantics.
+  for (const {node, parentId} of secondaries) {
+    const parent = xy.get(parentId); if (!parent) continue;
+    const angle = Math.atan2((parent.y-226)/162, (parent.x-380)/(162*1.65));
+    xy.set(node.id,{x:380+Math.cos(angle)*312,y:226+Math.sin(angle)*194});
+  }
   for(const edge of view.edges){const a=xy.get(edge.from),b=xy.get(edge.to);
     if(!a||!b)continue;
     const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link'});
     const tooltip=svgElement('title');tooltip.textContent=displayRelation(edge.relation);line.append(tooltip);svg.append(line);
+  }
+  for (const {node, parentId} of secondaries) {
+    const a=xy.get(parentId),b=xy.get(node.id);
+    if(!a||!b)continue;
+    const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link graph-link-secondary'});
+    const source=displayEdges.find(e => (e.from===parentId&&e.to===node.id)||(e.to===parentId&&e.from===node.id));
+    const tooltip=svgElement('title');tooltip.textContent=source?displayRelation(source.relation):'Lien déclaré';line.append(tooltip);
+    svg.append(line);
   }
   let previewGroup=null;
   const clearPreview=()=>{previewGroup?.remove();previewGroup=null;};
@@ -274,7 +296,7 @@ function drawGraph(target, visible) {
     clearPreview();
     if(node.id===selected.id)return;
     // The center is already visible: exclude it from the preview satellites.
-    const secondary=previewNeighbors(neighborIndex,node.id,[selected.id],6);
+    const secondary=previewNeighbors(neighborIndex,node.id,[selected.id,...secondaryIds],6);
     if(!secondary.length)return;
     const anchor=xy.get(node.id);
     const obstacles=[...xy].map(([id,p])=>({...p,r:id===selected.id?43:25}));
@@ -290,7 +312,7 @@ function drawGraph(target, visible) {
     svg.append(previewGroup);
   };
   for(const n of shown){const p=xy.get(n.id),central=n.id===selected.id;
-    const group=svgElement('g',{class:'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${displayNode(n)}`});
+    const group=svgElement('g',{class: isUnnamedForVisitor(n) ? 'graph-node graph-node-unlabeled' : 'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${displayNode(n)}`});
     group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?43:23}));
     const sym=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});sym.textContent=central?'✳':'◇';group.append(sym);
     const label=svgElement('text',{x:p.x,y:p.y+(central?59:38)});label.textContent=short(displayNode(n),central?32:24);group.append(label);
@@ -299,6 +321,20 @@ function drawGraph(target, visible) {
     group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(n.id);}});
     if(!central){group.addEventListener('mouseenter',()=>showPreview(n));group.addEventListener('mouseleave',clearPreview);
       group.addEventListener('focus',()=>showPreview(n));group.addEventListener('blur',clearPreview);}
+    svg.append(group);
+  }
+  for (const {node} of secondaries) {
+    const p=xy.get(node.id);if(!p)continue;
+    const group=svgElement('g',{class: isUnnamedForVisitor(node) ? 'graph-node graph-node-secondary graph-node-unlabeled' : 'graph-node graph-node-secondary', 'data-layer':'secondary',
+      'data-kind':node.kind,role:'button',tabindex:'0',
+      'aria-label':`Connexion de deuxième niveau : ${displayNode(node)}`});
+    group.append(svgElement('circle',{cx:p.x,cy:p.y,r:17}));
+    const mark=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});mark.textContent='·';group.append(mark);
+    const label=svgElement('text',{x:p.x,y:p.y+(p.y<130?-23:30)});
+    label.textContent=short(displayNode(node),23);group.append(label);
+    const tip=svgElement('title');tip.textContent=state.localized?.get(node.id)?.definition||publicDescription(node.description)||displayNode(node);group.append(tip);
+    group.addEventListener('click',()=>focusOn(node.id));
+    group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(node.id);}});
     svg.append(group);
   }
   // Separate buttons, not nested inside the navigation buttons.
@@ -315,13 +351,32 @@ function drawGraph(target, visible) {
     svg.append(badge);
   }
   target.append(svg);
-  target.append(element('p','graph-hint','Cliquez sur une bulle pour explorer ses liens. Survolez-la pour découvrir d’autres notions.'));
+  if (secondaries.length) {
+    const legend=element('p','graph-layers-legend');
+    legend.append(element('span','graph-legend-direct','● Liens directs'),
+      element('span','graph-legend-secondary',`◌ ${secondaries.length} connexion(s) de deuxième niveau — liens réellement déclarés`));
+    target.append(legend);
+  }
+  target.append(element('p','graph-hint',state.autoFocus
+    ? 'Point de départ : notion existante la plus connectée. Le titre du Kristal peut désigner une notion sans lien direct.'
+    : 'Cliquez sur une bulle pour explorer ses liens. Survolez-la pour découvrir d’autres notions.'));
   if(state.portraitId){const node=all.find(n=>n.id===state.portraitId);if(node)profileCard(target,node);}
   if(isKnowledge() && !selected.technical_identifier) {
     const hidden=state.bundle.edges.filter(e=>e.from===selected.id && all.some(n=>n.id===e.to&&n.technical_identifier)).length;
     if(hidden) target.append(element('p','graph-hint',`${hidden} identifiant(s) de référence masqué(s) sur la carte; disponibles dans les détails techniques de la fiche.`));
   }
-  if(view.degree===0) target.append(element('p','graph-empty',state.query?'Aucun voisin correspondant à la recherche. Effacer la recherche pour voir les relations.':'Aucun autre lien nommé à afficher pour cette notion. Vous pouvez inclure les notions sans nom dans Options avancées.'));
+  if(view.degree===0) {
+    target.append(element('p','graph-empty',state.query
+      ? 'Aucun voisin correspondant à la recherche. Effacer la recherche pour voir les relations.'
+      : 'Cette notion n’a aucun lien directement visible dans les relations déclarées.'));
+    if (!state.query.trim()) {
+      const connected=connectedEntry(all,displayEdges);
+      if (connected && connected!==selected.id) {
+        const browse=element('button','graph-browse-connected','Explorer une notion réellement connectée');browse.type='button';
+        browse.addEventListener('click',()=>focusOn(connected));target.append(browse);
+      }
+    }
+  }
   $('truncation').textContent=`${shown.length-1} notion(s) autour du sujet · ${state.satellites} maximum à l’écran`;
 }
 function drawRegistry(target, nodes) {
@@ -520,7 +575,7 @@ async function main(){
   state.query=(params.get('q')||'').slice(0,250);$('search').value=state.query;
   state.lens=['constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
   state.selection=params.get('focus'); state.satellites=clampSatellites(params.get('n')||8);
-  state.showUnnamed=params.get('ids')==='1';$('show-unnamed').checked=state.showUnnamed;
+  state.showUnnamed=params.get('ids')!=='0';$('show-unnamed').checked=state.showUnnamed;
   state.requestedLocale=params.get('lang')||null;
   try {
     const res=await fetch('./data/catalog.json',{cache:'no-cache'});if(!res.ok)throw Error('Catalogue indisponible');
@@ -543,13 +598,20 @@ $('localization').addEventListener('change',async()=>{
   }catch(e){$('localization-status').textContent=e.message;notify('Fichier de langue refusé : '+e.message);
     $('localization').value=state.locale||'';}
 });
-$('show-unnamed').addEventListener('change',()=>{state.showUnnamed=$('show-unnamed').checked;state.page=0;render();urlState();});
+$('show-unnamed').addEventListener('change',()=>{
+  state.showUnnamed=$('show-unnamed').checked;
+  if(!state.showUnnamed && isKnowledge() && isUnnamedForVisitor(state.bundle?.nodes.find(n=>n.id===state.selection))){
+    const named=state.bundle.nodes.find(n=>!n.technical_identifier&&!isUnnamedForVisitor(n));
+    if(named){state.selection=named.id;state.history=[named.id];state.autoFocus=false;}
+  }
+  state.page=0;render();urlState();
+});
 for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.lens=btn.dataset.lens;state.page=0;render();urlState();});
 $('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;render();urlState();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
 $('satellites').addEventListener('input',()=>{state.satellites=clampSatellites($('satellites').value);render();urlState();});
 $('graph-back').addEventListener('click',()=>{if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();});
-$('graph-home').addEventListener('click',()=>{if(!state.bundle)return;const home=state.bundle.nodes.find(n=>!n.technical_identifier&&!isUnnamedForVisitor(n))||state.bundle.nodes[0];if(home)focusOn(home.id);});
+$('graph-home').addEventListener('click',()=>{if(!state.bundle)return;const nodes=state.bundle.nodes;const edges=isKnowledge()?readableKnowledgeEdges(nodes,state.bundle.edges,''):state.bundle.edges;const id=isKnowledge()?connectedEntry(nodes,edges):null;const home=nodes.find(n=>n.id===id)||nodes.find(n=>!n.technical_identifier&&!isUnnamedForVisitor(n))||nodes[0];if(home)focusOn(home.id);});
 $('reset').addEventListener('click',()=>{state.page=0;state.query='';$('search').value='';render();urlState();});
 $('share').addEventListener('click',async()=>{urlState();try{await navigator.clipboard.writeText(location.href);notify('Lien de navigation copié.');}catch{notify(`Copiez l’URL du navigateur pour partager la vue.`);}});
 $('export').addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';

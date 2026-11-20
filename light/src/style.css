@@ -105,3 +105,61 @@
 .localization-row select {width:100%; min-width:0; padding:10px; border-radius:7px;}
 .localization-row small {color:var(--muted, #778);line-height:1.45;}
 .node-definition {white-space:pre-line;overflow-wrap:anywhere;}
+
+
+/* BETA-126 visual correction — spruce green palette rooted in #1e6864.
+   Reader presentation only; canonical source data and C1-C4 are unchanged. */
+:root {
+  --brand:#1e6864;
+  --brand-hover:#287b73;
+  --brand-light:#a7e6d2;
+  --brand-soft:#174840;
+  --forest-bg:#071c19;
+  --forest-rail:#0a2420;
+  --forest-panel:#102d28;
+  --forest-raised:#14372f;
+  --forest-edge:#32675d;
+  --forest-copy:#eef9f5;
+  --forest-muted:#b4d7ca;
+  background:var(--forest-bg);
+  color:var(--forest-copy);
+}
+body,.main {background:var(--forest-bg);color:var(--forest-copy)}
+.rail {background:var(--forest-rail);border-right-color:var(--forest-edge)}
+.rail-bottom,.top,.panel-foot {border-color:var(--forest-edge)}
+.rail-label,.eyebrow,.metric span {color:#a8cfbf}
+.brand small,.field-label,.rail-bottom small,.heading p,.panel-heading p,
+.inspection,.inspection dt,.footer,.panel-foot,.record small,.graph-hint,.graph-empty {color:var(--forest-muted)}
+.rail select,.button,.search,.record,.evidence-item,.technical-details,
+.more-relations,.provenance-details {background:var(--forest-raised);border-color:var(--forest-edge);color:var(--forest-copy)}
+.rail select {background-image:linear-gradient(45deg,transparent 50%,#a7e6d2 50%),linear-gradient(135deg,#a7e6d2 50%,transparent 50%)}
+.view {color:var(--forest-muted)}
+.view:hover {background:#19473d;color:#f7fffd}
+.view.active {background:var(--brand);border-color:#72c3ab;color:white}
+.metric {background:linear-gradient(140deg,#174139,#0b2923);border-color:var(--forest-edge)}
+.explore,.inspector,.node-portrait-card {background:var(--forest-panel);border-color:var(--forest-edge)}
+.graph-controls {background:#143b34;border-color:var(--forest-edge)}
+.visual {background:radial-gradient(ellipse at 50% 40%,#154139 0%,#0c2723 75%,#081e1a 100%)}
+.search input {color:var(--forest-copy)}
+.search input::placeholder {color:#9bc5b5}
+.button.accent,.graph-controls label strong {background:var(--brand);color:white}
+.view-tag,.inspection .kind {border-color:#448779;color:#b5ead8}
+.inspection h3,.inspection dd,.inspection .relation-heading {color:var(--forest-copy)}
+.relation-entry {background:#163c34;border-color:var(--forest-edge)}
+.relation-entry:hover {background:#1f5347}
+.record:hover,.record.selected {background:#1b4c40}
+.c4-disclosure {background:#10332c;border-color:var(--brand);color:#c0e4d7}
+.c4-disclosure strong {color:#d8f9ea}
+.toast {background:#1e6864;border-color:#88d6ba;color:#fff;box-shadow:0 8px 28px #05140e}
+.graph-node circle {stroke:#7dc5ae}
+.graph-node text {fill:#e5fbf4}
+.graph-node[data-selected="true"] circle {fill:var(--brand);stroke:#b9f5de}
+.graph-node-unlabeled circle {fill:#28554a;stroke:#91c6b4;stroke-dasharray:4 3}
+.graph-node-secondary circle {fill:#225246;stroke:#9ed8bf;stroke-width:1.7;stroke-dasharray:3 3}
+.graph-node-secondary text {font-size:10px;fill:#c8f1e4}
+.graph-link-secondary {stroke:#81d7b5;stroke-width:1.4;stroke-dasharray:6 5;opacity:.85}
+.graph-layers-legend {display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:0 8px 12px;font-size:11px;color:#c5e7d9}
+.graph-legend-direct {color:#b5f1dc}
+.graph-legend-secondary {color:#9bdbbe}
+.graph-browse-connected {display:block;margin:0 auto 16px;padding:9px 13px;background:var(--brand);border:1px solid #91d7bf;border-radius:8px;color:white}
+.graph-browse-connected:hover {background:var(--brand-hover)}
