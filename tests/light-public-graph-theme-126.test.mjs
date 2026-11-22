@@ -49,13 +49,13 @@ test('les identifiants externes restent exclus de la carte publique',()=>{
 
 test('vue : secondaires visibles par défaut, retour au mode nommé disponible',()=>{
   const js=source('app.js');
-  assert.match(js,/showUnnamed:true/);
-  assert.match(js,/params\.get\('ids'\)!=='0'/);
+  assert.match(js,/showUnnamed:false/);
+  assert.match(js,/params\.get\('ids'\)==='1'/);
   assert.match(js,/const unnamedIds=isKnowledge\(\) && !state\.showUnnamed/);
   assert.match(js,/connectedEntry\(data\.nodes, activeEdges\)/);
   assert.match(js,/secondaryRing\(all, displayEdges, shown\.slice\(1\), selected\.id, 6\)/);
   assert.match(js,/graph-node-secondary/);
-  assert.match(js,/Sans nom · \$\{n\.id\.slice\(-10\)\}/);
+  assert.match(js,/const displayNode = n =>/);
   assert.match(js,/graph-browse-connected/);
   assert.match(js,/Point de départ : notion existante la plus connectée/);
 });
@@ -66,7 +66,7 @@ test('marque Konstellation : #1e6864, palette forêt, cache offline renouvelé',
   assert.match(css,/--forest-bg:#071c19/);
   assert.match(css,/\.rail\s*\{background:var\(--forest-rail\)/);
   assert.match(css,/\.graph-link-secondary/);
-  assert.match(source('sw.js'),/konstellation-light-public-v10-satellites-green/);
+  assert.match(source('sw.js'),/konstellation-light-public-v15-reader-media-audit-126/);
 });
 
 test('Architecture déjà dans le dépôt : entrée initiale isolée, graphe connexe disponible',()=>{

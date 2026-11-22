@@ -163,3 +163,161 @@ body,.main {background:var(--forest-bg);color:var(--forest-copy)}
 .graph-legend-secondary {color:#9bdbbe}
 .graph-browse-connected {display:block;margin:0 auto 16px;padding:9px 13px;background:var(--brand);border:1px solid #91d7bf;border-radius:8px;color:white}
 .graph-browse-connected:hover {background:var(--brand-hover)}
+
+
+/* Reader wording / selector accessibility — no technical values in the UI. */
+.rail select, .localization-row select {
+  color:#effff9; background-color:#154138; border:1px solid #78bca6;
+  appearance:auto; background-image:none; min-height:43px;
+  font-weight:600; line-height:1.4; cursor:pointer;
+}
+.rail select option {background:#14372f;color:#f7fff9}
+.rail select:focus-visible {outline:2px solid #b9f5de;outline-offset:2px}
+.localization-row small {font-size:11px;line-height:1.55;color:#c1dfd4}
+.inspection .subtle-hint {line-height:1.6;color:#b9d8c9}
+@media(max-width:720px){
+  .visual svg{min-height:420px;max-height:none}
+  .search-row{flex-wrap:wrap}
+  .search-row .results{width:100%;white-space:normal}
+  .graph-controls{gap:10px}
+  .inspector{margin-top:16px}
+}
+
+
+/* READER-126: true names first, anonymous connections grouped, document index,
+   accessible narrow-screen relation list. Presentation only. */
+.reader-overview{margin:12px 4px 18px;padding:20px;border:1px solid #4a8976;
+  border-radius:13px;background:linear-gradient(145deg,#17463a,#102e28);color:#e9fff5}
+.reader-overview h3{font-size:19px;line-height:1.3;margin:0 0 12px;color:#f0fff9}
+.reader-overview p{font-size:14px;line-height:1.65;margin:8px 0;color:#cee9dc}
+.reader-overview .button{margin-top:14px}
+.reader-muted{font-size:13px;line-height:1.6;color:#b6d8c9}
+.reader-named-list .record{min-height:55px;line-height:1.5}
+.reader-named-list .record strong{font-size:14px}
+.reader-doc-group,.reader-unnamed-group{border:1px solid #3f7566;border-radius:12px;
+  background:#13382e;margin:12px 4px;padding:12px 15px}
+.reader-doc-group>summary,.reader-unnamed-group>summary{font-size:15px;font-weight:700;
+  line-height:1.5;color:#e6fff4;cursor:pointer;padding:7px 0}
+.reader-doc-list{display:grid;gap:8px;padding:12px 0 5px}
+.reader-doc-row{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;padding:11px 12px;background:#102e27;border:1px solid #366b5b;border-radius:9px}
+.reader-doc-title{font-size:14px;line-height:1.5;color:#f0fff8;text-align:left;
+  background:none;border:0;padding:3px 0;white-space:normal}
+.reader-doc-title:hover{text-decoration:underline}
+.reader-doc-source{font-size:12px;color:#b5eed9;text-decoration:underline;text-underline-offset:3px}
+.reader-unnamed-list{display:flex;gap:8px;flex-wrap:wrap;max-height:280px;overflow:auto;padding:12px 0}
+.reader-unnamed-link{font-size:12px;line-height:1.4;background:#194337;color:#e8fff4;
+  border:1px solid #649e88;border-radius:8px;padding:9px 11px;white-space:normal}
+.reader-grouped-hint{margin:15px 0;padding:12px 13px;font-size:13px;line-height:1.55;
+  border-left:3px solid #88cbb1;border-radius:5px;background:#194136;color:#dcf4ea}
+.reader-mobile-map{display:none}
+@media(max-width:720px){
+  .reader-overview{padding:15px;margin:6px 0 14px}
+  .reader-overview h3{font-size:18px}
+  .reader-overview p{font-size:14px}
+  .reader-doc-group,.reader-unnamed-group{margin:9px 0;padding:10px}
+  .reader-doc-title{min-height:36px;font-size:15px}
+  .reader-doc-source{display:block;min-height:32px;padding-top:8px}
+  .reader-doc-row{display:block}
+  .reader-graph-svg{display:none!important}
+  .reader-mobile-map{display:grid;gap:10px;margin:5px 0 15px;padding:10px 3px}
+  .reader-mobile-map h3{margin:0 0 4px;font-size:18px;line-height:1.4;color:#f3fff9}
+  .reader-mobile-link{background:#163d33;border:1px solid #538d75;color:#f2fff8;
+    text-align:left;display:grid;gap:6px;min-height:59px;padding:12px 14px;
+    border-radius:10px;white-space:normal}
+  .reader-mobile-link strong{font-size:15px;line-height:1.45;overflow-wrap:anywhere}
+  .reader-mobile-link small{font-size:12px;line-height:1.4;color:#c0e4d5}
+  .reader-mobile-link:focus-visible{outline:3px solid #b7f1d8}
+  .reader-named-list .record strong{font-size:15px}
+  .visual{min-height:180px}
+  .visual:has(.reader-overview){min-height:160px}
+}
+
+
+/* Lot finition lecteur 126: readable, reversible presentation; brand #1e6864. */
+.reader-actions {display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.reader-actions .button {min-height:42px;line-height:1.35;white-space:normal}
+.reader-relations-browser {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;margin:18px 10px;padding:16px;border:1px solid #467c6a;
+  border-radius:12px;background:#0d3028}
+.reader-relations-browser>h3,.reader-relations-browser>p,.reader-relations-browser>details,
+.reader-relations-browser>.button {grid-column:1/-1}
+.reader-relations-browser>h3 {font-size:16px;line-height:1.4;color:#effff8;margin:0 0 2px}
+.reader-relations-browser>.reader-muted {margin:0 0 7px}
+.reader-relations-browser .reader-mobile-link {display:grid;min-width:0;min-height:59px;
+  text-align:left;gap:5px;padding:11px 13px;border:1px solid #5a9884;
+  border-radius:9px;background:#17443a;color:#f3fff9;cursor:pointer}
+.reader-relations-browser .reader-mobile-link:hover {background:#215747;border-color:#a9dbc6}
+.reader-relations-browser .reader-mobile-link:focus-visible,
+.reader-doc-title:focus-visible,.reader-doc-source:focus-visible,
+.reader-relations-browser summary:focus-visible,.reader-actions button:focus-visible {
+  outline:3px solid #b6f3db;outline-offset:3px}
+.reader-relations-browser .reader-mobile-link strong{font-size:14px;font-weight:700;
+  overflow-wrap:anywhere;line-height:1.45}
+.reader-relations-browser .reader-mobile-link small{font-size:12px;color:#c8e8dc;line-height:1.4}
+.reader-relations-extra {padding:9px 3px;border-top:1px solid #4d8874}
+.reader-relations-extra summary {cursor:pointer;font-weight:700;color:#d5f6e9;padding:9px}
+.reader-extra-list {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:9px}
+.reader-doc-row.selected {border-color:#a6ebd1;background:#205346}
+.reader-doc-title[aria-pressed=true]{font-weight:750;text-decoration:underline;text-decoration-color:#b4ebd9}
+.inspection h3 {overflow-wrap:anywhere}
+.graph-node {outline:0}
+.graph-node:focus-visible circle, .graph-node-secondary:focus-visible circle {
+  stroke:#f4fffa;stroke-width:3;filter:drop-shadow(0 0 6px #8bdcbd)}
+/* Native title/aria labels and the companion list hold full names; text on
+   crowded constellations is deliberately limited to a handful of labels. */
+.reader-graph-svg {overflow:visible}
+@media(max-width:720px){
+  .reader-graph-svg{display:none!important}
+  .reader-relations-browser {grid-template-columns:minmax(0,1fr);margin:6px 0 12px;padding:12px;
+    background:#102f28}
+  .reader-extra-list{grid-template-columns:minmax(0,1fr)}
+  .reader-relations-browser .reader-mobile-link strong{font-size:15px}
+  .graph-controls label[for=satellites],.graph-controls input#satellites {display:none}
+  .reader-actions{flex-direction:column}
+  .reader-actions button{width:100%;text-align:center;justify-content:center}
+  .reader-doc-row{scroll-margin-top:16px}
+  .inspector{scroll-margin-top:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .graph-secondary-preview{animation:none}
+  *{scroll-behavior:auto!important}
+}
+
+/* Lecture 126 : compact mobile header + reader-only media inventory. */
+.reader-media-summary{margin:18px 0;padding:16px 18px;border:1px solid #3e806d;border-radius:12px;background:#11372d}
+.reader-media-summary h3{margin:0 0 9px;font-size:17px;color:#ebfff7}
+.reader-media-groups{margin:7px 0 0;padding-left:22px;color:#d0eadf;line-height:1.75}
+.reader-media-summary .reader-muted{margin:5px 0 8px}
+
+@media(max-width:720px){
+  .rail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 10px;padding:9px 12px 12px}
+  .rail .brand{grid-column:1/-1;margin:0;gap:9px}
+  .brand-logo{width:48px;height:31px;padding:4px 6px;border-radius:7px}
+  .brand strong{font-size:12px;letter-spacing:.7px}
+  .brand small{font-size:8px;letter-spacing:1px;margin-top:1px}
+  .rail .rail-label{display:none}
+  .rail>.field-label{grid-column:1;font-size:10px;margin:0;align-self:end}
+  .rail>#collection{grid-column:1;min-width:0;align-self:start;padding:9px 24px 9px 10px;font-size:12px}
+  .rail>.localization-row{grid-column:2;grid-row:2/4;min-width:0;gap:3px;padding:0}
+  .localization-row>.field-label{margin:0;font-size:10px}
+  .rail .localization-row select{padding:9px 24px 9px 10px;font-size:12px}
+  .rail #localization-status{font-size:10px;line-height:1.25}
+  .rail #revision-row{grid-column:1/-1}
+  .rail>nav{grid-column:1/-1;gap:5px;padding-top:2px}
+  .rail .view{flex:1;justify-content:center;font-size:11px;gap:5px;padding:7px 5px;white-space:normal;line-height:1.2}
+  .rail .view span{width:auto;font-size:15px}
+  .rail>.advanced-tools{grid-column:1/-1;font-size:11px;margin:0;padding:0}
+  .top{min-height:0;padding:7px 0;height:auto}
+  .top .eyebrow{display:none}
+  .top-actions{gap:6px;flex-wrap:nowrap;justify-content:flex-start}
+  .top-actions .button{font-size:11px;padding:7px 8px;white-space:normal;text-align:center}
+  .heading{padding:12px 0 11px}
+  .heading h1{font-size:26px;margin:7px 0 5px}
+  .heading p{line-height:1.4;font-size:12px}
+  .heading .chip{font-size:8px;padding:5px 8px}
+  .metrics{margin-bottom:12px}
+  .metric{min-height:76px;padding:10px 12px}
+  .metric strong{font-size:24px;margin-top:5px}
+  .reader-media-summary{padding:12px;margin:10px 0}
+}

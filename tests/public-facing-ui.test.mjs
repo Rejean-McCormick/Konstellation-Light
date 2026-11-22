@@ -38,7 +38,8 @@ test('visiteur : navigation simple, divulgation C4 accessible et outils avancés
   assert.match(html,/<details><summary>Comment ces données sont-elles vérifiées/);
   assert.match(html,/id="compare-tab" hidden/);
   assert.match(html,/id="revision-row" class="revision-row" hidden/);
-  assert.match(js,/Détails techniques et références/);
+  assert.doesNotMatch(js,/Détails techniques et références/);
+  assert.match(js,/publicReaderLabel/);
   assert.match(js,/isUnlabeledKnowledge/);
   assert.doesNotMatch(html,/<strong>C4 — LECTURE DÉRIVÉE/);
 });
@@ -50,7 +51,8 @@ test('build local : site inclut les libellés grand public et préserve toutes l
   const b=spawnSync(process.execPath,['scripts/build-light.mjs','--collection',collection,'--out',output,'--public','YES'],{cwd:root,encoding:'utf8',timeout:20000});
   assert.equal(b.status,0,b.stderr);
   assert.match(fs.readFileSync(path.join(output,'index.html'),'utf8'),/Options avancées/);
-  assert.match(fs.readFileSync(path.join(output,'app.js'),'utf8'),/Détails techniques et références/);
+  assert.doesNotMatch(fs.readFileSync(path.join(output,'app.js'),'utf8'),/Détails techniques et références/);
+  assert.match(fs.readFileSync(path.join(output,'app.js'),'utf8'),/publicReaderLabel/);
   const catalog=JSON.parse(fs.readFileSync(path.join(output,'data/catalog.json')));
   const original=JSON.parse(fs.readFileSync(path.join(output,catalog.entries[0].path)));
   assert.equal(original.nodes.length,7);
