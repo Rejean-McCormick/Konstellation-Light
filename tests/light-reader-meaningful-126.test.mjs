@@ -91,7 +91,7 @@ test('le lecteur public regroupe les notions anonymes et préfère la liste mobi
   assert.match(css,/@media\(max-width:720px\)/);
   assert.match(css,/\.reader-graph-svg\{display:none!important\}/);
   assert.match(html,/Explorer individuellement les notions sans nom/);
-  assert.match(sw,/v15-reader-media-audit-126/);
+  assert.match(sw,/v16-reader-codes-interactions-126/);
 });
 
 test('les 126 packs réels restent inchangés et sont regroupés de manière déterministe',()=>{

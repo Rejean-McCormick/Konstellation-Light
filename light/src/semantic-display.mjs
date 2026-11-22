@@ -242,9 +242,18 @@ export function publicConceptLabel(label) {
  * translations of an unknown Kristal term and NOT editorial classifications.
  * Raw canonical labels, identifiers, provenance and edges remain untouched.
  */
+// A schema key is an identifier, not an independently reviewed name. We do
+// not turn snake_case or camelCase into plausible French/English concepts.
+// Scoped to public-reader labels: original canonical data are never changed.
+export function isReaderMachineConceptLabel(value) {
+  const s=String(value ?? '').trim();
+  return /\b[a-z][a-z0-9]{1,}(?:_[a-z0-9]{2,})+\b/i.test(s) ||
+    /^(?:[a-z][a-z0-9]*[A-Z][a-zA-Z0-9]*|[a-z][a-z0-9]*\.[a-z][a-z0-9.]*)$/.test(s) ||
+    /^(?:type|datatype|schema|property|coordinate|value)\s*[:=]\s*[a-z][a-z0-9:._-]*$/i.test(s);
+}
 export function isOpaqueReaderText(value) {
   const s=String(value ?? '').trim();
-  return !s || /^(?:K[QPAS]\d{2,}|[QP]\d{2,}|(?:urn|sha256|state|artifact|file):\S+|[a-f0-9]{24,})$/i.test(s) ||
+  return !s || isReaderMachineConceptLabel(s) || /^(?:K[QPAS]\d{2,}|[QP]\d{2,}|(?:urn|sha256|state|artifact|file):\S+|[a-f0-9]{24,})$/i.test(s) ||
     /(?:^|[\/])(?:\.kristal|canon|materializations|snapshot)[\/]/i.test(s) ||
     /\.(?:jsonl?|ya?ml|mjs|cjs|py|tsx?|md|jpe?g|png|webp|gif|svg|bmp|tiff?|wav|mp3|ogg|flac|m4a|mp4|webm|mov|pdf)\b/i.test(s) ||
     /^(?:type|datatype|schema|property|coordinate|value)\s*[:=]\s*(?:string|integer|number|boolean|array|object|null|xsd:\S+|[a-z][a-z0-9_:.\-]+)$/i.test(s) ||
@@ -305,6 +314,10 @@ export function publicReaderLabel(node, { localizedLabel='', viewKind='derived-p
 }
 export function publicReaderDescription(value) {
   const s=publicDescription(value);
+  // The 126 derived public packs use this as an internal value-type descriptor,
+  // not a reader-facing definition. Suppress just this well-known template;
+  // preserve real prose, original values and their datatypes in the pack.
+  if(/^Valeur littérale déclarée(?:\s*\([a-z]{2}(?:-[a-z0-9]+)?\))?;\s*type\s*:\s*[a-z][a-z0-9:._-]*\.$/i.test(s))return '';
   // No source paths, internal commitments, or transport terms in reader prose.
   if(/(?:sha256:|urn:|\.kristal[\/]|canon[\/]|\.(?:jsonl?|ya?ml|mjs|cjs|tsx?)\b|state snapshot|materialization_manifest|\b\d+\s+octets\b)/i.test(s))return '';
   return s;
@@ -389,7 +402,10 @@ export function readerConnectedNamedFocus(nodes,edges,{localized=null,requireRev
   const named=new Map(nodes.filter(n=>isNamedForReader(n,{
     localizedLabel:localized?.get(n.id)?.label,requireReviewed
   })).map(n=>[n.id,n]));
-  const eligible=new Set(nodes.filter(n=>!n.technical_identifier).map(n=>n.id));
+  // The graph hides media and pure machine values. Do not choose a focus
+  // whose only edges lead to such hidden endpoints.
+  const eligible=new Set(nodes.filter(n=>!n.technical_identifier &&
+    !readerMediaCategory(n) && !isReaderMachineValue(n)).map(n=>n.id));
   const degree=new Map([...named.keys()].map(id=>[id,0]));
   for(const e of edges){
     if(!eligible.has(e.from)||!eligible.has(e.to)||e.from===e.to)continue;

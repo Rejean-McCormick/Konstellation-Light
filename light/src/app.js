@@ -262,8 +262,14 @@ function activateRealConnections() {
   if(!isKnowledge())return;
   const data=state.bundle;
   const edges=readableKnowledgeEdges(data.nodes,data.edges,'');
-  const preferred=readerConnectedNamedFocus(data.nodes,edges,{
-    localized:state.localized,requireReviewed:Boolean(state.locale)})||connectedEntry(data.nodes,edges);
+  const eligible=data.nodes.filter(n=>!n.technical_identifier && !isReferenceOrMachineValue(n));
+  const visibleIds=new Set(eligible.map(n=>n.id));
+  const visibleEdges=edges.filter(e=>visibleIds.has(e.from)&&visibleIds.has(e.to));
+  // When a registry has no named, connected node, permit exploration of a
+  // genuinely connected anonymous node; displayNode assigns a neutral number.
+  const preferred=readerConnectedNamedFocus(eligible,visibleEdges,{
+    localized:state.localized,requireReviewed:Boolean(state.locale)})||connectedEntry(eligible,visibleEdges);
+  if(!preferred){notify('Aucune connexion affichable dans cette collection.');return;}
   state.showUnnamed=true;
   $('show-unnamed').checked=true;
   state.autoFocus=false;state.autoLens=false;state.lens='constellation';state.page=0;

@@ -78,5 +78,5 @@ test('Interface : médias regroupés, sélection mobile compacte, lecteur sans c
   assert.match(app,/!isReferenceOrMachineValue/);
   assert.match(css,/\.rail\{display:grid;grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/);
   assert.match(css,/\.reader-media-summary/);
-  assert.match(sw,/v15-reader-media-audit-126/);
+  assert.match(sw,/v16-reader-codes-interactions-126/);
 });
