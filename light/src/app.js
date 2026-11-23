@@ -1,6 +1,6 @@
 import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges, connectedEntry, secondaryRing} from './graph-core.mjs';
 import {portraitFor, orbitPreview} from './profile.mjs';
-import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, isMachineRelationLabel, publicConceptLabel, publicReaderLabel, publicReaderDescription, isOpaqueReaderText, isNamedForReader, readerKnowledgeSummary, defaultReaderLens, readerPreferredFocus, readerDocumentGroups, readerDocumentCategory, readerConnectedNamedFocus, readableDocumentTitle, readerMediaCategory, readerMediaGroups, isReaderMachineValue, isReaderPredicateCode} from './semantic-display.mjs';
+import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, isMachineRelationLabel, publicConceptLabel, publicReaderLabel, publicReaderDescription, isOpaqueReaderText, isNamedForReader, readerKnowledgeSummary, defaultReaderLens, readerPreferredFocus, readerDocumentGroups, readerDocumentMap, readerDocumentCategory, readerConnectedNamedFocus, readableDocumentTitle, readerMediaCategory, readerMediaGroups, isReaderMachineValue, isReaderPredicateCode} from './semantic-display.mjs';
 import {validateLocalization, validateLocaleDescriptor, localizationMap, relationLocalizationMap} from './multilingual-read.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
 // All untrusted labels are inserted with textContent; no semantic authority is inferred.
@@ -43,7 +43,7 @@ const displayRelation = relation => {
   const readable=publicRelationLabel(relation,isKnowledge()?state.bundle.relation_labels?.[relation]:null);
   return isReaderPredicateCode(readable)?'Lien déclaré':readable;
 };
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
@@ -53,6 +53,8 @@ function urlState() {
   if (state.selection) p.set('focus', state.selection); else p.delete('focus');
   if (state.query) p.set('q', state.query); else p.delete('q');
   if (state.showUnnamed) p.set('ids','1'); else p.delete('ids');
+  if(state.bundle?.view_kind==='derived-hosting-navigation' && state.docCategory)p.set('cat',state.docCategory);
+  else p.delete('cat');
   if(state.locale)p.set('lang',state.locale);else p.delete('lang');
   if (state.embed) p.set('embed', '1'); else p.delete('embed');
   history.replaceState(null, '', `${location.pathname}?${p.toString()}${location.hash}`);
@@ -186,6 +188,7 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
   if(state.slug && state.slug!==slug){
     state.showUnnamed=false;
     $('show-unnamed').checked=false;
+    state.docCategory=null;
   }
   $('visual').replaceChildren(element('div', 'loading', 'Vérification de l’intégrité du bundle…'));
   try {
@@ -193,17 +196,33 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
     state.slug = slug; state.revision = revision; state.bundle = data; state.portraitId = null;
     state.nodeOrdinal = new Map(data.nodes.map((node,i)=>[node.id,i+1]));
     const validFocus = keepFocus && data.nodes.some(n => n.id === state.selection);
+    const hosting=data.view_kind==='derived-hosting-navigation';
+    const byId=new Map(data.nodes.map(n=>[n.id,n]));
     const activeEdges = data.view_kind === 'derived-public-knowledge'
-      ? readableKnowledgeEdges(data.nodes, data.edges, '') : data.edges;
-    const connected = data.view_kind === 'derived-public-knowledge' ? connectedEntry(data.nodes, activeEdges) : null;
-    // A source title is preferable to an anonymous high-degree centre for readers.
+      ? readableKnowledgeEdges(data.nodes, data.edges, '').filter(e=>
+        !isReferenceOrMachineValue(byId.get(e.from)) && !isReferenceOrMachineValue(byId.get(e.to))) : data.edges;
+    const eligible=data.nodes.filter(n=>!n.technical_identifier&&!isReferenceOrMachineValue(n));
     const namedFocus=data.view_kind==='derived-public-knowledge'
-      ? readerPreferredFocus(data.nodes,activeEdges) : null;
+      ? readerConnectedNamedFocus(eligible,activeEdges) : null;
+    const connected=data.view_kind==='derived-public-knowledge'
+      ? connectedEntry(eligible,activeEdges) : null;
+    const namedOnly=data.view_kind==='derived-public-knowledge'
+      ? new Set(eligible.filter(n=>isNamedForReader(n)).map(n=>n.id)) : new Set();
+    const namedEdges=activeEdges.filter(e=>namedOnly.has(e.from)&&namedOnly.has(e.to)).length;
+    // The 51 real-but-unnamed knowledge registries open as maps automatically.
+    // This is a visual choice, not a translation of unknown identifiers.
+    if(state.autoLens&&!validFocus&&data.view_kind==='derived-public-knowledge'){
+      state.showUnnamed=namedEdges<2 && Boolean(connected);
+      $('show-unnamed').checked=state.showUnnamed;
+    }
+    state.docCategory=hosting && keepFocus && readerDocumentGroups(data.nodes).some(g=>g.key===state.requestedCategory)
+      ? state.requestedCategory : null;
     state.autoFocus = !validFocus && Boolean(connected) && !namedFocus;
-    if (!validFocus) state.selection = data.view_kind==='derived-hosting-navigation'
-      ? (data.nodes.find(n=>n.kind==='hosted_file')||data.nodes[0])?.id||null
-      : namedFocus || connected ||
-        (data.nodes.find(n => !n.technical_identifier && !isUnnamedForVisitor(n)) || data.nodes[0])?.id || null;
+    if (!validFocus) state.selection = hosting
+      ? (state.docCategory ? readerDocumentGroups(data.nodes).find(g=>g.key===state.docCategory)?.nodes[0]?.id : null) ||
+        (data.nodes.find(n=>n.kind==='hosted_state')||data.nodes[0])?.id||null
+      : (state.showUnnamed ? (namedFocus||connected) : (namedFocus||readerPreferredFocus(eligible,activeEdges)||connected)) ||
+        (eligible[0]||data.nodes[0])?.id || null;
     state.history = state.selection ? [state.selection] : [];
     state.localized=null;state.localizedRelations=null;state.locale=null;
     const desiredLanguage=renderLocalizationSelector(state.requestedLocale);
@@ -216,7 +235,6 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
       }
     }
     if(state.autoLens)state.lens=defaultReaderLens(data,{localized:state.localized,requireReviewed:Boolean(state.locale)});
-    if(data.view_kind==='derived-hosting-navigation' && state.lens==='constellation')state.lens='registry';
     fillSelect($('collection'), [...new Set(state.catalog.entries.map(e => e.slug))].map(s => [s, publicKristalTitle(s,state.catalog.entries.find(e=>e.slug===s).title)]).sort((a,b)=>a[1].localeCompare(b[1],'fr')), slug);
     const versions=existingRevisions(slug);
     fillSelect($('revision'), versions.map((x,i) => [x.revision, `Version ${i+1}`]), revision);
@@ -254,7 +272,12 @@ function filteredNodes() {
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
-  state.portraitId = null; state.autoFocus = false; state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
+  state.portraitId = null; state.autoFocus = false;
+  if(state.bundle.view_kind==='derived-hosting-navigation'){
+    const node=state.bundle.nodes.find(n=>n.id===id);
+    state.docCategory=node?.kind==='hosted_state'?null:readerDocumentCategory(node);
+  }
+  state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
 }
 // The explorer is opt-in: anonymous endpoints are numbered for navigation only.
 // This never assigns identities or modifies source relations.
@@ -292,7 +315,9 @@ function actionButton(label,handler,style='button ghost'){
 }
 function lensMeta() {
   return {
-    constellation: ['Carte des connaissances', isKnowledge() ? 'Sélectionnez une notion pour découvrir ses liens avec les autres.' : 'Cliquez sur un élément pour explorer ses liens.'],
+    constellation: [isKnowledge() ? 'Constellation des connaissances' : 'Carte visuelle des documents',
+      isKnowledge() ? 'Connexions réellement présentes. Les notions sans nom restent neutres et numérotées.' :
+      'Classement visuel de fichiers publics, sans relations sémantiques supposées. Sélectionnez une catégorie pour découvrir les documents.'],
     registry: [isKnowledge()?'Notions disponibles':'Documents de la collection', isKnowledge() ? 'Parcourez les notions qui possèdent un vrai libellé. Les notions anonymes restent regroupées.' : 'Parcourez les documents répertoriés, classés par type.'],
     trace: ['Vérification des données', 'Ce qui a été vérifié, et ce qui ne l’a pas été.'],
     compare: ['Comparer les versions', 'Éléments ajoutés, retirés ou modifiés entre deux versions.'],
@@ -301,24 +326,27 @@ function lensMeta() {
 
 function render() {
   const data = state.bundle; if (!data) return;
-  if(data.view_kind==='derived-hosting-navigation' && state.lens==='constellation')state.lens='registry';
   $('title').textContent = publicKristalTitle(data.slug,data.title);
   const semantic = data.view_kind === 'derived-semantic-preview';
-  $('subtitle').textContent = isKnowledge() ? 'Lisez les notions nommées. Les connexions sans intitulé sont regroupées jusqu’à leur révision.' : semantic ? 'Aperçu local de connaissances en cours de préparation (non publié).' : 'Parcourez la documentation publique de la collection. Aucun graphe sémantique n’est revendiqué.';
+  $('subtitle').textContent = isKnowledge() ? 'Explorez visuellement les liens déclarés. Les notions sans intitulé portent une désignation neutre.' : semantic ? 'Aperçu local de connaissances en cours de préparation (non publié).' : 'Explorez visuellement la structure documentaire publique. Aucun graphe sémantique n’est revendiqué.';
   $('metric-members').textContent = Number(isKnowledge() ? readerKnowledgeSummary(data.nodes,data.edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}).named : data.nodes.filter(n=>n.kind==='hosted_file').length).toLocaleString('fr-FR');
   $('metric-relations').textContent = Number(data.edges.length).toLocaleString('fr-FR');
   $('metric-members-label').textContent = isKnowledge() ? 'NOTIONS NOMMÉES' : 'DOCUMENTS RÉPERTORIÉS';
   $('metric-relations-label').textContent = isKnowledge() ? 'LIENS DÉCLARÉS (NON VALIDÉS)' : 'LIENS D’INVENTAIRE';
-  $('graph-controls').hidden = state.lens !== 'constellation' || data.view_kind==='derived-hosting-navigation';
-  document.querySelector('[data-lens="constellation"]').hidden=data.view_kind==='derived-hosting-navigation';
+  $('graph-controls').hidden = state.lens !== 'constellation';
+  document.querySelector('[data-lens="constellation"]').hidden=false;
+  document.querySelector('[data-lens="constellation"]').lastChild.textContent=isKnowledge()?' Constellation des connaissances':' Carte des documents';
+  document.querySelector('.advanced-toggle').hidden=data.view_kind==='derived-hosting-navigation';
   document.querySelector('[data-lens="registry"]').lastChild.textContent=isKnowledge()?' Explorer les notions':' Parcourir les documents';
+  document.querySelector('label[for="satellites"]').firstChild.textContent=isKnowledge()?'Notions autour du sujet ':'Documents visibles ';
+  $('satellites').setAttribute('aria-label',isKnowledge()?'Nombre de bulles autour de la notion centrale':'Nombre maximal de documents affichés par catégorie');
   $('satellites').value = String(state.satellites); $('satellites-count').textContent = String(state.satellites);
-  $('graph-back').disabled = state.history.length < 2;
+  $('graph-back').disabled = state.history.length < 2 && !(data.view_kind==='derived-hosting-navigation' && state.docCategory);
   const [heading, hint] = lensMeta(); $('panel-title').textContent = heading; $('panel-hint').textContent = hint;
-  $('view-tag').textContent = ({constellation:'CARTE',registry:isKnowledge()?'NOTIONS':'DOCUMENTS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
+  $('view-tag').textContent = ({constellation:isKnowledge()?'CARTE DES LIENS':'CARTE DOCUMENTAIRE',registry:isKnowledge()?'NOTIONS':'DOCUMENTS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
   if (state.lens==='trace' || state.lens==='compare') $('advanced-tools').open=true;
   document.querySelectorAll('[data-lens]').forEach(btn => { btn.classList.toggle('active', btn.dataset.lens === state.lens); btn.setAttribute('aria-pressed', String(btn.dataset.lens === state.lens)); });
-  const visible = filteredNodes(); $('count').textContent = state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} notions avec un libellé disponible` : `${data.nodes.filter(n=>n.kind==='hosted_file').length.toLocaleString('fr-FR')} documents répertoriés`;
+  const visible = filteredNodes(); $('count').textContent = state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString('fr-FR')} documents répertoriés`;
   const view = $('visual'); view.replaceChildren();
   if (state.lens === 'constellation') drawGraph(view, visible);
   if (state.lens === 'registry') drawRegistry(view, visible);
@@ -345,11 +373,107 @@ function profileCard(target, node, opener = null) {
   card.append(element('p','portrait-note','Données déclarées dans cette projection.'));target.append(card);
   if(opener){portraitOpener=opener;close.focus();}
 }
+// VISUAL-V17: a map of document *categories*. Categories are derived from
+// actual public filenames; drawn connectors are graphic grouping guides, never
+// graph assertions. Individual document selection opens the existing inspector.
+function drawDocumentConstellation(target,visible){
+  const d=state.bundle;
+  const allowed=new Set(visible.map(n=>n.id));
+  const plan=readerDocumentMap(d.nodes,{category:state.docCategory,allowedIds:allowed,limit:state.satellites});
+  if(state.docCategory && !plan.selected)state.docCategory=null;
+  const group=plan.selected;
+  const centralName=group?group.label:publicKristalTitle(d.slug,d.title);
+  const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group',class:'reader-graph-svg reader-doc-svg',
+    'data-map-mode':'documents','aria-label':group ?
+    `Carte documentaire : ${group.label}. Sélectionnez un document pour afficher sa fiche.` :
+    `Carte documentaire de ${centralName}. Sélectionnez une catégorie pour explorer ses fichiers.`});
+  const center={x:380,y:218},items=group?plan.visible:plan.groups;
+  const N=items.length;
+  const positions=items.map((_,i)=>{
+    const angle=2*Math.PI*i/Math.max(1,N)-Math.PI/2;
+    const distanceX=N>12?260:225;
+    const distanceY=N>12?176:155;
+    return {x:center.x+distanceX*Math.cos(angle),y:center.y+distanceY*Math.sin(angle)};
+  });
+  const guide=svgElement('g',{class:'document-cluster-guides','aria-hidden':'true'});
+  for(const p of positions)guide.append(svgElement('path',{
+    d:`M ${center.x} ${center.y} Q ${Math.round((center.x+p.x)/2)} ${Math.round((center.y+p.y)/2-10)} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`,
+    class:'document-cluster-link'}));
+  svg.append(guide);
+  const centerNode=svgElement('g',{class:'graph-node graph-doc-hub','data-selected':'true',role:'button',tabindex:'0',
+    'aria-label':group?'Retour à la carte des catégories':'Collection documentaire'});
+  centerNode.append(svgElement('circle',{cx:center.x,cy:center.y,r:52}));
+  const mark=svgElement('text',{x:center.x,y:center.y-4,class:'type-mark'});mark.textContent=group?'▤':'✳';centerNode.append(mark);
+  const title=svgElement('text',{x:center.x,y:center.y+77,class:'graph-doc-center-label'});
+  title.textContent=short(centralName,33);centerNode.append(title);
+  if(group){const back=()=>{state.docCategory=null;state.selection=d.nodes.find(n=>n.kind==='hosted_state')?.id||null;state.history=state.selection?[state.selection]:[];render();urlState();};
+    centerNode.addEventListener('click',back);
+    centerNode.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();back();}});
+  } else {centerNode.setAttribute('role','img');centerNode.removeAttribute('tabindex');}
+  svg.append(centerNode);
+  for(const [i,item] of items.entries()){
+    const p=positions[i];
+    const isFile=Boolean(group);
+    const node=isFile?item:null;
+    const label=isFile ? readableDocumentTitle(node,{ordinal:state.nodeOrdinal.get(node.id)||1,groupLabel:group.label}) : item.label;
+    const active=Boolean(isFile&&state.selection===node.id);
+    const bubble=svgElement('g',{class:`graph-node ${isFile?'graph-doc-file':'graph-doc-category'} doc-category-${isFile?group.key:item.key}`,
+      'data-selected':String(active),role:'button',tabindex:'0',
+      'aria-label':isFile?`Consulter : ${label}`:`Explorer ${label}, ${item.nodes.length} documents`});
+    bubble.append(svgElement('circle',{cx:p.x,cy:p.y,r:isFile?24:38}));
+    const type=svgElement('text',{x:p.x,y:p.y+4,class:'type-mark'});type.textContent=isFile?'▤':'◆';bubble.append(type);
+    const name=svgElement('text',{x:p.x,y:p.y+(isFile?39:54),class:'graph-doc-node-label'});
+    name.textContent=short(label,isFile?23:27);bubble.append(name);
+    if(!isFile){const count=svgElement('text',{x:p.x,y:p.y+68,class:'graph-doc-count'});count.textContent=`${item.nodes.length} document(s)`;bubble.append(count);}
+    const tip=svgElement('title');tip.textContent=label;bubble.append(tip);
+    const open=()=>{
+      if(isFile)focusOn(node.id);
+      else {state.docCategory=item.key;state.selection=item.nodes[0]?.id||state.selection;state.history=state.selection?[state.selection]:[];render();urlState();}
+    };
+    bubble.addEventListener('click',open);
+    bubble.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+    svg.append(bubble);
+  }
+  target.append(svg);
+  const note=element('p','reader-document-disclaimer',
+    'Carte de classement des fichiers publics. Les traits représentent uniquement des regroupements visuels, pas des relations de connaissances.');
+  target.append(note);
+  const trail=element('section','reader-doc-navigation');
+  trail.append(element('h3','',group?`Documents · ${group.label}`:'Explorer les familles de documents'));
+  if(group){
+    const back=actionButton('← Toutes les catégories',()=>{state.docCategory=null;state.selection=d.nodes.find(n=>n.kind==='hosted_state')?.id||null;state.history=state.selection?[state.selection]:[];render();urlState();},'button ghost');
+    trail.append(back);
+    const links=element('div','reader-doc-choices');
+    for(const node of plan.visible){
+      const label=readableDocumentTitle(node,{ordinal:state.nodeOrdinal.get(node.id)||1,groupLabel:group.label});
+      const button=element('button','reader-doc-choice',label);
+      button.type='button';button.setAttribute('aria-pressed',String(node.id===state.selection));
+      button.addEventListener('click',()=>focusOn(node.id));
+      links.append(button);
+    }
+    trail.append(links);
+    if(plan.total>plan.visible.length){
+      trail.append(element('p','reader-muted',`${plan.total-plan.visible.length} document(s) supplémentaires dans cette catégorie.`),
+        actionButton('Voir tous les documents',()=>{state.lens='registry';state.autoLens=false;state.page=0;render();urlState();},'button ghost'));
+    }
+    $('truncation').textContent=`${plan.visible.length}/${plan.total} documents affichés · classement visuel sans assertions nouvelles`;
+  }else{
+    const groups=element('div','reader-doc-choices');
+    for(const g of plan.groups){const b=element('button','reader-doc-choice',`${g.label} · ${g.nodes.length}`);b.type='button';
+      b.addEventListener('click',()=>{state.docCategory=g.key;state.selection=g.nodes[0].id;state.history=[state.selection];render();urlState();});groups.append(b);}
+    trail.append(groups);
+    $('truncation').textContent=`${plan.groups.length} catégories · ${plan.groups.reduce((n,g)=>n+g.nodes.length,0)} documents publics · aucune relation sémantique inventée`;
+  }
+  if(!plan.groups.length)trail.append(element('p','reader-muted','Aucun document ne correspond à cette recherche.'));
+  target.append(trail);
+}
+
 function drawGraph(target, visible) {
+  if(state.bundle.view_kind==='derived-hosting-navigation')return drawDocumentConstellation(target,visible);
   const all=state.bundle.nodes;
   if(isKnowledge() && !state.showUnnamed && !state.query.trim()){
     const info=readerKnowledgeSummary(all,state.bundle.edges,{localized:state.localized,requireReviewed:Boolean(state.locale)});
-    if(info.namedEdges===0){
+    if(info.namedEdges===0 && !info.navigable){
       const box=element('section','reader-overview');
       box.append(element('h3','','Les relations nécessitent encore des intitulés'),
         element('p','',`${info.named.toLocaleString('fr-FR')} notion(s) disposent d’un nom. ${info.unnamed.toLocaleString('fr-FR')} autre(s) n’en ont pas encore. Aucun lien direct entre notions nommées n’est disponible dans cette collection.`),
@@ -429,9 +553,10 @@ function drawGraph(target, visible) {
     const sym=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});sym.textContent=central?'✳':'◇';group.append(sym);
     // Full titles live in the accompanying accessible list. Orbital text is
     // deliberately limited to avoid unreadable overlaps and clipped captions.
-    if(central || (!isUnnamedForVisitor(n) && count<=8 && shown.indexOf(n)<=6)){
+    if(central || (count<=10 && shown.indexOf(n)<=10)){
       const label=svgElement('text',{x:p.x,y:p.y+(central?58:36)});
-      label.textContent=short(displayNode(n),central?27:17);group.append(label);
+      const graphName=isUnnamedForVisitor(n)?`Notion n° ${state.nodeOrdinal.get(n.id)||1}`:displayNode(n);
+      label.textContent=short(graphName,central?27:17);group.append(label);
     }
     const tip=svgElement('title');tip.textContent=displayDescription(n)||displayNode(n);group.append(tip);
     group.addEventListener('click',()=>focusOn(n.id));
@@ -794,6 +919,7 @@ async function main(){
     } catch { /* The local reader must still work if service workers are unavailable. */ }
   }
   const params=new URLSearchParams(location.search);
+  state.requestedCategory=(params.get('cat')||'').slice(0,40);
   state.embed=params.get('embed')==='1';document.documentElement.classList.toggle('embed',state.embed);
   const back=params.get('retour');
   if(back && /^\/eleve\/(?:[a-z0-9._~!$&'()*+,;=:@%\/?-]*)$/i.test(back) && !back.includes('//')){ $('back-ekole').href=back; $('back-ekole').hidden=false; }
@@ -815,7 +941,7 @@ async function main(){
     await setChoice(slug,revision,{keepFocus:true});
   }catch(e){showFailure(e);}
 }
-$('collection').addEventListener('change',()=>{const s=$('collection').value;state.page=0;state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
+$('collection').addEventListener('change',()=>{const s=$('collection').value;state.page=0;state.docCategory=null;state.requestedCategory=null;state.autoLens=true;state.lens='constellation';state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
 $('localization').addEventListener('change',async()=>{
   const selected=$('localization').value;
@@ -837,8 +963,24 @@ for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('
 $('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;render();urlState();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
 $('satellites').addEventListener('input',()=>{state.satellites=clampSatellites($('satellites').value);render();urlState();});
-$('graph-back').addEventListener('click',()=>{if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();});
-$('graph-home').addEventListener('click',()=>{if(!state.bundle)return;const nodes=state.bundle.nodes;const edges=isKnowledge()?readableKnowledgeEdges(nodes,state.bundle.edges,''):state.bundle.edges;const id=isKnowledge()?readerPreferredFocus(nodes,edges,{localized:state.localized,requireReviewed:Boolean(state.locale)})||connectedEntry(nodes,edges):null;const home=nodes.find(n=>n.id===id)||nodes.find(n=>!n.technical_identifier&&!isUnnamedForVisitor(n))||nodes[0];if(home)focusOn(home.id);});
+$('graph-back').addEventListener('click',()=>{
+  if(state.bundle?.view_kind==='derived-hosting-navigation' && state.docCategory){
+    state.docCategory=null;state.selection=state.bundle.nodes.find(n=>n.kind==='hosted_state')?.id||null;
+    state.history=state.selection?[state.selection]:[];render();urlState();return;
+  }
+  if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();
+});
+$('graph-home').addEventListener('click',()=>{
+  if(!state.bundle)return;
+  if(state.bundle.view_kind==='derived-hosting-navigation'){
+    state.docCategory=null;state.selection=state.bundle.nodes.find(n=>n.kind==='hosted_state')?.id||state.bundle.nodes[0]?.id;
+    state.history=state.selection?[state.selection]:[];render();urlState();return;
+  }
+  const nodes=state.bundle.nodes;const edges=readableKnowledgeEdges(nodes,state.bundle.edges,'');
+  const eligible=nodes.filter(n=>!n.technical_identifier&&!isReferenceOrMachineValue(n));
+  const id=readerConnectedNamedFocus(eligible,edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}) || connectedEntry(eligible,edges);
+  const home=nodes.find(n=>n.id===id)||eligible[0]||nodes[0];if(home)focusOn(home.id);
+});
 $('reset').addEventListener('click',()=>{state.page=0;state.query='';$('search').value='';render();urlState();});
 $('share').addEventListener('click',async()=>{urlState();try{await navigator.clipboard.writeText(location.href);notify('Lien de navigation copié.');}catch{notify(`Copiez l’URL du navigateur pour partager la vue.`);}});
 $('export')?.addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';

@@ -346,14 +346,10 @@ export function readerKnowledgeSummary(nodes, edges, {localized=null, requireRev
     declared:edges.length,navigable:validEdges.length,namedEdges:namedEdges.length};
 }
 
-// Default document and knowledge views are chosen by what is actually named.
-// A dense anonymous graph is never passed off as a readable map.
-export function defaultReaderLens(bundle, {localized=null, requireReviewed=false}={}) {
-  if(bundle.view_kind==='derived-hosting-navigation') return 'registry';
-  if(bundle.view_kind==='derived-public-knowledge') {
-    const info=readerKnowledgeSummary(bundle.nodes,bundle.edges,{localized,requireReviewed});
-    return info.namedEdges>=2 ? 'constellation' : 'registry';
-  }
+// Light is a *visual* reader. A public hosting surface gets a clearly
+// labelled structural map; an unnamed knowledge graph stays a real graph with
+// neutral node captions. Neither choice creates an assertion or an identity.
+export function defaultReaderLens(_bundle, _options={}) {
   return 'constellation';
 }
 
@@ -394,6 +390,18 @@ export function readerDocumentGroups(nodes) {
     groups.get(readerDocumentCategory(node)).nodes.push(node);
   }
   return [...groups.values()].filter(group=>group.nodes.length);
+}
+
+// Presentation-only plan: groups derive from file paths/kinds already present
+// in the public bundle. The returned map never adds graph edges or facts.
+export function readerDocumentMap(nodes,{category=null,allowedIds=null,limit=8}={}){
+  const allowed=allowedIds instanceof Set ? allowedIds : null;
+  const groups=readerDocumentGroups(nodes)
+    .map(group=>({...group,nodes:group.nodes.filter(n=>!allowed||allowed.has(n.id))}))
+    .filter(group=>group.nodes.length);
+  const selected=groups.find(group=>group.key===category)||null;
+  const max=Math.min(25,Math.max(3,Math.trunc(Number(limit)||8)));
+  return {groups,selected,visible:selected?.nodes.slice(0,max)||[],total:selected?.nodes.length||0};
 }
 
 

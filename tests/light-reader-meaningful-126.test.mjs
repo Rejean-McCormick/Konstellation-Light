@@ -36,7 +36,7 @@ test('le résumé regroupe les inconnus, ne fabrique ni identités ni arêtes',(
   const before=JSON.stringify({nodes,edges});
   const info=readerKnowledgeSummary(nodes,edges);
   assert.deepEqual(info,{named:2,unnamed:1,declared:4,navigable:3,namedEdges:1});
-  assert.equal(defaultReaderLens({view_kind:'derived-public-knowledge',nodes,edges}),'registry');
+  assert.equal(defaultReaderLens({view_kind:'derived-public-knowledge',nodes,edges}),'constellation');
   assert.equal(defaultReaderLens({view_kind:'derived-public-knowledge',nodes,edges:[...edges,{from:'b',to:'a'}]}),'constellation');
   assert.equal(readerPreferredFocus(nodes,edges),'a');
   assert.equal(JSON.stringify({nodes,edges}),before);
@@ -73,12 +73,12 @@ test('collections de documents classées sans déduire leur contenu',()=>{
   assert.equal(groups.reduce((x,g)=>x+g.nodes.length,0),6);
   assert(groups.every(g=>g.label&&g.key));
   assert(!groups.some(g=>g.nodes.some(n=>n.kind==='hosted_state')));
-  assert.equal(defaultReaderLens({view_kind:'derived-hosting-navigation',nodes,edges:[{from:'s',to:'r'}]}),'registry');
+  assert.equal(defaultReaderLens({view_kind:'derived-hosting-navigation',nodes,edges:[{from:'s',to:'r'}]}),'constellation');
   assert.match(publicReaderLabel(nodes[1],{viewKind:'derived-hosting-navigation'}),/Présentation du projet/);
 });
 
 test('le lecteur public regroupe les notions anonymes et préfère la liste mobile',()=>{
-  const js=source('light/src/app.js'), css=source('light/src/style.css');
+  const js=source('light/src/app.js'), css=source('light/src/style.css'), sourceV17=source('light/src/visual-v17.css');
   const html=source('light/src/index.html'), sw=source('light/src/sw.js');
   assert.match(js,/showUnnamed:false/);
   assert.match(js,/readerKnowledgeSummary/);
@@ -89,9 +89,9 @@ test('le lecteur public regroupe les notions anonymes et préfère la liste mobi
   assert.match(js,/reader-mobile-map/);
   assert.match(js,/Explorer les relations existantes/);
   assert.match(css,/@media\(max-width:720px\)/);
-  assert.match(css,/\.reader-graph-svg\{display:none!important\}/);
+  assert.match(sourceV17,/\.visual \.reader-graph-svg\{display:block!important;/);
   assert.match(html,/Explorer individuellement les notions sans nom/);
-  assert.match(sw,/v16-reader-codes-interactions-126/);
+  assert.match(sw,/v17-visual-126/);
 });
 
 test('les 126 packs réels restent inchangés et sont regroupés de manière déterministe',()=>{
@@ -111,7 +111,7 @@ test('les 126 packs réels restent inchangés et sont regroupés de manière dé
       assert(info.namedEdges<=info.navigable);
     }else if(data.view_kind==='derived-hosting-navigation'){
       documents++;
-      assert.equal(lens,'registry');
+      assert.equal(lens,'constellation');
       const grouped=readerDocumentGroups(data.nodes);
       assert.equal(grouped.reduce((n,g)=>n+g.nodes.length,0),data.nodes.filter(n=>['hosted_file','logical_artifact'].includes(n.kind)).length);
     }

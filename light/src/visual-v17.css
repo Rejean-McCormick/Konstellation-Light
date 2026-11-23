@@ -1,0 +1,35 @@
+/* Presentation derived from public bundles. No semantic inference. */
+/* V17 — Le visuel d'abord, sans inférence sémantique. */
+.reader-doc-svg{display:block;min-height:400px;overflow:visible}
+.document-cluster-link{fill:none;stroke:#65c3a1;stroke-width:1.7;stroke-dasharray:6 7;opacity:.63}
+.graph-doc-hub circle{fill:#1c7963;stroke:#c0ffe2;stroke-width:3}
+.graph-doc-hub .type-mark{font-size:28px;fill:#edfff6}
+.graph-doc-center-label{font-size:15px!important;font-weight:750;fill:#e8fff3!important;paint-order:stroke;stroke:#0a2b24;stroke-width:4px}
+.graph-doc-category circle{fill:#265b64;stroke:#97e3d5;stroke-width:2.2}
+.graph-doc-file circle{fill:#255a48;stroke:#b3ead1;stroke-width:2}
+.doc-category-presentation circle{fill:#285c78}
+.doc-category-documentation circle{fill:#266d59}
+.doc-category-tests circle{fill:#6a4c68}
+.doc-category-data circle{fill:#70583b}
+.doc-category-other circle{fill:#3d5d71}
+.graph-doc-category .type-mark{font-size:21px!important}
+.graph-doc-file .type-mark{font-size:16px!important}
+.graph-doc-node-label{font-weight:700;font-size:13px!important;fill:#e5fff5!important;paint-order:stroke;stroke:#071f1a;stroke-width:3px}
+.graph-doc-count{fill:#bcebd8!important;font-size:11px!important;paint-order:stroke;stroke:#071f1a;stroke-width:3px}
+.graph-doc-category:hover circle,.graph-doc-category:focus-visible circle,.graph-doc-file:hover circle,.graph-doc-file:focus-visible circle{stroke:#fff;stroke-width:3.5;filter:drop-shadow(0 0 8px #69c8a9)}
+.reader-document-disclaimer{margin:10px 10px 16px;padding:10px 13px;border-left:3px solid #89d8b9;background:#123b31;border-radius:6px;color:#d4f0e2;font-size:13px;line-height:1.55}
+.reader-doc-navigation{margin:14px 9px 18px;padding:15px;border:1px solid #3e7966;background:#10352b;border-radius:13px}
+.reader-doc-navigation h3{margin:0 0 12px;color:#e3fff4;font-size:16px;line-height:1.5}
+.reader-doc-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:9px;margin-top:12px}
+.reader-doc-choice{padding:12px 14px;min-height:50px;background:#1c5042;border:1px solid #639e8a;border-radius:10px;color:#f0fff9;font-size:14px;line-height:1.45;text-align:left;cursor:pointer}
+.reader-doc-choice:hover,.reader-doc-choice[aria-pressed="true"]{background:#287563;border-color:#c0f9e2}
+.reader-doc-choice:focus-visible{outline:3px solid #b5f3dc;outline-offset:3px}
+@media(max-width:720px){
+  .visual{overflow-x:auto;overscroll-behavior-x:contain}
+  .visual .reader-graph-svg{display:block!important;min-width:560px;min-height:345px;max-height:none}
+  .visual .reader-doc-svg{min-width:560px}
+  .graph-controls label[for=satellites],.graph-controls input#satellites{display:flex}
+  .reader-doc-navigation{margin:9px 0;padding:12px}
+  .reader-doc-choices{grid-template-columns:minmax(0,1fr)}
+  .reader-document-disclaimer{margin:8px 0 14px}
+}

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {isOpaqueReaderText,isReaderMachineConceptLabel,publicReaderDescription,publicReaderLabel,
-  isNamedForReader,readerConnectedNamedFocus,defaultReaderLens,readerMediaCategory,isReaderMachineValue} from '../light/src/semantic-display.mjs';
+  isNamedForReader,readerConnectedNamedFocus,readerKnowledgeSummary,defaultReaderLens,readerMediaCategory,isReaderMachineValue} from '../light/src/semantic-display.mjs';
 import {readableKnowledgeEdges,graphNeighborhood,connectedEntry} from '../light/src/graph-core.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),'utf8'));
@@ -61,7 +61,7 @@ test('Les 51 registres ont des relations réelles et un focus affichable après 
   let checked=0;
   for(const entry of catalog.entries){
     const doc=pack(entry);
-    if(doc.view_kind!=='derived-public-knowledge'||defaultReaderLens(doc)!=='registry')continue;
+    if(doc.view_kind!=='derived-public-knowledge'||readerKnowledgeSummary(doc.nodes,doc.edges).namedEdges>=2)continue;
     checked++;
     const edges=readableKnowledgeEdges(doc.nodes,doc.edges,'');
     const eligible=doc.nodes.filter(n=>!n.technical_identifier && !readerMediaCategory(n) && !isReaderMachineValue(n));

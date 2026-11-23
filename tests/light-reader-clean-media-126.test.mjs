@@ -71,12 +71,12 @@ test('Fichiers des 126 Kristals restent identiques et classification vérifiée 
 });
 
 test('Interface : médias regroupés, sélection mobile compacte, lecteur sans codes',()=>{
-  const app=src('light/src/app.js'), css=src('light/src/style.css'),sw=src('light/src/sw.js');
+  const app=src('light/src/app.js'), css=src('light/src/style.css'),visualV17=src('light/src/visual-v17.css'),sw=src('light/src/sw.js');
   assert.match(app,/readerMediaGroups/);
   assert.match(app,/Ressources citées dans la collection/);
   assert.match(app,/isReaderPredicateCode/);
   assert.match(app,/!isReferenceOrMachineValue/);
-  assert.match(css,/\.rail\{display:grid;grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/);
-  assert.match(css,/\.reader-media-summary/);
-  assert.match(sw,/v16-reader-codes-interactions-126/);
+  assert.match(visualV17,/\.visual \.reader-graph-svg\{display:block!important;/);
+  assert.match(visualV17,/\.reader-doc-navigation/);
+  assert.match(sw,/v17-visual-126/);
 });

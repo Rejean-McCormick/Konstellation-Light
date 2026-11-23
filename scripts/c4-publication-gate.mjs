@@ -11,7 +11,7 @@ import { validateLocalization,validateLocaleDescriptor } from '../shared/multili
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = b => createHash('sha256').update(b).digest('hex');
 const PACK = /^data\/pack-([a-f0-9]{64})\.json$/;
-const optionalLocal = new Set(['semantic-display.mjs','multilingual-read.mjs','assets/logo_k.svg']);
+const optionalLocal = new Set(['semantic-display.mjs','multilingual-read.mjs','visual-v17.css','assets/logo_k.svg']);
 const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'profile.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
 const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
 export class C4GateError extends Error { constructor(code,message) {super(message);this.name='C4GateError';this.code=code;} }
@@ -80,7 +80,7 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
       allowed.add(descriptor.path);
     }
   }
-  // Recognize one additional JS presentation asset for review-only local builds.
+  // Recognize reviewed optional presentation assets for local/public beta builds.
   // Its presence always prevents the Pages-demo pin from matching.
   for (const file of fileList) if (optionalLocal.has(file)) allowed.add(file);
   // A brand asset is allowed for local preview only, and must match this repository's

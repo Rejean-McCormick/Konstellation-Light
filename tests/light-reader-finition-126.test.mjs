@@ -34,7 +34,7 @@ test('les documents reçoivent des titres de type, jamais un contenu inventé ou
 });
 
 test('la finition du lecteur garde les liens réels et une liste accessible sur mobile',()=>{
-  const js=file('light/src/app.js'),css=file('light/src/style.css'),sw=file('light/src/sw.js');
+  const js=file('light/src/app.js'),css=file('light/src/style.css'),visualV17=file('light/src/visual-v17.css'),sw=file('light/src/sw.js');
   assert.match(js,/function activateRealConnections/);
   assert.match(js,/readerConnectedNamedFocus/);
   assert.match(js,/function returnToReadableWords/);
@@ -48,9 +48,9 @@ test('la finition du lecteur garde les liens réels et une liste accessible sur 
   assert.match(js,/aria-pressed/);
   assert.match(js,/liens déclarés dans la collection/);
   assert.match(css,/\.reader-relations-browser/);
-  assert.match(css,/\.reader-graph-svg\{display:none!important\}/);
+  assert.match(visualV17,/\.visual \.reader-graph-svg\{display:block!important;/);
   assert.match(css,/#1e6864/);
-  assert.match(sw,/v16-reader-codes-interactions-126/);
+  assert.match(sw,/v17-visual-126/);
   assert.doesNotMatch(file('light/src/index.html'),/onerror\s*=/);
 });
 
@@ -64,7 +64,7 @@ test('126 Kristals : aucune nouvelle relation, les 51 vues sans graphe nommé re
     if(pack.view_kind==='derived-public-knowledge'){
       counts.knowledge++;
       const info=readerKnowledgeSummary(pack.nodes,pack.edges);
-      if(defaultReaderLens(pack)==='registry'){
+      if(readerKnowledgeSummary(pack.nodes,pack.edges).namedEdges<2){
         counts.summary++;
         const edges=readableKnowledgeEdges(pack.nodes,pack.edges,'');
         const focus=readerConnectedNamedFocus(pack.nodes,edges)||connectedEntry(pack.nodes,edges);

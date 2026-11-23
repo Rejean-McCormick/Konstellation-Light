@@ -1,6 +1,6 @@
 // Offline mode is opt-in from the UI. Only same-origin static public assets are cached.
-const CACHE = 'konstellation-light-public-v16-reader-codes-interactions-126';
-const SHELL = ['./','./index.html','./app.js','./graph-core.mjs','./profile.mjs','./semantic-display.mjs','./multilingual-read.mjs','./style.css','./assets/logo_k.svg','./data/catalog.json'];
+const CACHE = 'konstellation-light-public-v17-visual-126';
+const SHELL = ['./','./index.html','./app.js','./graph-core.mjs','./profile.mjs','./semantic-display.mjs','./multilingual-read.mjs','./style.css','./visual-v17.css','./assets/logo_k.svg','./data/catalog.json'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL))); self.skipWaiting(); });
 self.addEventListener('activate', e => { e.waitUntil((async () => {
   for(const key of await caches.keys()) if(key.startsWith('konstellation-light-public-') && key !== CACHE) await caches.delete(key);
