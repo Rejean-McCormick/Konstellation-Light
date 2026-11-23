@@ -41,8 +41,8 @@ test('la finition du lecteur garde les liens réels et une liste accessible sur 
   assert.match(js,/sans intitulé/);
   assert.match(js,/non traduite/);
   assert.match(js,/reader-relations-browser/);
-  assert.match(js,/graphNeighborhood\(all,displayEdges,selected.id/);
-  assert.match(js,/readableKnowledgeEdges\(all,state.bundle.edges/);
+  assert.match(js,/directNeighborPages\(all,links,selected.id/);
+  assert.match(js,/readableKnowledgeEdges\(all,data.edges/);
   assert.match(js,/showUnnamed=true/);
   assert.match(js,/readableDocumentTitle/);
   assert.match(js,/aria-pressed/);
@@ -50,7 +50,7 @@ test('la finition du lecteur garde les liens réels et une liste accessible sur 
   assert.match(css,/\.reader-relations-browser/);
   assert.match(visualV17,/\.visual \.reader-graph-svg\{display:block!important;/);
   assert.match(css,/#1e6864/);
-  assert.match(sw,/v17-visual-126/);
+  assert.match(sw,/v19-readable-126/);
   assert.doesNotMatch(file('light/src/index.html'),/onerror\s*=/);
 });
 

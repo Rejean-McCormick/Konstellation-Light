@@ -51,13 +51,13 @@ test('vue : secondaires visibles par défaut, retour au mode nommé disponible',
   const js=source('app.js');
   assert.match(js,/showUnnamed:false/);
   assert.match(js,/params\.get\('ids'\)==='1'/);
-  assert.match(js,/const unnamedIds=isKnowledge\(\) && !state\.showUnnamed/);
+  assert.match(js,/const unnamedIds=!state\.showUnnamed/);
   assert.match(js,/connectedEntry\(eligible,activeEdges\)/);
-  assert.match(js,/secondaryRing\(all, displayEdges, shown\.slice\(1\), selected\.id, 6\)/);
-  assert.match(js,/graph-node-secondary/);
+  assert.match(js,/directNeighborPages\(all,links,selected\.id/);
+  assert.match(js,/v19-node-card/);
   assert.match(js,/const displayNode = n =>/);
-  assert.match(js,/graph-browse-connected/);
-  assert.match(js,/Point de départ : notion existante la plus connectée/);
+  assert.match(js,/Explorer une autre notion connectée/);
+  assert.match(js,/Explorer ce Kristal/);
 });
 
 test('marque Konstellation : #1e6864, palette forêt, cache offline renouvelé',()=>{
@@ -66,7 +66,7 @@ test('marque Konstellation : #1e6864, palette forêt, cache offline renouvelé',
   assert.match(css,/--forest-bg:#071c19/);
   assert.match(css,/\.rail\s*\{background:var\(--forest-rail\)/);
   assert.match(css,/\.graph-link-secondary/);
-  assert.match(source('sw.js'),/konstellation-light-public-v17-visual-126/);
+  assert.match(source('sw.js'),/konstellation-light-public-v19-readable-126/);
 });
 
 test('Architecture déjà dans le dépôt : entrée initiale isolée, graphe connexe disponible',()=>{

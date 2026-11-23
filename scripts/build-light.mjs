@@ -151,7 +151,7 @@ const catalog = { format:'konstellation.light-catalog/1.0',
   notice: 'Navigation dérivée. Aucun contrôle de signature, publication, activation ou autorité sémantique.',
   entries };
 staged.set('data/catalog.json', json(catalog));
-for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','multilingual-read.mjs','style.css','visual-v17.css','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
+for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','multilingual-read.mjs','style.css','visual-v17.css','visual-v19.css','exploration-v19.mjs','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
 // Same SVG supplied for the brand and the favicon; static, local and no external requests.
 staged.set('assets/logo_k.svg', fs.readFileSync(path.join(root, 'light/src/assets/logo_k.svg')));
 staged.set('.nojekyll', Buffer.from(''));
@@ -174,7 +174,7 @@ const backup = path.join(outputParent, `.light-backup-${path.basename(temp)}`);
 let backedUp = false;
 try {
   for (const [rel, bytes] of staged) {
-    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|lang-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|multilingual-read\.mjs|style\.css|visual-v17\.css|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
+    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|lang-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|multilingual-read\.mjs|style\.css|visual-v17\.css|visual-v19\.css|exploration-v19\.mjs|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
     const target = path.join(temp, rel);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, bytes);

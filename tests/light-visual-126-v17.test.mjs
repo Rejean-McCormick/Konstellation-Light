@@ -79,9 +79,9 @@ test('V17: le build exporte le thème, C4 garde le blocage des collections réel
   assert.match(text('light/src/index.html'),/href="\.\/visual-v17\.css"/);
   assert.match(text('scripts/build-light.mjs'),/visual-v17\.css/);
   assert.match(text('scripts/c4-publication-gate.mjs'),/visual-v17\.css/);
-  assert.match(text('light/src/sw.js'),/v17-visual-126/);
+  assert.match(text('light/src/sw.js'),/v19-readable-126/);
   assert.match(text('light/src/app.js'),/function drawDocumentConstellation/);
-  assert.match(text('light/src/app.js'),/data-map-mode':'documents'/);
+  assert.match(text('light/src/app.js'),/data-map-mode':documentary\?'documents'/);
   assert.match(text('light/src/app.js'),/showUnnamed=namedEdges<2/);
   assert.match(text('light/src/visual-v17.css'),/reader-doc-navigation/);
   assert.match(text('scripts/c4-publication-gate.mjs'),/BLOCK_REAL_COLLECTION/);

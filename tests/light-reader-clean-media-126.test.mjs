@@ -78,5 +78,5 @@ test('Interface : médias regroupés, sélection mobile compacte, lecteur sans c
   assert.match(app,/!isReferenceOrMachineValue/);
   assert.match(visualV17,/\.visual \.reader-graph-svg\{display:block!important;/);
   assert.match(visualV17,/\.reader-doc-navigation/);
-  assert.match(sw,/v17-visual-126/);
+  assert.match(sw,/v19-readable-126/);
 });

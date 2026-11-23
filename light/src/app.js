@@ -1,5 +1,6 @@
 import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges, connectedEntry, secondaryRing} from './graph-core.mjs';
 import {portraitFor, orbitPreview} from './profile.mjs';
+import {directNeighborPages, connectedEntryPoints, graphCaptionLines, readableMapPositions, mapGeometrySafe} from './exploration-v19.mjs';
 import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, isMachineRelationLabel, publicConceptLabel, publicReaderLabel, publicReaderDescription, isOpaqueReaderText, isNamedForReader, readerKnowledgeSummary, defaultReaderLens, readerPreferredFocus, readerDocumentGroups, readerDocumentMap, readerDocumentCategory, readerConnectedNamedFocus, readableDocumentTitle, readerMediaCategory, readerMediaGroups, isReaderMachineValue, isReaderPredicateCode} from './semantic-display.mjs';
 import {validateLocalization, validateLocaleDescriptor, localizationMap, relationLocalizationMap} from './multilingual-read.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
@@ -43,7 +44,7 @@ const displayRelation = relation => {
   const readable=publicRelationLabel(relation,isKnowledge()?state.bundle.relation_labels?.[relation]:null);
   return isReaderPredicateCode(readable)?'Lien déclaré':readable;
 };
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, neighborPage:0, overviewOpen:true, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
@@ -53,6 +54,7 @@ function urlState() {
   if (state.selection) p.set('focus', state.selection); else p.delete('focus');
   if (state.query) p.set('q', state.query); else p.delete('q');
   if (state.showUnnamed) p.set('ids','1'); else p.delete('ids');
+  if (state.neighborPage) p.set('pg',String(state.neighborPage)); else p.delete('pg');
   if(state.bundle?.view_kind==='derived-hosting-navigation' && state.docCategory)p.set('cat',state.docCategory);
   else p.delete('cat');
   if(state.locale)p.set('lang',state.locale);else p.delete('lang');
@@ -194,6 +196,7 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
   try {
     const data = await loadPack(row);
     state.slug = slug; state.revision = revision; state.bundle = data; state.portraitId = null;
+    if (!keepFocus){state.neighborPage=0;state.overviewOpen=true;}
     state.nodeOrdinal = new Map(data.nodes.map((node,i)=>[node.id,i+1]));
     const validFocus = keepFocus && data.nodes.some(n => n.id === state.selection);
     const hosting=data.view_kind==='derived-hosting-navigation';
@@ -272,6 +275,7 @@ function filteredNodes() {
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
+  state.neighborPage=0; state.overviewOpen=false;
   state.portraitId = null; state.autoFocus = false;
   if(state.bundle.view_kind==='derived-hosting-navigation'){
     const node=state.bundle.nodes.find(n=>n.id===id);
@@ -348,6 +352,7 @@ function render() {
   document.querySelectorAll('[data-lens]').forEach(btn => { btn.classList.toggle('active', btn.dataset.lens === state.lens); btn.setAttribute('aria-pressed', String(btn.dataset.lens === state.lens)); });
   const visible = filteredNodes(); $('count').textContent = state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString('fr-FR')} documents répertoriés`;
   const view = $('visual'); view.replaceChildren();
+  updateReaderTrail();
   if (state.lens === 'constellation') drawGraph(view, visible);
   if (state.lens === 'registry') drawRegistry(view, visible);
   if (state.lens === 'trace') drawTrace(view);
@@ -377,295 +382,250 @@ function profileCard(target, node, opener = null) {
 // actual public filenames; drawn connectors are graphic grouping guides, never
 // graph assertions. Individual document selection opens the existing inspector.
 function drawDocumentConstellation(target,visible){
-  const d=state.bundle;
+  const data=state.bundle;
   const allowed=new Set(visible.map(n=>n.id));
-  const plan=readerDocumentMap(d.nodes,{category:state.docCategory,allowedIds:allowed,limit:state.satellites});
-  if(state.docCategory && !plan.selected)state.docCategory=null;
-  const group=plan.selected;
-  const centralName=group?group.label:publicKristalTitle(d.slug,d.title);
-  const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group',class:'reader-graph-svg reader-doc-svg',
-    'data-map-mode':'documents','aria-label':group ?
-    `Carte documentaire : ${group.label}. Sélectionnez un document pour afficher sa fiche.` :
-    `Carte documentaire de ${centralName}. Sélectionnez une catégorie pour explorer ses fichiers.`});
-  const center={x:380,y:218},items=group?plan.visible:plan.groups;
-  const N=items.length;
-  const positions=items.map((_,i)=>{
-    const angle=2*Math.PI*i/Math.max(1,N)-Math.PI/2;
-    const distanceX=N>12?260:225;
-    const distanceY=N>12?176:155;
-    return {x:center.x+distanceX*Math.cos(angle),y:center.y+distanceY*Math.sin(angle)};
+  const plan=readerDocumentMap(data.nodes,{category:state.docCategory,allowedIds:allowed,limit:25});
+  const selected=plan.selected;
+  if(!selected)state.neighborPage=0;
+  const groups=plan.groups;
+  const pool=selected ? selected.nodes : groups;
+  const size=Math.max(3,Math.min(8,state.satellites));
+  const pages=Math.max(1,Math.ceil(pool.length/size));
+  const page=Math.min(state.neighborPage,pages-1);state.neighborPage=page;
+  const shown=pool.slice(page*size,(page+1)*size);
+  const items=shown.map(entry=>{
+    const isFile=Boolean(selected);
+    const label=isFile?readableDocumentTitle(entry,{ordinal:state.nodeOrdinal.get(entry.id)||1,groupLabel:selected.label}):entry.label;
+    return {id:isFile?entry.id:entry.key,label,
+      meta:isFile?'Document public répertorié':`${entry.nodes.length} document(s)`,
+      cssClass:isFile?'graph-doc-file':'graph-doc-category',
+      open:()=>{
+        if(isFile)focusOn(entry.id);
+        else {state.docCategory=entry.key;state.selection=entry.nodes[0]?.id||null;state.neighborPage=0;
+          state.history=state.selection?[state.selection]:[];render();urlState();}
+      }};
   });
-  const guide=svgElement('g',{class:'document-cluster-guides','aria-hidden':'true'});
-  for(const p of positions)guide.append(svgElement('path',{
-    d:`M ${center.x} ${center.y} Q ${Math.round((center.x+p.x)/2)} ${Math.round((center.y+p.y)/2-10)} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`,
-    class:'document-cluster-link'}));
-  svg.append(guide);
-  const centerNode=svgElement('g',{class:'graph-node graph-doc-hub','data-selected':'true',role:'button',tabindex:'0',
-    'aria-label':group?'Retour à la carte des catégories':'Collection documentaire'});
-  centerNode.append(svgElement('circle',{cx:center.x,cy:center.y,r:52}));
-  const mark=svgElement('text',{x:center.x,y:center.y-4,class:'type-mark'});mark.textContent=group?'▤':'✳';centerNode.append(mark);
-  const title=svgElement('text',{x:center.x,y:center.y+77,class:'graph-doc-center-label'});
-  title.textContent=short(centralName,33);centerNode.append(title);
-  if(group){const back=()=>{state.docCategory=null;state.selection=d.nodes.find(n=>n.kind==='hosted_state')?.id||null;state.history=state.selection?[state.selection]:[];render();urlState();};
-    centerNode.addEventListener('click',back);
-    centerNode.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();back();}});
-  } else {centerNode.setAttribute('role','img');centerNode.removeAttribute('tabindex');}
-  svg.append(centerNode);
-  for(const [i,item] of items.entries()){
+  drawReadableMap(target,selected?selected.label:publicKristalTitle(data.slug,data.title),items,{documentary:true});
+  const focus=element('div','v19-mobile-focus');
+  focus.append(element('small','','Structure documentaire · classement, pas liens sémantiques'),
+    element('strong','',selected?selected.label:publicKristalTitle(data.slug,data.title)));
+  target.append(focus);
+  appendNeighborPager(target,page,pool.length,pages);
+  const navigation=element('section','reader-doc-navigation');
+  navigation.append(element('h3','',selected?`Documents : ${selected.label}`:'Choisir une catégorie documentaire'));
+  navigation.append(element('p','reader-muted','Ces regroupements proviennent des fichiers publics. Ils ne représentent pas des relations entre connaissances.'));
+  if(selected)navigation.append(actionButton('← Toutes les catégories',()=>{
+    state.docCategory=null;state.neighborPage=0;
+    state.selection=data.nodes.find(n=>n.kind==='hosted_state')?.id||null;
+    state.history=state.selection?[state.selection]:[];render();urlState();},'button ghost'));
+  const buttons=element('div','reader-doc-choices');
+  for(const item of shown){
+    const button=element('button','reader-doc-choice',selected?
+      readableDocumentTitle(item,{ordinal:state.nodeOrdinal.get(item.id)||1,groupLabel:selected.label}):
+      `${item.label} · ${item.nodes.length} document(s)`);
+    button.type='button';if(selected){button.setAttribute('aria-pressed',String(state.selection===item.id));if(state.selection===item.id)button.classList.add('selected');}
+    button.addEventListener('click',selected?()=>focusOn(item.id):()=>{
+      state.docCategory=item.key;state.neighborPage=0;state.selection=item.nodes[0]?.id||null;
+      state.history=state.selection?[state.selection]:[];render();urlState();});
+    buttons.append(button);
+  }
+  navigation.append(buttons);target.append(navigation);
+  $('truncation').textContent=`${pool.length} ${selected?'documents':'catégories'} disponibles · ${shown.length} sur la page · classement documenté`;
+}
+function updateReaderTrail() {
+  const container=$('reader-trail');
+  if(!container || !state.bundle || state.lens!=='constellation'){if(container)container.hidden=true;return;}
+  container.replaceChildren();container.hidden=false;
+  const home=actionButton('Vue d’ensemble',()=>{state.overviewOpen=true;state.neighborPage=0;render();urlState();},'v19-overview-toggle');
+  container.append(home);
+  if(!isKnowledge() && state.docCategory){container.append(element('span','v19-path-separator','›'),element('span','',readerDocumentGroups(state.bundle.nodes).find(g=>g.key===state.docCategory)?.label||'Documents'));return;}
+  const previous=state.history.slice(-4);
+  const byId=new Map(state.bundle.nodes.map(n=>[n.id,n]));
+  for(const id of previous){const n=byId.get(id);if(!n)continue;
+    container.append(element('span','v19-path-separator','›'));
+    const b=actionButton(displayNode(n),()=>focusOn(n.id),'v19-trail-button');
+    if(id===state.selection)b.setAttribute('aria-current','step');
+    container.append(b);
+  }
+}
+
+function makeCaption(svg,x,y,caption,max=3) {
+  const t=svgElement('text',{x,y,class:'v19-caption graph-visible-caption'});
+  const lines=graphCaptionLines(caption,22,max);
+  for (let i=0;i<lines.length;i++) {
+    const line=svgElement('tspan',{x,dy:i?19:0});line.textContent=lines[i];t.append(line);
+  }
+  svg.append(t);return t;
+}
+
+// V19.1 — On touch devices, keep a *real visual connection map* instead of
+// hiding the diagram behind a plain relation list. Its branches come solely
+// from the items already present in the V19 graph/document plan.
+function drawMobileConnectionMap(target,centerLabel,items,{documentary=false}={}){
+  const diagram=element('section','v191-mobile-diagram');
+  diagram.setAttribute('aria-label',documentary?'Carte tactile de classement des documents':'Carte tactile des connexions déclarées');
+  const intro=element('p','v191-mobile-map-caption',documentary?
+    'CARTE DOCUMENTAIRE · lignes de classement, sans relation sémantique':
+    'CARTE DES LIENS · connexions réellement déclarées');
+  const hub=element('div','v191-mobile-hub');
+  hub.append(element('span','v191-mobile-hub-mark',documentary?'▤':'✳'),element('strong','',centerLabel));
+  diagram.append(intro,hub);
+  const branches=element('div','v191-mobile-branches');
+  if(!items.length)branches.append(element('p','v191-mobile-empty','Aucun voisin affichable pour cette sélection.'));
+  for(const [index,item] of items.entries()){
+    const button=element('button','v191-mobile-branch');button.type='button';
+    button.setAttribute('data-v191-node-id',String(item.id||item.label));
+    button.setAttribute('aria-label',`Explorer ${item.label}. ${item.meta||item.relationLabel||''}`);
+    const title=element('strong','',item.label);
+    const metadata=element('small','',item.meta||item.relationLabel||
+      (documentary?'Document public répertorié':'Lien déclaré'));
+    button.append(element('span','v191-mobile-index',String(index+1).padStart(2,'0')),title,metadata);
+    button.addEventListener('click',item.open);
+    branches.append(button);
+  }
+  diagram.append(branches);target.append(diagram);
+  return diagram;
+}
+
+// Accessible, collision-free 2-column constellation, shared with documentary maps.
+function drawReadableMap(target,centerLabel,items,{documentary=false}={}){
+  if(items.length>8)throw Error('Carte V19 : trop de nœuds simultanément.');
+  const positions=readableMapPositions(items.length);
+  if(!mapGeometrySafe(positions))throw Error('Carte V19 : géométrie non lisible.');
+  const stage=element('div','v19-map-stage');
+  const svg=svgElement('svg',{viewBox:'0 0 1000 720',class:'reader-graph-svg v19-map-svg',role:'group',
+    'data-map-mode':documentary?'documents':'knowledge',
+    'aria-label':documentary?'Carte documentaire : les lignes indiquent uniquement le classement des fichiers.':'Carte de connexions réelles, chaque notion est sélectionnable au clic ou au clavier.'});
+  // Render declared lines first, then cards so labels remain legible and on top.
+  for (let i=0;i<items.length;i++) {
     const p=positions[i];
-    const isFile=Boolean(group);
-    const node=isFile?item:null;
-    const label=isFile ? readableDocumentTitle(node,{ordinal:state.nodeOrdinal.get(node.id)||1,groupLabel:group.label}) : item.label;
-    const active=Boolean(isFile&&state.selection===node.id);
-    const bubble=svgElement('g',{class:`graph-node ${isFile?'graph-doc-file':'graph-doc-category'} doc-category-${isFile?group.key:item.key}`,
-      'data-selected':String(active),role:'button',tabindex:'0',
-      'aria-label':isFile?`Consulter : ${label}`:`Explorer ${label}, ${item.nodes.length} documents`});
-    bubble.append(svgElement('circle',{cx:p.x,cy:p.y,r:isFile?24:38}));
-    const type=svgElement('text',{x:p.x,y:p.y+4,class:'type-mark'});type.textContent=isFile?'▤':'◆';bubble.append(type);
-    const name=svgElement('text',{x:p.x,y:p.y+(isFile?39:54),class:'graph-doc-node-label'});
-    name.textContent=short(label,isFile?23:27);bubble.append(name);
-    if(!isFile){const count=svgElement('text',{x:p.x,y:p.y+68,class:'graph-doc-count'});count.textContent=`${item.nodes.length} document(s)`;bubble.append(count);}
-    const tip=svgElement('title');tip.textContent=label;bubble.append(tip);
-    const open=()=>{
-      if(isFile)focusOn(node.id);
-      else {state.docCategory=item.key;state.selection=item.nodes[0]?.id||state.selection;state.history=state.selection?[state.selection]:[];render();urlState();}
-    };
-    bubble.addEventListener('click',open);
-    bubble.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
-    svg.append(bubble);
+    const line=svgElement('path',{d:`M 500 335 Q ${p.side==='left'?420:580} ${p.y} ${p.x} ${p.y}`,class:documentary?'document-cluster-link':'graph-link v19-card-link'});
+    const tip=svgElement('title');tip.textContent=documentary?'Lien de classement documentaire':items[i].relationLabel||'Lien déclaré';line.append(tip);svg.append(line);
   }
-  target.append(svg);
-  const note=element('p','reader-document-disclaimer',
-    'Carte de classement des fichiers publics. Les traits représentent uniquement des regroupements visuels, pas des relations de connaissances.');
-  target.append(note);
-  const trail=element('section','reader-doc-navigation');
-  trail.append(element('h3','',group?`Documents · ${group.label}`:'Explorer les familles de documents'));
-  if(group){
-    const back=actionButton('← Toutes les catégories',()=>{state.docCategory=null;state.selection=d.nodes.find(n=>n.kind==='hosted_state')?.id||null;state.history=state.selection?[state.selection]:[];render();urlState();},'button ghost');
-    trail.append(back);
-    const links=element('div','reader-doc-choices');
-    for(const node of plan.visible){
-      const label=readableDocumentTitle(node,{ordinal:state.nodeOrdinal.get(node.id)||1,groupLabel:group.label});
-      const button=element('button','reader-doc-choice',label);
-      button.type='button';button.setAttribute('aria-pressed',String(node.id===state.selection));
-      button.addEventListener('click',()=>focusOn(node.id));
-      links.append(button);
-    }
-    trail.append(links);
-    if(plan.total>plan.visible.length){
-      trail.append(element('p','reader-muted',`${plan.total-plan.visible.length} document(s) supplémentaires dans cette catégorie.`),
-        actionButton('Voir tous les documents',()=>{state.lens='registry';state.autoLens=false;state.page=0;render();urlState();},'button ghost'));
-    }
-    $('truncation').textContent=`${plan.visible.length}/${plan.total} documents affichés · classement visuel sans assertions nouvelles`;
-  }else{
-    const groups=element('div','reader-doc-choices');
-    for(const g of plan.groups){const b=element('button','reader-doc-choice',`${g.label} · ${g.nodes.length}`);b.type='button';
-      b.addEventListener('click',()=>{state.docCategory=g.key;state.selection=g.nodes[0].id;state.history=[state.selection];render();urlState();});groups.append(b);}
-    trail.append(groups);
-    $('truncation').textContent=`${plan.groups.length} catégories · ${plan.groups.reduce((n,g)=>n+g.nodes.length,0)} documents publics · aucune relation sémantique inventée`;
+  const center=svgElement('g',{class:'v19-focus graph-node','data-selected':'true',role:'img','aria-label':`Centre : ${centerLabel}`});
+  center.append(svgElement('circle',{cx:500,cy:335,r:61}));
+  const sym=svgElement('text',{x:500,y:342});sym.textContent=documentary?'▤':'✳';center.append(sym);
+  const centralTitle=svgElement('rect',{x:360,y:415,width:280,height:58,rx:13,class:'v19-center-title'});center.append(centralTitle);
+  const title=svgElement('text',{x:500,y:439,class:'v19-title-text'});
+  const lines=graphCaptionLines(centerLabel,28,2);
+  for(let i=0;i<lines.length;i++){const tspan=svgElement('tspan',{x:500,dy:i?21:0});tspan.textContent=lines[i];title.append(tspan);}
+  center.append(title);svg.append(center);
+  for(let i=0;i<items.length;i++) {
+    const item=items[i],p=positions[i];
+    const g=svgElement('g',{class:`graph-node v19-node-card ${item.cssClass||''}`, 'data-selected':'false',
+      'data-node-id':item.id || item.label,'data-v19-label':item.label,role:'button',tabindex:'0',
+      'aria-label':`Explorer : ${item.label}. ${item.meta||item.relationLabel||''}`});
+    g.append(svgElement('rect',{x:p.boxX,y:p.boxY,width:p.boxW,height:p.boxH,rx:13,class:'card-bg'}));
+    g.append(svgElement('circle',{cx:p.x,cy:p.y,r:20}));
+    const mark=svgElement('text',{x:p.x,y:p.y+6,class:'type-mark'});mark.textContent=documentary?'▤':'◇';g.append(mark);
+    const cap=svgElement('g',{class:'v19-title-group'});
+    makeCaption(cap,p.boxX+13,p.boxY+28,item.label,3);g.append(cap);
+    const description=svgElement('text',{x:p.boxX+13,y:p.boxY+93,class:'v19-relation-caption'});
+    description.textContent=String(item.meta||item.relationLabel||'').slice(0,34);g.append(description);
+    const tip=svgElement('title');tip.textContent=`${item.label} — ${item.meta||item.relationLabel||''}`;g.append(tip);
+    g.addEventListener('click',item.open);
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();item.open();}});
+    svg.append(g);
   }
-  if(!plan.groups.length)trail.append(element('p','reader-muted','Aucun document ne correspond à cette recherche.'));
-  target.append(trail);
+  stage.append(svg);target.append(stage);
+  const mobileDiagram=drawMobileConnectionMap(target,centerLabel,items,{documentary});
+  return {stage,svg,mobileDiagram};
+}
+
+function appendNeighborPager(target,current,total,pages){
+  const controls=element('div','v19-graph-toolbar');
+  controls.append(element('span','v19-page-state',`${total} voisin(s) réels · page ${current+1}/${pages}`));
+  if(pages>1){
+    const prev=actionButton('← Connexions précédentes',()=>{state.neighborPage=Math.max(0,state.neighborPage-1);render();urlState();});prev.disabled=current===0;
+    const next=actionButton('Autres connexions →',()=>{state.neighborPage=Math.min(pages-1,state.neighborPage+1);render();urlState();});next.disabled=current>=pages-1;
+    controls.append(prev,next);
+  }
+  controls.append(actionButton('Agrandir la carte',()=>{
+    const map=target.querySelector('.v19-map-stage');if(!map)return;
+    if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+    else map.requestFullscreen?.().catch(()=>notify('Plein écran indisponible.'));
+  }));
+  target.append(controls);
+}
+
+function makeOverview(target,nodes,edges) {
+  if(!isKnowledge())return;
+  const eligible=n=>!n.technical_identifier && !isReferenceOrMachineValue(n) &&
+    (!isUnnamedForVisitor(n) || state.showUnnamed);
+  const entries=connectedEntryPoints(nodes,edges,eligible,displayNode,6);
+  const section=element('section','v19-discovery');
+  const header=element('div','v19-discovery-head');
+  const title=element('div');title.append(element('h3','','Explorer ce Kristal'),element('p','',
+    'Choisissez un point d’entrée réellement connecté. Le nombre de liens n’indique pas une importance scientifique.'));
+  const toggle=actionButton(state.overviewOpen?'Masquer les parcours':'Voir les points d’entrée',()=>{state.overviewOpen=!state.overviewOpen;render();urlState();},'v19-overview-toggle');
+  toggle.setAttribute('aria-expanded',String(state.overviewOpen));header.append(title,toggle);section.append(header);
+  if(state.overviewOpen){
+    const grid=element('div','v19-discovery-list');
+    if(!entries.length)grid.append(element('p','v19-empty','Aucun point d’entrée connecté n’est disponible avec ces critères.'));
+    for(const {node,degree} of entries){
+      const button=element('button','v19-entry');button.type='button';
+      button.append(element('strong','',displayNode(node)),element('small','',`${degree} connexion(s) déclarée(s)`));
+      button.addEventListener('click',()=>focusOn(node.id));grid.append(button);
+    }
+    section.append(grid);
+  }
+  target.append(section);
 }
 
 function drawGraph(target, visible) {
   if(state.bundle.view_kind==='derived-hosting-navigation')return drawDocumentConstellation(target,visible);
-  const all=state.bundle.nodes;
-  if(isKnowledge() && !state.showUnnamed && !state.query.trim()){
-    const info=readerKnowledgeSummary(all,state.bundle.edges,{localized:state.localized,requireReviewed:Boolean(state.locale)});
-    if(info.namedEdges===0 && !info.navigable){
-      const box=element('section','reader-overview');
-      box.append(element('h3','','Les relations nécessitent encore des intitulés'),
-        element('p','',`${info.named.toLocaleString('fr-FR')} notion(s) disposent d’un nom. ${info.unnamed.toLocaleString('fr-FR')} autre(s) n’en ont pas encore. Aucun lien direct entre notions nommées n’est disponible dans cette collection.`),
-        element('p','','Le nombre de liens déclarés ne constitue ni une traduction ni une relation intelligible pour le lecteur.'));
-      const actions=element('div','reader-actions');
-      actions.append(actionButton('Lire les notions nommées',()=>{state.lens='registry';state.page=0;render();urlState();},'button ghost'));
-      if(info.navigable)actions.append(actionButton('Explorer les relations existantes',activateRealConnections,'button accent'));
-      box.append(actions,element('p','reader-muted','Les éléments sans intitulé sont numérotés pour la navigation seulement. Leur identité n’est pas déduite.'));
-      target.append(box);$('graph-controls').hidden=true;
-      $('truncation').textContent=`${info.navigable.toLocaleString('fr-FR')} lien(s) navigables · ${info.declared.toLocaleString('fr-FR')} déclarés dans la collection`;return;
-    }
-  }
-  const selected=all.find(n=>n.id===state.selection && !isReferenceOrMachineValue(n))||all.find(n=>!isReferenceOrMachineValue(n))||all[0];
-  if (!selected) { target.append(element('div','empty','Aucun nœud disponible.'));return; }
-  const matched=state.query.trim() ? new Set(visible.map(n=>n.id)) : null;
-  const unnamedIds=isKnowledge() && !state.showUnnamed && !state.query.trim() ? new Set(all.filter(n=>isUnnamedForVisitor(n)&&n.id!==selected.id).map(n=>n.id)) : null;
-  const resourceIds=new Set(isKnowledge()?all.filter(isReferenceOrMachineValue).map(n=>n.id):[]);
-  const displayEdges=isKnowledge() ? readableKnowledgeEdges(all,state.bundle.edges,selected.id).filter(e=>
-    !resourceIds.has(e.from) && !resourceIds.has(e.to) && (!unnamedIds || (!unnamedIds.has(e.from) && !unnamedIds.has(e.to)))) : state.bundle.edges;
-  const view=graphNeighborhood(all,displayEdges,selected.id,state.satellites,matched);
-  const neighborIndex=buildNeighborIndex(all,displayEdges);
-  const shown=view.nodes;
-  const secondaries = !state.query.trim() && isKnowledge() && shown.length > 1
-    ? secondaryRing(all, displayEdges, shown.slice(1), selected.id, 6) : [];
-  const secondaryIds = new Set(secondaries.map(item => item.node.id));
-  const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group','aria-label':'Graphe navigable : Entrée ou clic pour recentrer sur une bulle. Survolez pour voir les satellites secondaires.'});
-  const xy=new Map([[selected.id,{x:380,y:226}]]);
-  const count=shown.length-1;
-  shown.slice(1).forEach((n,i)=>{const angle=2*Math.PI*i/Math.max(1,count)-Math.PI/2;
-    const radius=count>13 ? 151+(i%2)*9 : 150;
-    xy.set(n.id,{x:380+Math.cos(angle)*radius*1.52,y:226+Math.sin(angle)*radius});
-  });
-  // Second-ring satellites appear without hovering, attached to actual
-  // first-ring edges; the labels cannot be confused with qualified semantics.
-  for (const {node, parentId} of secondaries) {
-    const parent = xy.get(parentId); if (!parent) continue;
-    const angle = Math.atan2((parent.y-226)/162, (parent.x-380)/(162*1.65));
-    xy.set(node.id,{x:380+Math.cos(angle)*312,y:226+Math.sin(angle)*194});
-  }
-  for(const edge of view.edges){const a=xy.get(edge.from),b=xy.get(edge.to);
-    if(!a||!b)continue;
-    const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link'});
-    const tooltip=svgElement('title');tooltip.textContent=displayRelation(edge.relation);line.append(tooltip);svg.append(line);
-  }
-  for (const {node, parentId} of secondaries) {
-    const a=xy.get(parentId),b=xy.get(node.id);
-    if(!a||!b)continue;
-    const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link graph-link-secondary'});
-    const source=displayEdges.find(e => (e.from===parentId&&e.to===node.id)||(e.to===parentId&&e.from===node.id));
-    const tooltip=svgElement('title');tooltip.textContent=source?displayRelation(source.relation):'Lien déclaré';line.append(tooltip);
-    svg.append(line);
-  }
-  let previewGroup=null;
-  const clearPreview=()=>{previewGroup?.remove();previewGroup=null;};
-  const showPreview=(node)=>{
-    clearPreview();
-    if(node.id===selected.id)return;
-    // The center is already visible: exclude it from the preview satellites.
-    const secondary=previewNeighbors(neighborIndex,node.id,[selected.id,...secondaryIds],6);
-    if(!secondary.length)return;
-    const anchor=xy.get(node.id);
-    const obstacles=[...xy].map(([id,p])=>({...p,r:id===selected.id?43:25}));
-    const positions=orbitPreview(secondary,anchor,760,470,6,obstacles);
-    previewGroup=svgElement('g',{class:'graph-secondary-preview','aria-hidden':'true'});
-    previewGroup.append(svgElement('circle',{cx:anchor.x,cy:anchor.y,r:38,class:'preview-halo'}));
-    for(const child of positions){
-      previewGroup.append(svgElement('line',{x1:anchor.x,y1:anchor.y,x2:child.x,y2:child.y}));
-      previewGroup.append(svgElement('circle',{cx:child.x,cy:child.y,r:18}));
-      const name=svgElement('text',{x:child.x,y:child.y+31,class:'preview-label'});
-      name.textContent=short(displayNode(child),19);previewGroup.append(name);
-    }
-    svg.append(previewGroup);
-  };
-  for(const n of shown){const p=xy.get(n.id),central=n.id===selected.id;
-    const group=svgElement('g',{class: isUnnamedForVisitor(n) ? 'graph-node graph-node-unlabeled' : 'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${displayNode(n)}`});
-    group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?43:23}));
-    const sym=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});sym.textContent=central?'✳':'◇';group.append(sym);
-    // Full titles live in the accompanying accessible list. Orbital text is
-    // deliberately limited to avoid unreadable overlaps and clipped captions.
-    if(central || (count<=10 && shown.indexOf(n)<=10)){
-      const label=svgElement('text',{x:p.x,y:p.y+(central?58:36)});
-      const graphName=isUnnamedForVisitor(n)?`Notion n° ${state.nodeOrdinal.get(n.id)||1}`:displayNode(n);
-      label.textContent=short(graphName,central?27:17);group.append(label);
-    }
-    const tip=svgElement('title');tip.textContent=displayDescription(n)||displayNode(n);group.append(tip);
-    group.addEventListener('click',()=>focusOn(n.id));
-    group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(n.id);}});
-    if(!central){group.addEventListener('mouseenter',()=>showPreview(n));group.addEventListener('mouseleave',clearPreview);
-      group.addEventListener('focus',()=>showPreview(n));group.addEventListener('blur',clearPreview);}
-    svg.append(group);
-  }
-  for (const {node} of secondaries) {
-    const p=xy.get(node.id);if(!p)continue;
-    const group=svgElement('g',{class: isUnnamedForVisitor(node) ? 'graph-node graph-node-secondary graph-node-unlabeled' : 'graph-node graph-node-secondary', 'data-layer':'secondary',
-      'data-kind':node.kind,role:'button',tabindex:'0',
-      'aria-label':`Connexion de deuxième niveau : ${displayNode(node)}`});
-    group.append(svgElement('circle',{cx:p.x,cy:p.y,r:17}));
-    const mark=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});mark.textContent='·';group.append(mark);
-    // Second-ring names remain available via title, aria-label and the link list.
-    const tip=svgElement('title');tip.textContent=displayDescription(node)||displayNode(node);group.append(tip);
-    group.addEventListener('click',()=>focusOn(node.id));
-    group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(node.id);}});
-    svg.append(group);
-  }
-  // Separate buttons, not nested inside the navigation buttons.
-  for(const n of shown){const profile=portraitFor(n);if(!profile)continue;
-    const p=xy.get(n.id),central=n.id===selected.id;
-    const badge=svgElement('g',{class:'graph-portrait-indicator',role:'button',tabindex:'0',
-      'aria-label':`Ouvrir la fiche de ${displayNode(n)}`});
-    const x=p.x+(central?33:19),y=p.y-(central?31:18);
-    badge.append(svgElement('circle',{cx:x,cy:y,r:central?12:10}));
-    const mark=svgElement('text',{x,y:y+4});mark.textContent='i';badge.append(mark);
-    const open=(e)=>{e.stopPropagation();clearPreview();state.portraitId=n.id;profileCard(target,n,badge);};
-    badge.addEventListener('click',open);
-    badge.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(e);}});
-    svg.append(badge);
-  }
-  svg.classList.add('reader-graph-svg');
-  target.append(svg);
-  // A real-edge, fully labelled companion list: available on desktop and
-  // primary on mobile, where tiny SVG text is deliberately hidden.
+  const data=state.bundle,all=data.nodes;
+  const selected=all.find(n=>n.id===state.selection&&!isReferenceOrMachineValue(n)) ||
+    all.find(n=>!isReferenceOrMachineValue(n)) || all[0];
+  if(!selected){target.append(element('p','v19-empty','Aucune notion disponible.'));return;}
+  const visibleIds=state.query.trim()?new Set(visible.map(n=>n.id)):null;
+  const unnamedIds=!state.showUnnamed&&!state.query.trim()?new Set(all.filter(n=>isUnnamedForVisitor(n)&&n.id!==selected.id).map(n=>n.id)):null;
+  const resourceIds=new Set(all.filter(isReferenceOrMachineValue).map(n=>n.id));
+  const links=readableKnowledgeEdges(all,data.edges,selected.id).filter(e=>
+    !resourceIds.has(e.from)&&!resourceIds.has(e.to)&&
+    (!unnamedIds||(!unnamedIds.has(e.from)&&!unnamedIds.has(e.to))));
+  makeOverview(target,all,links);
+  const eligible=n=>!n.technical_identifier && !isReferenceOrMachineValue(n) &&
+    (!unnamedIds||!unnamedIds.has(n.id));
+  const paged=directNeighborPages(all,links,selected.id,eligible,displayNode,
+    state.neighborPage,state.satellites,visibleIds);
+  state.neighborPage=paged.page;
+  const index=buildNeighborIndex(all,links);
+  const entries=paged.items.map(({node,relation,direction})=>({id:node.id,label:displayNode(node),
+    relationLabel:displayRelation(relation),cssClass:isUnnamedForVisitor(node)?'graph-node-unlabeled':'',
+    meta:`${direction==='sortant'?'↗':direction==='entrant'?'↙':'↔'} ${displayRelation(relation)} · ${index.adjacent.get(node.id)?.size||0} voisin(s)`,
+    open:()=>focusOn(node.id)}));
+  drawReadableMap(target,displayNode(selected),entries);
+  const focus=element('div','v19-mobile-focus');focus.append(element('small','','Notion actuelle'),element('strong','',displayNode(selected)));
+  target.append(focus);
+  appendNeighborPager(target,paged.page,paged.total,paged.pages);
+  target.append(element('p','v19-label-note',
+    'Chaque carte porte un intitulé. Les noms longs sont également accessibles entièrement dans la liste et la fiche. Sélectionnez un voisin pour avancer.'));
   const browser=element('section','reader-mobile-map reader-relations-browser');
-  browser.append(element('h3','','Parcourir les connexions de cette notion'));
-  browser.append(element('p','reader-muted','Chaque entrée correspond à un lien existant dans les données. Les noms manquants ne sont pas devinés.'));
-  const byId=new Map(all.map(n=>[n.id,n]));
-  const links=displayEdges.filter(e=>e.from===selected.id||e.to===selected.id);
-  const unique=new Map();
-  for(const e of links){
-    const other=byId.get(e.from===selected.id?e.to:e.from);if(!other||other.id===selected.id)continue;
-    if(!state.showUnnamed && isUnnamedForVisitor(other))continue;
-    if(!unique.has(other.id))unique.set(other.id,{node:other,relation:e.relation});
-  }
-  const allLinks=[...unique.values()].sort((a,b)=>
-    Number(isUnnamedForVisitor(a.node))-Number(isUnnamedForVisitor(b.node))||
-    displayNode(a.node).localeCompare(displayNode(b.node),'fr'));
-  const makeLink=({node,relation})=>{
+  browser.append(element('h3','','Connexions autour de cette notion'),
+    element('p','reader-muted','Sélectionnez une relation réelle pour approfondir. Les liens sans intitulé restent neutres.'));
+  if(paged.total===0)browser.append(element('p','reader-muted',state.query?'Aucun voisin ne correspond à la recherche.':'Aucun lien direct visible pour cette notion.'));
+  for(const {node,relation,direction} of paged.items){
     const button=element('button','reader-mobile-link');button.type='button';
-    button.append(element('strong','',displayNode(node)),element('small','',displayRelation(relation)));
+    button.append(element('strong','',displayNode(node)),element('small','',`${direction==='sortant'?'↗ Sortant':direction==='entrant'?'↙ Entrant':'↔ Multiple'} · ${displayRelation(relation)}`));
     button.setAttribute('aria-label',`Explorer ${displayNode(node)} · ${displayRelation(relation)}`);
-    button.addEventListener('click',()=>focusOn(node.id));return button;
-  };
-  for(const item of allLinks.slice(0,12))browser.append(makeLink(item));
-  if(allLinks.length>12){
-    const more=element('details','reader-relations-extra');
-    more.append(element('summary','',`Afficher ${allLinks.length-12} autre(s) connexion(s)`));
-    const extra=element('div','reader-extra-list');
-    for(const item of allLinks.slice(12,80))extra.append(makeLink(item));
-    if(allLinks.length>80)extra.append(element('p','reader-muted',
-      `${allLinks.length-80} autre(s) connexion(s) non affichée(s) ici ; sélectionnez un autre point pour poursuivre.`));
-    more.append(extra);browser.append(more);
+    button.addEventListener('click',()=>focusOn(node.id));browser.append(button);
   }
-  if(!allLinks.length)browser.append(element('p','reader-muted',
-    state.query?'Aucun voisin correspondant à la recherche.':'Aucun lien direct disponible pour cette notion.'));
-  if(isKnowledge() && state.showUnnamed){
-    browser.append(actionButton('Revenir aux notions nommées',returnToReadableWords,'button ghost'));
-  }else if(isKnowledge()){
-    const opaque=links.filter(e=>{
-      const other=byId.get(e.from===selected.id?e.to:e.from);
-      return other && isUnnamedForVisitor(other);
-    });
-    if(opaque.length)browser.append(element('p','reader-muted',
-      `${opaque.length} lien(s) supplémentaires vers des notions sans intitulé sont regroupés.`),
-      actionButton('Explorer également ces connexions',activateRealConnections,'button ghost'));
+  if(isKnowledge()&&state.showUnnamed)browser.append(actionButton('Revenir aux notions nommées',returnToReadableWords,'button ghost'));
+  else if(isKnowledge()){
+    const id=new Set([selected.id]);
+    const hidden=data.edges.filter(e=>(id.has(e.from)||id.has(e.to)) &&
+      isUnnamedForVisitor(all.find(n=>n.id===(e.from===selected.id?e.to:e.from)))).length;
+    if(hidden)browser.append(element('p','reader-muted',`${hidden} relation(s) vers des notions sans intitulé peuvent être explorées en mode avancé.`),
+      actionButton('Explorer les connexions sans intitulé',activateRealConnections,'button ghost'));
   }
   target.append(browser);
-  if (secondaries.length) {
-    const legend=element('p','graph-layers-legend');
-    legend.append(element('span','graph-legend-direct','● Liens directs'),
-      element('span','graph-legend-secondary',`◌ ${secondaries.length} connexion(s) de deuxième niveau — liens réellement déclarés`));
-    target.append(legend);
+  if(state.portraitId){const n=all.find(node=>node.id===state.portraitId);if(n)profileCard(target,n);}
+  if(paged.total===0){
+    const fallback=connectedEntry(all,links);
+    if(fallback&&fallback!==selected.id)target.append(actionButton('Explorer une autre notion connectée',()=>focusOn(fallback),'button accent'));
   }
-  target.append(element('p','graph-hint',state.autoFocus
-    ? 'Point de départ : notion existante la plus connectée. Le titre du Kristal peut désigner une notion sans lien direct.'
-    : 'Cliquez sur une bulle pour explorer ses liens. Survolez-la pour découvrir d’autres notions.'));
-  if(state.portraitId){const node=all.find(n=>n.id===state.portraitId);if(node)profileCard(target,node);}
-  if(isKnowledge() && !selected.technical_identifier) {
-    const hidden=state.bundle.edges.filter(e=>e.from===selected.id && all.some(n=>n.id===e.to&&n.technical_identifier)).length;
-    if(hidden) target.append(element('p','graph-hint','Certaines références internes sont volontairement masquées pour faciliter la lecture.'));
-  }
-  if(view.degree===0) {
-    target.append(element('p','graph-empty',state.query
-      ? 'Aucun voisin correspondant à la recherche. Effacer la recherche pour voir les relations.'
-      : 'Cette notion n’a aucun lien directement visible dans les relations déclarées.'));
-    if (!state.query.trim()) {
-      const connected=connectedEntry(all,displayEdges);
-      if (connected && connected!==selected.id) {
-        const browse=element('button','graph-browse-connected','Explorer une notion réellement connectée');browse.type='button';
-        browse.addEventListener('click',()=>focusOn(connected));target.append(browse);
-      }
-    }
-  }
-  $('truncation').textContent=`${shown.length-1} voisin(s) affiché(s) · ${secondaries.length} connexion(s) secondaires · ${links.length.toLocaleString('fr-FR')} lien(s) directs répertoriés · ${state.bundle.edges.length.toLocaleString('fr-FR')} liens déclarés dans la collection`;
+  $('truncation').textContent=`${paged.items.length}/${paged.total} voisins affichés · ${data.edges.length} liens déclarés dans la collection · aucune relation ajoutée`;
 }
 function drawDocumentRegistry(target,nodes){
   const intro=element('section','reader-overview');
@@ -844,6 +804,16 @@ function drawInspection(){
     const other=nodeById.get(e.from===n.id?e.to:e.from);
     return other && !other.technical_identifier && !related.includes(e);
   });
+  if(isKnowledge()){
+    const outbound=sourceRelations.filter(e=>e.from===n.id).length;
+    const inbound=sourceRelations.filter(e=>e.to===n.id).length;
+    const stats=element('section','v19-inspector-facts');
+    stats.append(element('h4','','Connexions déclarées'),
+      element('p','',`${outbound} lien(s) sortant(s) · ${inbound} lien(s) entrant(s). Les directions reflètent uniquement les déclarations de la source.`));
+    if(!description && !localizedDefinition)stats.append(element('p','reader-muted',
+      'Aucune définition vérifiée n’est disponible pour cette notion dans le lecteur public.'));
+    target.append(stats);
+  }
   if(related.length){
     target.append(element('h4','relation-heading',`Liens avec d’autres notions (${related.length.toLocaleString('fr-FR')})`));
     const list=element('div','relation-list');
@@ -852,7 +822,7 @@ function drawInspection(){
       if(!other)return;
       const button=element('button','relation-entry');button.type='button';
       button.append(element('strong','',displayNode(other)),
-        element('small','',displayRelation(edge.relation)));
+        element('small','',`${edge.from===n.id?'↗ Sortant':'↙ Entrant'} · ${displayRelation(edge.relation)}`));
       button.addEventListener('click',()=>focusOn(other.id));list.append(button);
     };
     for(const edge of related.slice(0,8))addRelation(edge);
@@ -868,7 +838,7 @@ function drawInspection(){
           const other=nodeById.get(edge.from===n.id?edge.to:edge.from);
           if(!other)continue;
           const button=element('button','relation-entry');button.type='button';
-          button.append(element('strong','',displayNode(other)),element('small','',displayRelation(edge.relation)));
+          button.append(element('strong','',displayNode(other)),element('small','',`${edge.from===n.id?'↗ Sortant':'↙ Entrant'} · ${displayRelation(edge.relation)}`));
           button.addEventListener('click',()=>focusOn(other.id));holder.append(button);
         }
         offset=limit;load.hidden=offset>=related.length;
@@ -927,7 +897,9 @@ async function main(){
   state.query=(params.get('q')||'').slice(0,250);$('search').value=state.query;
   state.autoLens=!params.has('lens');
   state.lens=['constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
-  state.selection=params.get('focus'); state.satellites=clampSatellites(params.get('n')||8);
+  state.selection=params.get('focus'); state.satellites=Math.min(8,clampSatellites(params.get('n')||6));
+  state.neighborPage=Math.max(0,Math.min(999,Number.parseInt(params.get('pg')||'0',10)||0));
+  state.overviewOpen=!params.has('focus');
   state.showUnnamed=params.get('ids')==='1';$('show-unnamed').checked=state.showUnnamed;
   state.requestedLocale=params.get('lang')||null;
   try {
@@ -947,7 +919,7 @@ $('localization').addEventListener('change',async()=>{
   const selected=$('localization').value;
   try{await loadLocalization(selected||null);state.requestedLocale=state.locale;
     $('localization-status').textContent=state.locale?`Texte révisé en ${new Intl.DisplayNames(['fr'],{type:'language'}).of(state.locale)} ; interface en français.`:'Mots d’origine ; interface en français.';
-    state.page=0;render();urlState();
+    state.page=0;state.neighborPage=0;render();urlState();
   }catch(e){$('localization-status').textContent=e.message;notify('Fichier de langue refusé : '+e.message);
     $('localization').value=state.locale||'';}
 });
@@ -957,31 +929,37 @@ $('show-unnamed').addEventListener('change',()=>{
     const named=state.bundle.nodes.find(n=>!n.technical_identifier&&!isUnnamedForVisitor(n));
     if(named){state.selection=named.id;state.history=[named.id];state.autoFocus=false;}
   }
-  state.page=0;render();urlState();
+  state.page=0;state.neighborPage=0;render();urlState();
 });
-for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.autoLens=false;state.lens=btn.dataset.lens;state.page=0;render();urlState();});
-$('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;render();urlState();});
+for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.autoLens=false;state.lens=btn.dataset.lens;state.page=0;state.neighborPage=0;render();urlState();});
+$('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;state.neighborPage=0;render();urlState();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
-$('satellites').addEventListener('input',()=>{state.satellites=clampSatellites($('satellites').value);render();urlState();});
+$('satellites').addEventListener('input',()=>{state.satellites=Math.min(8,clampSatellites($('satellites').value));state.neighborPage=0;render();urlState();});
+$('map-fullscreen')?.addEventListener('click',async()=>{
+  const map=document.querySelector('#visual .v19-map-stage');if(!map)return;
+  try{if(document.fullscreenElement)await document.exitFullscreen();else await map.requestFullscreen();}
+  catch{notify('Plein écran indisponible dans ce navigateur.');}
+});
 $('graph-back').addEventListener('click',()=>{
   if(state.bundle?.view_kind==='derived-hosting-navigation' && state.docCategory){
     state.docCategory=null;state.selection=state.bundle.nodes.find(n=>n.kind==='hosted_state')?.id||null;
-    state.history=state.selection?[state.selection]:[];render();urlState();return;
+    state.history=state.selection?[state.selection]:[];state.neighborPage=0;render();urlState();return;
   }
-  if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();
+  if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);state.neighborPage=0;render();urlState();
 });
 $('graph-home').addEventListener('click',()=>{
+  state.overviewOpen=true;state.neighborPage=0;
   if(!state.bundle)return;
   if(state.bundle.view_kind==='derived-hosting-navigation'){
     state.docCategory=null;state.selection=state.bundle.nodes.find(n=>n.kind==='hosted_state')?.id||state.bundle.nodes[0]?.id;
-    state.history=state.selection?[state.selection]:[];render();urlState();return;
+    state.history=state.selection?[state.selection]:[];state.neighborPage=0;render();urlState();return;
   }
   const nodes=state.bundle.nodes;const edges=readableKnowledgeEdges(nodes,state.bundle.edges,'');
   const eligible=nodes.filter(n=>!n.technical_identifier&&!isReferenceOrMachineValue(n));
   const id=readerConnectedNamedFocus(eligible,edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}) || connectedEntry(eligible,edges);
   const home=nodes.find(n=>n.id===id)||eligible[0]||nodes[0];if(home)focusOn(home.id);
 });
-$('reset').addEventListener('click',()=>{state.page=0;state.query='';$('search').value='';render();urlState();});
+$('reset').addEventListener('click',()=>{state.neighborPage=0;state.page=0;state.query='';$('search').value='';render();urlState();});
 $('share').addEventListener('click',async()=>{urlState();try{await navigator.clipboard.writeText(location.href);notify('Lien de navigation copié.');}catch{notify(`Copiez l’URL du navigateur pour partager la vue.`);}});
 $('export')?.addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';
  const href=URL.createObjectURL(new Blob([text],{type:'application/json'}));const a=element('a');a.href=href;a.download='konstellation-light-selection.json';a.click();setTimeout(()=>URL.revokeObjectURL(href),3000);notify('Descripteur de sélection exporté.');});
