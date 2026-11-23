@@ -50,7 +50,7 @@ test('la finition du lecteur garde les liens réels et une liste accessible sur 
   assert.match(css,/\.reader-relations-browser/);
   assert.match(visualV17,/\.visual \.reader-graph-svg\{display:block!important;/);
   assert.match(css,/#1e6864/);
-  assert.match(sw,/v19-readable-126/);
+  assert.match(sw,/v20-documented-126/);
   assert.doesNotMatch(file('light/src/index.html'),/onerror\s*=/);
 });
 

@@ -34,6 +34,16 @@ const displayNode = n => {
   return publicReaderLabel(n, {localizedLabel,viewKind:state.bundle?.view_kind,
     ordinal,requireReviewed:Boolean(state.locale)});
 };
+const documentReading = n => state.bundle?.reading?.documents?.find(d=>n?.kind==='hosted_file' && d.path===n.label) || null;
+const displayDocumentTitle = n => {
+  const found=documentReading(n);if(found?.title)return found.title;
+  if(n?.kind==='hosted_file' && /\.md$/i.test(n.label)){
+    const filename=n.label.split('/').at(-1).replace(/\.md$/i,'');
+    const label=filename.replace(/^\d+[_-]*/,'').replace(/[_-]+/g,' ').trim();
+    if(label)return `Document : ${label}`;
+  }
+  return readableDocumentTitle(n,{ordinal:state.nodeOrdinal?.get(n.id)||1,groupLabel:readerDocumentGroups([n])[0]?.label||'Document'});
+};
 const displayDescription = n => state.locale && !state.localized?.get(n.id)?.definition ? '' : publicReaderDescription(state.localized?.get(n.id)?.definition || n.description);
 const isUnnamedForVisitor=n=>Boolean(n && !n.technical_identifier && ((isUnlabeledKnowledge(n)||isOpaqueReaderText(n.label))&&!state.localized?.get(n.id)?.label || (state.locale&&!state.localized?.get(n.id)?.label)));
 const displayRelation = relation => {
@@ -125,6 +135,27 @@ async function loadPack(entry) {
         !Array.isArray(e.source_refs)||e.source_refs.length>80||
         !e.source_refs.every(x=>typeof x==='string'&&x.length>0&&x.length<=180))
       throw Error('Provenance de la relation invalide.');
+  }
+  if (obj.reading !== undefined) {
+    const r=obj.reading;
+    const safePath=p=>typeof p==='string' && p.length<=240 &&
+      /^(?:README\.md|AI_START_HERE\.md|docs\/(?:[A-Za-z0-9_.-]+\/)?[A-Za-z0-9_.-]+\.md|ai\/(?:CONTEXT|QUESTIONS|GLOSSARY)\.md)$/.test(p);
+    const safeString=(value,max)=>typeof value==='string'&&value.length<=max;
+    const sourceDigest=s=>typeof s==='string'&&/^sha256:[a-f0-9]{64}$/.test(s);
+    if (!r || r.format!=='konstellation.light-reading/1.0' ||
+        r.status!=='source-public-documents-unqualified'||r.semantic_assertions_created!==0||
+        !safeString(r.intro,420)||!Array.isArray(r.topics)||r.topics.length>10||
+        !Array.isArray(r.documents)||r.documents.length>48||
+        !Number.isSafeInteger(r.scanned_files)||r.scanned_files!==r.documents.length||
+        !(r.overview_path===null||safePath(r.overview_path)) ||
+        !r.documents.every(d=>safePath(d.path)&&sourceDigest(d.sha256)&&safeString(d.title,150)&&
+          safeString(d.excerpt,320)&&Array.isArray(d.sections)&&d.sections.length<=8&&
+          d.sections.every(s=>safeString(s.title,110)&&Number.isInteger(s.line)&&s.line>0)&&
+          Array.isArray(d.topics)&&d.topics.length<=10&&
+          d.topics.every(t=>safeString(t.title,95)&&safeString(t.detail,210)&&safeString(t.section,90)&&Number.isInteger(t.line)&&t.line>0))||
+        !r.topics.every(t=>safeString(t.title,95)&&safeString(t.detail,210)&&safeString(t.section,90)&&Number.isInteger(t.line)&&t.line>0) ||
+        (r.overview_path!==null&&!r.documents.some(d=>d.path===r.overview_path)))
+      throw Error('Projection documentaire non conforme.');
   }
   if (obj.discovery !== undefined) {
     const d=obj.discovery;
@@ -237,7 +268,7 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
         if(translatedFocus){state.selection=translatedFocus;state.history=[translatedFocus];state.autoFocus=false;}
       }
     }
-    if(state.autoLens)state.lens=defaultReaderLens(data,{localized:state.localized,requireReviewed:Boolean(state.locale)});
+    if(state.autoLens)state.lens=(data.reading?.documents?.length && (hosting || namedEdges<2)) ? 'discover' : defaultReaderLens(data,{localized:state.localized,requireReviewed:Boolean(state.locale)});
     fillSelect($('collection'), [...new Set(state.catalog.entries.map(e => e.slug))].map(s => [s, publicKristalTitle(s,state.catalog.entries.find(e=>e.slug===s).title)]).sort((a,b)=>a[1].localeCompare(b[1],'fr')), slug);
     const versions=existingRevisions(slug);
     fillSelect($('revision'), versions.map((x,i) => [x.revision, `Version ${i+1}`]), revision);
@@ -267,9 +298,8 @@ function filteredNodes() {
     }))) return false;
     const category=state.bundle.view_kind==='derived-hosting-navigation'?readerDocumentCategory(n):'';
     const docTitle=state.bundle.view_kind==='derived-hosting-navigation'
-      ?readableDocumentTitle(n,{ordinal:state.nodeOrdinal.get(n.id)||1,
-        groupLabel:readerDocumentGroups([n])[0]?.label||'Document'}):'';
-    const words=`${displayNode(n)} ${docTitle} ${displayDescription(n)} ${state.localized?.get(n.id)?.definition||''} ${category}`.toLocaleLowerCase(state.locale||'fr');
+      ?displayDocumentTitle(n):'';
+    const words=`${displayNode(n)} ${docTitle} ${documentReading(n)?.excerpt||''} ${documentReading(n)?.sections?.map(s=>s.title).join(' ')||''} ${displayDescription(n)} ${state.localized?.get(n.id)?.definition||''} ${category}`.toLocaleLowerCase(state.locale||'fr');
     return terms.every(t=>words.includes(t));
   });
 }
@@ -319,6 +349,7 @@ function actionButton(label,handler,style='button ghost'){
 }
 function lensMeta() {
   return {
+    discover: ['Découvrir ce Kristal', 'Présentation et documents tirés de la source publique; aucune relation ni qualification inventée.'],
     constellation: [isKnowledge() ? 'Constellation des connaissances' : 'Carte visuelle des documents',
       isKnowledge() ? 'Connexions réellement présentes. Les notions sans nom restent neutres et numérotées.' :
       'Classement visuel de fichiers publics, sans relations sémantiques supposées. Sélectionnez une catégorie pour découvrir les documents.'],
@@ -338,6 +369,7 @@ function render() {
   $('metric-members-label').textContent = isKnowledge() ? 'NOTIONS NOMMÉES' : 'DOCUMENTS RÉPERTORIÉS';
   $('metric-relations-label').textContent = isKnowledge() ? 'LIENS DÉCLARÉS (NON VALIDÉS)' : 'LIENS D’INVENTAIRE';
   $('graph-controls').hidden = state.lens !== 'constellation';
+  document.querySelector('[data-lens="discover"]').hidden = !Boolean(data.reading?.documents?.length);
   document.querySelector('[data-lens="constellation"]').hidden=false;
   document.querySelector('[data-lens="constellation"]').lastChild.textContent=isKnowledge()?' Constellation des connaissances':' Carte des documents';
   document.querySelector('.advanced-toggle').hidden=data.view_kind==='derived-hosting-navigation';
@@ -347,12 +379,13 @@ function render() {
   $('satellites').value = String(state.satellites); $('satellites-count').textContent = String(state.satellites);
   $('graph-back').disabled = state.history.length < 2 && !(data.view_kind==='derived-hosting-navigation' && state.docCategory);
   const [heading, hint] = lensMeta(); $('panel-title').textContent = heading; $('panel-hint').textContent = hint;
-  $('view-tag').textContent = ({constellation:isKnowledge()?'CARTE DES LIENS':'CARTE DOCUMENTAIRE',registry:isKnowledge()?'NOTIONS':'DOCUMENTS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
+  $('view-tag').textContent = ({discover:'LECTURE SOURCÉE',constellation:isKnowledge()?'CARTE DES LIENS':'CARTE DOCUMENTAIRE',registry:isKnowledge()?'NOTIONS':'DOCUMENTS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
   if (state.lens==='trace' || state.lens==='compare') $('advanced-tools').open=true;
   document.querySelectorAll('[data-lens]').forEach(btn => { btn.classList.toggle('active', btn.dataset.lens === state.lens); btn.setAttribute('aria-pressed', String(btn.dataset.lens === state.lens)); });
-  const visible = filteredNodes(); $('count').textContent = state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString('fr-FR')} documents répertoriés`;
+  const visible = filteredNodes(); $('count').textContent = state.lens==='discover' ? `${data.reading?.documents?.length||0} document(s) publics présentés` : state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString('fr-FR')} documents répertoriés`;
   const view = $('visual'); view.replaceChildren();
   updateReaderTrail();
+  if (state.lens === 'discover') drawDiscover(view);
   if (state.lens === 'constellation') drawGraph(view, visible);
   if (state.lens === 'registry') drawRegistry(view, visible);
   if (state.lens === 'trace') drawTrace(view);
@@ -381,6 +414,83 @@ function profileCard(target, node, opener = null) {
 // VISUAL-V17: a map of document *categories*. Categories are derived from
 // actual public filenames; drawn connectors are graphic grouping guides, never
 // graph assertions. Individual document selection opens the existing inspector.
+
+// V20 — actual documented reading surface. Everything here is sourced from
+// SHA-verified public Markdown; it is NOT a canonical graph transformation.
+function publicDocLink(relative, line = null) {
+  const source=state.bundle?.source;
+  if(!source || !/^https:\/\/github\.com\/[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/.test(source.repository) ||
+     !/^[a-f0-9]{40}$/.test(source.commit) ||
+     !/^(?:README\.md|AI_START_HERE\.md|docs\/(?:[A-Za-z0-9_.-]+\/)?[A-Za-z0-9_.-]+\.md|ai\/(?:CONTEXT|QUESTIONS|GLOSSARY)\.md)$/.test(relative))return null;
+  const parts=[...('kristals/'+state.bundle.slug+'/'+relative).split('/')];
+  if(parts.some(p=>p==='.'||p==='..'||!p))return null;
+  const base=source.repository+'/blob/'+source.commit+'/'+parts.map(encodeURIComponent).join('/');
+  return base+(Number.isInteger(line)&&line>0?'#L'+line:'');
+}
+function sourceAnchor(text,path,line=null){
+  const url=publicDocLink(path,line);
+  if(!url)return element('span','v20-source-local','Source contrôlée : '+path+' · lien GitHub disponible dans la bêta épinglée');
+  const a=element('a','v20-source',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;
+}
+function drawDiscover(target){
+  const reading=state.bundle.reading;
+  if(!reading || !reading.documents?.length){
+    target.append(element('p','reader-muted','Aucune présentation documentaire exploitable dans cette surface publique. La carte reste disponible.'));
+    return;
+  }
+  const intro=element('section','v20-intro');
+  intro.append(element('span','v20-eyebrow','PRÉSENTATION ISSUE DES DOCUMENTS PUBLICS'),
+    element('h3','',publicKristalTitle(state.bundle.slug,state.bundle.title)));
+  intro.append(element('p','v20-intro-copy',reading.intro || 'Aucun paragraphe de présentation exploitable dans le document source.'));
+  if(reading.overview_path)intro.append(sourceAnchor('Lire la présentation d’origine',reading.overview_path));
+  intro.append(element('p','v20-disclaimer','Extraits documentaires non qualifiés. Ces textes n’attribuent aucun nom ou sens aux identifiants du graphe.'));
+  target.append(intro);
+  if(reading.topics.length){
+    const topics=element('section','v20-section');
+    topics.append(element('h3','','Repères réellement cités dans la présentation'),
+      element('p','v20-subtle','Éléments repris des rubriques du document source, sans liens sémantiques supposés.'));
+    const grid=element('div','v20-topic-grid');
+    const q=state.query.trim().toLocaleLowerCase('fr');
+    for(const t of reading.topics.filter(t=>!q||`${t.title} ${t.detail} ${t.section}`.toLocaleLowerCase('fr').includes(q))){
+      const card=element('article','v20-topic');
+      card.append(element('strong','',t.title));
+      if(t.detail && t.detail!==t.title)card.append(element('p','',t.detail));
+      card.append(sourceAnchor('Lire le passage',reading.overview_path,t.line));
+      grid.append(card);
+    }
+    topics.append(grid);target.append(topics);
+  }
+  const section=element('section','v20-section');
+  section.append(element('h3','','Documents pour approfondir'),
+    element('p','v20-subtle','Titres, extraits et rubriques présents dans les fichiers publics contrôlés.'));
+  const q=state.query.trim().toLocaleLowerCase('fr');
+  const docs=reading.documents.filter(d=>!q||`${d.title} ${d.excerpt} ${d.sections.map(s=>s.title).join(' ')}`.toLocaleLowerCase('fr').includes(q));
+  const list=element('div','v20-doc-grid');
+  for(const d of docs){
+    const card=element('article','v20-document');
+    card.append(element('h4','',d.title));
+    if(d.excerpt)card.append(element('p','',d.excerpt));
+    if(d.sections.length){
+      const details=element('details','v20-outline');details.append(element('summary','',`Rubriques du document (${d.sections.length})`));
+      const ul=element('ul');for(const s of d.sections){const li=element('li');li.append(sourceAnchor(s.title,d.path,s.line));ul.append(li);}details.append(ul);card.append(details);
+    }
+    const footer=element('div','v20-doc-footer');
+    footer.append(sourceAnchor('Consulter la source',d.path,d.heading_line));
+    const fileNode=state.bundle.nodes.find(n=>n.kind==='hosted_file'&&n.label===d.path);
+    if(fileNode)footer.append(actionButton('Voir dans la carte',()=>{state.lens='constellation';state.autoLens=false;focusOn(fileNode.id);},'button ghost'));
+    card.append(footer);list.append(card);
+  }
+  section.append(list);
+  if(!docs.length)section.append(element('p','reader-muted','Aucun extrait documentaire correspondant à la recherche.'));
+  target.append(section);
+  const actions=element('section','v20-next');
+  actions.append(element('strong','',isKnowledge()?'Explorer les connexions disponibles':'Explorer la structure des fichiers'),
+    element('p','',isKnowledge()?'La carte représente les relations déclarées, y compris certaines notions encore anonymes.':'La carte classe les fichiers publics; ses traits ne sont pas des relations entre connaissances.'));
+  actions.append(actionButton('Ouvrir la carte',()=>{state.lens='constellation';state.autoLens=false;render();urlState();},'button accent'));
+  target.append(actions);
+  $('truncation').textContent=`${docs.length}/${reading.documents.length} documents présentés · données publiées non qualifiées · ${reading.scanned_files} fichiers Markdown lus`;
+}
+
 function drawDocumentConstellation(target,visible){
   const data=state.bundle;
   const allowed=new Set(visible.map(n=>n.id));
@@ -395,9 +505,9 @@ function drawDocumentConstellation(target,visible){
   const shown=pool.slice(page*size,(page+1)*size);
   const items=shown.map(entry=>{
     const isFile=Boolean(selected);
-    const label=isFile?readableDocumentTitle(entry,{ordinal:state.nodeOrdinal.get(entry.id)||1,groupLabel:selected.label}):entry.label;
+    const label=isFile?displayDocumentTitle(entry):entry.label;
     return {id:isFile?entry.id:entry.key,label,
-      meta:isFile?'Document public répertorié':`${entry.nodes.length} document(s)`,
+      meta:isFile?(documentReading(entry)?.excerpt||'Fichier public répertorié'):`${entry.nodes.length} document(s)`,
       cssClass:isFile?'graph-doc-file':'graph-doc-category',
       open:()=>{
         if(isFile)focusOn(entry.id);
@@ -421,7 +531,7 @@ function drawDocumentConstellation(target,visible){
   const buttons=element('div','reader-doc-choices');
   for(const item of shown){
     const button=element('button','reader-doc-choice',selected?
-      readableDocumentTitle(item,{ordinal:state.nodeOrdinal.get(item.id)||1,groupLabel:selected.label}):
+      displayDocumentTitle(item):
       `${item.label} · ${item.nodes.length} document(s)`);
     button.type='button';if(selected){button.setAttribute('aria-pressed',String(state.selection===item.id));if(state.selection===item.id)button.classList.add('selected');}
     button.addEventListener('click',selected?()=>focusOn(item.id):()=>{
@@ -641,7 +751,7 @@ function drawDocumentRegistry(target,nodes){
     const list=element('div','reader-doc-list');
     for(const [i,n] of group.nodes.entries()){
       const row=element('div','reader-doc-row');
-      const readable=readableDocumentTitle(n,{ordinal:state.nodeOrdinal.get(n.id)||i+1,groupLabel:group.label});
+      const readable=displayDocumentTitle(n);
       const select=element('button','reader-doc-title',readable);select.type='button';
       select.setAttribute('aria-pressed',String(state.selection===n.id));
       if(state.selection===n.id)row.classList.add('selected');
@@ -773,13 +883,15 @@ function drawInspection(){
   const n=d.nodes.find(x=>x.id===state.selection);
   if (!n){target.append(element('p','','Choisissez une notion sur la carte.'));return;}
   const inspectorTitle=d.view_kind==='derived-hosting-navigation'
-    ? readableDocumentTitle(n,{ordinal:state.nodeOrdinal.get(n.id)||1,groupLabel:readerDocumentGroups([n])[0]?.label||'Document'})
+    ? displayDocumentTitle(n)
     : displayNode(n);
   const titleNode=element('h3','',inspectorTitle);titleNode.tabIndex=-1;
   target.append(element('span','kind',publicNodeKind(n.kind)),titleNode);
   const localizedDefinition=state.localized?.get(n.id)?.definition;
-  const description=displayDescription(n);
+  const description=documentReading(n)?.excerpt || displayDescription(n);
   if(description)target.append(element('p',localizedDefinition?'node-definition':'node-description',description));
+  const documented=documentReading(n);
+  if(documented?.sections?.length){const p=element('p','v20-inspector-outline','Rubriques : '+documented.sections.slice(0,4).map(x=>x.title).join(' · '));target.append(p);}
   if(d.view_kind==='derived-hosting-navigation')target.append(element('p','subtle-hint',
     'Ce document est répertorié dans la collection publique. Son contenu n’a pas été vérifié indépendamment.'));
 
@@ -861,7 +973,10 @@ function drawInspection(){
   }
   if(d.source?.repository){const issue=element('a','inspector-action','Signaler un problème');
     const title=`Konstellation Light · ${publicKristalTitle(d.slug,d.title)} · ${short(displayNode(n),70)}`;
-    const body=`Révision: ${d.revision}\nState ref: ${d.state_ref}\nSurface digest: ${d.surface_digest}\nEntité: ${n.id}\nLien: ${location.href}\n\nObservation (à compléter) :`;
+    const here=new URL(location.pathname,location.origin);
+    here.searchParams.set('k',d.slug);here.searchParams.set('r',d.revision);here.searchParams.set('lens',state.lens);here.searchParams.set('n',String(state.satellites));here.searchParams.set('focus',n.id);
+    if(state.showUnnamed)here.searchParams.set('ids','1');
+    const body=`Révision: ${d.revision}\nState ref: ${d.state_ref}\nSurface digest: ${d.surface_digest}\nEntité: ${n.id}\nLien: ${here.href}\n\nObservation (à compléter) :`;
     issue.href=`${d.source.repository}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
     issue.target='_blank';issue.rel='noopener noreferrer';target.append(issue);
   }
@@ -896,7 +1011,7 @@ async function main(){
   else if(location.pathname.includes('/eleve/konstellation/')){ $('back-ekole').href='../'; $('back-ekole').hidden=false; }
   state.query=(params.get('q')||'').slice(0,250);$('search').value=state.query;
   state.autoLens=!params.has('lens');
-  state.lens=['constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
+  state.lens=['discover','constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
   state.selection=params.get('focus'); state.satellites=Math.min(8,clampSatellites(params.get('n')||6));
   state.neighborPage=Math.max(0,Math.min(999,Number.parseInt(params.get('pg')||'0',10)||0));
   state.overviewOpen=!params.has('focus');
@@ -909,7 +1024,6 @@ async function main(){
     state.catalog=catalog;
     const first=catalog.entries[0];const slug=catalog.entries.some(x=>x.slug===params.get('k'))?params.get('k'):first.slug;
     const revision=lookup(slug,params.get('r'))?params.get('r'):existingRevisions(slug).at(-1).revision;
-    if(!params.has('lens')) state.lens='constellation';
     await setChoice(slug,revision,{keepFocus:true});
   }catch(e){showFailure(e);}
 }

@@ -8,6 +8,7 @@ import { createHash } from 'node:crypto';
 import { inspectGithubKristal, listGithubKristals, toNavigationPack } from '../shared/kristal-v10.mjs';
 import { discoveryProjection } from '../shared/discovery.mjs';
 import { projectPublicKnowledge } from '../shared/public-knowledge.mjs';
+import { projectPublicReading } from '../shared/public-reading.mjs';
 import { validateLocalization, validateLocaleDescriptor, localeRE } from '../shared/multilingual-read.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -91,6 +92,7 @@ for (const [i, item] of listed.entries()) {
   const nodes = knowledge ? knowledge.nodes : pack.entities.map((e) => ({ id: e.id, kind: e.type, label: e.label, description: e.description }));
   const edges = knowledge ? knowledge.edges : pack.assertions.map((a) => ({ from: a.subject, to: a.value, relation: a.relation }));
   const selectedDiscovery = includeDiscovery ? discoveryProjection(checked, collection) : null;
+  const reading = projectPublicReading(checked, collection);
   const bundle = {
     format: 'konstellation.light-navigation/1.0',
     view_kind: knowledge ? 'derived-public-knowledge' : 'derived-hosting-navigation',
@@ -102,7 +104,7 @@ for (const [i, item] of listed.entries()) {
     verification: checked.checks,
     source: repoURL ? { repository: repoURL.replace(/\/$/, ''), commit: gitSHA } : null,
     metrics: { members: checked.state.members.length, files: checked.files.length, bytes: checked.sync.total_bytes },
-    nodes, edges,
+    nodes, edges, reading,
     ...(knowledge ? { knowledge: knowledge.knowledge, relation_labels: knowledge.relation_labels } : {}),
     ...(selectedDiscovery ? { discovery: selectedDiscovery } : {}),
   };
@@ -151,7 +153,7 @@ const catalog = { format:'konstellation.light-catalog/1.0',
   notice: 'Navigation dérivée. Aucun contrôle de signature, publication, activation ou autorité sémantique.',
   entries };
 staged.set('data/catalog.json', json(catalog));
-for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','multilingual-read.mjs','style.css','visual-v17.css','visual-v19.css','exploration-v19.mjs','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
+for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','multilingual-read.mjs','style.css','visual-v17.css','visual-v19.css','visual-v20.css','exploration-v19.mjs','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
 // Same SVG supplied for the brand and the favicon; static, local and no external requests.
 staged.set('assets/logo_k.svg', fs.readFileSync(path.join(root, 'light/src/assets/logo_k.svg')));
 staged.set('.nojekyll', Buffer.from(''));
@@ -174,7 +176,7 @@ const backup = path.join(outputParent, `.light-backup-${path.basename(temp)}`);
 let backedUp = false;
 try {
   for (const [rel, bytes] of staged) {
-    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|lang-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|multilingual-read\.mjs|style\.css|visual-v17\.css|visual-v19\.css|exploration-v19\.mjs|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
+    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|lang-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|multilingual-read\.mjs|style\.css|visual-v17\.css|visual-v19\.css|visual-v20\.css|exploration-v19\.mjs|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
     const target = path.join(temp, rel);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, bytes);

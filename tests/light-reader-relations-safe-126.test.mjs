@@ -33,7 +33,7 @@ test('le lecteur public utilise systématiquement la fonction stricte',()=>{
  assert.match(js,/const readable=publicRelationLabel\(relation/);
  assert.match(js,/isMachineRelationLabel\(localized\)/);
  assert.doesNotMatch(js,/semanticLabel\(relation\)/);
- assert.match(read('light/src/sw.js'),/v19-readable-126/);
+ assert.match(read('light/src/sw.js'),/v20-documented-126/);
 });
 
 test('126 packs: toutes les relations publiques donnent un texte non technique',()=>{

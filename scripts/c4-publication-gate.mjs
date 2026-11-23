@@ -11,7 +11,7 @@ import { validateLocalization,validateLocaleDescriptor } from '../shared/multili
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = b => createHash('sha256').update(b).digest('hex');
 const PACK = /^data\/pack-([a-f0-9]{64})\.json$/;
-const optionalLocal = new Set(['semantic-display.mjs','multilingual-read.mjs','visual-v17.css','visual-v19.css','exploration-v19.mjs','assets/logo_k.svg']);
+const optionalLocal = new Set(['semantic-display.mjs','multilingual-read.mjs','visual-v17.css','visual-v19.css','visual-v20.css','exploration-v19.mjs','assets/logo_k.svg']);
 const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'profile.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
 const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
 export class C4GateError extends Error { constructor(code,message) {super(message);this.name='C4GateError';this.code=code;} }
@@ -63,6 +63,17 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
        bundle.slug!==entry.slug||bundle.revision!==entry.revision||bundle.surface_digest!==entry.surface_digest||
        !['derived-hosting-navigation','derived-semantic-preview','derived-public-knowledge'].includes(bundle.view_kind))
        reject('BUNDLE_INVALID','Bundle identity or representation invalid.');
+    if (bundle.reading !== undefined) {
+      const reading=bundle.reading;
+      const pathOk=p=>typeof p==='string'&&/^(?:README\.md|AI_START_HERE\.md|docs\/(?:[A-Za-z0-9_.-]+\/)?[A-Za-z0-9_.-]+\.md|ai\/(?:CONTEXT|QUESTIONS|GLOSSARY)\.md)$/.test(p);
+      if (!reading || reading.format!=='konstellation.light-reading/1.0' ||
+          reading.status!=='source-public-documents-unqualified' ||
+          reading.semantic_assertions_created!==0 || !Array.isArray(reading.documents) ||
+          reading.documents.length>48 || !reading.documents.every(d=>pathOk(d.path)&&/^sha256:[a-f0-9]{64}$/.test(d.sha256)&&typeof d.title==='string'&&d.title.length<=150) ||
+          !(reading.overview_path===null||pathOk(reading.overview_path)) ||
+          (reading.overview_path!==null&&!reading.documents.some(d=>d.path===reading.overview_path)))
+        reject('READING_INVALID','Unqualified public reading projection malformed.');
+    }
     allowed.add(entry.path);
     const localized=entry.localizations||{};
     if(!localized||typeof localized!=='object'||Array.isArray(localized)||Object.keys(localized).length>64)

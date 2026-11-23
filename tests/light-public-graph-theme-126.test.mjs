@@ -66,7 +66,7 @@ test('marque Konstellation : #1e6864, palette forêt, cache offline renouvelé',
   assert.match(css,/--forest-bg:#071c19/);
   assert.match(css,/\.rail\s*\{background:var\(--forest-rail\)/);
   assert.match(css,/\.graph-link-secondary/);
-  assert.match(source('sw.js'),/konstellation-light-public-v19-readable-126/);
+  assert.match(source('sw.js'),/konstellation-light-public-v20-documented-126/);
 });
 
 test('Architecture déjà dans le dépôt : entrée initiale isolée, graphe connexe disponible',()=>{
