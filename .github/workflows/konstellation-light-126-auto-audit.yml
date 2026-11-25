@@ -16,7 +16,7 @@ concurrency:
 jobs:
   technical-preview:
     name: Verify published bytes, build preview and smoke-test navigation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
       - name: Checkout reader source without persistent credentials

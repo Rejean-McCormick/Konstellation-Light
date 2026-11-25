@@ -54,7 +54,7 @@ const displayRelation = relation => {
   const readable=publicRelationLabel(relation,isKnowledge()?state.bundle.relation_labels?.[relation]:null);
   return isReaderPredicateCode(readable)?'Lien déclaré':readable;
 };
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, neighborPage:0, overviewOpen:true, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, neighborPage:0, overviewOpen:true, readingId:null, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
@@ -63,6 +63,7 @@ function urlState() {
   p.set('k', state.slug || ''); p.set('r', state.revision || ''); p.set('lens', state.lens); p.set('n', String(state.satellites));
   if (state.selection) p.set('focus', state.selection); else p.delete('focus');
   if (state.query) p.set('q', state.query); else p.delete('q');
+  if (state.readingId) p.set('lecture',state.readingId); else p.delete('lecture');
   if (state.showUnnamed) p.set('ids','1'); else p.delete('ids');
   if (state.neighborPage) p.set('pg',String(state.neighborPage)); else p.delete('pg');
   if(state.bundle?.view_kind==='derived-hosting-navigation' && state.docCategory)p.set('cat',state.docCategory);
@@ -156,6 +157,28 @@ async function loadPack(entry) {
         !r.topics.every(t=>safeString(t.title,95)&&safeString(t.detail,210)&&safeString(t.section,90)&&Number.isInteger(t.line)&&t.line>0) ||
         (r.overview_path!==null&&!r.documents.some(d=>d.path===r.overview_path)))
       throw Error('Projection documentaire non conforme.');
+  }
+  if (obj.guided_reading !== undefined) {
+    const g=obj.guided_reading;
+    const docs=obj.reading?.documents||[];
+    const sourceDoc=docs.find(d=>d.path==='README.md');
+    if(!g || g.format!=='konstellation.light-guided-reading/1.0' ||
+       g.status!=='verbatim-source-unqualified' || g.semantic_assertions_created!==0 ||
+       g.source_commit!==obj.source?.commit || !Array.isArray(g.passages) ||
+       g.passages.length<1 || g.passages.length>8 || !sourceDoc ||
+       !g.passages.every(x=>/^lecture-scene-(?:0[1-9]|1[0-9]|20)$/.test(x.id) &&
+         x.id===`lecture-scene-${String(x.scene).padStart(2,'0')}` &&
+         Number.isInteger(x.scene) && x.scene>0 && x.scene<=20 &&
+         typeof x.title==='string' && x.title.length>0 && x.title.length<=130 &&
+         typeof x.text==='string' && x.text.length>0 && x.text.length<=500 &&
+         (x.explanation===undefined || typeof x.explanation==='string' && x.explanation.length<=240) &&
+         (x.related===undefined || Array.isArray(x.related) && x.related.length<=5 &&
+           x.related.every(part=>Number.isInteger(part.line) && part.line>0 && part.line<2000 &&
+             typeof part.text==='string' && part.text.length>0 && part.text.length<=240)) &&
+         x.source_path==='README.md' && Number.isInteger(x.line) && x.line>0 && x.line<2000 &&
+         x.sha256===sourceDoc.sha256) ||
+       new Set(g.passages.map(x=>x.id)).size!==g.passages.length)
+      throw Error('Citations guidées non conformes ou sources incohérentes.');
   }
   if (obj.discovery !== undefined) {
     const d=obj.discovery;
@@ -275,7 +298,12 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
     $('revision-row').hidden=versions.length<2;
     $('compare-tab').hidden=versions.length<2;
     if (versions.length<2 && state.lens==='compare') state.lens='constellation';
+    const existsInGuide=Boolean(data.guided_reading?.passages?.some(x=>x.id===state.readingId));
+    if(state.readingId && !existsInGuide && !(state.readingId==='lecture-scene-02' && data.slug==='biology'))
+      state.readingId=null;
+    if(state.readingId)state.lens='discover';
     render(); urlState();
+    if(state.readingId)markGuidedReading(state.readingId,{scroll:true});
   } catch (e) { showFailure(e); }
 }
 function showFailure(err) {
@@ -415,6 +443,59 @@ function profileCard(target, node, opener = null) {
 // actual public filenames; drawn connectors are graphic grouping guides, never
 // graph assertions. Individual document selection opens the existing inspector.
 
+// V21 — reading is deliberately selected from the pinned source, never guessed
+// from the viewport text. Only the visible quoted span carries the stable ID.
+function markGuidedReading(id,{scroll=false}={}){
+  const quotes=[...document.querySelectorAll('[data-reading-id]')];
+  for(const quote of quotes){
+    const selected=quote.dataset.readingId===id;
+    quote.classList.toggle('v21-reading-selected',selected);
+    quote.setAttribute('aria-current',selected?'true':'false');
+  }
+  const target=quotes.find(node=>node.dataset.readingId===id);
+  if(scroll && target)target.scrollIntoView({block:'center',behavior:'instant'});
+  return Boolean(target);
+}
+function drawGuidedReading(target){
+  const guides=state.bundle.guided_reading?.passages || [];
+  if(!guides.length)return;
+  const section=element('section','v21-guided');section.id='source-readings';
+  section.append(element('p','v21-eyebrow','LECTURE SOURCÉE · VISITE LA FÊTE DES IDÉES'),
+    element('h3','','Passages concrets à lire et à comprendre'),
+    element('p','v21-guided-note','Chaque extrait provient du README épinglé. Son intégrité a été vérifiée pendant la construction; cela ne qualifie pas la vérité de l’affirmation. Les exemples de la vidéo restent fictifs.'));
+  const cards=element('div','v21-reading-cards');
+  for(const reading of guides){
+    const card=element('article','v21-reading-card');
+    const header=element('div','v21-reading-heading');
+    header.append(element('span','v21-reading-scene',`SCÈNE ${String(reading.scene).padStart(2,'0')}`),
+      element('h4','',reading.title));
+    card.append(header);
+    const quote=element('blockquote','v21-reading-quote',[reading.text,...(reading.related||[]).map(x=>x.text)].join('\n'));
+    quote.id=reading.id;
+    quote.dataset.readingId=reading.id;
+    quote.dataset.sourceLine=String(reading.line);
+    quote.tabIndex=0;
+    quote.setAttribute('aria-label',`Passage source pour la scène ${reading.scene} : ${reading.text}`);
+    card.append(quote);
+    if(reading.explanation)card.append(element('p','v21-commentary',reading.explanation));
+    const lineMark=reading.related?.length ? `lignes ${reading.line}–${reading.related.at(-1).line}` : `ligne ${reading.line}`;
+    const meta=element('p','v21-reading-provenance',`Source épinglée : kristals/${state.bundle.slug}/README.md · ${lineMark} · SHA-256 ${reading.sha256.slice(7,19)}…`);
+    card.append(meta);
+    const actions=element('div','v21-reading-actions');
+    const btn=element('button','button ghost',`Mettre en évidence la scène ${reading.scene}`);
+    btn.type='button';
+    btn.addEventListener('click',()=>{
+      state.readingId=reading.id;
+      urlState();
+      markGuidedReading(reading.id,{scroll:true});
+    });
+    actions.append(btn,sourceAnchor('Voir la ligne d’origine',reading.source_path,reading.line));
+    card.append(actions);cards.append(card);
+  }
+  section.append(cards);target.append(section);
+  if(state.readingId)markGuidedReading(state.readingId);
+}
+
 // V20 — actual documented reading surface. Everything here is sourced from
 // SHA-verified public Markdown; it is NOT a canonical graph transformation.
 function publicDocLink(relative, line = null) {
@@ -443,8 +524,14 @@ function drawDiscover(target){
     element('h3','',publicKristalTitle(state.bundle.slug,state.bundle.title)));
   intro.append(element('p','v20-intro-copy',reading.intro || 'Aucun paragraphe de présentation exploitable dans le document source.'));
   if(reading.overview_path)intro.append(sourceAnchor('Lire la présentation d’origine',reading.overview_path));
-  intro.append(element('p','v20-disclaimer','Extraits documentaires non qualifiés. Ces textes n’attribuent aucun nom ou sens aux identifiants du graphe.'));
+  const notice=element('p','v20-disclaimer','Extraits documentaires non qualifiés. Ces textes n’attribuent aucun nom ou sens aux identifiants du graphe.');
+  if(state.bundle.slug==='biology'){
+    notice.id='lecture-scene-02';notice.dataset.readingId='lecture-scene-02';notice.tabIndex=0;
+  }
+  intro.append(notice);
   target.append(intro);
+  drawGuidedReading(target);
+  if(state.readingId)markGuidedReading(state.readingId);
   if(reading.topics.length){
     const topics=element('section','v20-section');
     topics.append(element('h3','','Repères réellement cités dans la présentation'),
@@ -1010,6 +1097,8 @@ async function main(){
   if(back && /^\/eleve\/(?:[a-z0-9._~!$&'()*+,;=:@%\/?-]*)$/i.test(back) && !back.includes('//')){ $('back-ekole').href=back; $('back-ekole').hidden=false; }
   else if(location.pathname.includes('/eleve/konstellation/')){ $('back-ekole').href='../'; $('back-ekole').hidden=false; }
   state.query=(params.get('q')||'').slice(0,250);$('search').value=state.query;
+  const requestedReading=params.get('lecture')||'';
+  state.readingId=/^lecture-scene-(?:0[1-9]|1[0-9]|20)$/.test(requestedReading)?requestedReading:null;
   state.autoLens=!params.has('lens');
   state.lens=['discover','constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
   state.selection=params.get('focus'); state.satellites=Math.min(8,clampSatellites(params.get('n')||6));
@@ -1027,7 +1116,7 @@ async function main(){
     await setChoice(slug,revision,{keepFocus:true});
   }catch(e){showFailure(e);}
 }
-$('collection').addEventListener('change',()=>{const s=$('collection').value;state.page=0;state.docCategory=null;state.requestedCategory=null;state.autoLens=true;state.lens='constellation';state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
+$('collection').addEventListener('change',()=>{const s=$('collection').value;state.readingId=null;state.page=0;state.docCategory=null;state.requestedCategory=null;state.autoLens=true;state.lens='constellation';state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
 $('localization').addEventListener('change',async()=>{
   const selected=$('localization').value;

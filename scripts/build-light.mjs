@@ -9,6 +9,7 @@ import { inspectGithubKristal, listGithubKristals, toNavigationPack } from '../s
 import { discoveryProjection } from '../shared/discovery.mjs';
 import { projectPublicKnowledge } from '../shared/public-knowledge.mjs';
 import { projectPublicReading } from '../shared/public-reading.mjs';
+import { projectGuidedReading } from '../shared/guided-reading.mjs';
 import { validateLocalization, validateLocaleDescriptor, localeRE } from '../shared/multilingual-read.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -24,7 +25,11 @@ if (options.help) { console.log('node scripts/build-light.mjs --collection PATH 
 const publicIntent = options.public === 'YES';
 if (!publicIntent) throw Error('Export refusé : fournir explicitement --public YES (les données seront accessibles publiquement).');
 const collection = options.collection ? path.resolve(options.collection) : '';
-if (!collection || !fs.existsSync(path.join(collection, 'kristals/index.json'))) throw Error('Collection v10 introuvable (kristals/index.json requis).');
+if (!collection || !fs.existsSync(path.join(collection, 'kristals/index.json'))) {
+  throw Error('Collection v10 introuvable : un dossier contenant kristals/index.json est requis. ' +
+    'LIGHT_SOURCE_PIN.json est facultatif pour ce build. ' +
+    'Pour localiser une collection : node scripts/check-light-sources.mjs --root CHEMIN.');
+}
 const output = path.resolve(options.out || path.join(root, 'light/site'));
 const repoURL = options.repository || '';
 const gitSHA = options.commit || '';
@@ -44,6 +49,8 @@ if (fs.existsSync(sourcePinFile)) {
       pin.qualification_verified !== false || pin.publication_verified !== false) {
     throw Error('Source pin incohérent : import épinglé et paramètres du build ne correspondent pas.');
   }
+} else {
+  console.log('SOURCE PIN : absent (facultatif pour build-light.mjs). Le commit Git source n’est pas attesté par un fichier PIN.');
 }
 const revision = options.revision || (gitSHA || 'local');
 if (!/^[a-zA-Z0-9._-]{1,70}$/.test(revision)) throw Error('Révision invalide.');
@@ -93,6 +100,7 @@ for (const [i, item] of listed.entries()) {
   const edges = knowledge ? knowledge.edges : pack.assertions.map((a) => ({ from: a.subject, to: a.value, relation: a.relation }));
   const selectedDiscovery = includeDiscovery ? discoveryProjection(checked, collection) : null;
   const reading = projectPublicReading(checked, collection);
+  const guided = projectGuidedReading(checked,collection,{repository:repoURL.replace(/\/$/,''),commit:gitSHA});
   const bundle = {
     format: 'konstellation.light-navigation/1.0',
     view_kind: knowledge ? 'derived-public-knowledge' : 'derived-hosting-navigation',
@@ -105,6 +113,7 @@ for (const [i, item] of listed.entries()) {
     source: repoURL ? { repository: repoURL.replace(/\/$/, ''), commit: gitSHA } : null,
     metrics: { members: checked.state.members.length, files: checked.files.length, bytes: checked.sync.total_bytes },
     nodes, edges, reading,
+    ...(guided ? {guided_reading:guided} : {}),
     ...(knowledge ? { knowledge: knowledge.knowledge, relation_labels: knowledge.relation_labels } : {}),
     ...(selectedDiscovery ? { discovery: selectedDiscovery } : {}),
   };
@@ -153,7 +162,7 @@ const catalog = { format:'konstellation.light-catalog/1.0',
   notice: 'Navigation dérivée. Aucun contrôle de signature, publication, activation ou autorité sémantique.',
   entries };
 staged.set('data/catalog.json', json(catalog));
-for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','multilingual-read.mjs','style.css','visual-v17.css','visual-v19.css','visual-v20.css','exploration-v19.mjs','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
+for (const name of ['index.html','app.js','graph-core.mjs','profile.mjs','semantic-display.mjs','multilingual-read.mjs','style.css','visual-v17.css','visual-v19.css','visual-v20.css','visual-v21.css','exploration-v19.mjs','sw.js']) staged.set(name, fs.readFileSync(path.join(root, 'light/src', name)));
 // Same SVG supplied for the brand and the favicon; static, local and no external requests.
 staged.set('assets/logo_k.svg', fs.readFileSync(path.join(root, 'light/src/assets/logo_k.svg')));
 staged.set('.nojekyll', Buffer.from(''));
@@ -176,7 +185,7 @@ const backup = path.join(outputParent, `.light-backup-${path.basename(temp)}`);
 let backedUp = false;
 try {
   for (const [rel, bytes] of staged) {
-    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|lang-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|multilingual-read\.mjs|style\.css|visual-v17\.css|visual-v19\.css|visual-v20\.css|exploration-v19\.mjs|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
+    if (!/^(?:data\/(?:pack-[a-f\d]{64}\.json|lang-[a-f\d]{64}\.json|catalog\.json)|index\.html|app\.js|graph-core\.mjs|profile\.mjs|semantic-display\.mjs|multilingual-read\.mjs|style\.css|visual-v17\.css|visual-v19\.css|visual-v20\.css|visual-v21\.css|exploration-v19\.mjs|sw\.js|assets\/logo_k\.svg|\.nojekyll)$/.test(rel)) throw Error('Chemin de sortie non autorisé.');
     const target = path.join(temp, rel);
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, bytes);

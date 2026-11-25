@@ -19,7 +19,7 @@ Reference folder: `C:\mycode\Konstellation\Konstellation-Light`. Extract project
 1. Install Python **3.10+** with `tkinter` for the Windows GUI.
 2. Double-click `Konstellation-Light.pyw`. Shortcut entry points include `Construire-Light.pyw`, `Previsualiser-Light.pyw`, `Deployer-Light.pyw` and `GitBook-Light.pyw`.
 3. Use **Preview** to view the bundled public demonstration locally at `http://127.0.0.1:4177/`, without Node.js.
-4. To compile an actual v10 collection, install Node.js (**22+ tested locally**) and select a collection directory containing `kristals/index.json`.
+4. To compile an actual v10 collection, install Node.js (**22+ tested locally**) and select a collection directory containing `kristals/index.json`. To find one without modifying anything, run `node scripts/check-light-sources.mjs --root PATH`. `LIGHT_SOURCE_PIN.json` is optional for `build-light.mjs`; its absence does not establish source provenance. See `docs/LIGHT_V211_DIAGNOSTIC_SOURCES.md`.
 
 The `.pyw` files are Python GUIs, not compiled `.exe` files. They do not automatically execute remote Git operations or ask for GitHub tokens.
 
