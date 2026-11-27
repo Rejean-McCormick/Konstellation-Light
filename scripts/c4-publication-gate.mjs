@@ -11,7 +11,7 @@ import { validateLocalization,validateLocaleDescriptor,MAX_CATALOG_LANGUAGES,nor
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const sha = b => createHash('sha256').update(b).digest('hex');
 const PACK = /^data\/pack-([a-f0-9]{64})\.json$/;
-const optionalLocal = new Set(['semantic-display.mjs','multilingual-read.mjs','visual-v17.css','visual-v19.css','visual-v20.css','visual-v21.css','exploration-v19.mjs','assets/logo_k.svg']);
+const optionalLocal = new Set(['semantic-display.mjs','multilingual-read.mjs','ui-languages.mjs','visual-v17.css','visual-v19.css','visual-v20.css','visual-v21.css','exploration-v19.mjs','assets/logo_k.svg']);
 const fixed = new Set(['.nojekyll', 'app.js', 'graph-core.mjs', 'profile.mjs', 'index.html', 'style.css', 'sw.js', 'data/catalog.json']);
 const own = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
 export class C4GateError extends Error { constructor(code,message) {super(message);this.name='C4GateError';this.code=code;} }

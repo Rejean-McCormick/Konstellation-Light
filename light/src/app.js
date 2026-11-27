@@ -1,3 +1,4 @@
+import {PRIORITY_LANGUAGES,priorityLocale,searchProfile,eligibleDescriptors,initialUi,uiText,translateShell} from './ui-languages.mjs';
 import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges, connectedEntry, secondaryRing} from './graph-core.mjs';
 import {portraitFor, orbitPreview} from './profile.mjs';
 import {directNeighborPages, connectedEntryPoints, graphCaptionLines, readableMapPositions, mapGeometrySafe} from './exploration-v19.mjs';
@@ -49,7 +50,7 @@ const isUnnamedForVisitor=n=>Boolean(n && !n.technical_identifier && ((isUnlabel
 const displayRelation = relation => {
   const localized=state.localizedRelations?.get(relation)?.label;
   if(localized && !isMachineRelationLabel(localized) && !isReaderPredicateCode(localized))return localized;
-  if(state.locale)return 'Relation non traduite';
+  if(state.locale)return t('noTranslation');
   if(state.bundle?.view_kind==='derived-hosting-navigation')return ({has_member:'Comprend',lists_file:'Contient'})[relation]||'Lien de collection';
   const readable=publicRelationLabel(relation,isKnowledge()?state.bundle.relation_labels?.[relation]:null);
   return isReaderPredicateCode(readable)?'Lien déclaré':readable;
@@ -57,30 +58,38 @@ const displayRelation = relation => {
 const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, neighborPage:0, overviewOpen:true, readingId:null, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
 // Search preferences are independent of the display localization.
 const ML_PREF_KEY='konstellation-light-search-locales-v1';
-const uiLocale=()=>normalizeLocale(document.documentElement.lang)||'fr';
+const UI_PREF_KEY='konstellation-light-ui-language-v1';
+let savedUi=null;try{savedUi=localStorage.getItem(UI_PREF_KEY);}catch{}
+const activeUi=initialUi(new URLSearchParams(location.search).get('ui'),savedUi);
+document.documentElement.lang=activeUi;
+const uiLocale=()=>activeUi;
+const t=key=>uiText(activeUi,key);
+translateShell(document,activeUi);
+$('ui-language-note').hidden=activeUi==='fr';
+fillSelect($('ui-language'),PRIORITY_LANGUAGES.map(tag=>[tag,new Intl.DisplayNames([tag],{type:'language'}).of(tag)]),activeUi);
 let searchExtras=[];
-try{const saved=JSON.parse(localStorage.getItem(ML_PREF_KEY)||'[]');if(Array.isArray(saved))searchExtras=selectedSearchLocales(uiLocale(),saved).filter(x=>![uiLocale(),'en'].includes(x));}catch{}
+try{const saved=JSON.parse(localStorage.getItem(ML_PREF_KEY)||'[]');if(Array.isArray(saved))searchExtras=searchProfile(uiLocale(),saved).filter(x=>![uiLocale(),'en'].includes(x));}catch{}
 let originalSearchOverride=null, searchGeneration=0, searchController=null, choiceGeneration=0, displayGeneration=0;
 let searchState={pending:false,results:[],failures:[]};
 const localeName=tag=>{try{return new Intl.DisplayNames([tag],{type:'language'}).of(tag)||tag;}catch{return tag;}};
-const searchTags=()=>selectedSearchLocales(uiLocale(),searchExtras);
+const searchTags=()=>searchProfile(uiLocale(),searchExtras);
 const saveSearchExtras=()=>{try{localStorage.setItem(ML_PREF_KEY,JSON.stringify(searchExtras));}catch{}};
 function cancelSearch(){searchGeneration++;searchController?.abort();searchController=null;searchState={pending:false,results:[],failures:[]};}
-function currentDescriptors(){return state.bundle?lookup(state.slug,state.revision)?.localizations||{}:{};}
-function sourceSearchEnabled(){return originalSearchOverride??Object.keys(currentDescriptors()).length===0;}
+function currentDescriptors(){return state.bundle?eligibleDescriptors(lookup(state.slug,state.revision)?.localizations||{}):{};}
+function sourceSearchEnabled(){return originalSearchOverride===true;}
 function renderSearchControls(){
   const desc=currentDescriptors(),active=searchTags(),available=Object.keys(desc).map(normalizeLocale).filter(Boolean);
   const missing=active.filter(tag=>!available.includes(tag));
-  $('search-language-summary').textContent=`Langues de recherche · ${active.map(localeName).join(' + ')}${sourceSearchEnabled()?' + sources d’origine':''}`;
-  $('search-language-defaults').textContent=`Par défaut : ${[...new Set([uiLocale(),'en'])].map(localeName).join(' + ')}.`;
+  $('search-language-summary').textContent=`${t('searchLang')} · ${active.map(localeName).join(' + ')}${sourceSearchEnabled()?' + '+t('originalShort'):''}`;
+  $('search-language-defaults').textContent=`${t('defaults')} : ${searchProfile(uiLocale()).map(localeName).join(' + ')}.`;
   const add=$('search-language-add');
   fillSelect(add,[['','—'],...[...new Set(available)].filter(tag=>!active.includes(tag)).sort().map(tag=>[tag,`${localeName(tag)} (${tag})`])],'');
-  add.disabled=active.length>=MAX_SEARCH_LANGUAGES||add.options.length===1;
+  add.disabled=active.length>=PRIORITY_LANGUAGES.length||add.options.length===1;
   const chips=$('search-language-extras');chips.replaceChildren();
-  for(const tag of searchExtras){const button=element('button','button ghost',`${localeName(tag)} (${tag}) ×`);button.type='button';button.setAttribute('aria-label',`Retirer ${localeName(tag)}`);button.addEventListener('click',()=>{searchExtras=searchExtras.filter(x=>x!==tag);saveSearchExtras();state.page=0;refreshSearch();});chips.append(button);}
+  for(const tag of searchExtras){const button=element('button','button ghost',`${localeName(tag)} (${tag}) ×`);button.type='button';button.setAttribute('aria-label',`${t('remove')} ${localeName(tag)}`);button.addEventListener('click',()=>{searchExtras=searchExtras.filter(x=>x!==tag);saveSearchExtras();state.page=0;refreshSearch();});chips.append(button);}
   $('search-original').checked=sourceSearchEnabled();
   const failures=searchState.failures.map(x=>x.locale);
-  $('search-language-status').textContent=[Object.keys(desc).length===0?'Aucune ressource linguistique révisée pour ce Kristal : le mode source est distinct de la recherche par langue.':'Seules les ressources des langues choisies sont interrogées.',missing.length?`Non disponibles : ${missing.join(', ')}.`:'',failures.length?`Ressources refusées ou indisponibles : ${failures.join(', ')}.`:'',active.length>=MAX_SEARCH_LANGUAGES?`Limite active : ${MAX_SEARCH_LANGUAGES} langues.`:''].filter(Boolean).join(' ');
+  $('search-language-status').textContent=[Object.keys(desc).length===0?t('noResource'):t('selectedOnly'),missing.length?`${t('missing')} : ${missing.join(', ')}.`:'',failures.length?`${t('refused')} : ${failures.join(', ')}.`:''].filter(Boolean).join(' ');
 }
 function originalRows(bundle){
   return bundle.nodes.filter(n=>!n.technical_identifier&&!(isKnowledge()&&isReferenceOrMachineValue(n))&&n.kind!=='hosted_state').map(n=>{
@@ -110,9 +119,9 @@ async function refreshSearch(){
   renderSearchControls();render();urlState();
 }
 function drawMultilingualResults(target){
-  if(searchState.pending){target.append(element('p','loading','Recherche dans les langues sélectionnées…'));return;}
+  if(searchState.pending){target.append(element('p','loading',t('searching')));return;}
   const results=searchState.results;
-  if(!results.length){target.append(element('p','empty','Aucun résultat dans le périmètre choisi. Vous pouvez ajouter une langue ou consulter les textes d’origine.'));return;}
+  if(!results.length){target.append(element('p','empty',t('noResults')));return;}
   const byId=new Map(state.bundle.nodes.map(n=>[n.id,n]));
   const list=element('div','ml-search-results');
   for(const item of results.slice(0,(state.page+1)*60)){
@@ -121,17 +130,18 @@ function drawMultilingualResults(target){
     const title=display||best.label||displayNode(node);
     const btn=element('button','record',undefined);btn.type='button';
     const body=element('main');body.append(element('strong','',title));
-    for(const m of item.matches){body.append(element('small','ml-result-match',`${m.locale?localeName(m.locale)+' ('+m.locale+')':'Source d’origine (langue non déclarée)'} · ${m.label||short(m.definition,140)}`));}
+    for(const m of item.matches){body.append(element('small','ml-result-match',`${m.locale?localeName(m.locale)+' ('+m.locale+')':t('originalShort')} · ${m.label||short(m.definition,140)}`));}
     btn.append(body);btn.addEventListener('click',()=>{state.query='';$('search').value='';cancelSearch();state.lens='constellation';state.autoLens=false;focusOn(node.id);});list.append(btn);
   }
   target.append(list);
-  if(results.length>(state.page+1)*60){const more=element('button','button ghost','Afficher 60 résultats supplémentaires');more.type='button';more.addEventListener('click',()=>{state.page++;render();});target.append(more);}
+  if(results.length>(state.page+1)*60){const more=element('button','button ghost',t('more'));more.type='button';more.addEventListener('click',()=>{state.page++;render();});target.append(more);}
 }
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
 function urlState() {
   const p = new URLSearchParams(location.search);
+  p.set('ui',activeUi);
   p.set('k', state.slug || ''); p.set('r', state.revision || ''); p.set('lens', state.lens); p.set('n', String(state.satellites));
   if (state.selection) p.set('focus', state.selection); else p.delete('focus');
   if (state.query) p.set('q', state.query); else p.delete('q');
@@ -301,19 +311,20 @@ async function fetchLocalization(tag,desc,bundle,signal){
 async function loadLocalization(tag) {
   const generation=++displayGeneration,bundle=state.bundle;
   if(!tag){state.locale=null;state.localized=null;state.localizedRelations=null;return true;}
-  const desc=lookup(state.slug,state.revision)?.localizations?.[tag];
+  if(!priorityLocale(tag))throw Error('Locale outside operational profile');
+  const desc=currentDescriptors()[tag];
   const doc=await fetchLocalization(tag,desc,bundle);
   if(generation!==displayGeneration||bundle!==state.bundle)return false;
   state.locale=tag;state.localized=localizationMap(doc);state.localizedRelations=relationLocalizationMap(doc);return true;
 }
 function renderLocalizationSelector(preferred){
-  const row=lookup(state.slug,state.revision),tags=Object.keys(row?.localizations||{}).sort();
+  const row=lookup(state.slug,state.revision),tags=Object.keys(eligibleDescriptors(row?.localizations||{})).sort();
   $('localization-row').hidden=false;
-  const options=[['','Mots d’origine (interface en français)'],...tags.map(x=>[x,`${localeName(x)} (${x})`])];
+  const options=[['',t('originalWords')],...tags.map(x=>[x,`${localeName(x)} (${x})`])];
   fillSelect($('localization'),options,tags.includes(preferred)?preferred:'');
   $('localization-status').textContent=tags.length
-    ? 'Seules les traductions révisées sont proposées. L’interface reste en français.'
-    : 'Aucune traduction révisée n’est encore publiée pour ce Kristal. L’interface est en français ; les connaissances restent dans leur langue d’origine.';
+    ? t('reviewedOnly')
+    : t('noReviewed');
   return tags.includes(preferred)?preferred:null;
 }
 async function setChoice(slug, revision, { keepFocus = false } = {}) {
@@ -370,7 +381,7 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
       try{await loadLocalization(desiredLanguage);}
       catch(e){if(generation!==choiceGeneration)return;$('localization').value='';$('localization-status').textContent=`Traduction refusée ou indisponible : ${e.message}. Mots d’origine affichés.`;}
       if(generation!==choiceGeneration)return;
-      if(state.locale)$('localization-status').textContent=`Texte révisé en ${localeName(desiredLanguage)} ; interface en français.`;
+      if(state.locale)$('localization-status').textContent=`${t('reviewedText')} ${localeName(desiredLanguage)}.`;
       if(!validFocus&&state.locale){
         const translatedFocus=readerPreferredFocus(data.nodes,activeEdges,{localized:state.localized,requireReviewed:true});
         if(translatedFocus){state.selection=translatedFocus;state.history=[translatedFocus];state.autoFocus=false;}
@@ -454,10 +465,10 @@ function actionButton(label,handler,style='button ghost'){
 function lensMeta() {
   return {
     discover: ['Découvrir ce Kristal', 'Présentation et documents tirés de la source publique; aucune relation ni qualification inventée.'],
-    constellation: [isKnowledge() ? 'Constellation des connaissances' : 'Carte visuelle des documents',
-      isKnowledge() ? 'Connexions réellement présentes. Les notions sans nom restent neutres et numérotées.' :
-      'Classement visuel de fichiers publics, sans relations sémantiques supposées. Sélectionnez une catégorie pour découvrir les documents.'],
-    registry: [isKnowledge()?'Notions disponibles':'Documents de la collection', isKnowledge() ? 'Parcourez les notions qui possèdent un vrai libellé. Les notions anonymes restent regroupées.' : 'Parcourez les documents répertoriés, classés par type.'],
+    constellation: [isKnowledge() ? t('mapKnowledge') : t('mapDocs'),
+      isKnowledge() ? t('mapHint') :
+      t('mapDocHint')],
+    registry: [isKnowledge()?(activeUi==='fr'?'Notions disponibles':t('registry')):(activeUi==='fr'?'Documents de la collection':t('registryDocs')), isKnowledge() ? t('registryHint') : t('registryDocHint')],
     trace: ['Vérification des données', 'Ce qui a été vérifié, et ce qui ne l’a pas été.'],
     compare: ['Comparer les versions', 'Éléments ajoutés, retirés ou modifiés entre deux versions.'],
   }[state.lens];
@@ -468,17 +479,17 @@ function render() {
   $('title').textContent = publicKristalTitle(data.slug,data.title);
   const semantic = data.view_kind === 'derived-semantic-preview';
   $('subtitle').textContent = isKnowledge() ? 'Explorez visuellement les liens déclarés. Les notions sans intitulé portent une désignation neutre.' : semantic ? 'Aperçu local de connaissances en cours de préparation (non publié).' : 'Explorez visuellement la structure documentaire publique. Aucun graphe sémantique n’est revendiqué.';
-  $('metric-members').textContent = Number(isKnowledge() ? readerKnowledgeSummary(data.nodes,data.edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}).named : data.nodes.filter(n=>n.kind==='hosted_file').length).toLocaleString('fr-FR');
-  $('metric-relations').textContent = Number(data.edges.length).toLocaleString('fr-FR');
-  $('metric-members-label').textContent = isKnowledge() ? 'NOTIONS NOMMÉES' : 'DOCUMENTS RÉPERTORIÉS';
-  $('metric-relations-label').textContent = isKnowledge() ? 'LIENS DÉCLARÉS (NON VALIDÉS)' : 'LIENS D’INVENTAIRE';
+  $('metric-members').textContent = Number(isKnowledge() ? readerKnowledgeSummary(data.nodes,data.edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}).named : data.nodes.filter(n=>n.kind==='hosted_file').length).toLocaleString(uiLocale());
+  $('metric-relations').textContent = Number(data.edges.length).toLocaleString(uiLocale());
+  $('metric-members-label').textContent = t(isKnowledge()?'named':'documents');
+  $('metric-relations-label').textContent = t(isKnowledge()?'links':'inventory');
   $('graph-controls').hidden = state.lens !== 'constellation';
   document.querySelector('[data-lens="discover"]').hidden = !Boolean(data.reading?.documents?.length);
   document.querySelector('[data-lens="constellation"]').hidden=false;
-  document.querySelector('[data-lens="constellation"]').lastChild.textContent=isKnowledge()?' Constellation des connaissances':' Carte des documents';
+  document.querySelector('[data-lens="constellation"]').lastChild.textContent=' '+t(isKnowledge()?'mapKnowledge':'mapDocs');
   document.querySelector('.advanced-toggle').hidden=data.view_kind==='derived-hosting-navigation';
-  document.querySelector('[data-lens="registry"]').lastChild.textContent=isKnowledge()?' Explorer les notions':' Parcourir les documents';
-  document.querySelector('label[for="satellites"]').firstChild.textContent=isKnowledge()?'Notions autour du sujet ':'Documents visibles ';
+  document.querySelector('[data-lens="registry"]').lastChild.textContent=' '+t(isKnowledge()?'registry':'registryDocs');
+  document.querySelector('label[for="satellites"]').firstChild.textContent=t(isKnowledge()?'neighbors':'visibleDocs')+' ';
   $('satellites').setAttribute('aria-label',isKnowledge()?'Nombre de bulles autour de la notion centrale':'Nombre maximal de documents affichés par catégorie');
   $('satellites').value = String(state.satellites); $('satellites-count').textContent = String(state.satellites);
   $('graph-back').disabled = state.history.length < 2 && !(data.view_kind==='derived-hosting-navigation' && state.docCategory);
@@ -486,14 +497,14 @@ function render() {
   $('view-tag').textContent = ({discover:'LECTURE SOURCÉE',constellation:isKnowledge()?'CARTE DES LIENS':'CARTE DOCUMENTAIRE',registry:isKnowledge()?'NOTIONS':'DOCUMENTS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
   if (state.lens==='trace' || state.lens==='compare') $('advanced-tools').open=true;
   document.querySelectorAll('[data-lens]').forEach(btn => { btn.classList.toggle('active', btn.dataset.lens === state.lens); btn.setAttribute('aria-pressed', String(btn.dataset.lens === state.lens)); });
-  const visible = filteredNodes(); $('count').textContent = state.lens==='discover' ? `${data.reading?.documents?.length||0} document(s) publics présentés` : state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString('fr-FR')} documents répertoriés`;
+  const visible = filteredNodes(); $('count').textContent = state.lens==='discover' ? `${data.reading?.documents?.length||0} document(s) publics présentés` : state.query.trim() ? `${visible.length.toLocaleString(uiLocale())} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString(uiLocale())} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString(uiLocale())} documents répertoriés`;
   const view = $('visual'); view.replaceChildren();
   updateReaderTrail();
   if(state.query.trim()){
-    $('count').textContent=searchState.pending?'Recherche…':`${searchState.results.length.toLocaleString('fr-FR')} résultat(s)`;
-    $('graph-controls').hidden=true;$('panel-title').textContent='Résultats de recherche';
-    $('panel-hint').textContent='Une entrée par identité dans le Kristal, avec les langues correspondantes.';
-    $('view-tag').textContent='RECHERCHE';$('truncation').textContent='Périmètre linguistique sélectionné';
+    $('count').textContent=searchState.pending?t('searching'):`${searchState.results.length.toLocaleString(uiLocale())} ${t('results')}`;
+    $('graph-controls').hidden=true;$('panel-title').textContent=t('searchResults');
+    $('panel-hint').textContent=t('searchHint');
+    $('view-tag').textContent=t('searchTag');$('truncation').textContent=t('searchScope');
     drawMultilingualResults(view);drawInspection();return;
   }
   if (state.lens === 'discover') drawDiscover(view);
@@ -954,10 +965,10 @@ function drawRegistry(target, nodes) {
   if(info){
     const summary=element('section','reader-overview');
     summary.append(element('h3','','Notions ayant un nom lisible'),
-      element('p','',`${info.named.toLocaleString('fr-FR')} notion(s) nommée(s) · ${state.bundle.nodes.filter(n=>!n.technical_identifier && !isReferenceOrMachineValue(n) && !isNamedForReader(n,{localizedLabel:state.localized?.get(n.id)?.label,requireReviewed:Boolean(state.locale)})).length.toLocaleString('fr-FR')} notion(s) sans intitulé regroupée(s) · ${readerMediaGroups(state.bundle.nodes).reduce((sum,g)=>sum+g.count,0).toLocaleString('fr-FR')} référence(s) de médias séparée(s).`));
+      element('p','',`${info.named.toLocaleString(uiLocale())} notion(s) nommée(s) · ${state.bundle.nodes.filter(n=>!n.technical_identifier && !isReferenceOrMachineValue(n) && !isNamedForReader(n,{localizedLabel:state.localized?.get(n.id)?.label,requireReviewed:Boolean(state.locale)})).length.toLocaleString(uiLocale())} notion(s) sans intitulé regroupée(s) · ${readerMediaGroups(state.bundle.nodes).reduce((sum,g)=>sum+g.count,0).toLocaleString(uiLocale())} référence(s) de médias séparée(s).`));
     if(info.unnamed)summary.append(element('p','reader-muted','Les notions sans intitulé ne sont pas des traductions manquantes à deviner. Elles restent dans les données et peuvent être explorées séparément.'));
     if(info.navigable){
-      summary.append(element('p','reader-muted',`${info.navigable.toLocaleString('fr-FR')} lien(s) entre notions consultables, sur ${info.declared.toLocaleString('fr-FR')} relations déclarées. Tous les liens ne disposent pas d’un intitulé compréhensible.`));
+      summary.append(element('p','reader-muted',`${info.navigable.toLocaleString(uiLocale())} lien(s) entre notions consultables, sur ${info.declared.toLocaleString(uiLocale())} relations déclarées. Tous les liens ne disposent pas d’un intitulé compréhensible.`));
       summary.append(actionButton('Explorer les relations existantes',activateRealConnections,'button accent'));
     }
     target.append(summary);
@@ -1003,10 +1014,10 @@ function drawRegistry(target, nodes) {
     section.append(element('h3','','Ressources citées dans la collection'),
       element('p','reader-muted','Les noms de fichiers ne sont pas des notions. Cet inventaire compte les références déclarées, sans garantir leur contenu ni leur disponibilité.'));
     const list=element('ul','reader-media-groups');
-    for(const group of mediaGroups)list.append(element('li','',`${group.label} : ${group.count.toLocaleString('fr-FR')}`));
+    for(const group of mediaGroups)list.append(element('li','',`${group.label} : ${group.count.toLocaleString(uiLocale())}`));
     section.append(list);target.append(section);
   }
-  $('truncation').textContent=`${Math.min((state.page+1)*60,named.length).toLocaleString('fr-FR')} notions nommées affichées · ${anonymous.length} à documenter · ${mediaCount} médias référencés`;
+  $('truncation').textContent=`${Math.min((state.page+1)*60,named.length).toLocaleString(uiLocale())} notions nommées affichées · ${anonymous.length} à documenter · ${mediaCount} médias référencés`;
 }
 function evidence(label,value,good=false) {
   const div=element('div','evidence-item');div.append(element('small','',label),element('strong',good?'ok':'',value));return div;
@@ -1097,7 +1108,7 @@ function drawInspection(){
     target.append(stats);
   }
   if(related.length){
-    target.append(element('h4','relation-heading',`Liens avec d’autres notions (${related.length.toLocaleString('fr-FR')})`));
+    target.append(element('h4','relation-heading',`Liens avec d’autres notions (${related.length.toLocaleString(uiLocale())})`));
     const list=element('div','relation-list');
     const addRelation=(edge)=>{
       const other=nodeById.get(edge.from===n.id?edge.to:edge.from);
@@ -1188,7 +1199,7 @@ async function main(){
   state.neighborPage=Math.max(0,Math.min(999,Number.parseInt(params.get('pg')||'0',10)||0));
   state.overviewOpen=!params.has('focus');
   state.showUnnamed=params.get('ids')==='1';$('show-unnamed').checked=state.showUnnamed;
-  state.requestedLocale=params.get('lang')||null;
+  state.requestedLocale=priorityLocale(params.get('lang'))?params.get('lang'):null;
   try {
     const res=await fetch('./data/catalog.json',{cache:'no-cache'});if(!res.ok)throw Error('Catalogue indisponible');
     const catalog=await res.json();
@@ -1199,12 +1210,13 @@ async function main(){
     await setChoice(slug,revision,{keepFocus:true});
   }catch(e){showFailure(e);}
 }
+$('ui-language').addEventListener('change',()=>{const next=priorityLocale($('ui-language').value);if(!next||next===activeUi)return;try{localStorage.setItem(UI_PREF_KEY,next);}catch{}const url=new URL(location.href);url.searchParams.set('ui',next);location.assign(url.toString());});
 $('collection').addEventListener('change',()=>{const s=$('collection').value;state.readingId=null;state.page=0;state.docCategory=null;state.requestedCategory=null;state.autoLens=true;state.lens='constellation';state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
 $('localization').addEventListener('change',async()=>{
   const selected=$('localization').value;
   try{if(!await loadLocalization(selected||null))return;state.requestedLocale=state.locale;
-    $('localization-status').textContent=state.locale?`Texte révisé en ${localeName(state.locale)} ; interface en français.`:'Mots d’origine ; interface en français.';
+    $('localization-status').textContent=state.locale?`${t('reviewedText')} ${localeName(state.locale)}.`:t('originalWords');
     state.page=0;state.neighborPage=0;render();urlState();
   }catch(e){$('localization-status').textContent=e.message;notify('Fichier de langue refusé : '+e.message);
     $('localization').value=state.locale||'';}
@@ -1219,7 +1231,7 @@ $('show-unnamed').addEventListener('change',()=>{
 });
 for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.autoLens=false;state.lens=btn.dataset.lens;state.page=0;state.neighborPage=0;render();urlState();});
 $('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;state.neighborPage=0;refreshSearch();});
-$('search-language-add').addEventListener('change',()=>{const tag=normalizeLocale($('search-language-add').value);if(tag&&searchTags().length<MAX_SEARCH_LANGUAGES&&!searchTags().includes(tag)){searchExtras.push(tag);saveSearchExtras();state.page=0;refreshSearch();}});
+$('search-language-add').addEventListener('change',()=>{const tag=priorityLocale($('search-language-add').value);if(tag&&Object.keys(currentDescriptors()).some(x=>priorityLocale(x)===tag)&&searchTags().length<PRIORITY_LANGUAGES.length&&!searchTags().includes(tag)){searchExtras.push(tag);saveSearchExtras();state.page=0;refreshSearch();}});
 $('search-language-reset').addEventListener('click',()=>{searchExtras=[];originalSearchOverride=null;saveSearchExtras();state.page=0;refreshSearch();});
 $('search-original').addEventListener('change',()=>{originalSearchOverride=$('search-original').checked;state.page=0;refreshSearch();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
@@ -1260,7 +1272,7 @@ $('offline').addEventListener('click',async()=>{
  worker?.postMessage({type:'KEEP',urls:['./data/catalog.json',`./${row.path}`,...new Set([...(state.locale?[`./${row.localizations[state.locale].path}`]:[]),...selectedDescriptors(searchTags(),row.localizations||{}).map(x=>`./${x.descriptor.path}`)])]});notify('Cache local public activé. Revérifiez les versions après reconnexion.');}
  catch(e){notify(`Mode hors ligne non activé : ${e.message}`);}
 });
-const networkStatus = () => { $('mode-label').textContent = navigator.onLine ? 'Consultation en lecture seule' : 'Hors ligne · version enregistrée'; };
+const networkStatus = () => { $('mode-label').textContent = navigator.onLine ? t('readOnly') : 'Hors ligne · version enregistrée'; };
 window.addEventListener('online',networkStatus);window.addEventListener('offline',networkStatus);networkStatus();
 window.addEventListener('popstate',()=>location.reload());
 main();

@@ -27,7 +27,7 @@ LANG_PATH = re.compile(r"data/lang-([0-9a-f]{64})\.json\Z")
 LANG_TAG = re.compile(r"[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*\Z")
 IMAGE_PATH = re.compile(r"\./images/([0-9a-f]{64})\.(png|jpg|jpeg|webp|gif)\Z")
 SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "profile.mjs", "style.css", "sw.js", "data/catalog.json"}
-SITE_OPTIONAL = {"semantic-display.mjs", "multilingual-read.mjs", "visual-v17.css", "visual-v19.css", "visual-v20.css", "visual-v21.css", "exploration-v19.mjs", "assets/logo_k.svg"}  # New local builds only; not bundled C4 demo.
+SITE_OPTIONAL = {"semantic-display.mjs", "multilingual-read.mjs", "ui-languages.mjs", "visual-v17.css", "visual-v19.css", "visual-v20.css", "visual-v21.css", "exploration-v19.mjs", "assets/logo_k.svg"}  # New local builds only; not bundled C4 demo.
 
 
 class LightError(ValueError):

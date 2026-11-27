@@ -42,6 +42,9 @@ def main():
             page.goto('http://localhost:8765/')
             expect(page.locator('#search-language-status')).to_contain_text('Seules les ressources')
             assert requests==[],requests
+            assert page.locator('#ui-language option').count()==6
+            assert page.locator('#localization option').count()==4
+            assert page.locator('#search-language-add option').count()==2
             page.locator('#search').fill('cell'); expect(page.locator('.ml-search-results .record')).to_have_count(2)
             assert set(requests)=={'fr','en'},requests
             expect(page.locator('.ml-search-results .record').first).to_contain_text('fr')
@@ -53,6 +56,13 @@ def main():
             expect(page.locator('.ml-search-results .record')).to_contain_text('Zelle')
             page.reload();expect(page.locator('.ml-search-results .record')).to_have_count(1)
             page.locator('#search-language-summary').click();page.locator('#search-language-extras button').click();expect(page.locator('#visual')).to_contain_text('Aucun résultat')
+            assert not (set(requests)-{'fr','en','de'}),requests
+            page.locator('#ui-language').select_option('de')
+            expect(page.locator('html')).to_have_attribute('lang','de')
+            expect(page.locator('#search-language-summary')).to_contain_text('Suchsprachen')
+            expect(page.locator('.ml-search-results .record')).to_have_count(1)
+            expect(page.locator('#search-language-summary')).to_contain_text('Deutsch')
+            assert page.locator('#localization option').count()==4
             assert not (set(requests)-{'fr','en','de'}),requests
             assert not errors,errors
             print('PASS: Chromium — 300 descriptors; default FR+EN only; DE display independent; add/remove; persistence; deduplication; homonyms; no unselected requests.')
