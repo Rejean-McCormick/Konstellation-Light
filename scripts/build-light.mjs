@@ -10,7 +10,7 @@ import { discoveryProjection } from '../shared/discovery.mjs';
 import { projectPublicKnowledge } from '../shared/public-knowledge.mjs';
 import { projectPublicReading } from '../shared/public-reading.mjs';
 import { projectGuidedReading } from '../shared/guided-reading.mjs';
-import { validateLocalization, validateLocaleDescriptor, localeRE } from '../shared/multilingual-read.mjs';
+import { validateLocalization, validateLocaleDescriptor, localeRE, normalizeLocale, MAX_CATALOG_LANGUAGES } from '../shared/multilingual-read.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const digest = (x) => createHash('sha256').update(x).digest('hex');
@@ -67,10 +67,12 @@ function loadLocalized(slug, base) {
   if(!fs.lstatSync(dir).isDirectory()||fs.lstatSync(dir).isSymbolicLink())throw Error('Dossier de langue non autorisé.');
   const descriptors={};
   const names=fs.readdirSync(dir).sort();
-  if(names.length>64)throw Error('Trop de langues pour un même Kristal.');
+  if(names.length>MAX_CATALOG_LANGUAGES)throw Error('Trop de langues pour un même Kristal.');
+  const seenLocales=new Set();
   for(const filename of names){
     if(!filename.endsWith('.json')||!localeRE.test(filename.slice(0,-5)))throw Error('Nom de fichier de langue invalide.');
     const locale=filename.slice(0,-5),file=path.join(dir,filename);
+    const canonical=normalizeLocale(locale);if(!canonical||seenLocales.has(canonical))throw Error('Langue invalide ou ambiguë.');seenLocales.add(canonical);
     if(!fs.lstatSync(file).isFile()||fs.lstatSync(file).isSymbolicLink())throw Error('Fichier de langue non autorisé.');
     const stat=fs.statSync(file);
     if(stat.size>4*1024*1024)throw Error('Fichier de langue trop volumineux.');

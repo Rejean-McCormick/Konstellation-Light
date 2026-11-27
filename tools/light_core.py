@@ -27,7 +27,7 @@ LANG_PATH = re.compile(r"data/lang-([0-9a-f]{64})\.json\Z")
 LANG_TAG = re.compile(r"[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*\Z")
 IMAGE_PATH = re.compile(r"\./images/([0-9a-f]{64})\.(png|jpg|jpeg|webp|gif)\Z")
 SITE_FIXED = {".nojekyll", "index.html", "app.js", "graph-core.mjs", "profile.mjs", "style.css", "sw.js", "data/catalog.json"}
-SITE_OPTIONAL = {"semantic-display.mjs", "multilingual-read.mjs", "assets/logo_k.svg"}  # New local builds only; not bundled C4 demo.
+SITE_OPTIONAL = {"semantic-display.mjs", "multilingual-read.mjs", "visual-v17.css", "visual-v19.css", "visual-v20.css", "visual-v21.css", "exploration-v19.mjs", "assets/logo_k.svg"}  # New local builds only; not bundled C4 demo.
 
 
 class LightError(ValueError):
@@ -88,7 +88,7 @@ def validated_site(site: Path) -> dict:
             raise LightError(f"Données de navigation invalides : {rel}")
         permitted.add(rel)
         locales = entry.get('localizations', {})
-        if not isinstance(locales, dict) or len(locales)>64:raise LightError('Références des langues invalides.')
+        if not isinstance(locales, dict) or len(locales)>512:raise LightError('Références des langues invalides.')
         for tag, descriptor in locales.items():
             if not isinstance(tag,str) or not LANG_TAG.fullmatch(tag) or not isinstance(descriptor,dict) or set(descriptor)!={'path','sha256','bytes'}:
                 raise LightError('Référence de langue invalide.')

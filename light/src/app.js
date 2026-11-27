@@ -2,7 +2,7 @@ import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, 
 import {portraitFor, orbitPreview} from './profile.mjs';
 import {directNeighborPages, connectedEntryPoints, graphCaptionLines, readableMapPositions, mapGeometrySafe} from './exploration-v19.mjs';
 import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, isMachineRelationLabel, publicConceptLabel, publicReaderLabel, publicReaderDescription, isOpaqueReaderText, isNamedForReader, readerKnowledgeSummary, defaultReaderLens, readerPreferredFocus, readerDocumentGroups, readerDocumentMap, readerDocumentCategory, readerConnectedNamedFocus, readableDocumentTitle, readerMediaCategory, readerMediaGroups, isReaderMachineValue, isReaderPredicateCode} from './semantic-display.mjs';
-import {validateLocalization, validateLocaleDescriptor, localizationMap, relationLocalizationMap} from './multilingual-read.mjs';
+import {validateLocalization, validateLocaleDescriptor, localizationMap, relationLocalizationMap, normalizeLocale, selectedSearchLocales, selectedDescriptors, searchMatches, loadSearchResources, MAX_SEARCH_LANGUAGES} from './multilingual-read.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
 // All untrusted labels are inserted with textContent; no semantic authority is inferred.
 const $ = (id) => document.getElementById(id);
@@ -55,6 +55,78 @@ const displayRelation = relation => {
   return isReaderPredicateCode(readable)?'Lien déclaré':readable;
 };
 const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, neighborPage:0, overviewOpen:true, readingId:null, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
+// Search preferences are independent of the display localization.
+const ML_PREF_KEY='konstellation-light-search-locales-v1';
+const uiLocale=()=>normalizeLocale(document.documentElement.lang)||'fr';
+let searchExtras=[];
+try{const saved=JSON.parse(localStorage.getItem(ML_PREF_KEY)||'[]');if(Array.isArray(saved))searchExtras=selectedSearchLocales(uiLocale(),saved).filter(x=>![uiLocale(),'en'].includes(x));}catch{}
+let originalSearchOverride=null, searchGeneration=0, searchController=null, choiceGeneration=0, displayGeneration=0;
+let searchState={pending:false,results:[],failures:[]};
+const localeName=tag=>{try{return new Intl.DisplayNames([tag],{type:'language'}).of(tag)||tag;}catch{return tag;}};
+const searchTags=()=>selectedSearchLocales(uiLocale(),searchExtras);
+const saveSearchExtras=()=>{try{localStorage.setItem(ML_PREF_KEY,JSON.stringify(searchExtras));}catch{}};
+function cancelSearch(){searchGeneration++;searchController?.abort();searchController=null;searchState={pending:false,results:[],failures:[]};}
+function currentDescriptors(){return state.bundle?lookup(state.slug,state.revision)?.localizations||{}:{};}
+function sourceSearchEnabled(){return originalSearchOverride??Object.keys(currentDescriptors()).length===0;}
+function renderSearchControls(){
+  const desc=currentDescriptors(),active=searchTags(),available=Object.keys(desc).map(normalizeLocale).filter(Boolean);
+  const missing=active.filter(tag=>!available.includes(tag));
+  $('search-language-summary').textContent=`Langues de recherche · ${active.map(localeName).join(' + ')}${sourceSearchEnabled()?' + sources d’origine':''}`;
+  $('search-language-defaults').textContent=`Par défaut : ${[...new Set([uiLocale(),'en'])].map(localeName).join(' + ')}.`;
+  const add=$('search-language-add');
+  fillSelect(add,[['','—'],...[...new Set(available)].filter(tag=>!active.includes(tag)).sort().map(tag=>[tag,`${localeName(tag)} (${tag})`])],'');
+  add.disabled=active.length>=MAX_SEARCH_LANGUAGES||add.options.length===1;
+  const chips=$('search-language-extras');chips.replaceChildren();
+  for(const tag of searchExtras){const button=element('button','button ghost',`${localeName(tag)} (${tag}) ×`);button.type='button';button.setAttribute('aria-label',`Retirer ${localeName(tag)}`);button.addEventListener('click',()=>{searchExtras=searchExtras.filter(x=>x!==tag);saveSearchExtras();state.page=0;refreshSearch();});chips.append(button);}
+  $('search-original').checked=sourceSearchEnabled();
+  const failures=searchState.failures.map(x=>x.locale);
+  $('search-language-status').textContent=[Object.keys(desc).length===0?'Aucune ressource linguistique révisée pour ce Kristal : le mode source est distinct de la recherche par langue.':'Seules les ressources des langues choisies sont interrogées.',missing.length?`Non disponibles : ${missing.join(', ')}.`:'',failures.length?`Ressources refusées ou indisponibles : ${failures.join(', ')}.`:'',active.length>=MAX_SEARCH_LANGUAGES?`Limite active : ${MAX_SEARCH_LANGUAGES} langues.`:''].filter(Boolean).join(' ');
+}
+function originalRows(bundle){
+  return bundle.nodes.filter(n=>!n.technical_identifier&&!(isKnowledge()&&isReferenceOrMachineValue(n))&&n.kind!=='hosted_state').map(n=>{
+    const doc=documentReading(n);
+    const label=bundle.view_kind==='derived-hosting-navigation'?displayDocumentTitle(n):isNamedForReader(n)?publicReaderLabel(n,{viewKind:bundle.view_kind}):'';
+    return {node_id:n.id,locale:null,label,definition:[publicReaderDescription(n.description),doc?.excerpt,doc?.sections?.map(s=>s.title).join(' '),bundle.view_kind==='derived-hosting-navigation'?readerDocumentCategory(n):'',bundle.view_kind==='derived-semantic-preview'?(n.aliases||[]).join(' '):''].filter(Boolean).join(' ')};
+  });
+}
+async function refreshSearch(){
+  cancelSearch();
+  if(!state.bundle)return;
+  const generation=searchGeneration,bundle=state.bundle,query=state.query.trim();
+  renderSearchControls();
+  if(!query){render();urlState();return;}
+  const controller=new AbortController();searchController=controller;
+  searchState.pending=true;render();urlState();
+  const rows=sourceSearchEnabled()?originalRows(bundle):[];
+  const allowed=new Set(bundle.nodes.filter(n=>!n.technical_identifier&&n.kind!=='hosted_state'&&!(isKnowledge()&&isReferenceOrMachineValue(n))).map(n=>n.id));
+  let loaded;
+  try{loaded=await loadSearchResources(searchTags(),currentDescriptors(),r=>fetchLocalization(r.tag,r.descriptor,bundle,controller.signal),{signal:controller.signal});}
+  catch(e){if(generation!==searchGeneration||bundle!==state.bundle)return;searchState={pending:false,results:[],failures:[{locale:'catalogue',error:e.message}]};renderSearchControls();render();return;}
+  if(generation!==searchGeneration||bundle!==state.bundle||loaded.aborted)return;
+  for(const resource of loaded.resources)for(const entry of resource.doc.entries){
+    if(allowed.has(entry.node_id)&&entry.provenance.review_status==='reviewed')rows.push({node_id:entry.node_id,locale:resource.locale,label:entry.label&&!isOpaqueReaderText(entry.label)?entry.label:'',definition:publicReaderDescription(entry.definition)});
+  }
+  searchState={pending:false,results:searchMatches(query,rows,{uiLocale:uiLocale()}),failures:loaded.failures};
+  renderSearchControls();render();urlState();
+}
+function drawMultilingualResults(target){
+  if(searchState.pending){target.append(element('p','loading','Recherche dans les langues sélectionnées…'));return;}
+  const results=searchState.results;
+  if(!results.length){target.append(element('p','empty','Aucun résultat dans le périmètre choisi. Vous pouvez ajouter une langue ou consulter les textes d’origine.'));return;}
+  const byId=new Map(state.bundle.nodes.map(n=>[n.id,n]));
+  const list=element('div','ml-search-results');
+  for(const item of results.slice(0,(state.page+1)*60)){
+    const node=byId.get(item.node_id);if(!node)continue;
+    const best=item.matches[0],display=state.localized?.get(node.id)?.label;
+    const title=display||best.label||displayNode(node);
+    const btn=element('button','record',undefined);btn.type='button';
+    const body=element('main');body.append(element('strong','',title));
+    for(const m of item.matches){body.append(element('small','ml-result-match',`${m.locale?localeName(m.locale)+' ('+m.locale+')':'Source d’origine (langue non déclarée)'} · ${m.label||short(m.definition,140)}`));}
+    btn.append(body);btn.addEventListener('click',()=>{state.query='';$('search').value='';cancelSearch();state.lens='constellation';state.autoLens=false;focusOn(node.id);});list.append(btn);
+  }
+  target.append(list);
+  if(results.length>(state.page+1)*60){const more=element('button','button ghost','Afficher 60 résultats supplémentaires');more.type='button';more.addEventListener('click',()=>{state.page++;render();});target.append(more);}
+}
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
@@ -206,30 +278,38 @@ function fillSelect(select, options, selected) {
   for (const [value, label] of options) { const opt = element('option', '', label); opt.value = value; select.append(opt); }
   select.value = selected;
 }
-async function loadLocalization(tag) {
-  if(!tag){state.locale=null;state.localized=null;state.localizedRelations=null;return;}
-  const desc=lookup(state.slug,state.revision)?.localizations?.[tag];
-  if(!desc) throw Error('Traduction non disponible dans cette version.');
+async function fetchLocalization(tag,desc,bundle,signal){
+  if(!desc)throw Error('Traduction non disponible dans cette version.');
   validateLocaleDescriptor(tag,desc);
   const key=desc.sha256;
   let doc=state.localeCache.get(key);
   if(!doc){
-    const res=await fetch(`./${desc.path}`,{cache:'no-store'});
+    const res=await fetch(`./${desc.path}`,{cache:'no-store',signal});
     if(!res.ok)throw Error('Fichier de langue indisponible.');
     const bytes=await res.arrayBuffer();
-    if(bytes.byteLength!==desc.bytes||`sha256:${await sha256(bytes)}`!==desc.sha256)
-      throw Error('Intégrité du fichier de langue invalide.');
+    if(bytes.byteLength!==desc.bytes||`sha256:${await sha256(bytes)}`!==desc.sha256)throw Error('Intégrité du fichier de langue invalide.');
     doc=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
-    validateLocalization(doc,state.bundle);
-    state.localeCache.set(key,doc);
   }
-  validateLocalization(doc,state.bundle);
-  state.locale=tag;state.localized=localizationMap(doc);state.localizedRelations=relationLocalizationMap(doc);
+  validateLocalization(doc,bundle);
+  if(doc.locale!==tag)throw Error('Langue du fichier incompatible.');
+  if(signal?.aborted)throw Error('Recherche annulée.');
+  state.localeCache.delete(key);state.localeCache.set(key,doc);
+  // Bound memory independently of the total number of catalog languages.
+  while(state.localeCache.size>20)state.localeCache.delete(state.localeCache.keys().next().value);
+  return doc;
+}
+async function loadLocalization(tag) {
+  const generation=++displayGeneration,bundle=state.bundle;
+  if(!tag){state.locale=null;state.localized=null;state.localizedRelations=null;return true;}
+  const desc=lookup(state.slug,state.revision)?.localizations?.[tag];
+  const doc=await fetchLocalization(tag,desc,bundle);
+  if(generation!==displayGeneration||bundle!==state.bundle)return false;
+  state.locale=tag;state.localized=localizationMap(doc);state.localizedRelations=relationLocalizationMap(doc);return true;
 }
 function renderLocalizationSelector(preferred){
   const row=lookup(state.slug,state.revision),tags=Object.keys(row?.localizations||{}).sort();
   $('localization-row').hidden=false;
-  const options=[['','Mots d’origine (interface en français)'],...tags.map(x=>[x,new Intl.DisplayNames(['fr'],{type:'language'}).of(x)||x])];
+  const options=[['','Mots d’origine (interface en français)'],...tags.map(x=>[x,`${localeName(x)} (${x})`])];
   fillSelect($('localization'),options,tags.includes(preferred)?preferred:'');
   $('localization-status').textContent=tags.length
     ? 'Seules les traductions révisées sont proposées. L’interface reste en français.'
@@ -239,6 +319,7 @@ function renderLocalizationSelector(preferred){
 async function setChoice(slug, revision, { keepFocus = false } = {}) {
   const row = lookup(slug, revision);
   if (!row) return;
+  const generation=++choiceGeneration; ++displayGeneration; cancelSearch(); originalSearchOverride=null;
   // An opt-in anonymous exploration of one Kristal must not silently leak
   // into a different collection selected through the sidebar.
   if(state.slug && state.slug!==slug){
@@ -249,6 +330,8 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
   $('visual').replaceChildren(element('div', 'loading', 'Vérification de l’intégrité du bundle…'));
   try {
     const data = await loadPack(row);
+    if(generation!==choiceGeneration)return;
+    cancelSearch();
     state.slug = slug; state.revision = revision; state.bundle = data; state.portraitId = null;
     if (!keepFocus){state.neighborPage=0;state.overviewOpen=true;}
     state.nodeOrdinal = new Map(data.nodes.map((node,i)=>[node.id,i+1]));
@@ -284,9 +367,11 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
     state.localized=null;state.localizedRelations=null;state.locale=null;
     const desiredLanguage=renderLocalizationSelector(state.requestedLocale);
     if(desiredLanguage){
-      await loadLocalization(desiredLanguage);
-      $('localization-status').textContent=`Texte révisé en ${new Intl.DisplayNames(['fr'],{type:'language'}).of(desiredLanguage)} ; interface en français.`;
-      if(!validFocus){
+      try{await loadLocalization(desiredLanguage);}
+      catch(e){if(generation!==choiceGeneration)return;$('localization').value='';$('localization-status').textContent=`Traduction refusée ou indisponible : ${e.message}. Mots d’origine affichés.`;}
+      if(generation!==choiceGeneration)return;
+      if(state.locale)$('localization-status').textContent=`Texte révisé en ${localeName(desiredLanguage)} ; interface en français.`;
+      if(!validFocus&&state.locale){
         const translatedFocus=readerPreferredFocus(data.nodes,activeEdges,{localized:state.localized,requireReviewed:true});
         if(translatedFocus){state.selection=translatedFocus;state.history=[translatedFocus];state.autoFocus=false;}
       }
@@ -302,9 +387,10 @@ async function setChoice(slug, revision, { keepFocus = false } = {}) {
     if(state.readingId && !existsInGuide && !(state.readingId==='lecture-scene-02' && data.slug==='biology'))
       state.readingId=null;
     if(state.readingId)state.lens='discover';
-    render(); urlState();
+    renderSearchControls(); await refreshSearch();
+    if(generation!==choiceGeneration)return;
     if(state.readingId)markGuidedReading(state.readingId,{scroll:true});
-  } catch (e) { showFailure(e); }
+  } catch (e) { if(generation===choiceGeneration)showFailure(e); }
 }
 function showFailure(err) {
   state.bundle = null;
@@ -313,23 +399,13 @@ function showFailure(err) {
   notify(/(?:SHA-256|intégrité|invalide|non conforme|incorrect)/i.test(err.message) ? 'Intégrité ou format à vérifier.' : 'Lecture interrompue : voir le message ci-dessus.');
 }
 function filteredNodes() {
-  const q = state.query.toLocaleLowerCase(state.locale||'fr').trim();
+  const q = state.query.trim();
   if (!q) return isKnowledge() ? state.bundle.nodes.filter(n=>
     !n.technical_identifier && !isReferenceOrMachineValue(n) && (state.showUnnamed || isNamedForReader(n,{
       localizedLabel:state.localized?.get(n.id)?.label,requireReviewed:Boolean(state.locale)
     }))) : state.bundle.nodes.filter(n=>n.kind!=='hosted_state');
-  const terms = q.split(/\s+/).filter(Boolean);
-  if (state.bundle.view_kind === 'derived-semantic-preview') return state.bundle.nodes.filter(n => semanticQueryMatch(n, q));
-  return state.bundle.nodes.filter(n => {
-    if(n.technical_identifier || (isKnowledge()&&isReferenceOrMachineValue(n)) || (isKnowledge()&&!state.showUnnamed&&!isNamedForReader(n,{
-      localizedLabel:state.localized?.get(n.id)?.label, requireReviewed:Boolean(state.locale)
-    }))) return false;
-    const category=state.bundle.view_kind==='derived-hosting-navigation'?readerDocumentCategory(n):'';
-    const docTitle=state.bundle.view_kind==='derived-hosting-navigation'
-      ?displayDocumentTitle(n):'';
-    const words=`${displayNode(n)} ${docTitle} ${documentReading(n)?.excerpt||''} ${documentReading(n)?.sections?.map(s=>s.title).join(' ')||''} ${displayDescription(n)} ${state.localized?.get(n.id)?.definition||''} ${category}`.toLocaleLowerCase(state.locale||'fr');
-    return terms.every(t=>words.includes(t));
-  });
+  const ids=new Set(searchState.results.map(r=>r.node_id));
+  return state.bundle.nodes.filter(n=>ids.has(n.id));
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
@@ -413,6 +489,13 @@ function render() {
   const visible = filteredNodes(); $('count').textContent = state.lens==='discover' ? `${data.reading?.documents?.length||0} document(s) publics présentés` : state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString('fr-FR')} documents répertoriés`;
   const view = $('visual'); view.replaceChildren();
   updateReaderTrail();
+  if(state.query.trim()){
+    $('count').textContent=searchState.pending?'Recherche…':`${searchState.results.length.toLocaleString('fr-FR')} résultat(s)`;
+    $('graph-controls').hidden=true;$('panel-title').textContent='Résultats de recherche';
+    $('panel-hint').textContent='Une entrée par identité dans le Kristal, avec les langues correspondantes.';
+    $('view-tag').textContent='RECHERCHE';$('truncation').textContent='Périmètre linguistique sélectionné';
+    drawMultilingualResults(view);drawInspection();return;
+  }
   if (state.lens === 'discover') drawDiscover(view);
   if (state.lens === 'constellation') drawGraph(view, visible);
   if (state.lens === 'registry') drawRegistry(view, visible);
@@ -1120,8 +1203,8 @@ $('collection').addEventListener('change',()=>{const s=$('collection').value;sta
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
 $('localization').addEventListener('change',async()=>{
   const selected=$('localization').value;
-  try{await loadLocalization(selected||null);state.requestedLocale=state.locale;
-    $('localization-status').textContent=state.locale?`Texte révisé en ${new Intl.DisplayNames(['fr'],{type:'language'}).of(state.locale)} ; interface en français.`:'Mots d’origine ; interface en français.';
+  try{if(!await loadLocalization(selected||null))return;state.requestedLocale=state.locale;
+    $('localization-status').textContent=state.locale?`Texte révisé en ${localeName(state.locale)} ; interface en français.`:'Mots d’origine ; interface en français.';
     state.page=0;state.neighborPage=0;render();urlState();
   }catch(e){$('localization-status').textContent=e.message;notify('Fichier de langue refusé : '+e.message);
     $('localization').value=state.locale||'';}
@@ -1135,7 +1218,10 @@ $('show-unnamed').addEventListener('change',()=>{
   state.page=0;state.neighborPage=0;render();urlState();
 });
 for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.autoLens=false;state.lens=btn.dataset.lens;state.page=0;state.neighborPage=0;render();urlState();});
-$('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;state.neighborPage=0;render();urlState();});
+$('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;state.neighborPage=0;refreshSearch();});
+$('search-language-add').addEventListener('change',()=>{const tag=normalizeLocale($('search-language-add').value);if(tag&&searchTags().length<MAX_SEARCH_LANGUAGES&&!searchTags().includes(tag)){searchExtras.push(tag);saveSearchExtras();state.page=0;refreshSearch();}});
+$('search-language-reset').addEventListener('click',()=>{searchExtras=[];originalSearchOverride=null;saveSearchExtras();state.page=0;refreshSearch();});
+$('search-original').addEventListener('change',()=>{originalSearchOverride=$('search-original').checked;state.page=0;refreshSearch();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
 $('satellites').addEventListener('input',()=>{state.satellites=Math.min(8,clampSatellites($('satellites').value));state.neighborPage=0;render();urlState();});
 $('map-fullscreen')?.addEventListener('click',async()=>{
@@ -1162,7 +1248,7 @@ $('graph-home').addEventListener('click',()=>{
   const id=readerConnectedNamedFocus(eligible,edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}) || connectedEntry(eligible,edges);
   const home=nodes.find(n=>n.id===id)||eligible[0]||nodes[0];if(home)focusOn(home.id);
 });
-$('reset').addEventListener('click',()=>{state.neighborPage=0;state.page=0;state.query='';$('search').value='';render();urlState();});
+$('reset').addEventListener('click',()=>{state.neighborPage=0;state.page=0;state.query='';$('search').value='';refreshSearch();});
 $('share').addEventListener('click',async()=>{urlState();try{await navigator.clipboard.writeText(location.href);notify('Lien de navigation copié.');}catch{notify(`Copiez l’URL du navigateur pour partager la vue.`);}});
 $('export')?.addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';
  const href=URL.createObjectURL(new Blob([text],{type:'application/json'}));const a=element('a');a.href=href;a.download='konstellation-light-selection.json';a.click();setTimeout(()=>URL.revokeObjectURL(href),3000);notify('Descripteur de sélection exporté.');});
@@ -1171,7 +1257,7 @@ $('offline').addEventListener('click',async()=>{
  if(!('serviceWorker' in navigator)){notify('Mode hors ligne indisponible dans ce navigateur.');return;}
  try{const reg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;
  const row=lookup(state.slug,state.revision);const worker=reg.active||reg.waiting||reg.installing;
- worker?.postMessage({type:'KEEP',urls:['./data/catalog.json',`./${row.path}`,...(state.locale?[`./${row.localizations[state.locale].path}`]:[])]});notify('Cache local public activé. Revérifiez les versions après reconnexion.');}
+ worker?.postMessage({type:'KEEP',urls:['./data/catalog.json',`./${row.path}`,...new Set([...(state.locale?[`./${row.localizations[state.locale].path}`]:[]),...selectedDescriptors(searchTags(),row.localizations||{}).map(x=>`./${x.descriptor.path}`)])]});notify('Cache local public activé. Revérifiez les versions après reconnexion.');}
  catch(e){notify(`Mode hors ligne non activé : ${e.message}`);}
 });
 const networkStatus = () => { $('mode-label').textContent = navigator.onLine ? 'Consultation en lecture seule' : 'Hors ligne · version enregistrée'; };

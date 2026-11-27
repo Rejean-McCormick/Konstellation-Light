@@ -69,7 +69,7 @@ try {
  fs.mkdirSync(path.join(tmp,'data'));
  if(portraitFiles.size)fs.mkdirSync(path.join(tmp,'images'));
  for(const [name,bytes] of portraitFiles)fs.writeFileSync(path.join(tmp,name),bytes);
- for(const name of ['index.html','app.js','style.css','sw.js','graph-core.mjs','profile.mjs','semantic-display.mjs'])fs.copyFileSync(path.join(root,'light/src',name),path.join(tmp,name));
+ for(const name of ['index.html','app.js','style.css','sw.js','graph-core.mjs','profile.mjs','semantic-display.mjs','exploration-v19.mjs','visual-v17.css','visual-v19.css','visual-v20.css','visual-v21.css'])fs.copyFileSync(path.join(root,'light/src',name),path.join(tmp,name));
  const multilingual=path.join(root,'light/src/multilingual-read.mjs');
  if(fs.existsSync(multilingual))fs.copyFileSync(multilingual,path.join(tmp,'multilingual-read.mjs'));
  const index=path.join(tmp,'index.html'),worker=path.join(tmp,'sw.js');

@@ -70,3 +70,63 @@ export function validateLocaleDescriptor(tag, d) {
   return d;
 }
 export {localeRE};
+
+// Selective multilingual search. A sidecar is a presentation resource, never an identity decision.
+export const MAX_CATALOG_LANGUAGES=512;
+export const MAX_SEARCH_LANGUAGES=16;
+export function normalizeLocale(tag){
+  if(typeof tag!=='string'||!localeRE.test(tag))return null;
+  try{return Intl.getCanonicalLocales(tag)[0]||null;}catch{return null;}
+}
+export function selectedSearchLocales(uiLocale, extras=[]){
+  const defaults=[normalizeLocale(uiLocale)||'fr','en'];
+  return [...new Set([...defaults,...(Array.isArray(extras)?extras:[]).map(normalizeLocale).filter(Boolean)])].slice(0,MAX_SEARCH_LANGUAGES);
+}
+export function selectedDescriptors(tags, descriptors={}){
+  // Only exact BCP47 matches (case/canonical aliases normalized); no implicit fallback to other languages.
+  const available=new Map();
+  for(const tag of Object.keys(descriptors)){
+    const canonical=normalizeLocale(tag);
+    if(!canonical)continue;
+    if(available.has(canonical))throw Error('Références de langue ambiguës.');
+    available.set(canonical,tag);
+  }
+  return tags.flatMap(locale=>available.has(locale)?[{locale,tag:available.get(locale),descriptor:descriptors[available.get(locale)]}]:[]);
+}
+export function searchNormalize(value, locale){
+  const text=String(value||'').normalize('NFC');
+  try{return text.toLocaleLowerCase(locale||undefined).normalize('NFC').trim();}catch{return text.toLowerCase().trim();}
+}
+// Match all query terms within one language, not across unrelated lexical forms.
+export function searchMatches(query, rows, {uiLocale='fr'}={}){
+  const results=new Map();
+  for(const row of rows){
+    const q=searchNormalize(query,row.locale), terms=q.split(/\s+/).filter(Boolean);
+    if(!terms.length||!row.node_id)continue;
+    const label=searchNormalize(row.label,row.locale), definition=searchNormalize(row.definition,row.locale);
+    const combined=[label,definition].join(' ');
+    if(!terms.every(t=>combined.includes(t)))continue;
+    const exact=label===q, labelMatch=terms.every(t=>label.includes(t));
+    // Exact label, then other label matches, then definition; UI language breaks ties.
+    const rank=(exact?0:labelMatch?2:4)+(row.locale===uiLocale?0:1);
+    const match={locale:row.locale,label:row.label||'',definition:row.definition||'',rank};
+    let item=results.get(row.node_id);
+    if(!item){item={node_id:row.node_id,rank,matches:[]};results.set(row.node_id,item);}
+    item.rank=Math.min(item.rank,rank);item.matches.push(match);
+  }
+  for(const item of results.values())item.matches.sort((a,b)=>a.rank-b.rank);
+  return [...results.values()].sort((a,b)=>a.rank-b.rank||String(a.node_id).localeCompare(String(b.node_id),'en'));
+}
+
+// Selection is completed before invoking the loader. The caller supplies an integrity-checked reader.
+export async function loadSearchResources(tags,descriptors,load,{signal}={}){
+  const requested=selectedDescriptors(tags,descriptors), resources=[], failures=[];
+  for(let i=0;i<requested.length;i+=3){
+    if(signal?.aborted)break;
+    const batch=requested.slice(i,i+3);
+    const outcomes=await Promise.allSettled(batch.map(async r=>({locale:r.locale,doc:await load(r)})));
+    if(signal?.aborted)break;
+    outcomes.forEach((outcome,j)=>outcome.status==='fulfilled'?resources.push(outcome.value):failures.push({locale:batch[j].locale,error:String(outcome.reason)}));
+  }
+  return {resources,failures,aborted:Boolean(signal?.aborted)};
+}
