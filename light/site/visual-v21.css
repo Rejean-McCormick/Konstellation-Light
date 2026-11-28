@@ -1,0 +1,20 @@
+/* V21 - source-checked guided reading, no overlay obscuring the reader. */
+.v21-guided{margin:22px 0 26px;padding:clamp(16px,2.7vw,28px);border:1px solid #6cad91;border-radius:18px;background:linear-gradient(150deg,#0b2927,#164334);color:#f2fff8}
+.v21-eyebrow{font-size:12px;letter-spacing:.09em;font-weight:800;color:#a6f2d1;margin:0 0 10px}
+.v21-guided h3{font-size:clamp(20px,2.2vw,27px);line-height:1.24;color:#fff;margin:0 0 10px}
+.v21-guided-note{font-size:14px;line-height:1.6;color:#cce9d9;margin:0 0 18px;max-width:78ch}
+.v21-reading-cards{display:grid;grid-template-columns:1fr;gap:15px}
+.v21-reading-card{min-width:0;padding:clamp(16px,2vw,22px);border:1px solid #4b846f;border-radius:16px;background:#173b34;overflow-wrap:anywhere}
+.v21-reading-heading{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.v21-reading-scene{background:#275c4b;border:1px solid #68ae96;border-radius:20px;color:#e4ffee;padding:5px 10px;font-size:12px;font-weight:800;letter-spacing:.045em}
+.v21-reading-heading h4{font-size:17px;line-height:1.4;color:#f6fff9;margin:0}
+.v21-reading-quote{white-space:pre-line;font-size:clamp(18px,2.1vw,25px);line-height:1.5;font-weight:720;letter-spacing:.005em;color:#fff8ce;border-left:5px solid #ebbe68;border-radius:5px;background:#235042;margin:12px 0;padding:17px 20px;transition:background .15s ease,border-color .15s ease}
+.v21-reading-quote.v21-reading-selected,.v20-disclaimer.v21-reading-selected{background:#6d501c;color:#fff8d8;border-color:#ffe08d;outline:3px solid #ffdd79;outline-offset:3px}
+.v21-reading-quote:focus-visible{outline:3px solid #ffe08d;outline-offset:4px}
+.v21-commentary{font-size:14px;line-height:1.55;color:#e6e7cb;margin:7px 0 11px}
+.v21-reading-provenance{font-size:12px;color:#bfdccf;line-height:1.55;margin:11px 0}
+.v21-reading-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:15px}
+.v21-reading-actions .button{font-size:13px;min-height:36px;padding:8px 12px;cursor:pointer}
+.v21-reading-actions .v20-source{font-size:13px}
+@media(max-width:720px){.v21-guided{padding:15px}.v21-reading-card{padding:15px}.v21-reading-quote{padding:14px 15px}}
+@media(prefers-reduced-motion:reduce){.v21-reading-quote{transition:none}}

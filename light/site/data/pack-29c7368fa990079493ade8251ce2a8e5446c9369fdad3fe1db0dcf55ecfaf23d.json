@@ -1,0 +1,1012 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "Education",
+  "slug": "education",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:kristal-education",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:5fcde752fe96e4564e2ac316bd02a1655e5e87ce12f51a15d0c1cb355bbea3f3"
+  },
+  "surface_digest": "sha256:2415eae2fb6b4b94e8adf5d119ee68efa752a4de431da19977ea4b2e2f87f919",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 26,
+    "bytes": 562625
+  },
+  "nodes": [
+    {
+      "id": "state:12fb5b369d7056589a4a4d8b",
+      "kind": "hosted_state",
+      "label": "Education",
+      "description": "Navigation dérivée ; état urn:kristal:state:kristal-education ; engagement déclaré sha256:5fcde752fe96e4564e2ac316bd02a1655e5e87ce12f51a15d0c1cb355bbea3f3"
+    },
+    {
+      "id": "artifact:332f022df380eda2466d3d35",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:artifact:kristal-education:portable-epistemic-state",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:d3a43d552efc9c2d4f810521e1ab95b6dbe0d71f25edcca3c04ff769c631111a"
+    },
+    {
+      "id": "file:458ac7e55c16295e9a01f141",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 2135 octets ; sha256:e9cb46128c77e1e7081b67dc47590a094835f043eb25dd70ea84ba9ebe5e6879"
+    },
+    {
+      "id": "file:fa821f4df00b2c3fbdc4a317",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1933 octets ; sha256:b2f2ac6e0fb5dcdaa84f1e0f08db194827f4e301a80d0e28285c7c7af281fef6"
+    },
+    {
+      "id": "file:c6da91f7aeb976c4a1dfd534",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:668ae66b1168e0871ef9d43c",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 2072 octets ; sha256:ad5e427227e4938f588c7b726ea5934f5272a8d4c2b8517fd0d79e3a9b1daab0"
+    },
+    {
+      "id": "file:96fa7f26cd734d6b4cae1ad5",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 5571 octets ; sha256:8a6bdc6a4045ea6a29b643d4dc4065cf31993512a1bc09bc5bb59d259882ed06"
+    },
+    {
+      "id": "file:98280dc387399589898f53ca",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1924 octets ; sha256:77335b5990ec6632c5a34ae38ed7bf608fac80fed7e45638b5f7a83d23d71041"
+    },
+    {
+      "id": "file:904f14f49879556ac5504df7",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 156 octets ; sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef"
+    },
+    {
+      "id": "file:789b0283069def65632c52b7",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 3904 octets ; sha256:6dcaa4cc6290fc19f899f7981f6ebbac46c8b1079d7c9a2c3b53b869eebc143f"
+    },
+    {
+      "id": "file:9be09d79d683f50270c53e53",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 581 octets ; sha256:d6094e5c4aad1e6693135c385225651ebc0f68a8cbbfe3144c6dbd1702410b2c"
+    },
+    {
+      "id": "file:9f1badf3879e0fea3a324b19",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 739 octets ; sha256:331700ebd57097a1a1cf0693a084699e7346bbaa81ecac5a050526b1664aa21f"
+    },
+    {
+      "id": "file:e9a9460f0b884a69d13a3f75",
+      "kind": "hosted_file",
+      "label": "canon/domain/portable-epistemic-state.payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 517592 octets ; sha256:e2a1cf2108c8c43c582c01e8febff346301a2f52390846a9558f6747f13ff59b"
+    },
+    {
+      "id": "file:43e5d2489a38590bc488a4cb",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1086 octets ; sha256:09e6d2123184bbd2dbcd4300798fe9da5b0720dfd515cfeb0de4792a001c6279"
+    },
+    {
+      "id": "file:55217f418effac96b087dd36",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1906 octets ; sha256:3c8cf8eee29a94bd660aa69291c361875357de00f01f639c4ac61abfe1f8a29d"
+    },
+    {
+      "id": "file:3be4d7956c8f6b2d11d9a0fd",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2711 octets ; sha256:8640d671d86a7327622cc5e37e7c01d740df71be52adfb2810a6f9896c16cdf7"
+    },
+    {
+      "id": "file:31dc82e924951cd950d22f27",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 717 octets ; sha256:4ee9e40014cde7eeb63fcd359fd4f9fca344f8cb7721d3b4071c01a569408114"
+    },
+    {
+      "id": "file:841c45a74d3cde08e5299b3c",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 670 octets ; sha256:a6ea9ca31f03e8455a9d9508ade7212a2643f62413263bb0aeb131665da79bc6"
+    },
+    {
+      "id": "file:ba8334dc9d9e930c6d47bea3",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 965 octets ; sha256:625b1a37bc58905fc22cf350aee06cc96953a82e2ea1b3ce36b4791c969c4721"
+    },
+    {
+      "id": "file:cefdcdca4202f7292b6a6d63",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 681 octets ; sha256:b7068fa758be2dcd71d255b3c8b90448ecc9a6136e78ed5763c416826f878447"
+    },
+    {
+      "id": "file:304b31595d48524d123dae13",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 1305 octets ; sha256:b3ed0863928c9de698f6a8067f8c87dd42c0057efad54307f36cc8bc0cf4d4d0"
+    },
+    {
+      "id": "file:b3be1692cc7e3478241940ba",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 518 octets ; sha256:bb6d4ef6aeb6791c5c658a9bb542453e500e0c5a5687f9040be0da25e1b815d6"
+    },
+    {
+      "id": "file:4152f4cf6d8b062a8b996566",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 789 octets ; sha256:df161a783fafbfaccaad46cc6c0ec2fd914a219009b25876cec87dbe074bc08b"
+    },
+    {
+      "id": "file:c118f4c2918e9aad05faed58",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 369 octets ; sha256:5029dcfcaef70badbfddd0fd7c2bc094c8a780deee9977329d072fee89bcbd8a"
+    },
+    {
+      "id": "file:be8610387ddd792a61bb08cf",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 3990 octets ; sha256:8cb4365905f8ca96e31b6b65a04a453ef2a7dc81c300b3fae7342f27f8333a5f"
+    },
+    {
+      "id": "file:99c4f29e2795ab68875f9d52",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1965 octets ; sha256:bfe1da81015cd624776c60ea621ca1ba2929f546ee02db0f1211abf0ec8585a3"
+    },
+    {
+      "id": "file:104aedffb18344f7b1827eef",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 4963 octets ; sha256:b40a375a5c080c71e2822b0d81122e9749667af2ed4b1739cccc4a409bea1a60"
+    },
+    {
+      "id": "file:d2d3c1c4b4a828953a5a2cae",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 756 octets ; sha256:e6478fe2c5dd5538c2a34c2951cbbe8d4c7b106cdfe7149f56196a1c2aa38a36"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "artifact:332f022df380eda2466d3d35",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:458ac7e55c16295e9a01f141",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:fa821f4df00b2c3fbdc4a317",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:c6da91f7aeb976c4a1dfd534",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:668ae66b1168e0871ef9d43c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:96fa7f26cd734d6b4cae1ad5",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:98280dc387399589898f53ca",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:904f14f49879556ac5504df7",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:789b0283069def65632c52b7",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:9be09d79d683f50270c53e53",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:9f1badf3879e0fea3a324b19",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:e9a9460f0b884a69d13a3f75",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:43e5d2489a38590bc488a4cb",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:55217f418effac96b087dd36",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:3be4d7956c8f6b2d11d9a0fd",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:31dc82e924951cd950d22f27",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:841c45a74d3cde08e5299b3c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:ba8334dc9d9e930c6d47bea3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:cefdcdca4202f7292b6a6d63",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:304b31595d48524d123dae13",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:b3be1692cc7e3478241940ba",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:4152f4cf6d8b062a8b996566",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:c118f4c2918e9aad05faed58",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:be8610387ddd792a61bb08cf",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:99c4f29e2795ab68875f9d52",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:104aedffb18344f7b1827eef",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:12fb5b369d7056589a4a4d8b",
+      "to": "file:d2d3c1c4b4a828953a5a2cae",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Corpus statique et validé décrivant la grammaire apprenant → objectif → activité → évaluation → progression.",
+    "topics": [
+      {
+        "title": "Apprenant",
+        "detail": "état daté, connaissances antérieures, besoins, engagement, autorégulation et accessibilité.",
+        "section": "Noyau conceptuel",
+        "line": 7
+      },
+      {
+        "title": "Objectif",
+        "detail": "acquis visé, compétence, connaissance, habileté, prérequis, critères et alignement.",
+        "section": "Noyau conceptuel",
+        "line": 8
+      },
+      {
+        "title": "Activité",
+        "detail": "enseignement, pratique, problème, projet, simulation, collaboration, étayage et ressources.",
+        "section": "Noyau conceptuel",
+        "line": 9
+      },
+      {
+        "title": "Évaluation",
+        "detail": "finalité, tâche, preuve, score, interprétation, validité, fidélité, équité et rétroaction.",
+        "section": "Noyau conceptuel",
+        "line": 10
+      },
+      {
+        "title": "Progression",
+        "detail": "maîtrise, croissance, rétention, transfert, remédiation, avancement et prochaine étape.",
+        "section": "Noyau conceptuel",
+        "line": 11
+      },
+      {
+        "title": "activité ≠ objectif ;",
+        "detail": "activité ≠ objectif ;",
+        "section": "Garde-fous majeurs",
+        "line": 19
+      },
+      {
+        "title": "tâche d'évaluation ≠ objectif ;",
+        "detail": "tâche d'évaluation ≠ objectif ;",
+        "section": "Garde-fous majeurs",
+        "line": 20
+      },
+      {
+        "title": "preuve ≠ maîtrise ;",
+        "detail": "preuve ≠ maîtrise ;",
+        "section": "Garde-fous majeurs",
+        "line": 21
+      },
+      {
+        "title": "score ≠ compétence ;",
+        "detail": "score ≠ compétence ;",
+        "section": "Garde-fous majeurs",
+        "line": 22
+      },
+      {
+        "title": "note ≠ état complet de l'apprenant ;",
+        "detail": "note ≠ état complet de l'apprenant ;",
+        "section": "Garde-fous majeurs",
+        "line": 23
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:ad5e427227e4938f588c7b726ea5934f5272a8d4c2b8517fd0d79e3a9b1daab0",
+        "title": "Kristal-Education v1.0.0",
+        "excerpt": "Corpus statique et validé décrivant la grammaire apprenant → objectif → activité → évaluation → progression.",
+        "sections": [
+          {
+            "title": "Noyau conceptuel",
+            "line": 5
+          },
+          {
+            "title": "Invariant central",
+            "line": 13
+          },
+          {
+            "title": "Garde-fous majeurs",
+            "line": 17
+          },
+          {
+            "title": "Taille",
+            "line": 32
+          },
+          {
+            "title": "Organisation",
+            "line": 38
+          },
+          {
+            "title": "Statut",
+            "line": 42
+          }
+        ],
+        "topics": [
+          {
+            "title": "Apprenant",
+            "detail": "état daté, connaissances antérieures, besoins, engagement, autorégulation et accessibilité.",
+            "section": "Noyau conceptuel",
+            "line": 7
+          },
+          {
+            "title": "Objectif",
+            "detail": "acquis visé, compétence, connaissance, habileté, prérequis, critères et alignement.",
+            "section": "Noyau conceptuel",
+            "line": 8
+          },
+          {
+            "title": "Activité",
+            "detail": "enseignement, pratique, problème, projet, simulation, collaboration, étayage et ressources.",
+            "section": "Noyau conceptuel",
+            "line": 9
+          },
+          {
+            "title": "Évaluation",
+            "detail": "finalité, tâche, preuve, score, interprétation, validité, fidélité, équité et rétroaction.",
+            "section": "Noyau conceptuel",
+            "line": 10
+          },
+          {
+            "title": "Progression",
+            "detail": "maîtrise, croissance, rétention, transfert, remédiation, avancement et prochaine étape.",
+            "section": "Noyau conceptuel",
+            "line": 11
+          },
+          {
+            "title": "activité ≠ objectif ;",
+            "detail": "activité ≠ objectif ;",
+            "section": "Garde-fous majeurs",
+            "line": 19
+          },
+          {
+            "title": "tâche d'évaluation ≠ objectif ;",
+            "detail": "tâche d'évaluation ≠ objectif ;",
+            "section": "Garde-fous majeurs",
+            "line": 20
+          },
+          {
+            "title": "preuve ≠ maîtrise ;",
+            "detail": "preuve ≠ maîtrise ;",
+            "section": "Garde-fous majeurs",
+            "line": 21
+          },
+          {
+            "title": "score ≠ compétence ;",
+            "detail": "score ≠ compétence ;",
+            "section": "Garde-fous majeurs",
+            "line": 22
+          },
+          {
+            "title": "note ≠ état complet de l'apprenant ;",
+            "detail": "note ≠ état complet de l'apprenant ;",
+            "section": "Garde-fous majeurs",
+            "line": 23
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:4ee9e40014cde7eeb63fcd359fd4f9fca344f8cb7721d3b4071c01a569408114",
+        "title": "Intention et portée — Kristal-Education",
+        "excerpt": "Ce Kristal conserve la connaissance originale associée à Education, sous sa forme native : learner-state / objective / activity / evidence / progression cycle.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:a6ea9ca31f03e8455a9d9508ade7212a2643f62413263bb0aeb131665da79bc6",
+        "title": "Frontière sémantique — Kristal-Education",
+        "excerpt": "Territoire propre : learner-state / objective / activity / evidence / progression cycle.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:625b1a37bc58905fc22cf350aee06cc96953a82e2ea1b3ce36b4791c969c4721",
+        "title": "Modèle natif — Kristal-Education",
+        "excerpt": "Le modèle déclaré par .kristal/v9/domain-profile.json est : learner-state / objective / activity / evidence / progression cycle.",
+        "sections": [
+          {
+            "title": "Distinctions à préserver",
+            "line": 7
+          },
+          {
+            "title": "Supports locaux du modèle",
+            "line": 15
+          }
+        ],
+        "topics": [
+          {
+            "title": "activity ≠ objective",
+            "detail": "activity ≠ objective",
+            "section": "Distinctions à préserver",
+            "line": 9
+          },
+          {
+            "title": "evidence ≠ mastery",
+            "detail": "evidence ≠ mastery",
+            "section": "Distinctions à préserver",
+            "line": 10
+          },
+          {
+            "title": "score ≠ competence",
+            "detail": "score ≠ competence",
+            "section": "Distinctions à préserver",
+            "line": 11
+          },
+          {
+            "title": "growth ≠ mastery",
+            "detail": "growth ≠ mastery",
+            "section": "Distinctions à préserver",
+            "line": 12
+          },
+          {
+            "title": "retention ≠ transfer",
+            "detail": "retention ≠ transfer",
+            "section": "Distinctions à préserver",
+            "line": 13
+          },
+          {
+            "title": "knowledge-base/corpus/learning-cycle-model.json",
+            "detail": "knowledge-base/corpus/learning-cycle-model.json",
+            "section": "Supports locaux du modèle",
+            "line": 17
+          },
+          {
+            "title": "knowledge-base/corpus/learning-record-model.json",
+            "detail": "knowledge-base/corpus/learning-record-model.json",
+            "section": "Supports locaux du modèle",
+            "line": 18
+          },
+          {
+            "title": "knowledge-base/corpus/objective-alignment-model.json",
+            "detail": "knowledge-base/corpus/objective-alignment-model.json",
+            "section": "Supports locaux du modèle",
+            "line": 19
+          },
+          {
+            "title": "knowledge-base/corpus/assessment-evidence-model.json",
+            "detail": "knowledge-base/corpus/assessment-evidence-model.json",
+            "section": "Supports locaux du modèle",
+            "line": 20
+          },
+          {
+            "title": "knowledge-base/corpus/progression-model.json",
+            "detail": "knowledge-base/corpus/progression-model.json",
+            "section": "Supports locaux du modèle",
+            "line": 21
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:b7068fa758be2dcd71d255b3c8b90448ecc9a6136e78ed5763c416826f878447",
+        "title": "Modèle épistémique — Kristal-Education",
+        "excerpt": "Le payload historique contient 723 assertions, leurs champs de provenance et leurs éventuelles références aux sources.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:b3ed0863928c9de698f6a8067f8c87dd42c0057efad54307f36cc8bc0cf4d4d0",
+        "title": "Canonique, matérialisations et dérivés — Kristal-Education",
+        "excerpt": "La relation entre le JSON v6 et le payload logique est vérifiée par projection exacte des clés du payload ; les seuls champs physiques supplémentaires admis sont state_id, content_hash et signatures.",
+        "sections": [
+          {
+            "title": "Canon authoring v3.2.2",
+            "line": 3
+          },
+          {
+            "title": "Materializations physiques existantes",
+            "line": 9
+          }
+        ],
+        "topics": [
+          {
+            "title": "canon/domain/portable-epistemic-state.payload.json",
+            "detail": "payload original du Logical Artifact v9.",
+            "section": "Canon authoring v3.2.2",
+            "line": 5
+          },
+          {
+            "title": "canon/state.index.json",
+            "detail": "identité et contrat du même artefact.",
+            "section": "Canon authoring v3.2.2",
+            "line": 6
+          },
+          {
+            "title": "knowledge-base/sources/",
+            "detail": "données/source policies historiques conservées.",
+            "section": "Canon authoring v3.2.2",
+            "line": 7
+          },
+          {
+            "title": ".kristal/v9/materialization-manifest.json",
+            "detail": "profil kristal.materialization/kristal-state-v6/1.",
+            "section": "Materializations physiques existantes",
+            "line": 11
+          },
+          {
+            "title": "knowledge-base/corpus/education.kristal-state.json",
+            "detail": "représentation v6 physique historisée, avec ses champs de métadonnées d'enveloppe.",
+            "section": "Materializations physiques existantes",
+            "line": 12
+          },
+          {
+            "title": "build/v9/materializations/",
+            "detail": "représentation inline JSON du kit ET enregistrement du manifest v6 existant.",
+            "section": "Materializations physiques existantes",
+            "line": 13
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 15
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:bb6d4ef6aeb6791c5c658a9bb542453e500e0c5a5687f9040be0da25e1b815d6",
+        "title": "Orientations et projections — Kristal-Education",
+        "excerpt": "Orientation dominante donnée par le modèle natif : state(t) → objective → activity → evidence → interpretation → decision → state(t+1).",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:df161a783fafbfaccaad46cc6c0ec2fd914a219009b25876cec87dbe074bc08b",
+        "title": "Validation — Kristal-Education",
+        "excerpt": "Ces tests contrôlent : format authoring 3.2.2, build v9, original Logical Commitment, original State Commitment, digest/size du blob v6, correspondance source/manifest et reconstruction exacte du payload à partir de la projection v6.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 11
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:5029dcfcaef70badbfddd0fd7c2bc094c8a780deee9977329d072fee89bcbd8a",
+        "title": "Hosting/publication — Kristal-Education",
+        "excerpt": "L'identité sémantique reste kristal.state/9.0. L'enveloppe cible mentionne kristal.hosting/10.0, mais aucun repo/commit GitHub n'est inventé.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:8cb4365905f8ca96e31b6b65a04a453ef2a7dc81c300b3fae7342f27f8333a5f",
+        "title": "Education — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Learning Path (ARK-10), declared; not independently approved.",
+            "detail": "Arketype: Learning Path (ARK-10), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Teaching and training; Curriculum, declared, semantic review pending.",
+            "detail": "UNESCO: Teaching and training; Curriculum, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 4ee9e40014cde7eeb6…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 4ee9e40014cde7eeb6…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 a6ea9ca31f03e8455a…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 a6ea9ca31f03e8455a…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 625b1a37bc58905fc2…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 625b1a37bc58905fc2…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 b7068fa758be2dcd71…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 b7068fa758be2dcd71…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 b3ed0863928c9de698…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 b3ed0863928c9de698…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 df161a783fafbfacca…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 df161a783fafbfacca…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:8a6bdc6a4045ea6a29b643d4dc4065cf31993512a1bc09bc5bb59d259882ed06",
+        "title": "AI Context — Education",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 35
+          },
+          {
+            "title": "Included orientation from docs/02_NATIVE_MODEL.md",
+            "line": 49
+          },
+          {
+            "title": "Distinctions à préserver",
+            "line": 57
+          },
+          {
+            "title": "Supports locaux du modèle",
+            "line": 65
+          },
+          {
+            "title": "Included orientation from docs/03_EPISTEMIC_MODEL.md",
+            "line": 77
+          },
+          {
+            "title": "Included orientation from docs/04_CANONICAL_DERIVED.md",
+            "line": 89
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:kristal-education",
+            "detail": "State ref: urn:kristal:state:kristal-education",
+            "section": "AI Context — Education",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:5fcde752fe96e4564e2ac316bd02a1655e5e87ce12f51a15d0c1cb355bbea3f3",
+            "section": "AI Context — Education",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — Education",
+            "line": 7
+          },
+          {
+            "title": "Native model: learner_objective_activity_evidence_progression_cycle",
+            "detail": "Native model: learner_objective_activity_evidence_progression_cycle",
+            "section": "AI Context — Education",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — Education",
+            "line": 9
+          },
+          {
+            "title": "Sources: 7",
+            "detail": "Sources: 7",
+            "section": "AI Context — Education",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — Education",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — Education",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — Education",
+            "line": 13
+          },
+          {
+            "title": "activity ≠ objective",
+            "detail": "activity ≠ objective",
+            "section": "Distinctions à préserver",
+            "line": 59
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef",
+        "title": "Glossary",
+        "excerpt": "No project-specific glossary has been authored. Use the native terminology in the canonical files and documentation; do not invent definitions.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:d6094e5c4aad1e6693135c385225651ebc0f68a8cbbfe3144c6dbd1702410b2c",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading Education offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 14
+  }
+}

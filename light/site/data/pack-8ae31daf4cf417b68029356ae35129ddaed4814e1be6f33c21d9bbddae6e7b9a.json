@@ -1,0 +1,1338 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "kOA / Koali Sales Pitch",
+  "slug": "koa-sales-pitch",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:koa-sales-pitch",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:97bf4babbe6111bd71cc2f4687c1320da4466f91aca3da2dcd37d9c8a83a224e"
+  },
+  "surface_digest": "sha256:371d4473e39c0eff7af39aa63d448349f0754d6897d0acddd0dddecb492e55cc",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 28,
+    "bytes": 701184
+  },
+  "nodes": [
+    {
+      "id": "state:ec76397479f3bb0d9997e783",
+      "kind": "hosted_state",
+      "label": "kOA / Koali Sales Pitch",
+      "description": "Navigation dérivée ; état urn:kristal:state:koa-sales-pitch ; engagement déclaré sha256:97bf4babbe6111bd71cc2f4687c1320da4466f91aca3da2dcd37d9c8a83a224e"
+    },
+    {
+      "id": "artifact:becbdc55219a4083600395a4",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:koa-sales-pitch:canonical",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:7b93562350b278aa9a126d28b0c3712e17847cac88620b97c9f6d31c36fcbe71"
+    },
+    {
+      "id": "file:7c14dc699337eb92397d7e9e",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 2238 octets ; sha256:a13a5bfce18a9737c177058de8ff50cdecb25b496ab2ad8b10741585a6285a43"
+    },
+    {
+      "id": "file:ec81fdda3a723d42755e598f",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1944 octets ; sha256:04edb6a1cbea0640bb24e57875c69556a040f6f2812f49fa35d95ef58c79d810"
+    },
+    {
+      "id": "file:85bb62fec6f5438d7fb3ff28",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:8566fbb158df96efed7e5679",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 3899 octets ; sha256:9d2be6443eb9f9b243120ce3bba88b7ffd00d7c9963a3541fc48eb20055f1dbd"
+    },
+    {
+      "id": "file:d14326a7722265d7ad9f0a2e",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 8386 octets ; sha256:fc43e7d107a715b577031be8a7e20315339d088326915c3cfb9052ced348e9da"
+    },
+    {
+      "id": "file:0de286f441245836f072ead4",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1995 octets ; sha256:74c167596c16ccd2a4532da00c0edc881b953aa9f0f453f5fbdd785984c3190a"
+    },
+    {
+      "id": "file:de73065f579e2efa004e9fff",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 818 octets ; sha256:65be4338b03dedd2edd56793437808651987220a588478a9f13dca45af827849"
+    },
+    {
+      "id": "file:cda4eb8e70059161f1d91c4c",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 4324 octets ; sha256:48398f1b4e2a9a637d2a94264f72f80f1c67bc267317340518b94d79c43e4702"
+    },
+    {
+      "id": "file:1be7c89dd9505c4a36831a2d",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 595 octets ; sha256:4000a7c9dae5c571a182e1fd4fb437197297572049986bbe6d7a6ba158768bd3"
+    },
+    {
+      "id": "file:720c0f0981fd5d3c789c8531",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 769 octets ; sha256:27ff124945b9ac4c9da3a4a50ff5c8d98140a3e72a72b477056c31156444a624"
+    },
+    {
+      "id": "file:d7372bc4349bdb4cd733e948",
+      "kind": "hosted_file",
+      "label": "canon/domain/sales-pitch.kristal-state.json",
+      "description": "Fichier dérivé (canonical_content) ; 630746 octets ; sha256:1d90c23af770b205da0ee04032040ed6b1b62966a2cecf490997a66fd33d3478"
+    },
+    {
+      "id": "file:b2c18a27af021688b2fc31fe",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1806 octets ; sha256:c85b3d41616745df89aa0f802705eb14841608de5ca9a6924fc55d86dd986a8c"
+    },
+    {
+      "id": "file:3c566e1286e3dd64f1ea1517",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1547 octets ; sha256:efc9541f5092972977a07f9b30adf3dbe154290f120d3be4340785870c8d70ff"
+    },
+    {
+      "id": "file:f3f8d5a23924e605a6ae2a39",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2135 octets ; sha256:87fd9f5c06fcc69023c836292e60a8f72ac5f69f3efde75b2db8d1678f1b7703"
+    },
+    {
+      "id": "file:76b644a2b2e04169c51bc991",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 1001 octets ; sha256:1d7d03677ba8038532cda3711c0447099ada3325ea56bc6c8e59c60bbd37df80"
+    },
+    {
+      "id": "file:99bc4865320a0ed367241bcf",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 1209 octets ; sha256:76ec917ced6a3fe9d664b85b31487f07ec9463eac0cc4523ed7060be1f400fda"
+    },
+    {
+      "id": "file:24c51da6887885359c2e05eb",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 1798 octets ; sha256:08871d999c3113ecc1e22a082dcc32f3dfdc25d512969beac8b2beb1a27fc004"
+    },
+    {
+      "id": "file:0e6bf66ba8498e5788edd096",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 1634 octets ; sha256:74ae21eec3e5b1921e3d59a01bfe9490e2e65cb45e432e94ee0b66f9c618bf0b"
+    },
+    {
+      "id": "file:b09e7b8d4246a7e12b0f2fde",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 1523 octets ; sha256:66fdb28c77982bdbd9a093ebfdbdf9cff3cbbd8fad014650200cf04b250f7fe0"
+    },
+    {
+      "id": "file:556072d7c78482c7b272f056",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 1083 octets ; sha256:b74198cf854746ab86e2393ed800f938751bacc2825b43e23578f35f5f91140e"
+    },
+    {
+      "id": "file:9d50866490a3844c486d6889",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 1538 octets ; sha256:6c206c5fa1f913cc14b54a98cd74393994c58a57ada72e9b46b141f74f70f868"
+    },
+    {
+      "id": "file:411d004ef6ebd1e134fa15ab",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 923 octets ; sha256:aa2ceaee302ba3d2b0e95a3621bef27e71560ecca8ddfa40c03cecbe7afbf97b"
+    },
+    {
+      "id": "file:d3c8b24f8513463ac884a964",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 4286 octets ; sha256:c045d063f3dee61aa8a804f18d21e0b5a6e8db46f8f86e8856ee404854e4630d"
+    },
+    {
+      "id": "file:0ffeed1dc1e589ec7868e15b",
+      "kind": "hosted_file",
+      "label": "docs/08_GLOSSARY.md",
+      "description": "Fichier dérivé (documentation) ; 818 octets ; sha256:65be4338b03dedd2edd56793437808651987220a588478a9f13dca45af827849"
+    },
+    {
+      "id": "file:38a150260d0c38371879ebd2",
+      "kind": "hosted_file",
+      "label": "docs/PROFILE_NOTES.md",
+      "description": "Fichier dérivé (documentation) ; 200 octets ; sha256:7c46043ab0c88a56dd614da3fffc5c35181c28d1eff31aa35ca8c7182ad59ded"
+    },
+    {
+      "id": "file:e7abf8ecb539028fcf88dc0e",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1965 octets ; sha256:4cfd3850868b6158138e96b2da82f768e182bd3c1d74e105870880afd2a6120a"
+    },
+    {
+      "id": "file:9e51ab9fcae92050f46ed1f3",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 18444 octets ; sha256:e45fb149694fd72ba3fb851fa026c9aa867b1faf22f53dc3a3094d0d948e4125"
+    },
+    {
+      "id": "file:532474ee47466727b9d0efab",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 933 octets ; sha256:34ee560fedf88cd579b5f6036a6045a5cf4760fed6ed50080c5cfaf43f51be60"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "artifact:becbdc55219a4083600395a4",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:7c14dc699337eb92397d7e9e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:ec81fdda3a723d42755e598f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:85bb62fec6f5438d7fb3ff28",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:8566fbb158df96efed7e5679",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:d14326a7722265d7ad9f0a2e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:0de286f441245836f072ead4",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:de73065f579e2efa004e9fff",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:cda4eb8e70059161f1d91c4c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:1be7c89dd9505c4a36831a2d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:720c0f0981fd5d3c789c8531",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:d7372bc4349bdb4cd733e948",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:b2c18a27af021688b2fc31fe",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:3c566e1286e3dd64f1ea1517",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:f3f8d5a23924e605a6ae2a39",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:76b644a2b2e04169c51bc991",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:99bc4865320a0ed367241bcf",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:24c51da6887885359c2e05eb",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:0e6bf66ba8498e5788edd096",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:b09e7b8d4246a7e12b0f2fde",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:556072d7c78482c7b272f056",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:9d50866490a3844c486d6889",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:411d004ef6ebd1e134fa15ab",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:d3c8b24f8513463ac884a964",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:0ffeed1dc1e589ec7868e15b",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:38a150260d0c38371879ebd2",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:e7abf8ecb539028fcf88dc0e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:9e51ab9fcae92050f46ed1f3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:ec76397479f3bb0d9997e783",
+      "to": "file:532474ee47466727b9d0efab",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Local workspace : kristal.local-workspace/3.2.0 (Authoring Kit 3.2.2)",
+    "topics": [
+      {
+        "title": ".kristal/",
+        "detail": "couche v8 dérivée et métadonnées de normalisation;",
+        "section": "Structure normalisée",
+        "line": 62
+      },
+      {
+        "title": "external-source-library/",
+        "detail": "extraits de sources conservés séparément;",
+        "section": "Structure normalisée",
+        "line": 63
+      },
+      {
+        "title": "knowledge-base/corpus/",
+        "detail": "état canonique et index;",
+        "section": "Structure normalisée",
+        "line": 64
+      },
+      {
+        "title": "knowledge-base/sources/",
+        "detail": "sources éditoriales internes;",
+        "section": "Structure normalisée",
+        "line": 65
+      },
+      {
+        "title": "knowledge-base/profiles/",
+        "detail": "profils de lecture;",
+        "section": "Structure normalisée",
+        "line": 66
+      },
+      {
+        "title": "knowledge-base/schemas/",
+        "detail": "schémas;",
+        "section": "Structure normalisée",
+        "line": 67
+      },
+      {
+        "title": "knowledge-base/documentation/",
+        "detail": "documentation;",
+        "section": "Structure normalisée",
+        "line": 68
+      },
+      {
+        "title": "knowledge-base/tools/",
+        "detail": "outils;",
+        "section": "Structure normalisée",
+        "line": 69
+      },
+      {
+        "title": "views/",
+        "detail": "projections de lecture pour les rencontres;",
+        "section": "Structure normalisée",
+        "line": 70
+      },
+      {
+        "title": "validation/",
+        "detail": "rapports de validation.",
+        "section": "Structure normalisée",
+        "line": 71
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:9d2be6443eb9f9b243120ce3bba88b7ffd00d7c9963a3541fc48eb20055f1dbd",
+        "title": "Kristal — kOA / Koali Sales Pitch",
+        "excerpt": "Local workspace : kristal.local-workspace/3.2.0 (Authoring Kit 3.2.2)",
+        "sections": [
+          {
+            "title": "Commandes Local 3.2.2",
+            "line": 8
+          },
+          {
+            "title": "Description fonctionnelle héritée",
+            "line": 19
+          },
+          {
+            "title": "Ce que cette version améliore",
+            "line": 23
+          },
+          {
+            "title": "À lire avant une rencontre",
+            "line": 31
+          },
+          {
+            "title": "Règle centrale",
+            "line": 41
+          },
+          {
+            "title": "E2E",
+            "line": 47
+          },
+          {
+            "title": "Validation locale",
+            "line": 51
+          },
+          {
+            "title": "Structure normalisée",
+            "line": 60
+          }
+        ],
+        "topics": [
+          {
+            "title": ".kristal/",
+            "detail": "couche v8 dérivée et métadonnées de normalisation;",
+            "section": "Structure normalisée",
+            "line": 62
+          },
+          {
+            "title": "external-source-library/",
+            "detail": "extraits de sources conservés séparément;",
+            "section": "Structure normalisée",
+            "line": 63
+          },
+          {
+            "title": "knowledge-base/corpus/",
+            "detail": "état canonique et index;",
+            "section": "Structure normalisée",
+            "line": 64
+          },
+          {
+            "title": "knowledge-base/sources/",
+            "detail": "sources éditoriales internes;",
+            "section": "Structure normalisée",
+            "line": 65
+          },
+          {
+            "title": "knowledge-base/profiles/",
+            "detail": "profils de lecture;",
+            "section": "Structure normalisée",
+            "line": 66
+          },
+          {
+            "title": "knowledge-base/schemas/",
+            "detail": "schémas;",
+            "section": "Structure normalisée",
+            "line": 67
+          },
+          {
+            "title": "knowledge-base/documentation/",
+            "detail": "documentation;",
+            "section": "Structure normalisée",
+            "line": 68
+          },
+          {
+            "title": "knowledge-base/tools/",
+            "detail": "outils;",
+            "section": "Structure normalisée",
+            "line": 69
+          },
+          {
+            "title": "views/",
+            "detail": "projections de lecture pour les rencontres;",
+            "section": "Structure normalisée",
+            "line": 70
+          },
+          {
+            "title": "validation/",
+            "detail": "rapports de validation.",
+            "section": "Structure normalisée",
+            "line": 71
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:1d7d03677ba8038532cda3711c0447099ada3325ea56bc6c8e59c60bbd37df80",
+        "title": "Intention et scope",
+        "excerpt": "Ce Kristal fournit une base de connaissance structurée et un copilote de rencontre pour présenter kOA / Koali avec un langage adapté à l'interlocuteur, des réponses gouvernées, des preuves explicites et des limites de preuve visibles.",
+        "sections": [
+          {
+            "title": "Pourquoi ce Kristal existe",
+            "line": 3
+          },
+          {
+            "title": "Corpus / problème de départ",
+            "line": 7
+          },
+          {
+            "title": "Résultats attendus",
+            "line": 11
+          }
+        ],
+        "topics": [
+          {
+            "title": "répondre d'abord au besoin puis à l'architecture ;",
+            "detail": "répondre d'abord au besoin puis à l'architecture ;",
+            "section": "Résultats attendus",
+            "line": 13
+          },
+          {
+            "title": "conserver la provenance et les limites de chaque affirmation ;",
+            "detail": "conserver la provenance et les limites de chaque affirmation ;",
+            "section": "Résultats attendus",
+            "line": 14
+          },
+          {
+            "title": "adapter la profondeur aux audiences sans modifier la vérité sous-jacente ;",
+            "detail": "adapter la profondeur aux audiences sans modifier la vérité sous-jacente ;",
+            "section": "Résultats attendus",
+            "line": 15
+          },
+          {
+            "title": "empêcher les surclaims sur traction, E2E, sécurité, marché et validation ;",
+            "detail": "empêcher les surclaims sur traction, E2E, sécurité, marché et validation ;",
+            "section": "Résultats attendus",
+            "line": 16
+          },
+          {
+            "title": "permettre la reconstruction des vues et index à partir du canon et des sources.",
+            "detail": "permettre la reconstruction des vues et index à partir du canon et des sources.",
+            "section": "Résultats attendus",
+            "line": 17
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:76ec917ced6a3fe9d664b85b31487f07ec9463eac0cc4523ed7060be1f400fda",
+        "title": "Frontière sémantique",
+        "excerpt": "Le Subject est le Sales Pitch kOA / Koali : connaissance structurée, positionnement, réponses de rencontre, preuves/limites et chemins conversationnels nécessaires à cette fonction.",
+        "sections": [
+          {
+            "title": "Subject / territoire",
+            "line": 3
+          },
+          {
+            "title": "Possède",
+            "line": 7
+          },
+          {
+            "title": "Ne possède pas",
+            "line": 11
+          },
+          {
+            "title": "Relations avec d'autres Kristals",
+            "line": 15
+          },
+          {
+            "title": "State identity v9",
+            "line": 19
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:08871d999c3113ecc1e22a082dcc32f3dfdc25d512969beac8b2beb1a27fc004",
+        "title": "Modèle natif",
+        "excerpt": "Les primitives dominantes sont : question canonique, variantes de question, audience, intention, réponse par profondeur, référence de preuve, posture de preuve, interdits de formulation, routage conversationnel et carte live.",
+        "sections": [
+          {
+            "title": "Primitives du domaine",
+            "line": 3
+          },
+          {
+            "title": "Relations / transformations",
+            "line": 9
+          },
+          {
+            "title": "Dimensions internes",
+            "line": 13
+          },
+          {
+            "title": "Forme native retenue",
+            "line": 17
+          },
+          {
+            "title": "Logical Contracts v9",
+            "line": 23
+          },
+          {
+            "title": "Pourquoi cette forme ne perd pas d'information essentielle",
+            "line": 27
+          },
+          {
+            "title": "Alternatives rejetées",
+            "line": 31
+          }
+        ],
+        "topics": [
+          {
+            "title": "document Markdown unique ;",
+            "detail": "document Markdown unique ;",
+            "section": "Alternatives rejetées",
+            "line": 33
+          },
+          {
+            "title": "ontologie générique unique ;",
+            "detail": "ontologie générique unique ;",
+            "section": "Alternatives rejetées",
+            "line": 34
+          },
+          {
+            "title": "fusion des sources et du canon ;",
+            "detail": "fusion des sources et du canon ;",
+            "section": "Alternatives rejetées",
+            "line": 35
+          },
+          {
+            "title": "promotion des vues/index au rang de vérité.",
+            "detail": "promotion des vues/index au rang de vérité.",
+            "section": "Alternatives rejetées",
+            "line": 36
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:74ae21eec3e5b1921e3d59a01bfe9490e2e65cb45e432e94ee0b66f9c618bf0b",
+        "title": "Modèle épistémique",
+        "excerpt": "Le Kristal distingue au minimum : source documentée, synthèse interne, illustration de design, état de rencontre mutable, preuve technique, validation commerciale, preuve d'impact et inconnus à rafraîchir.",
+        "sections": [
+          {
+            "title": "Régimes d'information",
+            "line": 3
+          },
+          {
+            "title": "Provenance épistémique",
+            "line": 7
+          },
+          {
+            "title": "Autorité",
+            "line": 11
+          },
+          {
+            "title": "Incertitude / conflits / inconnus",
+            "line": 15
+          },
+          {
+            "title": "Provenance de build",
+            "line": 19
+          },
+          {
+            "title": "Politique des sorties IA",
+            "line": 23
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:66fdb28c77982bdbd9a093ebfdbdf9cff3cbbd8fad014650200cf04b250f7fe0",
+        "title": "Canonique et dérivé",
+        "excerpt": "Le canon Local 3.2.2 est canon/domain/sales-pitch.kristal-state.json. Il est une copie byte-identique de l'ancien état compilé v6 afin de préserver la continuité sémantique.",
+        "sections": [
+          {
+            "title": "Source de vérité",
+            "line": 3
+          },
+          {
+            "title": "Logical Artifacts canoniques",
+            "line": 9
+          },
+          {
+            "title": "Artefacts dérivés / Runtime",
+            "line": 13
+          },
+          {
+            "title": "Materializations",
+            "line": 19
+          },
+          {
+            "title": "Recettes de reconstruction",
+            "line": 23
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:b74198cf854746ab86e2393ed800f938751bacc2825b43e23578f35f5f91140e",
+        "title": "Orientations et surfaces",
+        "excerpt": "Les principales orientations de lecture sont :",
+        "sections": [
+          {
+            "title": "Orientations utiles",
+            "line": 3
+          },
+          {
+            "title": "Dimensions qui ne sont PAS des Orientation Axes",
+            "line": 14
+          },
+          {
+            "title": "Projections à matérialiser",
+            "line": 18
+          }
+        ],
+        "topics": [
+          {
+            "title": "audience",
+            "detail": "general, incubator, institution, finance, research, philanthropy/Ashoka, technical due diligence ;",
+            "section": "Orientations utiles",
+            "line": 7
+          },
+          {
+            "title": "famille/intention de question ;",
+            "detail": "famille/intention de question ;",
+            "section": "Orientations utiles",
+            "line": 8
+          },
+          {
+            "title": "profondeur de réponse",
+            "detail": "headline, meeting 30–60 s, due diligence ;",
+            "section": "Orientations utiles",
+            "line": 9
+          },
+          {
+            "title": "priorité de rencontre.",
+            "detail": "priorité de rencontre.",
+            "section": "Orientations utiles",
+            "line": 10
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:6c206c5fa1f913cc14b54a98cd74393994c58a57ada72e9b46b141f74f70f868",
+        "title": "Validation du domaine et lifecycle v10",
+        "excerpt": "1. python knowledge-base/tools/validate.py",
+        "sections": [
+          {
+            "title": "Invariants structurels",
+            "line": 3
+          },
+          {
+            "title": "Invariants épistémiques",
+            "line": 12
+          },
+          {
+            "title": "Tests de reconstruction",
+            "line": 20
+          },
+          {
+            "title": "Logical Commitments",
+            "line": 27
+          },
+          {
+            "title": "Critères de publication",
+            "line": 31
+          }
+        ],
+        "topics": [
+          {
+            "title": "142 IDs Q&A uniques ;",
+            "detail": "142 IDs Q&A uniques ;",
+            "section": "Invariants structurels",
+            "line": 5
+          },
+          {
+            "title": "toutes les routes Q&A résolvent vers des IDs existants ;",
+            "detail": "toutes les routes Q&A résolvent vers des IDs existants ;",
+            "section": "Invariants structurels",
+            "line": 6
+          },
+          {
+            "title": "toutes les références de preuve packagées existent ;",
+            "detail": "toutes les références de preuve packagées existent ;",
+            "section": "Invariants structurels",
+            "line": 7
+          },
+          {
+            "title": "le miroir legacy du state reste byte-identique au canon 3.2.2 ;",
+            "detail": "le miroir legacy du state reste byte-identique au canon 3.2.2 ;",
+            "section": "Invariants structurels",
+            "line": 8
+          },
+          {
+            "title": "READ MODEL != CANONICAL STATE ;",
+            "detail": "READ MODEL != CANONICAL STATE ;",
+            "section": "Invariants structurels",
+            "line": 9
+          },
+          {
+            "title": "MODEL OUTPUT != AUTHORITY.",
+            "detail": "MODEL OUTPUT != AUTHORITY.",
+            "section": "Invariants structurels",
+            "line": 10
+          },
+          {
+            "title": "120 scénarios historiques + 36 archétypes V2 ne deviennent jamais 156 validations…",
+            "detail": "120 scénarios historiques + 36 archétypes V2 ne deviennent jamais 156 validations indépendantes ;",
+            "section": "Invariants épistémiques",
+            "line": 14
+          },
+          {
+            "title": "scénario récurrent ≠ validation marché ;",
+            "detail": "scénario récurrent ≠ validation marché ;",
+            "section": "Invariants épistémiques",
+            "line": 15
+          },
+          {
+            "title": "documenté ≠ implémenté ≠ testé ≠ qualifié ≠ déployé ≠ commercialisé ;",
+            "detail": "documenté ≠ implémenté ≠ testé ≠ qualifié ≠ déployé ≠ commercialisé ;",
+            "section": "Invariants épistémiques",
+            "line": 16
+          },
+          {
+            "title": "modularité/séparation ≠ preuve de confinement ;",
+            "detail": "modularité/séparation ≠ preuve de confinement ;",
+            "section": "Invariants épistémiques",
+            "line": 17
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 22
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:aa2ceaee302ba3d2b0e95a3621bef27e71560ecca8ddfa40c03cecbe7afbf97b",
+        "title": "Hosting et publication v10",
+        "excerpt": "Le canon et les commitments restent v9. L'hébergement est une couche v10 séparée.",
+        "sections": [
+          {
+            "title": "Node / repository",
+            "line": 5
+          },
+          {
+            "title": "State path",
+            "line": 9
+          },
+          {
+            "title": "Qualification",
+            "line": 13
+          },
+          {
+            "title": "Publication",
+            "line": 17
+          },
+          {
+            "title": "Activation",
+            "line": 21
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:c045d063f3dee61aa8a804f18d21e0b5a6e8db46f8f86e8856ee404854e4630d",
+        "title": "kOA / Koali Sales Pitch — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 27
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 33
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 42
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Layered Interpretations (ARK-12), declared; not independently approved.",
+            "detail": "Arketype: Layered Interpretations (ARK-12), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "UNESCO: Organization and management; Communication research and policy, declared, semantic…",
+            "detail": "UNESCO: Organization and management; Communication research and policy, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 31
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 37
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 1d7d03677ba8038532…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 1d7d03677ba8038532…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 76ec917ced6a3fe9d6…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 76ec917ced6a3fe9d6…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 08871d999c3113ecc1…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 08871d999c3113ecc1…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 74ae21eec3e5b1921e…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 74ae21eec3e5b1921e…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 66fdb28c77982bdbd9…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 66fdb28c77982bdbd9…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 6c206c5fa1f913cc14…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 6c206c5fa1f913cc14…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 49
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/08_GLOSSARY.md",
+        "sha256": "sha256:65be4338b03dedd2edd56793437808651987220a588478a9f13dca45af827849",
+        "title": "Glossaire du Kristal",
+        "excerpt": "kOA — initiative/entreprise et portefeuille, plus large que le Digital Ecosystem.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "kOA",
+            "detail": "initiative/entreprise et portefeuille, plus large que le Digital Ecosystem.",
+            "section": "Glossaire du Kristal",
+            "line": 3
+          },
+          {
+            "title": "kOA Digital Ecosystem",
+            "detail": "infrastructure numérique opérable reliant connaissance, jugement/délibération, décision, exécution et mémoire.",
+            "section": "Glossaire du Kristal",
+            "line": 4
+          },
+          {
+            "title": "Koali / kOA-Linux",
+            "detail": "host/platform local-first et gouverné ; il compose des workloads sans absorber l'autorité de leurs sous-systèmes.",
+            "section": "Glossaire du Kristal",
+            "line": 5
+          },
+          {
+            "title": "Kristal",
+            "detail": "connaissance/état structuré, portable, versionné et traçable.",
+            "section": "Glossaire du Kristal",
+            "line": 6
+          },
+          {
+            "title": "Konnaxion",
+            "detail": "coordination, consultation, délibération et responsabilité civique/publique.",
+            "section": "Glossaire du Kristal",
+            "line": 7
+          },
+          {
+            "title": "Orgo",
+            "detail": "workflow/exécution, responsabilités, cas, tâches et preuve d'achèvement.",
+            "section": "Glossaire du Kristal",
+            "line": 8
+          },
+          {
+            "title": "Point d'articulation",
+            "detail": "interface explicite entre modules séparés, limitée à l'information ou à l'autorité nécessaire.",
+            "section": "Glossaire du Kristal",
+            "line": 9
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "docs/PROFILE_NOTES.md",
+        "sha256": "sha256:7c46043ab0c88a56dd614da3fffc5c35181c28d1eff31aa35ca8c7182ad59ded",
+        "title": "Notes du profil layered",
+        "excerpt": "Le Kristal sépare explicitement régimes de preuve, structure Q&A, sources, projections de lecture et lifecycle. Le profil est une amorce, pas une contrainte de payload.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:fc43e7d107a715b577031be8a7e20315339d088326915c3cfb9052ced348e9da",
+        "title": "AI Context — kOA / Koali Sales Pitch",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Pourquoi ce Kristal existe",
+            "line": 25
+          },
+          {
+            "title": "Corpus / problème de départ",
+            "line": 29
+          },
+          {
+            "title": "Résultats attendus",
+            "line": 33
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 43
+          },
+          {
+            "title": "Subject / territoire",
+            "line": 47
+          },
+          {
+            "title": "Possède",
+            "line": 51
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:koa-sales-pitch",
+            "detail": "State ref: urn:kristal:state:koa-sales-pitch",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:97bf4babbe6111bd71cc2f4687c1320da4466f91aca3da2dcd37d9c8a83a224e",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 7
+          },
+          {
+            "title": "Native model: structured_qa_evidence_state",
+            "detail": "Native model: structured_qa_evidence_state",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 9
+          },
+          {
+            "title": "Sources: 51",
+            "detail": "Sources: 51",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — kOA / Koali Sales Pitch",
+            "line": 13
+          },
+          {
+            "title": "répondre d'abord au besoin puis à l'architecture ;",
+            "detail": "répondre d'abord au besoin puis à l'architecture ;",
+            "section": "Résultats attendus",
+            "line": 35
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:65be4338b03dedd2edd56793437808651987220a588478a9f13dca45af827849",
+        "title": "Glossaire du Kristal",
+        "excerpt": "kOA — initiative/entreprise et portefeuille, plus large que le Digital Ecosystem.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "kOA",
+            "detail": "initiative/entreprise et portefeuille, plus large que le Digital Ecosystem.",
+            "section": "Glossaire du Kristal",
+            "line": 3
+          },
+          {
+            "title": "kOA Digital Ecosystem",
+            "detail": "infrastructure numérique opérable reliant connaissance, jugement/délibération, décision, exécution et mémoire.",
+            "section": "Glossaire du Kristal",
+            "line": 4
+          },
+          {
+            "title": "Koali / kOA-Linux",
+            "detail": "host/platform local-first et gouverné ; il compose des workloads sans absorber l'autorité de leurs sous-systèmes.",
+            "section": "Glossaire du Kristal",
+            "line": 5
+          },
+          {
+            "title": "Kristal",
+            "detail": "connaissance/état structuré, portable, versionné et traçable.",
+            "section": "Glossaire du Kristal",
+            "line": 6
+          },
+          {
+            "title": "Konnaxion",
+            "detail": "coordination, consultation, délibération et responsabilité civique/publique.",
+            "section": "Glossaire du Kristal",
+            "line": 7
+          },
+          {
+            "title": "Orgo",
+            "detail": "workflow/exécution, responsabilités, cas, tâches et preuve d'achèvement.",
+            "section": "Glossaire du Kristal",
+            "line": 8
+          },
+          {
+            "title": "Point d'articulation",
+            "detail": "interface explicite entre modules séparés, limitée à l'information ou à l'autorité nécessaire.",
+            "section": "Glossaire du Kristal",
+            "line": 9
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:4000a7c9dae5c571a182e1fd4fb437197297572049986bbe6d7a6ba158768bd3",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading kOA / Koali Sales Pitch offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 16
+  }
+}

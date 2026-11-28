@@ -1,0 +1,961 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "Time",
+  "slug": "time",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:kristal-time",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:a9d9f876c87cfc77e610ea7c2c3da276fed236b4ddfaecb77ffbc523ca38c52c"
+  },
+  "surface_digest": "sha256:fb2a36843ae9d1e4c488f45cebdf1f5ad9bbdd8df06072b0af08c211eb597f76",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 27,
+    "bytes": 491941
+  },
+  "nodes": [
+    {
+      "id": "state:8208cba532b43816db636304",
+      "kind": "hosted_state",
+      "label": "Time",
+      "description": "Navigation dérivée ; état urn:kristal:state:kristal-time ; engagement déclaré sha256:a9d9f876c87cfc77e610ea7c2c3da276fed236b4ddfaecb77ffbc523ca38c52c"
+    },
+    {
+      "id": "artifact:baf5dc3ffc468eaa0d212061",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:artifact:kristal-time:portable-epistemic-state",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:47cf73e1fcc2b6b9368583aca08056a1319383abc7c10ea1ec250937747b3f29"
+    },
+    {
+      "id": "file:560af685ec14d712ca74e47a",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 1891 octets ; sha256:3effc15fd33992ce442c0c05129add020311202cc44fb681e82869eb99b8f95a"
+    },
+    {
+      "id": "file:0e35c637fbc3d49e767911f8",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1918 octets ; sha256:e5b8531e230a65c15844870d940b77d66059afc5555ddc8fd33f4cc018bc9aa7"
+    },
+    {
+      "id": "file:dbef00341b066ac85074071e",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:aca1ce1db95161566c611fe9",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 1162 octets ; sha256:95b2ea8baec35e4be95a5e3bde6fde2a32db6c4118d71052daada4eb06cb781d"
+    },
+    {
+      "id": "file:3514c0782f89437779794008",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 3713 octets ; sha256:acd34ca12dbd9921e1cf5917d51c2da35cb98770dfcd7d1e7235220d02bbf35b"
+    },
+    {
+      "id": "file:56f7d2d76c76303db8fbd506",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1678 octets ; sha256:44f10682b961ef57c5364741da4769a332f59823a628ddd326859c0722c27d2d"
+    },
+    {
+      "id": "file:3df8c37f74166a2a03bb6169",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 156 octets ; sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef"
+    },
+    {
+      "id": "file:c431e862568070666cbbb598",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 4125 octets ; sha256:f6da008787bf46f9ea4fa7e583d4cd0762e95ae4973800f6b2c32df2a0c18c78"
+    },
+    {
+      "id": "file:b44660261cd0b32551c46f8c",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 576 octets ; sha256:86a1e5abdcd05e5f643599c7a3ae8b260c3ec96e75354a4eac8310f864ddbdd7"
+    },
+    {
+      "id": "file:3611a57316aa489a4e5976dc",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 729 octets ; sha256:833f4740583abf5cd81b4d65d9c754318ebf315fe276d2a562b5fbcad27daf75"
+    },
+    {
+      "id": "file:a472891368d7c68e7834d85e",
+      "kind": "hosted_file",
+      "label": "canon/domain/kristal-time.canonical-payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 439164 octets ; sha256:787b6ba0f9cfe193511cd777cd8d9e2b3258e461593009521182a1252a5131a8"
+    },
+    {
+      "id": "file:6b1d05a4a4753db9796de77e",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1141 octets ; sha256:73192e3a8fa0b223a7769d5b95bf78b5ea571c39c1bb2756c748f5486d3a825b"
+    },
+    {
+      "id": "file:a793bf4ad587b05d42d47264",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1892 octets ; sha256:e7b198e73c97531191d74fa41b18cb82492601d147072e8473777d095a97b9cf"
+    },
+    {
+      "id": "file:e43141d2d917e1aa5eb323a8",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2699 octets ; sha256:ca53cce1633b9aebfd865df23fe9b89503d2687ab6b2f3d49bca3bd68f22c91f"
+    },
+    {
+      "id": "file:4fc06a867ab9ecf17c36547e",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 382 octets ; sha256:20ea596477f92ed394906f60e1159b2b1f256eebcc1a7f678854f64e257a8a53"
+    },
+    {
+      "id": "file:ccf0af07443e10f22adcf6b0",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 430 octets ; sha256:1740ada125d794255fc60171d4ef6bb85f5db2fc1e8b753e634ecc509d2dedc3"
+    },
+    {
+      "id": "file:4c4a038ee475cb997c23bf47",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 470 octets ; sha256:2553aee5d15341d0b6b61d586fd29440d63da8d4a93f00dbb98166c7834c04ce"
+    },
+    {
+      "id": "file:418ab1e095808a9dc4fb7582",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 541 octets ; sha256:e206818c46ae3ae2b756eb1ae8519ad087eb266ea7ce6398693f20bba1367254"
+    },
+    {
+      "id": "file:23fc2c9a44e168d37785dfef",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 687 octets ; sha256:133212cc51d094d3978525801002087b52c16c245e91b894d0a5a86d10b23c94"
+    },
+    {
+      "id": "file:fe7299d97289fa500447e703",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 402 octets ; sha256:6e9fe7a396cf5eec10ffa9b1afe7764d3a48a85de516fc6fa965e59736598a97"
+    },
+    {
+      "id": "file:e1ddd56aa1b25a84c032a4bf",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 474 octets ; sha256:6ccc97353cd2612606fa0c46960fab3ae272d5205ff09bf8732377fee93d732c"
+    },
+    {
+      "id": "file:0e992edd4d2c150ad0b6d51f",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 410 octets ; sha256:ce29fffbc029aab94c4b8b3390f229f93fe5b4a909bc76c738a6c032824f0299"
+    },
+    {
+      "id": "file:d13253341c17e718121967ad",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 3907 octets ; sha256:32c107b0e51a12b0e86f3d60c8b0bd259f9437fd32b70c84c7aea7f1db913ff5"
+    },
+    {
+      "id": "file:5b5f4bba246218ac77827d4f",
+      "kind": "hosted_file",
+      "label": "docs/08_TEMPORAL_CANDIDATE.md",
+      "description": "Fichier dérivé (documentation) ; 6636 octets ; sha256:c704a6260ebcf0fc0e430ce7dc3efa6322563760c7587b735cc06e0b3ab54c4a"
+    },
+    {
+      "id": "file:98d941c23864f2c31c360b21",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1939 octets ; sha256:c2b0c9de5370cd7f4671636cc21aea4f91f1d46a96e5f2c372a5515fd42e334e"
+    },
+    {
+      "id": "file:eece8fbccae690551d17ebe6",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 11446 octets ; sha256:356c0e06775ed8895e6cd8091d194dd9da53d50950b94870bd65633aa98077d8"
+    },
+    {
+      "id": "file:81e6fe26f0158ab1b734c351",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 746 octets ; sha256:fe99ce390b6fc9a43ffeff9e71162b2c2c86ebf2aabb739beb708baa28299c60"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "artifact:baf5dc3ffc468eaa0d212061",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:560af685ec14d712ca74e47a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:0e35c637fbc3d49e767911f8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:dbef00341b066ac85074071e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:aca1ce1db95161566c611fe9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:3514c0782f89437779794008",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:56f7d2d76c76303db8fbd506",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:3df8c37f74166a2a03bb6169",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:c431e862568070666cbbb598",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:b44660261cd0b32551c46f8c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:3611a57316aa489a4e5976dc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:a472891368d7c68e7834d85e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:6b1d05a4a4753db9796de77e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:a793bf4ad587b05d42d47264",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:e43141d2d917e1aa5eb323a8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:4fc06a867ab9ecf17c36547e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:ccf0af07443e10f22adcf6b0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:4c4a038ee475cb997c23bf47",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:418ab1e095808a9dc4fb7582",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:23fc2c9a44e168d37785dfef",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:fe7299d97289fa500447e703",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:e1ddd56aa1b25a84c032a4bf",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:0e992edd4d2c150ad0b6d51f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:d13253341c17e718121967ad",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:5b5f4bba246218ac77827d4f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:98d941c23864f2c31c360b21",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:eece8fbccae690551d17ebe6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8208cba532b43816db636304",
+      "to": "file:81e6fe26f0158ab1b734c351",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Corpus statique et versionné de référence sur instant / intervalle / durée / ordre / récurrence / calendrier / référentiel temporel.",
+    "topics": [
+      {
+        "title": "instant ≠ timestamp ;",
+        "detail": "instant ≠ timestamp ;",
+        "section": "Distinctions structurantes",
+        "line": 11
+      },
+      {
+        "title": "intervalle ≠ durée ;",
+        "detail": "intervalle ≠ durée ;",
+        "section": "Distinctions structurantes",
+        "line": 12
+      },
+      {
+        "title": "durée physique fixe ≠ durée calendaire ;",
+        "detail": "durée physique fixe ≠ durée calendaire ;",
+        "section": "Distinctions structurantes",
+        "line": 13
+      },
+      {
+        "title": "antériorité ≠ causalité ;",
+        "detail": "antériorité ≠ causalité ;",
+        "section": "Distinctions structurantes",
+        "line": 14
+      },
+      {
+        "title": "offset UTC ≠ zone horaire ;",
+        "detail": "offset UTC ≠ zone horaire ;",
+        "section": "Distinctions structurantes",
+        "line": 15
+      },
+      {
+        "title": "heure locale ≠ instant ;",
+        "detail": "heure locale ≠ instant ;",
+        "section": "Distinctions structurantes",
+        "line": 16
+      },
+      {
+        "title": "UTC ≠ TAI ≠ UT1 ;",
+        "detail": "UTC ≠ TAI ≠ UT1 ;",
+        "section": "Distinctions structurantes",
+        "line": 17
+      },
+      {
+        "title": "précision de représentation ≠ exactitude ;",
+        "detail": "précision de représentation ≠ exactitude ;",
+        "section": "Distinctions structurantes",
+        "line": 18
+      },
+      {
+        "title": "règle de récurrence ≠ occurrences matérialisées ;",
+        "detail": "règle de récurrence ≠ occurrences matérialisées ;",
+        "section": "Distinctions structurantes",
+        "line": 19
+      },
+      {
+        "title": "date approximative ≠ date exacte.",
+        "detail": "date approximative ≠ date exacte.",
+        "section": "Distinctions structurantes",
+        "line": 20
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:95b2ea8baec35e4be95a5e3bde6fde2a32db6c4118d71052daada4eb06cb781d",
+        "title": "Kristal-Time v0.1.0",
+        "excerpt": "Corpus statique et versionné de référence sur instant / intervalle / durée / ordre / récurrence / calendrier / référentiel temporel.",
+        "sections": [
+          {
+            "title": "Noyau conceptuel",
+            "line": 5
+          },
+          {
+            "title": "Distinctions structurantes",
+            "line": 9
+          },
+          {
+            "title": "Seed",
+            "line": 22
+          },
+          {
+            "title": "Validation",
+            "line": 28
+          }
+        ],
+        "topics": [
+          {
+            "title": "instant ≠ timestamp ;",
+            "detail": "instant ≠ timestamp ;",
+            "section": "Distinctions structurantes",
+            "line": 11
+          },
+          {
+            "title": "intervalle ≠ durée ;",
+            "detail": "intervalle ≠ durée ;",
+            "section": "Distinctions structurantes",
+            "line": 12
+          },
+          {
+            "title": "durée physique fixe ≠ durée calendaire ;",
+            "detail": "durée physique fixe ≠ durée calendaire ;",
+            "section": "Distinctions structurantes",
+            "line": 13
+          },
+          {
+            "title": "antériorité ≠ causalité ;",
+            "detail": "antériorité ≠ causalité ;",
+            "section": "Distinctions structurantes",
+            "line": 14
+          },
+          {
+            "title": "offset UTC ≠ zone horaire ;",
+            "detail": "offset UTC ≠ zone horaire ;",
+            "section": "Distinctions structurantes",
+            "line": 15
+          },
+          {
+            "title": "heure locale ≠ instant ;",
+            "detail": "heure locale ≠ instant ;",
+            "section": "Distinctions structurantes",
+            "line": 16
+          },
+          {
+            "title": "UTC ≠ TAI ≠ UT1 ;",
+            "detail": "UTC ≠ TAI ≠ UT1 ;",
+            "section": "Distinctions structurantes",
+            "line": 17
+          },
+          {
+            "title": "précision de représentation ≠ exactitude ;",
+            "detail": "précision de représentation ≠ exactitude ;",
+            "section": "Distinctions structurantes",
+            "line": 18
+          },
+          {
+            "title": "règle de récurrence ≠ occurrences matérialisées ;",
+            "detail": "règle de récurrence ≠ occurrences matérialisées ;",
+            "section": "Distinctions structurantes",
+            "line": 19
+          },
+          {
+            "title": "date approximative ≠ date exacte.",
+            "detail": "date approximative ≠ date exacte.",
+            "section": "Distinctions structurantes",
+            "line": 20
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:20ea596477f92ed394906f60e1159b2b1f256eebcc1a7f678854f64e257a8a53",
+        "title": "Intention et périmètre — Kristal-Time",
+        "excerpt": "Entités temporelles, durée, ordre, récurrence, calendrier, fuseau horaire et référentiel.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:1740ada125d794255fc60171d4ef6bb85f5db2fc1e8b753e634ecc509d2dedc3",
+        "title": "Frontière sémantique",
+        "excerpt": "Propriété : Entités temporelles, durée, ordre, récurrence, calendrier, fuseau horaire et référentiel.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:2553aee5d15341d0b6b61d586fd29440d63da8d4a93f00dbb98166c7834c04ce",
+        "title": "Modèle natif",
+        "excerpt": "Kind : temporal_entity_recurrence_graph",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:e206818c46ae3ae2b756eb1ae8519ad087eb266ea7ce6398693f20bba1367254",
+        "title": "Épistémologie, autorité et provenance",
+        "excerpt": "Les valeurs assertion_status, evidence_refs, provenance_refs, valuations, applicability, et autres qualificatifs existants sont conservés lorsqu’ils sont présents. Le nouveau catalogue sources/source-catalog.json est une vue du catalogue historique knowledge-base/sources/source-catalog.json. Une source référencée ne…",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:133212cc51d094d3978525801002087b52c16c245e91b894d0a5a86d10b23c94",
+        "title": "Canonique versus dérivé",
+        "excerpt": "Entrée canonique de build 3.2.2 : canon/domain/kristal-time.canonical-payload.json. Les sources métier historiques restent sous knowledge-base/sources. Le fichier .kristal/v9 historique n’est pas réécrit.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:6e9fe7a396cf5eec10ffa9b1afe7764d3a48a85de516fc6fa965e59736598a97",
+        "title": "Orientations de lecture",
+        "excerpt": "Lecture principale : Entités temporelles, durée, ordre, récurrence, calendrier, fuseau horaire et référentiel.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:6ccc97353cd2612606fa0c46960fab3ae272d5205ff09bf8732377fee93d732c",
+        "title": "Validation",
+        "excerpt": "1. python tools/kristal.py check .",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:ce29fffbc029aab94c4b8b3390f229f93fe5b4a909bc76c738a6c032824f0299",
+        "title": "Hosting, publication et activation",
+        "excerpt": "Workspace 3.2.2 local ; State v9 conservé. La publication (snapshot immuable) et l’activation (sélecteur mutable) sont des opérations séparées de check/build-v9.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:32c107b0e51a12b0e86f3d60c8b0bd259f9437fd32b70c84c7aea7f1db913ff5",
+        "title": "Time — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Semantic Reference (ARK-01), declared; not independently approved.",
+            "detail": "Arketype: Semantic Reference (ARK-01), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Mathematics and statistics; History, declared, semantic review pending.",
+            "detail": "UNESCO: Mathematics and statistics; History, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 20ea596477f92ed394…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 20ea596477f92ed394…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 1740ada125d794255f…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 1740ada125d794255f…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 2553aee5d15341d0b6…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 2553aee5d15341d0b6…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 e206818c46ae3ae2b7…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 e206818c46ae3ae2b7…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 133212cc51d094d397…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 133212cc51d094d397…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 6ccc97353cd2612606…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 6ccc97353cd2612606…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/08_TEMPORAL_CANDIDATE.md",
+        "sha256": "sha256:c704a6260ebcf0fc0e430ce7dc3efa6322563760c7587b735cc06e0b3ab54c4a",
+        "title": "Noncanonical temporal candidate — Kristal-Time",
+        "excerpt": "Status: proposed; domain-owner review required. This is an additive extension for temporal_entity_recurrence_graph. None of its examples, validations or derived previews amend the domain canon, the preserved v9 commitments, the v11 graph, or the legacy source catalog.",
+        "sections": [
+          {
+            "title": "Scope and boundaries",
+            "line": 5
+          },
+          {
+            "title": "DST resolution",
+            "line": 21
+          },
+          {
+            "title": "Recurrence subset (not full RFC 5545)",
+            "line": 32
+          },
+          {
+            "title": "Source and epistemic gates",
+            "line": 36
+          },
+          {
+            "title": "Sources available in the existing Kristal catalog",
+            "line": 42
+          },
+          {
+            "title": "Run",
+            "line": 51
+          },
+          {
+            "title": "Historic-byte preservation verification",
+            "line": 64
+          }
+        ],
+        "topics": [
+          {
+            "title": "A nonexistent local wall time (spring DST gap) fails; it is never normalized without…",
+            "detail": "A nonexistent local wall time (spring DST gap) fails; it is never normalized without disclosure.",
+            "section": "DST resolution",
+            "line": 25
+          },
+          {
+            "title": "An ambiguous time (autumn DST fold) fails unless resolution selects earlier or later.",
+            "detail": "An ambiguous time (autumn DST fold) fails unless resolution selects earlier or later.",
+            "section": "DST resolution",
+            "line": 26
+          },
+          {
+            "title": "src:w3c:owl-time-2022",
+            "detail": "W3C *Time Ontology in OWL*, Candidate Recommendation Draft, 15 November 2022, .",
+            "section": "Sources available in the existing Kristal catalog",
+            "line": 44
+          },
+          {
+            "title": "src:rfc:3339",
+            "detail": "IETF RFC 3339, *Date and Time on the Internet: Timestamps*, July 2002, .",
+            "section": "Sources available in the existing Kristal catalog",
+            "line": 45
+          },
+          {
+            "title": "src:rfc:5545",
+            "detail": "IETF RFC 5545, *Internet Calendaring and Scheduling Core Object Specification*, September 2009, .",
+            "section": "Sources available in the existing Kristal catalog",
+            "line": 46
+          },
+          {
+            "title": "src:iana:tzdb-2026e",
+            "detail": "existing source-catalog reference to IANA tzdb 2026e. General tzdb maintenance description: . Do not infer that the runtime uses the catalog's version.",
+            "section": "Sources available in the existing Kristal catalog",
+            "line": 47
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:acd34ca12dbd9921e1cf5917d51c2da35cb98770dfcd7d1e7235220d02bbf35b",
+        "title": "AI Context — Time",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 31
+          },
+          {
+            "title": "Included orientation from docs/02_NATIVE_MODEL.md",
+            "line": 43
+          },
+          {
+            "title": "Included orientation from docs/03_EPISTEMIC_MODEL.md",
+            "line": 57
+          },
+          {
+            "title": "Included orientation from docs/04_CANONICAL_DERIVED.md",
+            "line": 67
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:kristal-time",
+            "detail": "State ref: urn:kristal:state:kristal-time",
+            "section": "AI Context — Time",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:a9d9f876c87cfc77e610ea7c2c3da276fed236b4ddfaecb77ffbc523ca38c52c",
+            "section": "AI Context — Time",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — Time",
+            "line": 7
+          },
+          {
+            "title": "Native model: temporal_entity_recurrence_graph",
+            "detail": "Native model: temporal_entity_recurrence_graph",
+            "section": "AI Context — Time",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — Time",
+            "line": 9
+          },
+          {
+            "title": "Sources: 16",
+            "detail": "Sources: 16",
+            "section": "AI Context — Time",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — Time",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — Time",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — Time",
+            "line": 13
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef",
+        "title": "Glossary",
+        "excerpt": "No project-specific glossary has been authored. Use the native terminology in the canonical files and documentation; do not invent definitions.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:86a1e5abdcd05e5f643599c7a3ae8b260c3ec96e75354a4eac8310f864ddbdd7",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading Time offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 15
+  }
+}

@@ -1,0 +1,1007 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "Botany",
+  "slug": "botany",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:botany",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:1e333720f36104ab8f7b1e375ea336f384ed4f19664f602f8f3dc183992757e2"
+  },
+  "surface_digest": "sha256:b68fac3c90684ed1368bbf1ad687f9c9450168c61527e92feb5fff9a81127aad",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 27,
+    "bytes": 362088
+  },
+  "nodes": [
+    {
+      "id": "state:c6a07db2fa9a165d85957e19",
+      "kind": "hosted_state",
+      "label": "Botany",
+      "description": "Navigation dérivée ; état urn:kristal:state:botany ; engagement déclaré sha256:1e333720f36104ab8f7b1e375ea336f384ed4f19664f602f8f3dc183992757e2"
+    },
+    {
+      "id": "artifact:cbbc6cd10c33007aacb13150",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:botany:artifact:canonical",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:6d5b5efdabc072fe3685fa326c459d5f2aec09aa3f63beca55f89e222d9dec3d"
+    },
+    {
+      "id": "file:89a60d01a64db1c1110c5422",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 2196 octets ; sha256:27351fe08455e99bed615ae59bf6d71a99e3576232e8526149c440e3dc283a2d"
+    },
+    {
+      "id": "file:7ffd9d84edc6b69cc89e3c90",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1916 octets ; sha256:aacd84de87d9444bba4ebf67b42033bb972f47b0d0b3579d1fd472df4663a9cc"
+    },
+    {
+      "id": "file:edb42bcadc845b9be2da7ad3",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:42b0102930be38382176396a",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 670 octets ; sha256:5500d6c05fa645a75b0b27eea7174bcabd91508bb481e2c7dfa4589e4a402a8d"
+    },
+    {
+      "id": "file:4b1880b33caf46a5ce1cb8a0",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 6526 octets ; sha256:cfa8ea26f52a14a824f600c07187ec25fd724be6c96c468228ad41fbf3939dd0"
+    },
+    {
+      "id": "file:57ae03cc4515f12e1476ac80",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1749 octets ; sha256:19e469fe56791d12b9c867010a29e3fa6d6f8835983b43bd2288f1087c24967f"
+    },
+    {
+      "id": "file:53f16817f1cd061ec7ad88e5",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 842 octets ; sha256:903479acec42ffd14c2149ce0b4809722e56de3a54684506d8e1ea2defc485aa"
+    },
+    {
+      "id": "file:1cc6b95ddd3bccb00f6d977e",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 4077 octets ; sha256:2c6f1144bb33782d52af26505f6ec4df4f12400d16b8d1c67eb578623c2ef4ec"
+    },
+    {
+      "id": "file:7aceb8b479db6eb50e97af39",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 578 octets ; sha256:5995cdcef40c15352653487102b2aa87fc6fc9ec0b5c6caf44f78f6745d1a709"
+    },
+    {
+      "id": "file:cd54c89be6b98d6a93679b16",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 782 octets ; sha256:99af8dcfbe62a689662449ce742c96125ae8bd400193b2fce87374cae94b61ff"
+    },
+    {
+      "id": "file:eef9f7f9b0d0f783938725b9",
+      "kind": "hosted_file",
+      "label": "canon/domain/legacy-v6-state.payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 308481 octets ; sha256:bfaa35259bd85c49179cf1908d00f095e4316f853ea17729688e82f7f62b13a2"
+    },
+    {
+      "id": "file:060168cdc43fdb7b4a6853fb",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1367 octets ; sha256:7c69a524ff91b245538e3d3b5a8314d4a22f9e7790e800f9255231148b9b670c"
+    },
+    {
+      "id": "file:99fc166840ad8c10c831d852",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1859 octets ; sha256:1b954a57c381feded8f7a377ade2ec786edeebf49797d1f8f373648f232d7233"
+    },
+    {
+      "id": "file:9541711aadee6d371fbb0443",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2666 octets ; sha256:bb4906d06421c0fe982c8888b38e4a3861294cd815c1c933fb75bed847bad7ec"
+    },
+    {
+      "id": "file:75921c545fa1a70adebb03fe",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 848 octets ; sha256:463083e9f99fb2aea3c19cfcef0b6246c3c7910ca2a6fd21bb6d8874bc90448c"
+    },
+    {
+      "id": "file:1f1ba55571918d165f54ff5d",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 1160 octets ; sha256:fbe7852b9081c2f2fe4d09ed655bf4437b9af159ea4fdea6e209df1d44fbadbd"
+    },
+    {
+      "id": "file:8799a42824594bb983b3b4a0",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 1056 octets ; sha256:c488e0952e57cb657137fa7dbba5b58b2b6ddf838c63dbf5c0b0f0d3a92a85a2"
+    },
+    {
+      "id": "file:f30fcb0ef94729150edbbe78",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 903 octets ; sha256:fad5907947e8d8a0c797420cd58f95c2c9cee02f9193f479956b2e61bc547e3c"
+    },
+    {
+      "id": "file:b1ced8e354ef0ca230cd9572",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 1354 octets ; sha256:05e650441c360703b975b2ec5075c6f6d40c7873e3924edf2c69ad06b15fa316"
+    },
+    {
+      "id": "file:1bb34b295ab7c669caeccfde",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 797 octets ; sha256:5d4edb70a339683a87acd481e0fb68c3d982f5ea1de393dbd351a4739fcec72d"
+    },
+    {
+      "id": "file:fa0056263bca63956e4a6875",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 845 octets ; sha256:99183560595e561a1c9449163d9fda8f81637ac613e8d2a7a368a3d06efdb889"
+    },
+    {
+      "id": "file:437d29d611926c3b426aff0a",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 642 octets ; sha256:360d76c456d961eb474329917318a5f29a091d3fc5b3f2980c57965450a4c4c6"
+    },
+    {
+      "id": "file:bad45f6595914de2c92f759d",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 3939 octets ; sha256:68a85cfe4a3bbbdc1a927fe00ced62f00595a9b957c0bb3ca8b1078e85863d21"
+    },
+    {
+      "id": "file:e47f596c1e9df3f5e5c32aca",
+      "kind": "hosted_file",
+      "label": "docs/08_GLOSSARY.md",
+      "description": "Fichier dérivé (documentation) ; 842 octets ; sha256:903479acec42ffd14c2149ce0b4809722e56de3a54684506d8e1ea2defc485aa"
+    },
+    {
+      "id": "file:bd0e9ad638e2c0f7b50a3d1a",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1748 octets ; sha256:f1b45c1b5f286d4cc6e0cab1d387187e082d276871ff0ea1124de87bdd83a5e5"
+    },
+    {
+      "id": "file:0779883f9047fdbc855c8fc3",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 10597 octets ; sha256:c8075ae93d5b77b40624a0ce989bc2a9c46b3edde63ada2b10f380facf8588cd"
+    },
+    {
+      "id": "file:1117522b39382b7516204507",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 1021 octets ; sha256:bd91b16f1fe9731e2275fdb5d70e9bca90cf89c8ae8d69a5d7229748924a1978"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "artifact:cbbc6cd10c33007aacb13150",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:89a60d01a64db1c1110c5422",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:7ffd9d84edc6b69cc89e3c90",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:edb42bcadc845b9be2da7ad3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:42b0102930be38382176396a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:4b1880b33caf46a5ce1cb8a0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:57ae03cc4515f12e1476ac80",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:53f16817f1cd061ec7ad88e5",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:1cc6b95ddd3bccb00f6d977e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:7aceb8b479db6eb50e97af39",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:cd54c89be6b98d6a93679b16",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:eef9f7f9b0d0f783938725b9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:060168cdc43fdb7b4a6853fb",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:99fc166840ad8c10c831d852",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:9541711aadee6d371fbb0443",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:75921c545fa1a70adebb03fe",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:1f1ba55571918d165f54ff5d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:8799a42824594bb983b3b4a0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:f30fcb0ef94729150edbbe78",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:b1ced8e354ef0ca230cd9572",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:1bb34b295ab7c669caeccfde",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:fa0056263bca63956e4a6875",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:437d29d611926c3b426aff0a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:bad45f6595914de2c92f759d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:e47f596c1e9df3f5e5c32aca",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:bd0e9ad638e2c0f7b50a3d1a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:0779883f9047fdbc855c8fc3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:c6a07db2fa9a165d85957e19",
+      "to": "file:1117522b39382b7516204507",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Corpus statique de référence consacré à l’architecture et au cycle des plantes : organes, tissus, fonctions, croissance, reproduction, taxonomie et réponses à l’environnement.",
+    "topics": [],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:5500d6c05fa645a75b0b27eea7174bcabd91508bb481e2c7dfa4589e4a402a8d",
+        "title": "Kristal Botany v1.0.0",
+        "excerpt": "Corpus statique de référence consacré à l’architecture et au cycle des plantes : organes, tissus, fonctions, croissance, reproduction, taxonomie et réponses à l’environnement.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:463083e9f99fb2aea3c19cfcef0b6246c3c7910ca2a6fd21bb6d8874bc90448c",
+        "title": "Intention et scope — Kristal-Botany",
+        "excerpt": "Ce workspace apporte une enveloppe Local Kristal 3.2.2 au corpus historique doté d’un état v9 sans modification éditoriale ni refonte sémantique.",
+        "sections": [
+          {
+            "title": "Forme et sujet déjà établis",
+            "line": 5
+          },
+          {
+            "title": "Portée de cette mise à jour",
+            "line": 11
+          }
+        ],
+        "topics": [
+          {
+            "title": "Préserver les données sources et anciens fichiers v8/v9.",
+            "detail": "Préserver les données sources et anciens fichiers v8/v9.",
+            "section": "Portée de cette mise à jour",
+            "line": 13
+          },
+          {
+            "title": "Conserver le Logical Commitment et le State Commitment historiques.",
+            "detail": "Conserver le Logical Commitment et le State Commitment historiques.",
+            "section": "Portée de cette mise à jour",
+            "line": 14
+          },
+          {
+            "title": "Ne pas prétendre à une qualification métier indépendante, ni à une publication v10.",
+            "detail": "Ne pas prétendre à une qualification métier indépendante, ni à une publication v10.",
+            "section": "Portée de cette mise à jour",
+            "line": 16
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:fbe7852b9081c2f2fe4d09ed655bf4437b9af159ea4fdea6e209df1d44fbadbd",
+        "title": "Frontière sémantique — Kristal-Botany",
+        "excerpt": "Ce Kristal possède les assertions statiques et identités de son corpus de référence dans le domaine botany et les règles d'interprétation associées.",
+        "sections": [
+          {
+            "title": "Possession logique",
+            "line": 3
+          },
+          {
+            "title": "Ce qui n'est pas possédé ou garanti",
+            "line": 9
+          },
+          {
+            "title": "Documents historiques de frontière / architecture",
+            "line": 15
+          }
+        ],
+        "topics": [
+          {
+            "title": "knowledge-base/documentation/ARCHITECTURE.md",
+            "detail": "knowledge-base/documentation/ARCHITECTURE.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 17
+          },
+          {
+            "title": "knowledge-base/documentation/CONTENT_BOUNDARY.md",
+            "detail": "knowledge-base/documentation/CONTENT_BOUNDARY.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 18
+          },
+          {
+            "title": "knowledge-base/documentation/COVERAGE.md",
+            "detail": "knowledge-base/documentation/COVERAGE.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 19
+          },
+          {
+            "title": "knowledge-base/documentation/EVIDENCE_MODEL.md",
+            "detail": "knowledge-base/documentation/EVIDENCE_MODEL.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 20
+          },
+          {
+            "title": "knowledge-base/documentation/INVARIANTS.md",
+            "detail": "knowledge-base/documentation/INVARIANTS.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 21
+          },
+          {
+            "title": "knowledge-base/documentation/ONTOLOGY.md",
+            "detail": "knowledge-base/documentation/ONTOLOGY.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 22
+          },
+          {
+            "title": "knowledge-base/documentation/QUERY_RECIPES.md",
+            "detail": "knowledge-base/documentation/QUERY_RECIPES.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 23
+          },
+          {
+            "title": "knowledge-base/documentation/VALIDATION.md",
+            "detail": "knowledge-base/documentation/VALIDATION.md",
+            "section": "Documents historiques de frontière / architecture",
+            "line": 24
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:c488e0952e57cb657137fa7dbba5b58b2b6ddf838c63dbf5c0b0f0d3a92a85a2",
+        "title": "Modèle natif — Kristal-Botany",
+        "excerpt": "Kind local : land_plant_architecture_function_graph.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:fad5907947e8d8a0c797420cd58f95c2c9cee02f9193f479956b2e61bc547e3c",
+        "title": "Modèle épistémique — Kristal-Botany",
+        "excerpt": "La bibliographie / provenance historique est accessible dans knowledge-base/sources/source_catalog.json. Sa vue normalisée est sources/source-catalog.json (21 entrées). Les métadonnées complètes et politiques historiques demeurent dans le fichier d'origine ou dans le payload engagé.",
+        "sections": [
+          {
+            "title": "Preuves et sources",
+            "line": 3
+          },
+          {
+            "title": "Interprétation",
+            "line": 7
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:05e650441c360703b975b2ec5075c6f6d40c7873e3924edf2c69ad06b15fa316",
+        "title": "Canonique et dérivé — Kristal-Botany",
+        "excerpt": "Le manifest .kristal/v9/materialization-manifest.json est conservé, y compris le profil natif native-blob/1 du Kristal Catho. Le blob est vérifié par son digest physique, mais le build-v9 du Kit 3.2.2 reconstruit sa propre matérialisation inline-json/1 et ne réutilise pas automatiquement ce manifest.",
+        "sections": [
+          {
+            "title": "Canon authoring 3.2.2",
+            "line": 3
+          },
+          {
+            "title": "Historique v9 préservé",
+            "line": 9
+          },
+          {
+            "title": "Dérivé",
+            "line": 13
+          }
+        ],
+        "topics": [
+          {
+            "title": "canon/state.index.json décrit l'unique Logical Artifact hérité, dans son contrat exact.",
+            "detail": "canon/state.index.json décrit l'unique Logical Artifact hérité, dans son contrat exact.",
+            "section": "Canon authoring 3.2.2",
+            "line": 5
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 11
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:5d4edb70a339683a87acd481e0fb68c3d982f5ea1de393dbd351a4739fcec72d",
+        "title": "Orientations et projections — Kristal-Botany",
+        "excerpt": "La lecture principale suit la structure documentée : architecture des Embryophyta : organes, tissus, fonctions, croissance, reproduction, taxonomie et réponses à l’environnement.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:99183560595e561a1c9449163d9fda8f81637ac613e8d2a7a368a3d06efdb889",
+        "title": "Validation — Kristal-Botany",
+        "excerpt": "Les deux engagements doivent rester identiques à ceux du paquet d'origine. Si une modification de canon/ change ces digests, c'est une nouvelle version logique, pas une simple optimisation de stockage.",
+        "sections": [
+          {
+            "title": "Checks techniques exécutés",
+            "line": 3
+          },
+          {
+            "title": "Golden Commitments",
+            "line": 9
+          },
+          {
+            "title": "Limite",
+            "line": 16
+          }
+        ],
+        "topics": [
+          {
+            "title": "python tools/kristal.py check .",
+            "detail": "python tools/kristal.py check .",
+            "section": "Checks techniques exécutés",
+            "line": 5
+          },
+          {
+            "title": "python tools/kristal.py build-v9 .",
+            "detail": "python tools/kristal.py build-v9 .",
+            "section": "Checks techniques exécutés",
+            "line": 6
+          },
+          {
+            "title": "vérification du blob du manifest historique ; comparaison des digests recomputés.",
+            "detail": "vérification du blob du manifest historique ; comparaison des digests recomputés.",
+            "section": "Checks techniques exécutés",
+            "line": 7
+          },
+          {
+            "title": "Logical Artifact",
+            "detail": "sha256:6d5b5efdabc072fe3685fa326c459d5f2aec09aa3f63beca55f89e222d9dec3d",
+            "section": "Golden Commitments",
+            "line": 11
+          },
+          {
+            "title": "State Snapshot",
+            "detail": "sha256:1e333720f36104ab8f7b1e375ea336f384ed4f19664f602f8f3dc183992757e2",
+            "section": "Golden Commitments",
+            "line": 12
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 14
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:360d76c456d961eb474329917318a5f29a091d3fc5b3f2980c57965450a4c4c6",
+        "title": "Hosting / publication — Kristal-Botany",
+        "excerpt": "L'état historique .kristal/v9/state-snapshot.json, l'Exchange et l'Activation antérieurs restent dans le ZIP, inchangés. Une nouvelle publication ni activation ne sont exécutées par cette migration.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:68a85cfe4a3bbbdc1a927fe00ced62f00595a9b957c0bb3ca8b1078e85863d21",
+        "title": "Botany — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Taxonomy / Natural Classification (ARK-17), declared; not independently approved.",
+            "detail": "Arketype: Taxonomy / Natural Classification (ARK-17), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Nature Taxonomy (PRF-03), declared; not independently approved.",
+            "detail": "Usage PRF: Nature Taxonomy (PRF-03), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Biology, declared, semantic review pending.",
+            "detail": "UNESCO: Biology, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 463083e9f99fb2aea3…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 463083e9f99fb2aea3…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 fbe7852b9081c2f2fe…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 fbe7852b9081c2f2fe…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 c488e0952e57cb6571…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 c488e0952e57cb6571…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 fad5907947e8d8a0c7…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 fad5907947e8d8a0c7…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 05e650441c360703b9…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 05e650441c360703b9…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 99183560595e561a1c…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 99183560595e561a1c…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/08_GLOSSARY.md",
+        "sha256": "sha256:903479acec42ffd14c2149ce0b4809722e56de3a54684506d8e1ea2defc485aa",
+        "title": "Glossaire et termes natifs — Kristal-Botany",
+        "excerpt": "State v9 : état logique engagé sans dépendance à une compression spécifique.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "State v9",
+            "detail": "état logique engagé sans dépendance à une compression spécifique.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 3
+          },
+          {
+            "title": "Logical Artifact",
+            "detail": "membre de l'état, identifié par son contrat et son Logical Commitment.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 4
+          },
+          {
+            "title": "v6",
+            "detail": "représentation kristal_state/6.0 des assertions et provenance dans les Kristals v6 ; Catho conserve son contrat natif.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 5
+          },
+          {
+            "title": "Source catalog",
+            "detail": "navigation entre références existantes, pas remplacement de leur politique d'autorité.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 6
+          },
+          {
+            "title": "Modèle natif",
+            "detail": "land_plant_architecture_function_graph",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 7
+          },
+          {
+            "title": "Avertissement d'interprétation",
+            "detail": "les relations d’organes, cycles et fonctions végétales ne remplacent pas la taxonomie ou les interactions écologiques.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 8
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:cfa8ea26f52a14a824f600c07187ec25fd724be6c96c468228ad41fbf3939dd0",
+        "title": "AI Context — Botany",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Forme et sujet déjà établis",
+            "line": 27
+          },
+          {
+            "title": "Portée de cette mise à jour",
+            "line": 33
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 42
+          },
+          {
+            "title": "Possession logique",
+            "line": 46
+          },
+          {
+            "title": "Ce qui n'est pas possédé ou garanti",
+            "line": 52
+          },
+          {
+            "title": "Documents historiques de frontière / architecture",
+            "line": 58
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:botany",
+            "detail": "State ref: urn:kristal:state:botany",
+            "section": "AI Context — Botany",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:1e333720f36104ab8f7b1e375ea336f384ed4f19664f602f8f3dc183992757e2",
+            "section": "AI Context — Botany",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — Botany",
+            "line": 7
+          },
+          {
+            "title": "Native model: land_plant_architecture_function_graph",
+            "detail": "Native model: land_plant_architecture_function_graph",
+            "section": "AI Context — Botany",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — Botany",
+            "line": 9
+          },
+          {
+            "title": "Sources: 21",
+            "detail": "Sources: 21",
+            "section": "AI Context — Botany",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — Botany",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — Botany",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — Botany",
+            "line": 13
+          },
+          {
+            "title": "Préserver les données sources et anciens fichiers v8/v9.",
+            "detail": "Préserver les données sources et anciens fichiers v8/v9.",
+            "section": "Portée de cette mise à jour",
+            "line": 35
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:903479acec42ffd14c2149ce0b4809722e56de3a54684506d8e1ea2defc485aa",
+        "title": "Glossaire et termes natifs — Kristal-Botany",
+        "excerpt": "State v9 : état logique engagé sans dépendance à une compression spécifique.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "State v9",
+            "detail": "état logique engagé sans dépendance à une compression spécifique.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 3
+          },
+          {
+            "title": "Logical Artifact",
+            "detail": "membre de l'état, identifié par son contrat et son Logical Commitment.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 4
+          },
+          {
+            "title": "v6",
+            "detail": "représentation kristal_state/6.0 des assertions et provenance dans les Kristals v6 ; Catho conserve son contrat natif.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 5
+          },
+          {
+            "title": "Source catalog",
+            "detail": "navigation entre références existantes, pas remplacement de leur politique d'autorité.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 6
+          },
+          {
+            "title": "Modèle natif",
+            "detail": "land_plant_architecture_function_graph",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 7
+          },
+          {
+            "title": "Avertissement d'interprétation",
+            "detail": "les relations d’organes, cycles et fonctions végétales ne remplacent pas la taxonomie ou les interactions écologiques.",
+            "section": "Glossaire et termes natifs — Kristal-Botany",
+            "line": 8
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:5995cdcef40c15352653487102b2aa87fc6fc9ec0b5c6caf44f78f6745d1a709",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading Botany offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 15
+  }
+}

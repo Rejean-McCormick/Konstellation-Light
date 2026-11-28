@@ -1,0 +1,115 @@
+/* V19 Knowledge explorer: legible maps, responsive cards and complete navigation. */
+.v19-discovery{margin:8px 0 18px;padding:15px 16px;background:linear-gradient(120deg,#123a34,#12352f);border:1px solid #477b6c;border-radius:13px}
+.v19-discovery-head{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap}
+.v19-discovery h3{margin:0 0 5px;color:#effff9;font-size:17px}
+.v19-discovery p{margin:0;color:#c6e3da;line-height:1.5;font-size:12px}
+.v19-discovery-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:13px}
+.v19-entry{min-height:70px;display:flex;flex-direction:column;gap:6px;text-align:left;white-space:normal;padding:11px 12px;border-radius:9px;border:1px solid #548c7e;background:#184b42;color:#f4fffb;overflow-wrap:anywhere}
+.v19-entry:hover,.v19-entry:focus-visible{background:#246d60;border-color:#c0f0de}
+.v19-entry strong{font-size:13px;line-height:1.35}.v19-entry small{color:#bfe8d8;font-size:11px}
+.v19-overview-toggle{border:1px solid #6da695;background:#18463e;color:#f1fff9;border-radius:8px;padding:8px 11px;font-size:12px}
+.v19-map-stage{position:relative;min-width:0;overflow:hidden;border-radius:13px;background:radial-gradient(ellipse at 50% 47%,#1d564b 0%,#12392f 44%,#0b2822 100%);border:1px solid #315e52}
+.visual svg.v19-map-svg{width:100%;height:auto;min-height:0;max-height:none;display:block;overflow:visible;aspect-ratio:1000/720}
+.v19-map-svg .graph-link{stroke:#77b8ab;stroke-width:2;opacity:.63}
+.v19-map-svg .v19-card-link{stroke:#b9e8d4;stroke-width:2.3;opacity:.86}
+.v19-map-svg .v19-node-card{cursor:pointer;outline:0}
+.v19-map-svg .v19-node-card .card-bg{fill:#183d3b;stroke:#7cc7b6;stroke-width:2.4;rx:13}
+.v19-map-svg .v19-node-card:hover .card-bg,.v19-map-svg .v19-node-card:focus-visible .card-bg{fill:#23594e;stroke:#dbfff0;stroke-width:3.5}
+.v19-map-svg .v19-node-card circle{fill:#295c66;stroke:#b3ebde;stroke-width:2.3}
+.v19-map-svg .v19-node-card[data-selected=true] circle{fill:#226f67;stroke:#c8fff0;stroke-width:4}
+.v19-map-svg .v19-node-card .v19-caption{font-size:17px;text-anchor:start;fill:#f2fff9;font-weight:670;pointer-events:none}
+.v19-map-svg .v19-node-card .v19-relation-caption{font-size:13px;text-anchor:start;fill:#c0e8da;pointer-events:none}
+.v19-map-svg .v19-node-card .type-mark{fill:#ddfff4;font-size:16px;text-anchor:middle;pointer-events:none}
+.v19-map-svg .v19-focus circle{fill:#1e746a;stroke:#b6fbe3;stroke-width:5;filter:drop-shadow(0 0 12px #358e80)}
+.v19-map-svg .v19-focus text{fill:#f3fff9;font-size:17px;font-weight:700;text-anchor:middle}
+.v19-map-svg .v19-center-title{fill:#f4fff9;stroke:#61a898;stroke-width:1.2}
+.v19-map-svg .v19-title-text{fill:#f6fff9;font-size:19px;font-weight:700;text-anchor:middle}
+.v19-graph-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 20px 15px;color:#c8e9dc;font-size:12px}
+.v19-page-state{font-variant-numeric:tabular-nums;color:#e5fff4}
+.v19-graph-toolbar button{min-height:36px;border-radius:8px;padding:7px 11px;background:#17473f;border:1px solid #74b9a5;color:#eafff6}
+.v19-graph-toolbar button:disabled{opacity:.4;cursor:not-allowed}
+.v19-trail{padding:10px 22px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;color:#bedfda;font-size:12px;background:#11342d;border-bottom:1px solid #326657}
+.v19-trail[hidden]{display:none}
+.v19-trail button{padding:6px 9px;border:1px solid #588c7e;border-radius:15px;background:#195145;color:#f1fff9;max-width:230px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.v19-trail button[aria-current=step]{background:#2f7063;border-color:#b9e9d4}
+.v19-path-separator{opacity:.6}
+.v19-label-note{padding:0 18px 10px;color:#beded0;font-size:12px;line-height:1.5}
+.v19-empty{padding:20px;text-align:center;color:#d2e5df}
+.v19-mobile-focus{display:none}
+.reader-relations-browser .reader-mobile-link{min-height:54px}
+.reader-relations-browser .reader-mobile-link strong{overflow-wrap:anywhere}
+.v19-map-stage:fullscreen{overflow:auto;display:grid;place-items:center;padding:20px;background:#0b2b25}
+.v19-map-stage:fullscreen .v19-map-svg{max-width:1300px;max-height:95vh}
+@media(max-width:1200px){.v19-discovery-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:920px){
+  .v19-discovery-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .v19-map-stage{display:none}
+  .v19-mobile-focus{display:block;background:#19493e;color:#f1fff9;padding:15px;border:1px solid #599a88;border-radius:11px;margin:0 0 12px}
+  .v19-mobile-focus strong{display:block;font-size:17px;margin-top:6px;overflow-wrap:anywhere}
+  .reader-mobile-map{display:grid!important;gap:10px;margin:6px 0 15px;padding:8px 4px}
+  .v19-graph-toolbar{padding:10px 4px 15px}
+}
+@media(max-width:600px){.v19-discovery-list{grid-template-columns:minmax(0,1fr)}.v19-discovery{padding:12px}.v19-trail{padding:9px 13px}}
+@media(prefers-reduced-motion:reduce){.v19-map-svg *{animation:none!important;transition:none!important}}
+/* Keep graphical type at a readable physical size even when the sidebar narrows. */
+@media(min-width:921px){
+  .v19-map-stage{overflow-x:auto;scrollbar-color:#679d90 #102e29}
+  .visual svg.v19-map-svg{min-width:920px}
+}
+@media(min-width:1101px) and (max-width:1600px){
+  .workspace{grid-template-columns:minmax(0,1fr)}
+  .inspector{margin-top:6px}
+}
+@media(max-width:920px){
+  .reader-relations-browser{position:relative;padding-left:20px!important}
+  .reader-relations-browser .reader-mobile-link{position:relative;border-left:3px solid #71bfa9}
+  .reader-relations-browser .reader-mobile-link:before{content:'●';position:absolute;left:-17px;top:12px;color:#89dec4;font-size:12px}
+  .v19-mobile-focus{border-left:4px solid #a9ead8}
+}
+
+.v19-inspector-facts{padding:10px 12px;margin:14px 0;border:1px solid #447d6f;border-radius:9px;background:#153f36}.v19-inspector-facts h4{margin:0 0 6px;color:#e5fff4;font-size:13px}.v19-inspector-facts p{margin:5px 0;color:#c8e7dd;font-size:12px;line-height:1.5}
+
+/* V19.1 — SVG paths never have a closed painted surface. A missing SVG
+   fill:none caused large black triangles in the V19 desktop screenshots. */
+.visual svg.v19-map-svg path.graph-link,
+.visual svg.v19-map-svg path.v19-card-link,
+.visual svg.v19-map-svg path.document-cluster-link{fill:none!important;stroke-linecap:round;stroke-linejoin:round}
+/* The centered title must contrast with its panel, not be white on white. */
+.visual svg.v19-map-svg .v19-center-title{fill:#103f37!important;stroke:#7ad5b5!important;stroke-width:2}
+.visual svg.v19-map-svg .v19-title-text{fill:#f4fff9!important;stroke:none!important}
+/* Desktop and tablet: the SVG remains the main interactive map. */
+.v191-mobile-diagram{display:none}
+/* Mobile: an actual tactile branch diagram with readable, untruncated labels.
+   The accessible link list still exists below as a complementary view. */
+@media(max-width:920px){
+  .v19-map-stage{display:none}
+  .v191-mobile-diagram{display:block;position:relative;margin:8px 0 14px;padding:14px;
+    background:radial-gradient(ellipse at 50% 0%,#1b594d 0%,#0c2c25 90%);
+    border:1px solid #4a8a76;border-radius:15px;color:#effff8}
+  .v191-mobile-map-caption{margin:0 0 13px;color:#b5e5d5;font-size:11px;
+    font-weight:700;letter-spacing:.06em;line-height:1.5}
+  .v191-mobile-hub{display:flex;align-items:center;gap:12px;min-height:68px;
+    padding:13px 15px;border:2px solid #b1f3db;border-radius:13px;background:#195c4e;
+    box-shadow:0 0 18px #4fcaab33;overflow-wrap:anywhere;line-height:1.4}
+  .v191-mobile-hub strong{font-size:17px;min-width:0;flex:1}
+  .v191-mobile-hub-mark{flex:none;display:grid;place-items:center;background:#287a69;
+    border:1px solid #a8eddb;border-radius:50%;width:39px;height:39px;font-size:22px}
+  .v191-mobile-branches{margin-left:29px;padding:17px 0 2px 24px;
+    border-left:2px solid #79c1a8;display:grid;gap:10px}
+  .v191-mobile-branch{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);
+    gap:4px 10px;text-align:left;min-width:0;min-height:70px;padding:11px 13px;
+    border:1px solid #7fc9b1;border-radius:11px;background:#184940;color:#f0fff7;
+    overflow-wrap:anywhere;white-space:normal}
+  .v191-mobile-branch:before{content:'';position:absolute;top:32px;left:-26px;
+    width:26px;border-top:2px solid #79c1a8}
+  .v191-mobile-branch:hover,.v191-mobile-branch:focus-visible{background:#216656;
+    border-color:#d0ffec;outline:3px solid #c7fbea;outline-offset:1px}
+  .v191-mobile-index{grid-row:span 2;color:#a9e6d4;font-size:11px;font-variant-numeric:tabular-nums;
+    border-radius:6px;background:#235b51;padding:5px;align-self:start}
+  .v191-mobile-branch strong{font-size:15px;line-height:1.4}
+  .v191-mobile-branch small{font-size:12px;color:#c4e9de;line-height:1.35}
+  .v191-mobile-empty{margin:8px 0 3px;color:#c9e9dd}
+  .v19-mobile-focus{display:none}
+}
+@media(max-width:360px){.v191-mobile-diagram{padding:10px}.v191-mobile-branches{margin-left:18px;padding-left:18px}.v191-mobile-branch:before{left:-20px;width:20px}}
+@media(prefers-reduced-motion:reduce){.v191-mobile-branch{scroll-behavior:auto;transition:none!important}}

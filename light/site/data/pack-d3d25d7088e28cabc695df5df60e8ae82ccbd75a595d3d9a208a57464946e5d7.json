@@ -1,0 +1,1190 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "kOA Ecosystem",
+  "slug": "koa-ecosystem",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:koa-ecosystem:state",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:77e97e70d2d5aeb28faa7cecb43bd8c9a17855a42d1bdf6fe73e9e0b126735f1"
+  },
+  "surface_digest": "sha256:e6635724b81068b28ae4273a8304b05651a935aabc35ebf7dd2365aba410b26f",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 29,
+    "bytes": 186239
+  },
+  "nodes": [
+    {
+      "id": "state:8e5b8d65ab03478b4972fa3a",
+      "kind": "hosted_state",
+      "label": "kOA Ecosystem",
+      "description": "Navigation dérivée ; état urn:kristal:koa-ecosystem:state ; engagement déclaré sha256:77e97e70d2d5aeb28faa7cecb43bd8c9a17855a42d1bdf6fe73e9e0b126735f1"
+    },
+    {
+      "id": "artifact:510077c2f80aa7df57f774cb",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:koa-ecosystem:artifact:canonical-state",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:8d5195171697739485ada83e69b8fae83fe95cda155d5181a8d61dff4cc40a74"
+    },
+    {
+      "id": "file:49c8efa64f0428123a39bf41",
+      "kind": "hosted_file",
+      "label": ".kristal/v9/materializations/canonical-state.materialization.json",
+      "description": "Fichier dérivé (materialization_manifest) ; 1346 octets ; sha256:60325b6fc96a48b18e1735ff395683e0c8d7490d13faa0ba707e144cee605cb1"
+    },
+    {
+      "id": "file:58214f0c0850c6e1d45b4c09",
+      "kind": "hosted_file",
+      "label": ".kristal/v9/materializations/source-bundle.materialization.json",
+      "description": "Fichier dérivé (materialization_manifest) ; 8341 octets ; sha256:41d6cd3b03632f9831ca58ba1e0cefb15a50cac054d8d9618cff791d155ada1c"
+    },
+    {
+      "id": "file:f4b26cc02f7aed4e0dc789fd",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 1410 octets ; sha256:ebd87bf792749081e0a8cae14e3ca0bbc865f1aba71daee3d1d6036ccb94e618"
+    },
+    {
+      "id": "file:c5f1f83459846443ee56c04e",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1975 octets ; sha256:72a2a7a504fba5304d8cd97a4476912aa484663c7e5a2e962019c4ed3963ddc9"
+    },
+    {
+      "id": "file:a3a4afab7bb923d8806a322a",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:acb2371cb9485e7f6008d5be",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 9500 octets ; sha256:a721032971a2f3716586d5c60aab93fcf1a815fc395ad970356dac7ad81997fc"
+    },
+    {
+      "id": "file:b3f2e55269b629a4e419a51e",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 6532 octets ; sha256:d231a353318b75714a07ffaad9df707cc173e34d2831992f64a60ab031be2589"
+    },
+    {
+      "id": "file:0db976dcf731f2f52124fa87",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1941 octets ; sha256:cd4d2c5158ff0aa2d0d784fcd1d93cb6540d651130de6327cda19c8cc13b6572"
+    },
+    {
+      "id": "file:7a3d0c0c3e57f74eac5b82bf",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 651 octets ; sha256:74e3ba51c6df103a5e7804a5d6ab57234f9835d8ceb6ebe52cae12f235345674"
+    },
+    {
+      "id": "file:38216149262a648a01cb9c78",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 14327 octets ; sha256:025e10e9c89a0eff0b75efca6b7e617bf20bcd21cb91c4842bbe5239b754ce08"
+    },
+    {
+      "id": "file:b9e2d68075e6cb05d32d3f6a",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 585 octets ; sha256:f0311986420da6c046134071df6126583af21ae661c16ab2274841ab1916c20d"
+    },
+    {
+      "id": "file:4df1516bfb30128370c465e0",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 729 octets ; sha256:f6954fdf4edb63fbfe2516652391f310ee7cb6b1dd55330be5177a63e1265c93"
+    },
+    {
+      "id": "file:42b7cc57ce01db6b3b8a8bb8",
+      "kind": "hosted_file",
+      "label": "canon/domain/README.md",
+      "description": "Fichier dérivé (canonical_content) ; 352 octets ; sha256:0f3c7fc78b9185435e4a95a7176cea6a0b38ffdf25acefe139775ddbd80788b6"
+    },
+    {
+      "id": "file:12330e2bc74fc18312b3538b",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1752 octets ; sha256:92d5e60854e8a18b90758cb887327278730c1a2e2f1f8687fa5f36066b5d78fe"
+    },
+    {
+      "id": "file:df459f579a5f28bf54b23e63",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 12929 octets ; sha256:5b5d18e1853bdaba5dde3450186013066bde4e7b28b7ab66345f40420d7baa72"
+    },
+    {
+      "id": "file:3445beb8dac43074dceaec89",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2765 octets ; sha256:3f2d47f8c1096d7dbd35751965fd81999c8c846cab8c7372c00c6c6c27810565"
+    },
+    {
+      "id": "file:4cd6b333e6edae1c2f5c617d",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 621 octets ; sha256:8574ef8ed3e3653392f0e119737543c3f9d244235682bc03d32be36923ee9934"
+    },
+    {
+      "id": "file:b53803a6dde31e58f616d8af",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 1215 octets ; sha256:8f1e54d3dfa3a54b89770459919880fc3a77db0b299c1a59fb0e94e86e9fdbb6"
+    },
+    {
+      "id": "file:c7d585682aa46831e6e15c26",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 1097 octets ; sha256:7ff715b5162013acdb41774baac4835ef0f89021cd6d34c1cf833b2ce574245f"
+    },
+    {
+      "id": "file:ac6500ba6cd330d37705e553",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 1050 octets ; sha256:8e8d077ef69fd0830d196dc2e0a847dc7bb6096a27a8fcca7a08c993b8a5ae1f"
+    },
+    {
+      "id": "file:98329df8a962fe6e5f8c6b7f",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 1356 octets ; sha256:4df2dd3c1cc0e48a0f6c12920f413dc943d29c2c1e693f84e6fdd32851f97976"
+    },
+    {
+      "id": "file:759ee8b689f7aa77c72df159",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 623 octets ; sha256:02c6b9e1cf1f4aa6b936b75ff8131a7726c00de2f3bc71dfd178d869e56048e0"
+    },
+    {
+      "id": "file:e0801c7ed636a9b71fd742dc",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 855 octets ; sha256:9300ac38d7fc28617fda1a63b1f6f826d7993ec3219c05e06d34daf5ff36b861"
+    },
+    {
+      "id": "file:b590f948704b80a2e5291e70",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 785 octets ; sha256:6a4a1809d307ec86b770c256ba97017c317dcefa2d05306401978dca3a0edec9"
+    },
+    {
+      "id": "file:8cd74038f640b43f590560ec",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 4128 octets ; sha256:718d426c43ef0eef89d56c296cb97af9fc40ef2e5036a3bfff0e16633a90a468"
+    },
+    {
+      "id": "file:432fd46db919ef761842cb58",
+      "kind": "hosted_file",
+      "label": "docs/08_GLOSSARY.md",
+      "description": "Fichier dérivé (documentation) ; 651 octets ; sha256:74e3ba51c6df103a5e7804a5d6ab57234f9835d8ceb6ebe52cae12f235345674"
+    },
+    {
+      "id": "file:1a4b7ed2ea82178c2efad8b9",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 2018 octets ; sha256:6521f0b740a4e2df9e3e3db4d9ca1ec792ebb5411d7487ab6fc63497177a947c"
+    },
+    {
+      "id": "file:3c685812d74f342b0005ce81",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 103244 octets ; sha256:4331276c579ea9a03436a9dd5b83d7c19ca6de60890572110db951aa9d1ba961"
+    },
+    {
+      "id": "file:e04f1e8481b1a2f12b84e10b",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 834 octets ; sha256:2050bdefd72f5e8733223c055ee85dae3f47e8e0a1c3eddb74acd8d156c4796d"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "artifact:510077c2f80aa7df57f774cb",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:49c8efa64f0428123a39bf41",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:58214f0c0850c6e1d45b4c09",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:f4b26cc02f7aed4e0dc789fd",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:c5f1f83459846443ee56c04e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:a3a4afab7bb923d8806a322a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:acb2371cb9485e7f6008d5be",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:b3f2e55269b629a4e419a51e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:0db976dcf731f2f52124fa87",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:7a3d0c0c3e57f74eac5b82bf",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:38216149262a648a01cb9c78",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:b9e2d68075e6cb05d32d3f6a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:4df1516bfb30128370c465e0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:42b7cc57ce01db6b3b8a8bb8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:12330e2bc74fc18312b3538b",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:df459f579a5f28bf54b23e63",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:3445beb8dac43074dceaec89",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:4cd6b333e6edae1c2f5c617d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:b53803a6dde31e58f616d8af",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:c7d585682aa46831e6e15c26",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:ac6500ba6cd330d37705e553",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:98329df8a962fe6e5f8c6b7f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:759ee8b689f7aa77c72df159",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:e0801c7ed636a9b71fd742dc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:b590f948704b80a2e5291e70",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:8cd74038f640b43f590560ec",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:432fd46db919ef761842cb58",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:1a4b7ed2ea82178c2efad8b9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:3c685812d74f342b0005ce81",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:8e5b8d65ab03478b4972fa3a",
+      "to": "file:e04f1e8481b1a2f12b84e10b",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Kristal portable state baseline: kristal_state/6.0",
+    "topics": [
+      {
+        "title": "repository ≠ authority et inventaire ≠ autorisation GitSink",
+        "detail": "les remotes déduits d'un origin local ou des snapshots restent non vérifiés en ligne.",
+        "section": "v0.7.0 — Réconciliation kOA et outils Kristal (27 octobre 2026)",
+        "line": 16
+      },
+      {
+        "title": "Aucune migration v11 implicite",
+        "detail": "Authoring Kit supporte le profil v11 opt-in, mais le présent Kristal conserve sa compatibilité historique et ne reçoit pas d'identifiants KQ/KP fabriqués.",
+        "section": "v0.7.0 — Réconciliation kOA et outils Kristal (27 octobre 2026)",
+        "line": 18
+      },
+      {
+        "title": "remote public enregistré + statut explicite;",
+        "detail": "remote public enregistré + statut explicite;",
+        "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+        "line": 40
+      },
+      {
+        "title": "path local observé + statut d’observation;",
+        "detail": "path local observé + statut d’observation;",
+        "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+        "line": 41
+      },
+      {
+        "title": "statut combiné du localisateur (public_remote_and_local, local_only, public_remote_only,…",
+        "detail": "statut combiné du localisateur (public_remote_and_local, local_only, public_remote_only, unresolved);",
+        "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+        "line": 42
+      },
+      {
+        "title": "nouvelle vue views/public-repository-directory.md générée depuis les mêmes données;",
+        "detail": "nouvelle vue views/public-repository-directory.md générée depuis les mêmes données;",
+        "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+        "line": 44
+      },
+      {
+        "title": "aucun remote manquant n’est déduit ou inventé à partir du nom du dossier.",
+        "detail": "aucun remote manquant n’est déduit ou inventé à partir du nom du dossier.",
+        "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+        "line": 45
+      },
+      {
+        "title": "views/repository-map.md expose maintenant Public remote + Local path côte à côte;",
+        "detail": "views/repository-map.md expose maintenant Public remote + Local path côte à côte;",
+        "section": "v0.6.2 — carte publique orientée écosystème et repos",
+        "line": 54
+      },
+      {
+        "title": "les URLs Git sont reprises du registre knowledge-base/sources/repositories.json et ne sont…",
+        "detail": "les URLs Git sont reprises du registre knowledge-base/sources/repositories.json et ne sont jamais devinées;",
+        "section": "v0.6.2 — carte publique orientée écosystème et repos",
+        "line": 55
+      },
+      {
+        "title": "les implémentations locales sans remote public vérifié restent visibles avec",
+        "detail": "plutôt qu’un faux lien;",
+        "section": "v0.6.2 — carte publique orientée écosystème et repos",
+        "line": 56
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:a721032971a2f3716586d5c60aab93fcf1a815fc395ad970356dac7ad81997fc",
+        "title": "Kristal kOA Ecosystem",
+        "excerpt": "Kristal portable state baseline: kristal_state/6.0",
+        "sections": [
+          {
+            "title": "v0.7.0 — Réconciliation kOA et outils Kristal (27 octobre 2026)",
+            "line": 12
+          },
+          {
+            "title": "Couche Kristal v9",
+            "line": 24
+          },
+          {
+            "title": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+            "line": 36
+          },
+          {
+            "title": "v0.6.2 — carte publique orientée écosystème et repos",
+            "line": 49
+          },
+          {
+            "title": "v0.6.1 — ingestion sémantique sélective des README",
+            "line": 61
+          },
+          {
+            "title": "v0.6.0 — réconciliation 01/02/03 + Pi Theory démêlé",
+            "line": 75
+          },
+          {
+            "title": "Axes de lecture",
+            "line": 93
+          },
+          {
+            "title": "Règles de preuve",
+            "line": 102
+          }
+        ],
+        "topics": [
+          {
+            "title": "repository ≠ authority et inventaire ≠ autorisation GitSink",
+            "detail": "les remotes déduits d'un origin local ou des snapshots restent non vérifiés en ligne.",
+            "section": "v0.7.0 — Réconciliation kOA et outils Kristal (27 octobre 2026)",
+            "line": 16
+          },
+          {
+            "title": "Aucune migration v11 implicite",
+            "detail": "Authoring Kit supporte le profil v11 opt-in, mais le présent Kristal conserve sa compatibilité historique et ne reçoit pas d'identifiants KQ/KP fabriqués.",
+            "section": "v0.7.0 — Réconciliation kOA et outils Kristal (27 octobre 2026)",
+            "line": 18
+          },
+          {
+            "title": "remote public enregistré + statut explicite;",
+            "detail": "remote public enregistré + statut explicite;",
+            "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+            "line": 40
+          },
+          {
+            "title": "path local observé + statut d’observation;",
+            "detail": "path local observé + statut d’observation;",
+            "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+            "line": 41
+          },
+          {
+            "title": "statut combiné du localisateur (public_remote_and_local, local_only, public_remote_only,…",
+            "detail": "statut combiné du localisateur (public_remote_and_local, local_only, public_remote_only, unresolved);",
+            "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+            "line": 42
+          },
+          {
+            "title": "nouvelle vue views/public-repository-directory.md générée depuis les mêmes données;",
+            "detail": "nouvelle vue views/public-repository-directory.md générée depuis les mêmes données;",
+            "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+            "line": 44
+          },
+          {
+            "title": "aucun remote manquant n’est déduit ou inventé à partir du nom du dossier.",
+            "detail": "aucun remote manquant n’est déduit ou inventé à partir du nom du dossier.",
+            "section": "v0.6.3 — localisateurs de repos dans le Kristal canonique",
+            "line": 45
+          },
+          {
+            "title": "views/repository-map.md expose maintenant Public remote + Local path côte à côte;",
+            "detail": "views/repository-map.md expose maintenant Public remote + Local path côte à côte;",
+            "section": "v0.6.2 — carte publique orientée écosystème et repos",
+            "line": 54
+          },
+          {
+            "title": "les URLs Git sont reprises du registre knowledge-base/sources/repositories.json et ne sont…",
+            "detail": "les URLs Git sont reprises du registre knowledge-base/sources/repositories.json et ne sont jamais devinées;",
+            "section": "v0.6.2 — carte publique orientée écosystème et repos",
+            "line": 55
+          },
+          {
+            "title": "les implémentations locales sans remote public vérifié restent visibles avec",
+            "detail": "plutôt qu’un faux lien;",
+            "section": "v0.6.2 — carte publique orientée écosystème et repos",
+            "line": 56
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 4
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:8574ef8ed3e3653392f0e119737543c3f9d244235682bc03d32be36923ee9934",
+        "title": "Intent and scope",
+        "excerpt": "This Kristal maps the kOA Digital Ecosystem as a durable semantic graph of components, capabilities, operating functions, contracts, artifacts, workflows, authorities, lifecycles, repositories and evidence.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:8f1e54d3dfa3a54b89770459919880fc3a77db0b299c1a59fb0e94e86e9fdbb6",
+        "title": "Semantic boundary",
+        "excerpt": "This Kristal owns the curated cross-system ecosystem map and the local architectural assertions that describe how kOA components, capabilities, functions, contracts, artifacts, workflows, lifecycles, repositories and evidence relate inside that map. It also owns the editorial selection/qualification rules used to…",
+        "sections": [
+          {
+            "title": "Owned here",
+            "line": 3
+          },
+          {
+            "title": "Explicitly not owned here",
+            "line": 9
+          },
+          {
+            "title": "Boundary invariants",
+            "line": 16
+          }
+        ],
+        "topics": [
+          {
+            "title": "Internal implementation truth of owner repositories beyond assertions explicitly imported…",
+            "detail": "Internal implementation truth of owner repositories beyond assertions explicitly imported into this Kristal.",
+            "section": "Explicitly not owned here",
+            "line": 11
+          },
+          {
+            "title": "Authority of independent supporting ecosystems or external tools merely connected to kOA.",
+            "detail": "Authority of independent supporting ecosystems or external tools merely connected to kOA.",
+            "section": "Explicitly not owned here",
+            "line": 12
+          },
+          {
+            "title": "Runtime deployment or activation merely because a composition, repository or local checkout…",
+            "detail": "Runtime deployment or activation merely because a composition, repository or local checkout exists.",
+            "section": "Explicitly not owned here",
+            "line": 13
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:7ff715b5162013acdb41774baac4835ef0f89021cd6d34c1cf833b2ce574245f",
+        "title": "Native model",
+        "excerpt": "The native model is a typed semantic graph represented in the canonical kristal_state/6.0 file. It is compiled from curated editorial catalogs under knowledge-base/sources/.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:8e8d077ef69fd0830d196dc2e0a847dc7bb6096a27a8fcca7a08c993b8a5ae1f",
+        "title": "Epistemic model and authority",
+        "excerpt": "Provenance and authority remain separate. The source registry and canonical assertions retain source IDs, evidence references, assertion status, record role and other qualifiers.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "A repository is not automatically an application, member or authority.",
+            "detail": "A repository is not automatically an application, member or authority.",
+            "section": "Epistemic model and authority",
+            "line": 7
+          },
+          {
+            "title": "Local presence does not prove activation or deployment.",
+            "detail": "Local presence does not prove activation or deployment.",
+            "section": "Epistemic model and authority",
+            "line": 9
+          },
+          {
+            "title": "Scenario compositions can remain runtime UNVERIFIED.",
+            "detail": "Scenario compositions can remain runtime UNVERIFIED.",
+            "section": "Epistemic model and authority",
+            "line": 10
+          },
+          {
+            "title": "Missing or unresolved information must not be fabricated.",
+            "detail": "Missing or unresolved information must not be fabricated.",
+            "section": "Epistemic model and authority",
+            "line": 11
+          },
+          {
+            "title": "Supporting ecosystems can contribute capabilities without becoming kOA members.",
+            "detail": "Supporting ecosystems can contribute capabilities without becoming kOA members.",
+            "section": "Epistemic model and authority",
+            "line": 12
+          },
+          {
+            "title": "AI/model output does not become proof or canon without explicit review/promotion.",
+            "detail": "AI/model output does not become proof or canon without explicit review/promotion.",
+            "section": "Epistemic model and authority",
+            "line": 13
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:4df2dd3c1cc0e48a0f6c12920f413dc943d29c2c1e693f84e6fdd32851f97976",
+        "title": "Canonical and derived surfaces",
+        "excerpt": "knowledge-base/corpus/koa-ecosystem.kristal-state.json is the registered canonical domain state. Its existing v9 Logical Artifact is:",
+        "sections": [
+          {
+            "title": "Canonical domain artifact",
+            "line": 3
+          },
+          {
+            "title": "Authoring/build inputs",
+            "line": 13
+          },
+          {
+            "title": "Derived/rebuildable surfaces",
+            "line": 17
+          }
+        ],
+        "topics": [
+          {
+            "title": "artifact: urn:kristal:koa-ecosystem:artifact:canonical-state",
+            "detail": "artifact: urn:kristal:koa-ecosystem:artifact:canonical-state",
+            "section": "Canonical domain artifact",
+            "line": 7
+          },
+          {
+            "title": "contract: koa-ecosystem.canonical-knowledge-state/1.0",
+            "detail": "contract: koa-ecosystem.canonical-knowledge-state/1.0",
+            "section": "Canonical domain artifact",
+            "line": 8
+          },
+          {
+            "title": "commitment: sha256:8d5195171697739485ada83e69b8fae83fe95cda155d5181a8d61dff4cc40a74",
+            "detail": "commitment: sha256:8d5195171697739485ada83e69b8fae83fe95cda155d5181a8d61dff4cc40a74",
+            "section": "Canonical domain artifact",
+            "line": 9
+          },
+          {
+            "title": "knowledge-base/corpus/index.json",
+            "detail": "query/index surface.",
+            "section": "Derived/rebuildable surfaces",
+            "line": 19
+          },
+          {
+            "title": ".kristal/v8/",
+            "detail": "legacy read/query models.",
+            "section": "Derived/rebuildable surfaces",
+            "line": 20
+          },
+          {
+            "title": "views/",
+            "detail": "generated navigational views and matrices.",
+            "section": "Derived/rebuildable surfaces",
+            "line": 21
+          },
+          {
+            "title": "build/v9/",
+            "detail": "Local Kit 3.2.2 build candidate.",
+            "section": "Derived/rebuildable surfaces",
+            "line": 22
+          },
+          {
+            "title": ".kristal/v9/",
+            "detail": "retained legacy v9 compatibility/migration envelope.",
+            "section": "Derived/rebuildable surfaces",
+            "line": 23
+          },
+          {
+            "title": "runtime/, derived/, projections/materialized/, state/",
+            "detail": "reconstructible surfaces when used.",
+            "section": "Derived/rebuildable surfaces",
+            "line": 24
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:02c6b9e1cf1f4aa6b936b75ff8131a7726c00de2f3bc71dfd178d869e56048e0",
+        "title": "Orientations and projections",
+        "excerpt": "The project already contains many derived views (views/) that orient the same canonical graph by repository, capability, operating function, utility, workflow, support boundary and other concerns. Those legacy views are not canonical.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:9300ac38d7fc28617fda1a63b1f6f826d7993ec3219c05e06d34daf5ff36b861",
+        "title": "Validation",
+        "excerpt": "Validation is layered. A structural Local Kit pass is not a claim that every domain assertion is universally true.",
+        "sections": [
+          {
+            "title": "Native domain validation",
+            "line": 5
+          },
+          {
+            "title": "Legacy v9 validation",
+            "line": 13
+          },
+          {
+            "title": "Local Kit 3.2.2",
+            "line": 23
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:6a4a1809d307ec86b770c256ba97017c317dcefa2d05306401978dca3a0edec9",
+        "title": "Hosting and publication",
+        "excerpt": "This normalization does not configure a hosted-network target and does not publish or activate anything. Repository URLs present in the domain/source catalogs are evidence and locators; they are not Local Kristal hosting configuration.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "Local Kit: structure, check and build-v9.",
+            "detail": "Local Kit: structure, check and build-v9.",
+            "section": "Hosting and publication",
+            "line": 7
+          },
+          {
+            "title": "Kristal Manager: inventory and backup of the full local folder.",
+            "detail": "Kristal Manager: inventory and backup of the full local folder.",
+            "section": "Hosting and publication",
+            "line": 8
+          },
+          {
+            "title": "Kompiler / portable AI: optional derived reading layer only.",
+            "detail": "Kompiler / portable AI: optional derived reading layer only.",
+            "section": "Hosting and publication",
+            "line": 10
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:718d426c43ef0eef89d56c296cb97af9fc40ef2e5036a3bfff0e16633a90a468",
+        "title": "kOA Ecosystem — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Federation / Topology (ARK-02), declared; not independently approved.",
+            "detail": "Arketype: Federation / Topology (ARK-02), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Information management; Organization and management, declared, semantic review pending.",
+            "detail": "UNESCO: Information management; Organization and management, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 8574ef8ed3e3653392…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 8574ef8ed3e3653392…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 8f1e54d3dfa3a54b89…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 8f1e54d3dfa3a54b89…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 7ff715b5162013acdb…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 7ff715b5162013acdb…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 8e8d077ef69fd0830d…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 8e8d077ef69fd0830d…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 4df2dd3c1cc0e48a0f…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 4df2dd3c1cc0e48a0f…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 9300ac38d7fc28617f…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 9300ac38d7fc28617f…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/08_GLOSSARY.md",
+        "sha256": "sha256:74e3ba51c6df103a5e7804a5d6ab57234f9835d8ceb6ebe52cae12f235345674",
+        "title": "Glossary",
+        "excerpt": "kOA Digital Ecosystem — canonical subject koa:digital-ecosystem, represented here as the cross-system ecosystem map.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "kOA Digital Ecosystem",
+            "detail": "canonical subject koa:digital-ecosystem, represented here as the cross-system ecosystem map.",
+            "section": "Glossary",
+            "line": 3
+          },
+          {
+            "title": "Canonical state",
+            "detail": "knowledge-base/corpus/koa-ecosystem.kristal-state.json.",
+            "section": "Glossary",
+            "line": 4
+          },
+          {
+            "title": "Editorial catalogs",
+            "detail": "structured project inputs under knowledge-base/sources/ compiled into the canonical graph.",
+            "section": "Glossary",
+            "line": 5
+          },
+          {
+            "title": "Repository evidence",
+            "detail": "repository/readme/local snapshot evidence; does not imply authority, membership, deployment or activation.",
+            "section": "Glossary",
+            "line": 6
+          },
+          {
+            "title": "Scenario",
+            "detail": "editorial composition used to test/understand possible workflows; not deployment proof.",
+            "section": "Glossary",
+            "line": 7
+          },
+          {
+            "title": "Projection/view",
+            "detail": "derived orientation over the canon.",
+            "section": "Glossary",
+            "line": 8
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:d231a353318b75714a07ffaad9df707cc173e34d2831992f64a60ab031be2589",
+        "title": "AI Context — kOA Ecosystem",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 33
+          },
+          {
+            "title": "Owned here",
+            "line": 37
+          },
+          {
+            "title": "Explicitly not owned here",
+            "line": 43
+          },
+          {
+            "title": "Boundary invariants",
+            "line": 50
+          },
+          {
+            "title": "Included orientation from docs/02_NATIVE_MODEL.md",
+            "line": 66
+          },
+          {
+            "title": "Included orientation from docs/03_EPISTEMIC_MODEL.md",
+            "line": 91
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:koa-ecosystem:state",
+            "detail": "State ref: urn:kristal:koa-ecosystem:state",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:77e97e70d2d5aeb28faa7cecb43bd8c9a17855a42d1bdf6fe73e9e0b126735f1",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: open",
+            "detail": "Workspace profile: open",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 7
+          },
+          {
+            "title": "Native model: semantic_graph",
+            "detail": "Native model: semantic_graph",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 9
+          },
+          {
+            "title": "Sources: 142",
+            "detail": "Sources: 142",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 2",
+            "detail": "Materialization manifests: 2",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — kOA Ecosystem",
+            "line": 13
+          },
+          {
+            "title": "Internal implementation truth of owner repositories beyond assertions explicitly imported…",
+            "detail": "Internal implementation truth of owner repositories beyond assertions explicitly imported into this Kristal.",
+            "section": "Explicitly not owned here",
+            "line": 45
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:74e3ba51c6df103a5e7804a5d6ab57234f9835d8ceb6ebe52cae12f235345674",
+        "title": "Glossary",
+        "excerpt": "kOA Digital Ecosystem — canonical subject koa:digital-ecosystem, represented here as the cross-system ecosystem map.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "kOA Digital Ecosystem",
+            "detail": "canonical subject koa:digital-ecosystem, represented here as the cross-system ecosystem map.",
+            "section": "Glossary",
+            "line": 3
+          },
+          {
+            "title": "Canonical state",
+            "detail": "knowledge-base/corpus/koa-ecosystem.kristal-state.json.",
+            "section": "Glossary",
+            "line": 4
+          },
+          {
+            "title": "Editorial catalogs",
+            "detail": "structured project inputs under knowledge-base/sources/ compiled into the canonical graph.",
+            "section": "Glossary",
+            "line": 5
+          },
+          {
+            "title": "Repository evidence",
+            "detail": "repository/readme/local snapshot evidence; does not imply authority, membership, deployment or activation.",
+            "section": "Glossary",
+            "line": 6
+          },
+          {
+            "title": "Scenario",
+            "detail": "editorial composition used to test/understand possible workflows; not deployment proof.",
+            "section": "Glossary",
+            "line": 7
+          },
+          {
+            "title": "Projection/view",
+            "detail": "derived orientation over the canon.",
+            "section": "Glossary",
+            "line": 8
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:f0311986420da6c046134071df6126583af21ae661c16ab2274841ab1916c20d",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading kOA Ecosystem offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 15
+  }
+}

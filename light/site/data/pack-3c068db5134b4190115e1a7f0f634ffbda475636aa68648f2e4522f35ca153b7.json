@@ -1,0 +1,911 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "Cybersecurity",
+  "slug": "cybersecurity",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:cybersecurity",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:ce349a4ad4d44b2f71f5d91294ae3f55e1a3a677941c3ec6cb57560a2e60292d"
+  },
+  "surface_digest": "sha256:8d71fa1ae1959c7e32ef488fc51b6b17c6404c38ad2a1be101392c278adf8d46",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 26,
+    "bytes": 929539
+  },
+  "nodes": [
+    {
+      "id": "state:1293f59bf19c031d1ab3794f",
+      "kind": "hosted_state",
+      "label": "Cybersecurity",
+      "description": "Navigation dérivée ; état urn:kristal:state:cybersecurity ; engagement déclaré sha256:ce349a4ad4d44b2f71f5d91294ae3f55e1a3a677941c3ec6cb57560a2e60292d"
+    },
+    {
+      "id": "artifact:d4ecde62a13ea2538a665ba5",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:cybersecurity:canonical-state",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:d688b56bbeaffe68c6b4e755fcf3d0c9b758f49d63c2df548bc97a1da9cc7e52"
+    },
+    {
+      "id": "file:8108f52995b1ef44217f81ad",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 540 octets ; sha256:21f82a14ea50ce090a2c43ba748bced2552b0b98d71ec0c59530935affd612e8"
+    },
+    {
+      "id": "file:0bb1780d77bb2d258d38b199",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1937 octets ; sha256:58af59583fe3bb7a999d590c23d6727646cbde151f060f4b677c01944a72c9aa"
+    },
+    {
+      "id": "file:438767e7caa7da77dc75518e",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:a735d306bc9a1dffc28fbc15",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 1257 octets ; sha256:f9c1f88631d245ed87ea5f1fb4dba181e323da2b1e9c2b3c056655ffdb877ef4"
+    },
+    {
+      "id": "file:11035884a140d60beebed606",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 4320 octets ; sha256:b08b400f46fc68baa08a480780abb88c956fdb7ca1d53d25b6082a305971de3b"
+    },
+    {
+      "id": "file:842050a5673f66b97f43d2cc",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1721 octets ; sha256:e182f8e9388e7073d6f646ae7120671ed0d24ca3b7bfb638ad00b07f967a6786"
+    },
+    {
+      "id": "file:997a47ddc8e9fd047b839ad3",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 156 octets ; sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef"
+    },
+    {
+      "id": "file:c90f42b20b1efd469a5712b3",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 3845 octets ; sha256:c12f3f33b6ef3014ea2b9e74ff5a7c001ac4a5cf570bbb4c4567287af918e7e8"
+    },
+    {
+      "id": "file:1e95ee3d4cde1a9a2eacfeaf",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 585 octets ; sha256:a395b292ca571a0b26a7ebe3d8cc9f285871f0551e6e973825b046e679e510d5"
+    },
+    {
+      "id": "file:be840379458d04d0f3b00cca",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 756 octets ; sha256:2e0490346a10d6278e7bddf9010018bd7b8e12c41c1600c28851a31f25e93e51"
+    },
+    {
+      "id": "file:5dad43bec468ce3a77de2b92",
+      "kind": "hosted_file",
+      "label": "canon/domain/legacy-v6-state.payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 885678 octets ; sha256:7e16d3927b3d616d8e0ae8e97005a67911b03e219231368b3feb3b8d81b3de50"
+    },
+    {
+      "id": "file:c318e3b557d5c98e723b5cdb",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1222 octets ; sha256:2dd52c1320d7ced484952890962f07118ac76ee774015459eeeb8afdedb24d2d"
+    },
+    {
+      "id": "file:d48d29e8e6a5ef463fd35101",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1871 octets ; sha256:1c27445b189222366a7afe7302108512d3412c509620925bf25c1e1df65b56e8"
+    },
+    {
+      "id": "file:8a1470061690392c38edd969",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2676 octets ; sha256:c8c686a7fe8fcf460b558425dc7cf6ec7400858255f783bef6bcb59a562568a1"
+    },
+    {
+      "id": "file:b85eed4d1a50dbb38ed86c98",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 581 octets ; sha256:1bb2b7aaeffb38962127190db708495a0deb43d00abaf6468e5efb66e4174417"
+    },
+    {
+      "id": "file:e5f883d6aef897960cdf84b7",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 540 octets ; sha256:b6df61fcbb7bdcb5a2e7eaa057477dcc1760e174640d5f8b06ffe9ab7614fedb"
+    },
+    {
+      "id": "file:a5c8f093efb1b8dc5bc4baf3",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 592 octets ; sha256:0ba76df8702d57fe619ed8f8c20abff49aa46a984db5b5912e7bc527f239865a"
+    },
+    {
+      "id": "file:ac38626c076138c5127a30bc",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 529 octets ; sha256:21995e5507f018ed5ab012e67c0bf8989ce1e3facab01d0f0769226086071c0d"
+    },
+    {
+      "id": "file:5c025b0c60c90f750ad25e4d",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 872 octets ; sha256:fc3c02b3d4f7e5c0a2d0a4b3a3d0ab4eb7dd550d80bab03451cc951f82629550"
+    },
+    {
+      "id": "file:ca2209a165f13faf1f3b04db",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 515 octets ; sha256:50b9a42e5cba8010f34a220c7dabf624e7227818552625b437fdea1a76c81f57"
+    },
+    {
+      "id": "file:6afebac526b626fedb344b8a",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 618 octets ; sha256:b5bc44c9ee9dbd73d9ae9c98841f981ea098c0d90ebb2e9321e132a20f1251cf"
+    },
+    {
+      "id": "file:afabfbcebdc1493aafb2f204",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 459 octets ; sha256:49adcbf3d18106a87c917f4472a77bbbbe6f64cebc81ab7200e85aab431077bb"
+    },
+    {
+      "id": "file:b871a0de31ad0f7471a755d8",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 3983 octets ; sha256:1683206ddfbbc99d82aaeab999e77b508b48b20b949ce30bd6fcf3f5dcffc941"
+    },
+    {
+      "id": "file:cbbecc309f9bdcd9eaf7acd6",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1966 octets ; sha256:5a37bec4f18913350f30d417ab43737ac0f8a3588412d135e7228ef53d425c49"
+    },
+    {
+      "id": "file:023db6fbc5f36e6b475905f9",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 8770 octets ; sha256:d6970319f9841a355f007882014c86ace5fdbbb14426833fc3478869532bc48c"
+    },
+    {
+      "id": "file:3562dc12aa7c446693cb0f82",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 923 octets ; sha256:fde412ce5b6c21ef689c1258d7243c18e2974a0f32a1dd481df8a7ceb50789a5"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "artifact:d4ecde62a13ea2538a665ba5",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:8108f52995b1ef44217f81ad",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:0bb1780d77bb2d258d38b199",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:438767e7caa7da77dc75518e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:a735d306bc9a1dffc28fbc15",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:11035884a140d60beebed606",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:842050a5673f66b97f43d2cc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:997a47ddc8e9fd047b839ad3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:c90f42b20b1efd469a5712b3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:1e95ee3d4cde1a9a2eacfeaf",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:be840379458d04d0f3b00cca",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:5dad43bec468ce3a77de2b92",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:c318e3b557d5c98e723b5cdb",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:d48d29e8e6a5ef463fd35101",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:8a1470061690392c38edd969",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:b85eed4d1a50dbb38ed86c98",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:e5f883d6aef897960cdf84b7",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:a5c8f093efb1b8dc5bc4baf3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:ac38626c076138c5127a30bc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:5c025b0c60c90f750ad25e4d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:ca2209a165f13faf1f3b04db",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:6afebac526b626fedb344b8a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:afabfbcebdc1493aafb2f204",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:b871a0de31ad0f7471a755d8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:cbbecc309f9bdcd9eaf7acd6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:023db6fbc5f36e6b475905f9",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:1293f59bf19c031d1ab3794f",
+      "to": "file:3562dc12aa7c446693cb0f82",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Corpus statique de référence en cybersécurité, centré sur le modèle :",
+    "topics": [
+      {
+        "title": "888 assertions Kristal v6",
+        "detail": "888 assertions Kristal v6",
+        "section": "Taille",
+        "line": 10
+      },
+      {
+        "title": "420 référents",
+        "detail": "420 référents",
+        "section": "Taille",
+        "line": 11
+      },
+      {
+        "title": "11 sources externes/éditoriales",
+        "detail": "11 sources externes/éditoriales",
+        "section": "Taille",
+        "line": 12
+      },
+      {
+        "title": "32 classes d’actifs",
+        "detail": "32 classes d’actifs",
+        "section": "Taille",
+        "line": 13
+      },
+      {
+        "title": "19 événements de menace",
+        "detail": "19 événements de menace",
+        "section": "Taille",
+        "line": 14
+      },
+      {
+        "title": "24 familles de faiblesses",
+        "detail": "24 familles de faiblesses",
+        "section": "Taille",
+        "line": 15
+      },
+      {
+        "title": "46 contrôles défensifs",
+        "detail": "46 contrôles défensifs",
+        "section": "Taille",
+        "line": 16
+      },
+      {
+        "title": "14 dimensions d’impact",
+        "detail": "14 dimensions d’impact",
+        "section": "Taille",
+        "line": 17
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:f9c1f88631d245ed87ea5f1fb4dba181e323da2b1e9c2b3c056655ffdb877ef4",
+        "title": "Kristal-Cybersecurity v1.0.0",
+        "excerpt": "Corpus statique de référence en cybersécurité, centré sur le modèle :",
+        "sections": [
+          {
+            "title": "Taille",
+            "line": 9
+          },
+          {
+            "title": "Principe de raisonnement",
+            "line": 19
+          },
+          {
+            "title": "Sources mouvantes",
+            "line": 22
+          },
+          {
+            "title": "Limite de sécurité",
+            "line": 25
+          },
+          {
+            "title": "Validation",
+            "line": 28
+          }
+        ],
+        "topics": [
+          {
+            "title": "888 assertions Kristal v6",
+            "detail": "888 assertions Kristal v6",
+            "section": "Taille",
+            "line": 10
+          },
+          {
+            "title": "420 référents",
+            "detail": "420 référents",
+            "section": "Taille",
+            "line": 11
+          },
+          {
+            "title": "11 sources externes/éditoriales",
+            "detail": "11 sources externes/éditoriales",
+            "section": "Taille",
+            "line": 12
+          },
+          {
+            "title": "32 classes d’actifs",
+            "detail": "32 classes d’actifs",
+            "section": "Taille",
+            "line": 13
+          },
+          {
+            "title": "19 événements de menace",
+            "detail": "19 événements de menace",
+            "section": "Taille",
+            "line": 14
+          },
+          {
+            "title": "24 familles de faiblesses",
+            "detail": "24 familles de faiblesses",
+            "section": "Taille",
+            "line": 15
+          },
+          {
+            "title": "46 contrôles défensifs",
+            "detail": "46 contrôles défensifs",
+            "section": "Taille",
+            "line": 16
+          },
+          {
+            "title": "14 dimensions d’impact",
+            "detail": "14 dimensions d’impact",
+            "section": "Taille",
+            "line": 17
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:1bb2b7aaeffb38962127190db708495a0deb43d00abaf6468e5efb66e4174417",
+        "title": "Intention et scope — Kristal-Cybersecurity",
+        "excerpt": "Corpus statique de référence en cybersécurité, centré sur le modèle :",
+        "sections": [
+          {
+            "title": "Intention originale (extrait README)",
+            "line": 3
+          },
+          {
+            "title": "Normalisation 3.2.2",
+            "line": 13
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 7
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:b6df61fcbb7bdcb5a2e7eaa057477dcc1760e174640d5f8b06ffe9ab7614fedb",
+        "title": "Frontière sémantique — Kristal-Cybersecurity",
+        "excerpt": "actif × menace × vulnérabilité × contrôle × impact.",
+        "sections": [
+          {
+            "title": "Objet",
+            "line": 3
+          },
+          {
+            "title": "Invariant",
+            "line": 7
+          },
+          {
+            "title": "Ownership",
+            "line": 11
+          },
+          {
+            "title": "Identité stable",
+            "line": 15
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:0ba76df8702d57fe619ed8f8c20abff49aa46a984db5b5912e7bc527f239865a",
+        "title": "Modèle natif — Kristal-Cybersecurity",
+        "excerpt": "Type conservé : typed_risk_scenario_graph.",
+        "sections": [
+          {
+            "title": "Référence historique",
+            "line": 11
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:21995e5507f018ed5ab012e67c0bf8989ce1e3facab01d0f0769226086071c0d",
+        "title": "Modèle épistémique — Kristal-Cybersecurity",
+        "excerpt": "Les assertions historiques sont conservées avec leurs données de provenance. Le catalogue original est external-source-library/source-store.json. La version normalisée est un index d’accès ; elle ne promeut pas un enregistrement externe en vérité universelle.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:fc3c02b3d4f7e5c0a2d0a4b3a3d0ab4eb7dd550d80bab03451cc951f82629550",
+        "title": "Canonique et dérivé — Kristal-Cybersecurity",
+        "excerpt": "canon/domain/legacy-v6-state.payload.json est un adaptateur lossless du payload du Logical Artifact historique urn:kristal:cybersecurity:canonical-state.",
+        "sections": [
+          {
+            "title": "Canon 3.2.2",
+            "line": 3
+          },
+          {
+            "title": "Legacy / matérialisation",
+            "line": 9
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:50b9a42e5cba8010f34a220c7dabf624e7227818552625b437fdea1a76c81f57",
+        "title": "Orientations et projections — Kristal-Cybersecurity",
+        "excerpt": "Orientation métier (historique) : actif × menace × vulnérabilité × contrôle × impact.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:b5bc44c9ee9dbd73d9ae9c98841f981ea098c0d90ebb2e9321e132a20f1251cf",
+        "title": "Validation — Kristal-Cybersecurity",
+        "excerpt": "Logical Artifact : sha256:d688b56bbeaffe68c6b4e755fcf3d0c9b758f49d63c2df548bc97a1da9cc7e52",
+        "sections": [
+          {
+            "title": "Commandes",
+            "line": 3
+          },
+          {
+            "title": "Golden commitments",
+            "line": 10
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 12
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:49adcbf3d18106a87c917f4472a77bbbbe6f64cebc81ab7200e85aab431077bb",
+        "title": "Hosting / publication — Kristal-Cybersecurity",
+        "excerpt": "La normalisation n’active ni ne publie un nouveau state. Les artefacts historiques .kristal/v9/activation.json, qualification et exchange demeurent à l’identique et ne sont pas interprétés comme une nouvelle opération.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:1683206ddfbbc99d82aaeab999e77b508b48b20b949ce30bd6fcf3f5dcffc941",
+        "title": "Cybersecurity — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Causal Diagnosis (ARK-08), declared; not independently approved.",
+            "detail": "Arketype: Causal Diagnosis (ARK-08), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Information technology (software); Pollution, disasters and safety, declared,…",
+            "detail": "UNESCO: Information technology (software); Pollution, disasters and safety, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 1bb2b7aaeffb389621…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 1bb2b7aaeffb389621…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 b6df61fcbb7bdcb5a2…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 b6df61fcbb7bdcb5a2…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 0ba76df8702d57fe61…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 0ba76df8702d57fe61…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 21995e5507f018ed5a…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 21995e5507f018ed5a…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 fc3c02b3d4f7e5c0a2…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 fc3c02b3d4f7e5c0a2…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 b5bc44c9ee9dbd73d9…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 b5bc44c9ee9dbd73d9…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:b08b400f46fc68baa08a480780abb88c956fdb7ca1d53d25b6082a305971de3b",
+        "title": "AI Context — Cybersecurity",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Intention originale (extrait README)",
+            "line": 25
+          },
+          {
+            "title": "Normalisation 3.2.2",
+            "line": 35
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 41
+          },
+          {
+            "title": "Objet",
+            "line": 45
+          },
+          {
+            "title": "Invariant",
+            "line": 49
+          },
+          {
+            "title": "Ownership",
+            "line": 53
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:cybersecurity",
+            "detail": "State ref: urn:kristal:state:cybersecurity",
+            "section": "AI Context — Cybersecurity",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:ce349a4ad4d44b2f71f5d91294ae3f55e1a3a677941c3ec6cb57560a2e60292d",
+            "section": "AI Context — Cybersecurity",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — Cybersecurity",
+            "line": 7
+          },
+          {
+            "title": "Native model: typed_risk_scenario_graph",
+            "detail": "Native model: typed_risk_scenario_graph",
+            "section": "AI Context — Cybersecurity",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — Cybersecurity",
+            "line": 9
+          },
+          {
+            "title": "Sources: 11",
+            "detail": "Sources: 11",
+            "section": "AI Context — Cybersecurity",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — Cybersecurity",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — Cybersecurity",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — Cybersecurity",
+            "line": 13
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef",
+        "title": "Glossary",
+        "excerpt": "No project-specific glossary has been authored. Use the native terminology in the canonical files and documentation; do not invent definitions.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:a395b292ca571a0b26a7ebe3d8cc9f285871f0551e6e973825b046e679e510d5",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading Cybersecurity offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 14
+  }
+}

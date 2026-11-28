@@ -1,6 +1,9 @@
-import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges} from './graph-core.mjs';
+import {PRIORITY_LANGUAGES,priorityLocale,searchProfile,eligibleDescriptors,initialUi,uiText,translateShell} from './ui-languages.mjs';
+import {clampSatellites, graphNeighborhood, navigationPath, buildNeighborIndex, previewNeighbors, readableKnowledgeEdges, connectedEntry, secondaryRing} from './graph-core.mjs';
 import {portraitFor, orbitPreview} from './profile.mjs';
-import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, publicConceptLabel} from './semantic-display.mjs';
+import {directNeighborPages, connectedEntryPoints, graphCaptionLines, readableMapPositions, mapGeometrySafe} from './exploration-v19.mjs';
+import {semanticLabel, readableNodeLabel, semanticQueryMatch, publicKristalTitle, isUnlabeledKnowledge, publicNodeKind, publicDescription, publicRelationLabel, isMachineRelationLabel, publicConceptLabel, publicReaderLabel, publicReaderDescription, isOpaqueReaderText, isNamedForReader, readerKnowledgeSummary, defaultReaderLens, readerPreferredFocus, readerDocumentGroups, readerDocumentMap, readerDocumentCategory, readerConnectedNamedFocus, readableDocumentTitle, readerMediaCategory, readerMediaGroups, isReaderMachineValue, isReaderPredicateCode} from './semantic-display.mjs';
+import {validateLocalization, validateLocaleDescriptor, localizationMap, relationLocalizationMap, normalizeLocale, selectedSearchLocales, selectedDescriptors, searchMatches, loadSearchResources, MAX_SEARCH_LANGUAGES} from './multilingual-read.mjs';
 // Konstellation Light: same-origin, dependency-free reader of build-verified derived bundles.
 // All untrusted labels are inserted with textContent; no semantic authority is inferred.
 const $ = (id) => document.getElementById(id);
@@ -18,18 +21,136 @@ const svgElement = (tag, attributes = {}) => {
 const short = (s, n = 34) => String(s).length > n ? `${String(s).slice(0, n - 1)}…` : String(s);
 // Human-readable labels are ONLY a rendering function; node IDs and predicates are unchanged.
 const isKnowledge = () => state.bundle?.view_kind === 'derived-public-knowledge';
-const displayNode = n => isKnowledge() && n.technical_identifier ? `Identifiant externe${n.property_code ? ` (${n.property_code})` : ''}` : isKnowledge() && isUnlabeledKnowledge(n) ? 'Notion sans nom' : state.bundle?.view_kind === 'derived-semantic-preview' ? readableNodeLabel(n.label, n.kind) : isKnowledge() ? publicConceptLabel(n.label) : n.label;
-const displayRelation = relation => isKnowledge() ? publicRelationLabel(relation, state.bundle.relation_labels?.[relation]) : state.bundle?.view_kind === 'derived-semantic-preview' ? semanticLabel(relation) : relation.replaceAll('_', ' ');
-const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false };
+const isReferenceOrMachineValue=n=>Boolean(readerMediaCategory(n)||isReaderMachineValue(n));
+const displayNode = n => {
+  if(isKnowledge() && isReferenceOrMachineValue(n)) return publicReaderLabel(n,{viewKind:state.bundle?.view_kind});
+  const ordinal=state.nodeOrdinal?.get(n.id) || 0;
+  const localizedLabel=state.localized?.get(n.id)?.label;
+  if (state.bundle?.view_kind==='derived-public-knowledge' &&
+      (n.technical_identifier || isUnlabeledKnowledge(n) || isOpaqueReaderText(n.label) ||
+        (state.locale && !localizedLabel))) {
+    const noun=n.kind==='valeur'?'Valeur':'Notion';
+    return `${noun} ${state.locale?'non traduite':'sans intitulé'} · n° ${ordinal}`;
+  }
+  return publicReaderLabel(n, {localizedLabel,viewKind:state.bundle?.view_kind,
+    ordinal,requireReviewed:Boolean(state.locale)});
+};
+const documentReading = n => state.bundle?.reading?.documents?.find(d=>n?.kind==='hosted_file' && d.path===n.label) || null;
+const displayDocumentTitle = n => {
+  const found=documentReading(n);if(found?.title)return found.title;
+  if(n?.kind==='hosted_file' && /\.md$/i.test(n.label)){
+    const filename=n.label.split('/').at(-1).replace(/\.md$/i,'');
+    const label=filename.replace(/^\d+[_-]*/,'').replace(/[_-]+/g,' ').trim();
+    if(label)return `Document : ${label}`;
+  }
+  return readableDocumentTitle(n,{ordinal:state.nodeOrdinal?.get(n.id)||1,groupLabel:readerDocumentGroups([n])[0]?.label||'Document'});
+};
+const displayDescription = n => state.locale && !state.localized?.get(n.id)?.definition ? '' : publicReaderDescription(state.localized?.get(n.id)?.definition || n.description);
+const isUnnamedForVisitor=n=>Boolean(n && !n.technical_identifier && ((isUnlabeledKnowledge(n)||isOpaqueReaderText(n.label))&&!state.localized?.get(n.id)?.label || (state.locale&&!state.localized?.get(n.id)?.label)));
+const displayRelation = relation => {
+  const localized=state.localizedRelations?.get(relation)?.label;
+  if(localized && !isMachineRelationLabel(localized) && !isReaderPredicateCode(localized))return localized;
+  if(state.locale)return t('noTranslation');
+  if(state.bundle?.view_kind==='derived-hosting-navigation')return ({has_member:'Comprend',lists_file:'Contient'})[relation]||'Lien de collection';
+  const readable=publicRelationLabel(relation,isKnowledge()?state.bundle.relation_labels?.[relation]:null);
+  return isReaderPredicateCode(readable)?'Lien déclaré':readable;
+};
+const state = { catalog: null, bundle: null, selection: null, query: '', lens: 'constellation', slug: null, revision: null, embed: false, page: 0, satellites:8, history: [], portraitId: null, showUnnamed:false, autoFocus:false, autoLens:true, docCategory:null, neighborPage:0, overviewOpen:true, readingId:null, locale:null, localized:null, localizedRelations:null, localeCache:new Map(), nodeOrdinal:new Map() };
+// Search preferences are independent of the display localization.
+const ML_PREF_KEY='konstellation-light-search-locales-v1';
+const UI_PREF_KEY='konstellation-light-ui-language-v1';
+let savedUi=null;try{savedUi=localStorage.getItem(UI_PREF_KEY);}catch{}
+const activeUi=initialUi(new URLSearchParams(location.search).get('ui'),savedUi);
+document.documentElement.lang=activeUi;
+const uiLocale=()=>activeUi;
+const t=key=>uiText(activeUi,key);
+translateShell(document,activeUi);
+$('ui-language-note').hidden=activeUi==='fr';
+fillSelect($('ui-language'),PRIORITY_LANGUAGES.map(tag=>[tag,new Intl.DisplayNames([tag],{type:'language'}).of(tag)]),activeUi);
+let searchExtras=[];
+try{const saved=JSON.parse(localStorage.getItem(ML_PREF_KEY)||'[]');if(Array.isArray(saved))searchExtras=searchProfile(uiLocale(),saved).filter(x=>![uiLocale(),'en'].includes(x));}catch{}
+let originalSearchOverride=null, searchGeneration=0, searchController=null, choiceGeneration=0, displayGeneration=0;
+let searchState={pending:false,results:[],failures:[]};
+const localeName=tag=>{try{return new Intl.DisplayNames([tag],{type:'language'}).of(tag)||tag;}catch{return tag;}};
+const searchTags=()=>searchProfile(uiLocale(),searchExtras);
+const saveSearchExtras=()=>{try{localStorage.setItem(ML_PREF_KEY,JSON.stringify(searchExtras));}catch{}};
+function cancelSearch(){searchGeneration++;searchController?.abort();searchController=null;searchState={pending:false,results:[],failures:[]};}
+function currentDescriptors(){return state.bundle?eligibleDescriptors(lookup(state.slug,state.revision)?.localizations||{}):{};}
+function sourceSearchEnabled(){return originalSearchOverride===true;}
+function renderSearchControls(){
+  const desc=currentDescriptors(),active=searchTags(),available=Object.keys(desc).map(normalizeLocale).filter(Boolean);
+  const missing=active.filter(tag=>!available.includes(tag));
+  $('search-language-summary').textContent=`${t('searchLang')} · ${active.map(localeName).join(' + ')}${sourceSearchEnabled()?' + '+t('originalShort'):''}`;
+  $('search-language-defaults').textContent=`${t('defaults')} : ${searchProfile(uiLocale()).map(localeName).join(' + ')}.`;
+  const add=$('search-language-add');
+  fillSelect(add,[['','—'],...[...new Set(available)].filter(tag=>!active.includes(tag)).sort().map(tag=>[tag,`${localeName(tag)} (${tag})`])],'');
+  add.disabled=active.length>=PRIORITY_LANGUAGES.length||add.options.length===1;
+  const chips=$('search-language-extras');chips.replaceChildren();
+  for(const tag of searchExtras){const button=element('button','button ghost',`${localeName(tag)} (${tag}) ×`);button.type='button';button.setAttribute('aria-label',`${t('remove')} ${localeName(tag)}`);button.addEventListener('click',()=>{searchExtras=searchExtras.filter(x=>x!==tag);saveSearchExtras();state.page=0;refreshSearch();});chips.append(button);}
+  $('search-original').checked=sourceSearchEnabled();
+  const failures=searchState.failures.map(x=>x.locale);
+  $('search-language-status').textContent=[Object.keys(desc).length===0?t('noResource'):t('selectedOnly'),missing.length?`${t('missing')} : ${missing.join(', ')}.`:'',failures.length?`${t('refused')} : ${failures.join(', ')}.`:''].filter(Boolean).join(' ');
+}
+function originalRows(bundle){
+  return bundle.nodes.filter(n=>!n.technical_identifier&&!(isKnowledge()&&isReferenceOrMachineValue(n))&&n.kind!=='hosted_state').map(n=>{
+    const doc=documentReading(n);
+    const label=bundle.view_kind==='derived-hosting-navigation'?displayDocumentTitle(n):isNamedForReader(n)?publicReaderLabel(n,{viewKind:bundle.view_kind}):'';
+    return {node_id:n.id,locale:null,label,definition:[publicReaderDescription(n.description),doc?.excerpt,doc?.sections?.map(s=>s.title).join(' '),bundle.view_kind==='derived-hosting-navigation'?readerDocumentCategory(n):'',bundle.view_kind==='derived-semantic-preview'?(n.aliases||[]).join(' '):''].filter(Boolean).join(' ')};
+  });
+}
+async function refreshSearch(){
+  cancelSearch();
+  if(!state.bundle)return;
+  const generation=searchGeneration,bundle=state.bundle,query=state.query.trim();
+  renderSearchControls();
+  if(!query){render();urlState();return;}
+  const controller=new AbortController();searchController=controller;
+  searchState.pending=true;render();urlState();
+  const rows=sourceSearchEnabled()?originalRows(bundle):[];
+  const allowed=new Set(bundle.nodes.filter(n=>!n.technical_identifier&&n.kind!=='hosted_state'&&!(isKnowledge()&&isReferenceOrMachineValue(n))).map(n=>n.id));
+  let loaded;
+  try{loaded=await loadSearchResources(searchTags(),currentDescriptors(),r=>fetchLocalization(r.tag,r.descriptor,bundle,controller.signal),{signal:controller.signal});}
+  catch(e){if(generation!==searchGeneration||bundle!==state.bundle)return;searchState={pending:false,results:[],failures:[{locale:'catalogue',error:e.message}]};renderSearchControls();render();return;}
+  if(generation!==searchGeneration||bundle!==state.bundle||loaded.aborted)return;
+  for(const resource of loaded.resources)for(const entry of resource.doc.entries){
+    if(allowed.has(entry.node_id)&&entry.provenance.review_status==='reviewed')rows.push({node_id:entry.node_id,locale:resource.locale,label:entry.label&&!isOpaqueReaderText(entry.label)?entry.label:'',definition:publicReaderDescription(entry.definition)});
+  }
+  searchState={pending:false,results:searchMatches(query,rows,{uiLocale:uiLocale()}),failures:loaded.failures};
+  renderSearchControls();render();urlState();
+}
+function drawMultilingualResults(target){
+  if(searchState.pending){target.append(element('p','loading',t('searching')));return;}
+  const results=searchState.results;
+  if(!results.length){target.append(element('p','empty',t('noResults')));return;}
+  const byId=new Map(state.bundle.nodes.map(n=>[n.id,n]));
+  const list=element('div','ml-search-results');
+  for(const item of results.slice(0,(state.page+1)*60)){
+    const node=byId.get(item.node_id);if(!node)continue;
+    const best=item.matches[0],display=state.localized?.get(node.id)?.label;
+    const title=display||best.label||displayNode(node);
+    const btn=element('button','record',undefined);btn.type='button';
+    const body=element('main');body.append(element('strong','',title));
+    for(const m of item.matches){body.append(element('small','ml-result-match',`${m.locale?localeName(m.locale)+' ('+m.locale+')':t('originalShort')} · ${m.label||short(m.definition,140)}`));}
+    btn.append(body);btn.addEventListener('click',()=>{state.query='';$('search').value='';cancelSearch();state.lens='constellation';state.autoLens=false;focusOn(node.id);});list.append(btn);
+  }
+  target.append(list);
+  if(results.length>(state.page+1)*60){const more=element('button','button ghost',t('more'));more.type='button';more.addEventListener('click',()=>{state.page++;render();});target.append(more);}
+}
 let toastTimeout;
 let portraitOpener = null;
 function notify(message) { const t = $('toast'); t.textContent = message; t.hidden = false; clearTimeout(toastTimeout); toastTimeout = setTimeout(() => t.hidden = true, 3300); }
 function urlState() {
   const p = new URLSearchParams(location.search);
+  p.set('ui',activeUi);
   p.set('k', state.slug || ''); p.set('r', state.revision || ''); p.set('lens', state.lens); p.set('n', String(state.satellites));
   if (state.selection) p.set('focus', state.selection); else p.delete('focus');
   if (state.query) p.set('q', state.query); else p.delete('q');
+  if (state.readingId) p.set('lecture',state.readingId); else p.delete('lecture');
   if (state.showUnnamed) p.set('ids','1'); else p.delete('ids');
+  if (state.neighborPage) p.set('pg',String(state.neighborPage)); else p.delete('pg');
+  if(state.bundle?.view_kind==='derived-hosting-navigation' && state.docCategory)p.set('cat',state.docCategory);
+  else p.delete('cat');
+  if(state.locale)p.set('lang',state.locale);else p.delete('lang');
   if (state.embed) p.set('embed', '1'); else p.delete('embed');
   history.replaceState(null, '', `${location.pathname}?${p.toString()}${location.hash}`);
   const full = new URL(location.href); full.searchParams.delete('embed');
@@ -98,6 +219,49 @@ async function loadPack(entry) {
         !e.source_refs.every(x=>typeof x==='string'&&x.length>0&&x.length<=180))
       throw Error('Provenance de la relation invalide.');
   }
+  if (obj.reading !== undefined) {
+    const r=obj.reading;
+    const safePath=p=>typeof p==='string' && p.length<=240 &&
+      /^(?:README\.md|AI_START_HERE\.md|docs\/(?:[A-Za-z0-9_.-]+\/)?[A-Za-z0-9_.-]+\.md|ai\/(?:CONTEXT|QUESTIONS|GLOSSARY)\.md)$/.test(p);
+    const safeString=(value,max)=>typeof value==='string'&&value.length<=max;
+    const sourceDigest=s=>typeof s==='string'&&/^sha256:[a-f0-9]{64}$/.test(s);
+    if (!r || r.format!=='konstellation.light-reading/1.0' ||
+        r.status!=='source-public-documents-unqualified'||r.semantic_assertions_created!==0||
+        !safeString(r.intro,420)||!Array.isArray(r.topics)||r.topics.length>10||
+        !Array.isArray(r.documents)||r.documents.length>48||
+        !Number.isSafeInteger(r.scanned_files)||r.scanned_files!==r.documents.length||
+        !(r.overview_path===null||safePath(r.overview_path)) ||
+        !r.documents.every(d=>safePath(d.path)&&sourceDigest(d.sha256)&&safeString(d.title,150)&&
+          safeString(d.excerpt,320)&&Array.isArray(d.sections)&&d.sections.length<=8&&
+          d.sections.every(s=>safeString(s.title,110)&&Number.isInteger(s.line)&&s.line>0)&&
+          Array.isArray(d.topics)&&d.topics.length<=10&&
+          d.topics.every(t=>safeString(t.title,95)&&safeString(t.detail,210)&&safeString(t.section,90)&&Number.isInteger(t.line)&&t.line>0))||
+        !r.topics.every(t=>safeString(t.title,95)&&safeString(t.detail,210)&&safeString(t.section,90)&&Number.isInteger(t.line)&&t.line>0) ||
+        (r.overview_path!==null&&!r.documents.some(d=>d.path===r.overview_path)))
+      throw Error('Projection documentaire non conforme.');
+  }
+  if (obj.guided_reading !== undefined) {
+    const g=obj.guided_reading;
+    const docs=obj.reading?.documents||[];
+    const sourceDoc=docs.find(d=>d.path==='README.md');
+    if(!g || g.format!=='konstellation.light-guided-reading/1.0' ||
+       g.status!=='verbatim-source-unqualified' || g.semantic_assertions_created!==0 ||
+       g.source_commit!==obj.source?.commit || !Array.isArray(g.passages) ||
+       g.passages.length<1 || g.passages.length>8 || !sourceDoc ||
+       !g.passages.every(x=>/^lecture-scene-(?:0[1-9]|1[0-9]|20)$/.test(x.id) &&
+         x.id===`lecture-scene-${String(x.scene).padStart(2,'0')}` &&
+         Number.isInteger(x.scene) && x.scene>0 && x.scene<=20 &&
+         typeof x.title==='string' && x.title.length>0 && x.title.length<=130 &&
+         typeof x.text==='string' && x.text.length>0 && x.text.length<=500 &&
+         (x.explanation===undefined || typeof x.explanation==='string' && x.explanation.length<=240) &&
+         (x.related===undefined || Array.isArray(x.related) && x.related.length<=5 &&
+           x.related.every(part=>Number.isInteger(part.line) && part.line>0 && part.line<2000 &&
+             typeof part.text==='string' && part.text.length>0 && part.text.length<=240)) &&
+         x.source_path==='README.md' && Number.isInteger(x.line) && x.line>0 && x.line<2000 &&
+         x.sha256===sourceDoc.sha256) ||
+       new Set(g.passages.map(x=>x.id)).size!==g.passages.length)
+      throw Error('Citations guidées non conformes ou sources incohérentes.');
+  }
   if (obj.discovery !== undefined) {
     const d=obj.discovery;
     const own=(x,k)=>Object.prototype.hasOwnProperty.call(x,k);
@@ -124,24 +288,120 @@ function fillSelect(select, options, selected) {
   for (const [value, label] of options) { const opt = element('option', '', label); opt.value = value; select.append(opt); }
   select.value = selected;
 }
+async function fetchLocalization(tag,desc,bundle,signal){
+  if(!desc)throw Error('Traduction non disponible dans cette version.');
+  validateLocaleDescriptor(tag,desc);
+  const key=desc.sha256;
+  let doc=state.localeCache.get(key);
+  if(!doc){
+    const res=await fetch(`./${desc.path}`,{cache:'no-store',signal});
+    if(!res.ok)throw Error('Fichier de langue indisponible.');
+    const bytes=await res.arrayBuffer();
+    if(bytes.byteLength!==desc.bytes||`sha256:${await sha256(bytes)}`!==desc.sha256)throw Error('Intégrité du fichier de langue invalide.');
+    doc=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+  }
+  validateLocalization(doc,bundle);
+  if(doc.locale!==tag)throw Error('Langue du fichier incompatible.');
+  if(signal?.aborted)throw Error('Recherche annulée.');
+  state.localeCache.delete(key);state.localeCache.set(key,doc);
+  // Bound memory independently of the total number of catalog languages.
+  while(state.localeCache.size>20)state.localeCache.delete(state.localeCache.keys().next().value);
+  return doc;
+}
+async function loadLocalization(tag) {
+  const generation=++displayGeneration,bundle=state.bundle;
+  if(!tag){state.locale=null;state.localized=null;state.localizedRelations=null;return true;}
+  if(!priorityLocale(tag))throw Error('Locale outside operational profile');
+  const desc=currentDescriptors()[tag];
+  const doc=await fetchLocalization(tag,desc,bundle);
+  if(generation!==displayGeneration||bundle!==state.bundle)return false;
+  state.locale=tag;state.localized=localizationMap(doc);state.localizedRelations=relationLocalizationMap(doc);return true;
+}
+function renderLocalizationSelector(preferred){
+  const row=lookup(state.slug,state.revision),tags=Object.keys(eligibleDescriptors(row?.localizations||{})).sort();
+  $('localization-row').hidden=false;
+  const options=[['',t('originalWords')],...tags.map(x=>[x,`${localeName(x)} (${x})`])];
+  fillSelect($('localization'),options,tags.includes(preferred)?preferred:'');
+  $('localization-status').textContent=tags.length
+    ? t('reviewedOnly')
+    : t('noReviewed');
+  return tags.includes(preferred)?preferred:null;
+}
 async function setChoice(slug, revision, { keepFocus = false } = {}) {
   const row = lookup(slug, revision);
   if (!row) return;
+  const generation=++choiceGeneration; ++displayGeneration; cancelSearch(); originalSearchOverride=null;
+  // An opt-in anonymous exploration of one Kristal must not silently leak
+  // into a different collection selected through the sidebar.
+  if(state.slug && state.slug!==slug){
+    state.showUnnamed=false;
+    $('show-unnamed').checked=false;
+    state.docCategory=null;
+  }
   $('visual').replaceChildren(element('div', 'loading', 'Vérification de l’intégrité du bundle…'));
   try {
     const data = await loadPack(row);
+    if(generation!==choiceGeneration)return;
+    cancelSearch();
     state.slug = slug; state.revision = revision; state.bundle = data; state.portraitId = null;
+    if (!keepFocus){state.neighborPage=0;state.overviewOpen=true;}
+    state.nodeOrdinal = new Map(data.nodes.map((node,i)=>[node.id,i+1]));
     const validFocus = keepFocus && data.nodes.some(n => n.id === state.selection);
-    if (!validFocus) state.selection = (data.nodes.find(n => !n.technical_identifier && !isUnlabeledKnowledge(n)) || data.nodes[0])?.id || null;
+    const hosting=data.view_kind==='derived-hosting-navigation';
+    const byId=new Map(data.nodes.map(n=>[n.id,n]));
+    const activeEdges = data.view_kind === 'derived-public-knowledge'
+      ? readableKnowledgeEdges(data.nodes, data.edges, '').filter(e=>
+        !isReferenceOrMachineValue(byId.get(e.from)) && !isReferenceOrMachineValue(byId.get(e.to))) : data.edges;
+    const eligible=data.nodes.filter(n=>!n.technical_identifier&&!isReferenceOrMachineValue(n));
+    const namedFocus=data.view_kind==='derived-public-knowledge'
+      ? readerConnectedNamedFocus(eligible,activeEdges) : null;
+    const connected=data.view_kind==='derived-public-knowledge'
+      ? connectedEntry(eligible,activeEdges) : null;
+    const namedOnly=data.view_kind==='derived-public-knowledge'
+      ? new Set(eligible.filter(n=>isNamedForReader(n)).map(n=>n.id)) : new Set();
+    const namedEdges=activeEdges.filter(e=>namedOnly.has(e.from)&&namedOnly.has(e.to)).length;
+    // The 51 real-but-unnamed knowledge registries open as maps automatically.
+    // This is a visual choice, not a translation of unknown identifiers.
+    if(state.autoLens&&!validFocus&&data.view_kind==='derived-public-knowledge'){
+      state.showUnnamed=namedEdges<2 && Boolean(connected);
+      $('show-unnamed').checked=state.showUnnamed;
+    }
+    state.docCategory=hosting && keepFocus && readerDocumentGroups(data.nodes).some(g=>g.key===state.requestedCategory)
+      ? state.requestedCategory : null;
+    state.autoFocus = !validFocus && Boolean(connected) && !namedFocus;
+    if (!validFocus) state.selection = hosting
+      ? (state.docCategory ? readerDocumentGroups(data.nodes).find(g=>g.key===state.docCategory)?.nodes[0]?.id : null) ||
+        (data.nodes.find(n=>n.kind==='hosted_state')||data.nodes[0])?.id||null
+      : (state.showUnnamed ? (namedFocus||connected) : (namedFocus||readerPreferredFocus(eligible,activeEdges)||connected)) ||
+        (eligible[0]||data.nodes[0])?.id || null;
     state.history = state.selection ? [state.selection] : [];
+    state.localized=null;state.localizedRelations=null;state.locale=null;
+    const desiredLanguage=renderLocalizationSelector(state.requestedLocale);
+    if(desiredLanguage){
+      try{await loadLocalization(desiredLanguage);}
+      catch(e){if(generation!==choiceGeneration)return;$('localization').value='';$('localization-status').textContent=`Traduction refusée ou indisponible : ${e.message}. Mots d’origine affichés.`;}
+      if(generation!==choiceGeneration)return;
+      if(state.locale)$('localization-status').textContent=`${t('reviewedText')} ${localeName(desiredLanguage)}.`;
+      if(!validFocus&&state.locale){
+        const translatedFocus=readerPreferredFocus(data.nodes,activeEdges,{localized:state.localized,requireReviewed:true});
+        if(translatedFocus){state.selection=translatedFocus;state.history=[translatedFocus];state.autoFocus=false;}
+      }
+    }
+    if(state.autoLens)state.lens=(data.reading?.documents?.length && (hosting || namedEdges<2)) ? 'discover' : defaultReaderLens(data,{localized:state.localized,requireReviewed:Boolean(state.locale)});
     fillSelect($('collection'), [...new Set(state.catalog.entries.map(e => e.slug))].map(s => [s, publicKristalTitle(s,state.catalog.entries.find(e=>e.slug===s).title)]).sort((a,b)=>a[1].localeCompare(b[1],'fr')), slug);
     const versions=existingRevisions(slug);
     fillSelect($('revision'), versions.map((x,i) => [x.revision, `Version ${i+1}`]), revision);
     $('revision-row').hidden=versions.length<2;
     $('compare-tab').hidden=versions.length<2;
     if (versions.length<2 && state.lens==='compare') state.lens='constellation';
-    render(); urlState();
-  } catch (e) { showFailure(e); }
+    const existsInGuide=Boolean(data.guided_reading?.passages?.some(x=>x.id===state.readingId));
+    if(state.readingId && !existsInGuide && !(state.readingId==='lecture-scene-02' && data.slug==='biology'))
+      state.readingId=null;
+    if(state.readingId)state.lens='discover';
+    renderSearchControls(); await refreshSearch();
+    if(generation!==choiceGeneration)return;
+    if(state.readingId)markGuidedReading(state.readingId,{scroll:true});
+  } catch (e) { if(generation===choiceGeneration)showFailure(e); }
 }
 function showFailure(err) {
   state.bundle = null;
@@ -150,20 +410,65 @@ function showFailure(err) {
   notify(/(?:SHA-256|intégrité|invalide|non conforme|incorrect)/i.test(err.message) ? 'Intégrité ou format à vérifier.' : 'Lecture interrompue : voir le message ci-dessus.');
 }
 function filteredNodes() {
-  const q = state.query.toLocaleLowerCase('fr').trim();
-  if (!q) return isKnowledge() ? state.bundle.nodes.filter(n=>!n.technical_identifier && (state.showUnnamed || !isUnlabeledKnowledge(n))) : state.bundle.nodes;
-  const terms = q.split(/\s+/).filter(Boolean);
-  if (state.bundle.view_kind === 'derived-semantic-preview') return state.bundle.nodes.filter(n => semanticQueryMatch(n, q));
-  return state.bundle.nodes.filter(n => terms.every(t => `${n.label} ${displayNode(n)} ${n.id} ${n.description || ''} ${n.kind}`.toLocaleLowerCase('fr').includes(t)));
+  const q = state.query.trim();
+  if (!q) return isKnowledge() ? state.bundle.nodes.filter(n=>
+    !n.technical_identifier && !isReferenceOrMachineValue(n) && (state.showUnnamed || isNamedForReader(n,{
+      localizedLabel:state.localized?.get(n.id)?.label,requireReviewed:Boolean(state.locale)
+    }))) : state.bundle.nodes.filter(n=>n.kind!=='hosted_state');
+  const ids=new Set(searchState.results.map(r=>r.node_id));
+  return state.bundle.nodes.filter(n=>ids.has(n.id));
 }
 function focusOn(id) {
   if (!state.bundle.nodes.some(n => n.id === id)) return;
-  state.portraitId = null; state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
+  state.neighborPage=0; state.overviewOpen=false;
+  state.portraitId = null; state.autoFocus = false;
+  if(state.bundle.view_kind==='derived-hosting-navigation'){
+    const node=state.bundle.nodes.find(n=>n.id===id);
+    state.docCategory=node?.kind==='hosted_state'?null:readerDocumentCategory(node);
+  }
+  state.selection = id; state.history = navigationPath(state.history, id); render(); urlState();
+}
+// The explorer is opt-in: anonymous endpoints are numbered for navigation only.
+// This never assigns identities or modifies source relations.
+function activateRealConnections() {
+  if(!isKnowledge())return;
+  const data=state.bundle;
+  const edges=readableKnowledgeEdges(data.nodes,data.edges,'');
+  const eligible=data.nodes.filter(n=>!n.technical_identifier && !isReferenceOrMachineValue(n));
+  const visibleIds=new Set(eligible.map(n=>n.id));
+  const visibleEdges=edges.filter(e=>visibleIds.has(e.from)&&visibleIds.has(e.to));
+  // When a registry has no named, connected node, permit exploration of a
+  // genuinely connected anonymous node; displayNode assigns a neutral number.
+  const preferred=readerConnectedNamedFocus(eligible,visibleEdges,{
+    localized:state.localized,requireReviewed:Boolean(state.locale)})||connectedEntry(eligible,visibleEdges);
+  if(!preferred){notify('Aucune connexion affichable dans cette collection.');return;}
+  state.showUnnamed=true;
+  $('show-unnamed').checked=true;
+  state.autoFocus=false;state.autoLens=false;state.lens='constellation';state.page=0;
+  if(preferred && preferred!==state.selection){state.selection=preferred;state.history=[preferred];}
+  render();urlState();
+}
+function returnToReadableWords() {
+  if(!isKnowledge())return;
+  state.showUnnamed=false;$('show-unnamed').checked=false;
+  state.autoLens=false;state.lens='registry';state.page=0;
+  const focus=readerPreferredFocus(state.bundle.nodes,
+    readableKnowledgeEdges(state.bundle.nodes,state.bundle.edges,''),{
+      localized:state.localized,requireReviewed:Boolean(state.locale)});
+  if(focus){state.selection=focus;state.history=[focus];}
+  render();urlState();
+}
+function actionButton(label,handler,style='button ghost'){
+  const btn=element('button',style,label);btn.type='button';btn.addEventListener('click',handler);
+  return btn;
 }
 function lensMeta() {
   return {
-    constellation: ['Carte des connaissances', isKnowledge() ? 'Sélectionnez une notion pour découvrir ses liens avec les autres.' : 'Cliquez sur un élément pour explorer ses liens.'],
-    registry: ['Explorer les notions', isKnowledge() ? 'Les éléments sans nom sont masqués par défaut. Vous pouvez les afficher dans Options avancées.' : 'Parcourez les éléments de ce Kristal.'],
+    discover: ['Découvrir ce Kristal', 'Présentation et documents tirés de la source publique; aucune relation ni qualification inventée.'],
+    constellation: [isKnowledge() ? t('mapKnowledge') : t('mapDocs'),
+      isKnowledge() ? t('mapHint') :
+      t('mapDocHint')],
+    registry: [isKnowledge()?(activeUi==='fr'?'Notions disponibles':t('registry')):(activeUi==='fr'?'Documents de la collection':t('registryDocs')), isKnowledge() ? t('registryHint') : t('registryDocHint')],
     trace: ['Vérification des données', 'Ce qui a été vérifié, et ce qui ne l’a pas été.'],
     compare: ['Comparer les versions', 'Éléments ajoutés, retirés ou modifiés entre deux versions.'],
   }[state.lens];
@@ -173,20 +478,36 @@ function render() {
   const data = state.bundle; if (!data) return;
   $('title').textContent = publicKristalTitle(data.slug,data.title);
   const semantic = data.view_kind === 'derived-semantic-preview';
-  $('subtitle').textContent = isKnowledge() ? 'Explorez les notions, les valeurs et leurs liens dans ce Kristal.' : semantic ? 'Aperçu local de connaissances en cours de préparation (non publié).' : 'Explorez les fichiers et les liens disponibles dans ce Kristal.';
-  $('metric-members').textContent = Number(isKnowledge() ? data.nodes.filter(n=>!n.technical_identifier && (state.showUnnamed || !isUnlabeledKnowledge(n))).length : data.nodes.length).toLocaleString('fr-FR');
-  $('metric-relations').textContent = Number(data.edges.length).toLocaleString('fr-FR');
-  $('metric-members-label').textContent = isKnowledge() ? (state.showUnnamed ? 'NOTIONS ET VALEURS' : 'ÉLÉMENTS NOMMÉS') : 'ÉLÉMENTS À EXPLORER';
-  $('metric-relations-label').textContent = isKnowledge() ? 'LIENS DÉCLARÉS' : 'LIENS DISPONIBLES';
+  $('subtitle').textContent = isKnowledge() ? 'Explorez visuellement les liens déclarés. Les notions sans intitulé portent une désignation neutre.' : semantic ? 'Aperçu local de connaissances en cours de préparation (non publié).' : 'Explorez visuellement la structure documentaire publique. Aucun graphe sémantique n’est revendiqué.';
+  $('metric-members').textContent = Number(isKnowledge() ? readerKnowledgeSummary(data.nodes,data.edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}).named : data.nodes.filter(n=>n.kind==='hosted_file').length).toLocaleString(uiLocale());
+  $('metric-relations').textContent = Number(data.edges.length).toLocaleString(uiLocale());
+  $('metric-members-label').textContent = t(isKnowledge()?'named':'documents');
+  $('metric-relations-label').textContent = t(isKnowledge()?'links':'inventory');
   $('graph-controls').hidden = state.lens !== 'constellation';
+  document.querySelector('[data-lens="discover"]').hidden = !Boolean(data.reading?.documents?.length);
+  document.querySelector('[data-lens="constellation"]').hidden=false;
+  document.querySelector('[data-lens="constellation"]').lastChild.textContent=' '+t(isKnowledge()?'mapKnowledge':'mapDocs');
+  document.querySelector('.advanced-toggle').hidden=data.view_kind==='derived-hosting-navigation';
+  document.querySelector('[data-lens="registry"]').lastChild.textContent=' '+t(isKnowledge()?'registry':'registryDocs');
+  document.querySelector('label[for="satellites"]').firstChild.textContent=t(isKnowledge()?'neighbors':'visibleDocs')+' ';
+  $('satellites').setAttribute('aria-label',isKnowledge()?'Nombre de bulles autour de la notion centrale':'Nombre maximal de documents affichés par catégorie');
   $('satellites').value = String(state.satellites); $('satellites-count').textContent = String(state.satellites);
-  $('graph-back').disabled = state.history.length < 2;
+  $('graph-back').disabled = state.history.length < 2 && !(data.view_kind==='derived-hosting-navigation' && state.docCategory);
   const [heading, hint] = lensMeta(); $('panel-title').textContent = heading; $('panel-hint').textContent = hint;
-  $('view-tag').textContent = ({constellation:'CARTE',registry:'NOTIONS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
+  $('view-tag').textContent = ({discover:'LECTURE SOURCÉE',constellation:isKnowledge()?'CARTE DES LIENS':'CARTE DOCUMENTAIRE',registry:isKnowledge()?'NOTIONS':'DOCUMENTS',trace:'VÉRIFICATION',compare:'VERSIONS'})[state.lens];
   if (state.lens==='trace' || state.lens==='compare') $('advanced-tools').open=true;
   document.querySelectorAll('[data-lens]').forEach(btn => { btn.classList.toggle('active', btn.dataset.lens === state.lens); btn.setAttribute('aria-pressed', String(btn.dataset.lens === state.lens)); });
-  const visible = filteredNodes(); $('count').textContent = state.query.trim() ? `${visible.length.toLocaleString('fr-FR')} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString('fr-FR')} éléments nommés` : `${visible.length.toLocaleString('fr-FR')} éléments`;
+  const visible = filteredNodes(); $('count').textContent = state.lens==='discover' ? `${data.reading?.documents?.length||0} document(s) publics présentés` : state.query.trim() ? `${visible.length.toLocaleString(uiLocale())} résultat(s)` : isKnowledge() ? `${visible.length.toLocaleString(uiLocale())} notions disponibles sur la carte` : `${visible.filter(n=>n.kind==='hosted_file').length.toLocaleString(uiLocale())} documents répertoriés`;
   const view = $('visual'); view.replaceChildren();
+  updateReaderTrail();
+  if(state.query.trim()){
+    $('count').textContent=searchState.pending?t('searching'):`${searchState.results.length.toLocaleString(uiLocale())} ${t('results')}`;
+    $('graph-controls').hidden=true;$('panel-title').textContent=t('searchResults');
+    $('panel-hint').textContent=t('searchHint');
+    $('view-tag').textContent=t('searchTag');$('truncation').textContent=t('searchScope');
+    drawMultilingualResults(view);drawInspection();return;
+  }
+  if (state.lens === 'discover') drawDiscover(view);
   if (state.lens === 'constellation') drawGraph(view, visible);
   if (state.lens === 'registry') drawRegistry(view, visible);
   if (state.lens === 'trace') drawTrace(view);
@@ -212,100 +533,491 @@ function profileCard(target, node, opener = null) {
   card.append(element('p','portrait-note','Données déclarées dans cette projection.'));target.append(card);
   if(opener){portraitOpener=opener;close.focus();}
 }
-function drawGraph(target, visible) {
-  const all=state.bundle.nodes;
-  const selected=all.find(n=>n.id===state.selection)||all[0];
-  if (!selected) { target.append(element('div','empty','Aucun nœud disponible.'));return; }
-  const matched=state.query.trim() ? new Set(visible.map(n=>n.id)) : null;
-  const unnamedIds=isKnowledge() && !state.showUnnamed && !state.query.trim() && !isUnlabeledKnowledge(selected) ? new Set(all.filter(isUnlabeledKnowledge).map(n=>n.id)) : null;
-  const displayEdges=isKnowledge() ? readableKnowledgeEdges(all,state.bundle.edges,selected.id).filter(e=>!unnamedIds || (!unnamedIds.has(e.from) && !unnamedIds.has(e.to))) : state.bundle.edges;
-  const view=graphNeighborhood(all,displayEdges,selected.id,state.satellites,matched);
-  const neighborIndex=buildNeighborIndex(all,displayEdges);
-  const shown=view.nodes;
-  const svg=svgElement('svg',{viewBox:'0 0 760 470',role:'group','aria-label':'Graphe navigable : Entrée ou clic pour recentrer sur une bulle. Survolez pour voir les satellites secondaires.'});
-  const xy=new Map([[selected.id,{x:380,y:226}]]);
-  const count=shown.length-1;
-  shown.slice(1).forEach((n,i)=>{const angle=2*Math.PI*i/Math.max(1,count)-Math.PI/2;
-    const radius=count>13 ? 174+(i%2)*24 : 162;
-    xy.set(n.id,{x:380+Math.cos(angle)*radius*1.65,y:226+Math.sin(angle)*radius});
-  });
-  for(const edge of view.edges){const a=xy.get(edge.from),b=xy.get(edge.to);
-    if(!a||!b)continue;
-    const line=svgElement('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'graph-link'});
-    const tooltip=svgElement('title');tooltip.textContent=displayRelation(edge.relation);line.append(tooltip);svg.append(line);
+// VISUAL-V17: a map of document *categories*. Categories are derived from
+// actual public filenames; drawn connectors are graphic grouping guides, never
+// graph assertions. Individual document selection opens the existing inspector.
+
+// V21 — reading is deliberately selected from the pinned source, never guessed
+// from the viewport text. Only the visible quoted span carries the stable ID.
+function markGuidedReading(id,{scroll=false}={}){
+  const quotes=[...document.querySelectorAll('[data-reading-id]')];
+  for(const quote of quotes){
+    const selected=quote.dataset.readingId===id;
+    quote.classList.toggle('v21-reading-selected',selected);
+    quote.setAttribute('aria-current',selected?'true':'false');
   }
-  let previewGroup=null;
-  const clearPreview=()=>{previewGroup?.remove();previewGroup=null;};
-  const showPreview=(node)=>{
-    clearPreview();
-    if(node.id===selected.id)return;
-    // The center is already visible: exclude it from the preview satellites.
-    const secondary=previewNeighbors(neighborIndex,node.id,[selected.id],6);
-    if(!secondary.length)return;
-    const anchor=xy.get(node.id);
-    const obstacles=[...xy].map(([id,p])=>({...p,r:id===selected.id?43:25}));
-    const positions=orbitPreview(secondary,anchor,760,470,6,obstacles);
-    previewGroup=svgElement('g',{class:'graph-secondary-preview','aria-hidden':'true'});
-    previewGroup.append(svgElement('circle',{cx:anchor.x,cy:anchor.y,r:38,class:'preview-halo'}));
-    for(const child of positions){
-      previewGroup.append(svgElement('line',{x1:anchor.x,y1:anchor.y,x2:child.x,y2:child.y}));
-      previewGroup.append(svgElement('circle',{cx:child.x,cy:child.y,r:18}));
-      const name=svgElement('text',{x:child.x,y:child.y+31,class:'preview-label'});
-      name.textContent=short(displayNode(child),19);previewGroup.append(name);
+  const target=quotes.find(node=>node.dataset.readingId===id);
+  if(scroll && target)target.scrollIntoView({block:'center',behavior:'instant'});
+  return Boolean(target);
+}
+function drawGuidedReading(target){
+  const guides=state.bundle.guided_reading?.passages || [];
+  if(!guides.length)return;
+  const section=element('section','v21-guided');section.id='source-readings';
+  section.append(element('p','v21-eyebrow','LECTURE SOURCÉE · VISITE LA FÊTE DES IDÉES'),
+    element('h3','','Passages concrets à lire et à comprendre'),
+    element('p','v21-guided-note','Chaque extrait provient du README épinglé. Son intégrité a été vérifiée pendant la construction; cela ne qualifie pas la vérité de l’affirmation. Les exemples de la vidéo restent fictifs.'));
+  const cards=element('div','v21-reading-cards');
+  for(const reading of guides){
+    const card=element('article','v21-reading-card');
+    const header=element('div','v21-reading-heading');
+    header.append(element('span','v21-reading-scene',`SCÈNE ${String(reading.scene).padStart(2,'0')}`),
+      element('h4','',reading.title));
+    card.append(header);
+    const quote=element('blockquote','v21-reading-quote',[reading.text,...(reading.related||[]).map(x=>x.text)].join('\n'));
+    quote.id=reading.id;
+    quote.dataset.readingId=reading.id;
+    quote.dataset.sourceLine=String(reading.line);
+    quote.tabIndex=0;
+    quote.setAttribute('aria-label',`Passage source pour la scène ${reading.scene} : ${reading.text}`);
+    card.append(quote);
+    if(reading.explanation)card.append(element('p','v21-commentary',reading.explanation));
+    const lineMark=reading.related?.length ? `lignes ${reading.line}–${reading.related.at(-1).line}` : `ligne ${reading.line}`;
+    const meta=element('p','v21-reading-provenance',`Source épinglée : kristals/${state.bundle.slug}/README.md · ${lineMark} · SHA-256 ${reading.sha256.slice(7,19)}…`);
+    card.append(meta);
+    const actions=element('div','v21-reading-actions');
+    const btn=element('button','button ghost',`Mettre en évidence la scène ${reading.scene}`);
+    btn.type='button';
+    btn.addEventListener('click',()=>{
+      state.readingId=reading.id;
+      urlState();
+      markGuidedReading(reading.id,{scroll:true});
+    });
+    actions.append(btn,sourceAnchor('Voir la ligne d’origine',reading.source_path,reading.line));
+    card.append(actions);cards.append(card);
+  }
+  section.append(cards);target.append(section);
+  if(state.readingId)markGuidedReading(state.readingId);
+}
+
+// V20 — actual documented reading surface. Everything here is sourced from
+// SHA-verified public Markdown; it is NOT a canonical graph transformation.
+function publicDocLink(relative, line = null) {
+  const source=state.bundle?.source;
+  if(!source || !/^https:\/\/github\.com\/[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/.test(source.repository) ||
+     !/^[a-f0-9]{40}$/.test(source.commit) ||
+     !/^(?:README\.md|AI_START_HERE\.md|docs\/(?:[A-Za-z0-9_.-]+\/)?[A-Za-z0-9_.-]+\.md|ai\/(?:CONTEXT|QUESTIONS|GLOSSARY)\.md)$/.test(relative))return null;
+  const parts=[...('kristals/'+state.bundle.slug+'/'+relative).split('/')];
+  if(parts.some(p=>p==='.'||p==='..'||!p))return null;
+  const base=source.repository+'/blob/'+source.commit+'/'+parts.map(encodeURIComponent).join('/');
+  return base+(Number.isInteger(line)&&line>0?'#L'+line:'');
+}
+function sourceAnchor(text,path,line=null){
+  const url=publicDocLink(path,line);
+  if(!url)return element('span','v20-source-local','Source contrôlée : '+path+' · lien GitHub disponible dans la bêta épinglée');
+  const a=element('a','v20-source',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;
+}
+function drawDiscover(target){
+  const reading=state.bundle.reading;
+  if(!reading || !reading.documents?.length){
+    target.append(element('p','reader-muted','Aucune présentation documentaire exploitable dans cette surface publique. La carte reste disponible.'));
+    return;
+  }
+  const intro=element('section','v20-intro');
+  intro.append(element('span','v20-eyebrow','PRÉSENTATION ISSUE DES DOCUMENTS PUBLICS'),
+    element('h3','',publicKristalTitle(state.bundle.slug,state.bundle.title)));
+  intro.append(element('p','v20-intro-copy',reading.intro || 'Aucun paragraphe de présentation exploitable dans le document source.'));
+  if(reading.overview_path)intro.append(sourceAnchor('Lire la présentation d’origine',reading.overview_path));
+  const notice=element('p','v20-disclaimer','Extraits documentaires non qualifiés. Ces textes n’attribuent aucun nom ou sens aux identifiants du graphe.');
+  if(state.bundle.slug==='biology'){
+    notice.id='lecture-scene-02';notice.dataset.readingId='lecture-scene-02';notice.tabIndex=0;
+  }
+  intro.append(notice);
+  target.append(intro);
+  drawGuidedReading(target);
+  if(state.readingId)markGuidedReading(state.readingId);
+  if(reading.topics.length){
+    const topics=element('section','v20-section');
+    topics.append(element('h3','','Repères réellement cités dans la présentation'),
+      element('p','v20-subtle','Éléments repris des rubriques du document source, sans liens sémantiques supposés.'));
+    const grid=element('div','v20-topic-grid');
+    const q=state.query.trim().toLocaleLowerCase('fr');
+    for(const t of reading.topics.filter(t=>!q||`${t.title} ${t.detail} ${t.section}`.toLocaleLowerCase('fr').includes(q))){
+      const card=element('article','v20-topic');
+      card.append(element('strong','',t.title));
+      if(t.detail && t.detail!==t.title)card.append(element('p','',t.detail));
+      card.append(sourceAnchor('Lire le passage',reading.overview_path,t.line));
+      grid.append(card);
     }
-    svg.append(previewGroup);
-  };
-  for(const n of shown){const p=xy.get(n.id),central=n.id===selected.id;
-    const group=svgElement('g',{class:'graph-node','data-kind':n.kind,'data-selected':String(central),role:'button',tabindex:'0','aria-label':`${central?'Notion centrale':'Explorer'} : ${displayNode(n)}`});
-    group.append(svgElement('circle',{cx:p.x,cy:p.y,r:central?43:23}));
-    const sym=svgElement('text',{x:p.x,y:p.y+5,class:'type-mark'});sym.textContent=central?'✳':'◇';group.append(sym);
-    const label=svgElement('text',{x:p.x,y:p.y+(central?59:38)});label.textContent=short(displayNode(n),central?32:24);group.append(label);
-    const tip=svgElement('title');tip.textContent=publicDescription(n.description)||displayNode(n);group.append(tip);
-    group.addEventListener('click',()=>focusOn(n.id));
-    group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();focusOn(n.id);}});
-    if(!central){group.addEventListener('mouseenter',()=>showPreview(n));group.addEventListener('mouseleave',clearPreview);
-      group.addEventListener('focus',()=>showPreview(n));group.addEventListener('blur',clearPreview);}
-    svg.append(group);
+    topics.append(grid);target.append(topics);
   }
-  // Separate buttons, not nested inside the navigation buttons.
-  for(const n of shown){const profile=portraitFor(n);if(!profile)continue;
-    const p=xy.get(n.id),central=n.id===selected.id;
-    const badge=svgElement('g',{class:'graph-portrait-indicator',role:'button',tabindex:'0',
-      'aria-label':`Ouvrir la fiche de ${displayNode(n)}`});
-    const x=p.x+(central?33:19),y=p.y-(central?31:18);
-    badge.append(svgElement('circle',{cx:x,cy:y,r:central?12:10}));
-    const mark=svgElement('text',{x,y:y+4});mark.textContent='i';badge.append(mark);
-    const open=(e)=>{e.stopPropagation();clearPreview();state.portraitId=n.id;profileCard(target,n,badge);};
-    badge.addEventListener('click',open);
-    badge.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(e);}});
-    svg.append(badge);
+  const section=element('section','v20-section');
+  section.append(element('h3','','Documents pour approfondir'),
+    element('p','v20-subtle','Titres, extraits et rubriques présents dans les fichiers publics contrôlés.'));
+  const q=state.query.trim().toLocaleLowerCase('fr');
+  const docs=reading.documents.filter(d=>!q||`${d.title} ${d.excerpt} ${d.sections.map(s=>s.title).join(' ')}`.toLocaleLowerCase('fr').includes(q));
+  const list=element('div','v20-doc-grid');
+  for(const d of docs){
+    const card=element('article','v20-document');
+    card.append(element('h4','',d.title));
+    if(d.excerpt)card.append(element('p','',d.excerpt));
+    if(d.sections.length){
+      const details=element('details','v20-outline');details.append(element('summary','',`Rubriques du document (${d.sections.length})`));
+      const ul=element('ul');for(const s of d.sections){const li=element('li');li.append(sourceAnchor(s.title,d.path,s.line));ul.append(li);}details.append(ul);card.append(details);
+    }
+    const footer=element('div','v20-doc-footer');
+    footer.append(sourceAnchor('Consulter la source',d.path,d.heading_line));
+    const fileNode=state.bundle.nodes.find(n=>n.kind==='hosted_file'&&n.label===d.path);
+    if(fileNode)footer.append(actionButton('Voir dans la carte',()=>{state.lens='constellation';state.autoLens=false;focusOn(fileNode.id);},'button ghost'));
+    card.append(footer);list.append(card);
   }
-  target.append(svg);
-  target.append(element('p','graph-hint','Cliquez sur une bulle pour explorer ses liens. Survolez-la pour découvrir d’autres notions.'));
-  if(state.portraitId){const node=all.find(n=>n.id===state.portraitId);if(node)profileCard(target,node);}
-  if(isKnowledge() && !selected.technical_identifier) {
-    const hidden=state.bundle.edges.filter(e=>e.from===selected.id && all.some(n=>n.id===e.to&&n.technical_identifier)).length;
-    if(hidden) target.append(element('p','graph-hint',`${hidden} identifiant(s) de référence masqué(s) sur la carte; disponibles dans les détails techniques de la fiche.`));
+  section.append(list);
+  if(!docs.length)section.append(element('p','reader-muted','Aucun extrait documentaire correspondant à la recherche.'));
+  target.append(section);
+  const actions=element('section','v20-next');
+  actions.append(element('strong','',isKnowledge()?'Explorer les connexions disponibles':'Explorer la structure des fichiers'),
+    element('p','',isKnowledge()?'La carte représente les relations déclarées, y compris certaines notions encore anonymes.':'La carte classe les fichiers publics; ses traits ne sont pas des relations entre connaissances.'));
+  actions.append(actionButton('Ouvrir la carte',()=>{state.lens='constellation';state.autoLens=false;render();urlState();},'button accent'));
+  target.append(actions);
+  $('truncation').textContent=`${docs.length}/${reading.documents.length} documents présentés · données publiées non qualifiées · ${reading.scanned_files} fichiers Markdown lus`;
+}
+
+function drawDocumentConstellation(target,visible){
+  const data=state.bundle;
+  const allowed=new Set(visible.map(n=>n.id));
+  const plan=readerDocumentMap(data.nodes,{category:state.docCategory,allowedIds:allowed,limit:25});
+  const selected=plan.selected;
+  if(!selected)state.neighborPage=0;
+  const groups=plan.groups;
+  const pool=selected ? selected.nodes : groups;
+  const size=Math.max(3,Math.min(8,state.satellites));
+  const pages=Math.max(1,Math.ceil(pool.length/size));
+  const page=Math.min(state.neighborPage,pages-1);state.neighborPage=page;
+  const shown=pool.slice(page*size,(page+1)*size);
+  const items=shown.map(entry=>{
+    const isFile=Boolean(selected);
+    const label=isFile?displayDocumentTitle(entry):entry.label;
+    return {id:isFile?entry.id:entry.key,label,
+      meta:isFile?(documentReading(entry)?.excerpt||'Fichier public répertorié'):`${entry.nodes.length} document(s)`,
+      cssClass:isFile?'graph-doc-file':'graph-doc-category',
+      open:()=>{
+        if(isFile)focusOn(entry.id);
+        else {state.docCategory=entry.key;state.selection=entry.nodes[0]?.id||null;state.neighborPage=0;
+          state.history=state.selection?[state.selection]:[];render();urlState();}
+      }};
+  });
+  drawReadableMap(target,selected?selected.label:publicKristalTitle(data.slug,data.title),items,{documentary:true});
+  const focus=element('div','v19-mobile-focus');
+  focus.append(element('small','','Structure documentaire · classement, pas liens sémantiques'),
+    element('strong','',selected?selected.label:publicKristalTitle(data.slug,data.title)));
+  target.append(focus);
+  appendNeighborPager(target,page,pool.length,pages);
+  const navigation=element('section','reader-doc-navigation');
+  navigation.append(element('h3','',selected?`Documents : ${selected.label}`:'Choisir une catégorie documentaire'));
+  navigation.append(element('p','reader-muted','Ces regroupements proviennent des fichiers publics. Ils ne représentent pas des relations entre connaissances.'));
+  if(selected)navigation.append(actionButton('← Toutes les catégories',()=>{
+    state.docCategory=null;state.neighborPage=0;
+    state.selection=data.nodes.find(n=>n.kind==='hosted_state')?.id||null;
+    state.history=state.selection?[state.selection]:[];render();urlState();},'button ghost'));
+  const buttons=element('div','reader-doc-choices');
+  for(const item of shown){
+    const button=element('button','reader-doc-choice',selected?
+      displayDocumentTitle(item):
+      `${item.label} · ${item.nodes.length} document(s)`);
+    button.type='button';if(selected){button.setAttribute('aria-pressed',String(state.selection===item.id));if(state.selection===item.id)button.classList.add('selected');}
+    button.addEventListener('click',selected?()=>focusOn(item.id):()=>{
+      state.docCategory=item.key;state.neighborPage=0;state.selection=item.nodes[0]?.id||null;
+      state.history=state.selection?[state.selection]:[];render();urlState();});
+    buttons.append(button);
   }
-  if(view.degree===0) target.append(element('p','graph-empty',state.query?'Aucun voisin correspondant à la recherche. Effacer la recherche pour voir les relations.':'Aucun autre lien nommé à afficher pour cette notion. Vous pouvez inclure les notions sans nom dans Options avancées.'));
-  $('truncation').textContent=`${shown.length-1} notion(s) autour du sujet · ${state.satellites} maximum à l’écran`;
+  navigation.append(buttons);target.append(navigation);
+  $('truncation').textContent=`${pool.length} ${selected?'documents':'catégories'} disponibles · ${shown.length} sur la page · classement documenté`;
+}
+function updateReaderTrail() {
+  const container=$('reader-trail');
+  if(!container || !state.bundle || state.lens!=='constellation'){if(container)container.hidden=true;return;}
+  container.replaceChildren();container.hidden=false;
+  const home=actionButton('Vue d’ensemble',()=>{state.overviewOpen=true;state.neighborPage=0;render();urlState();},'v19-overview-toggle');
+  container.append(home);
+  if(!isKnowledge() && state.docCategory){container.append(element('span','v19-path-separator','›'),element('span','',readerDocumentGroups(state.bundle.nodes).find(g=>g.key===state.docCategory)?.label||'Documents'));return;}
+  const previous=state.history.slice(-4);
+  const byId=new Map(state.bundle.nodes.map(n=>[n.id,n]));
+  for(const id of previous){const n=byId.get(id);if(!n)continue;
+    container.append(element('span','v19-path-separator','›'));
+    const b=actionButton(displayNode(n),()=>focusOn(n.id),'v19-trail-button');
+    if(id===state.selection)b.setAttribute('aria-current','step');
+    container.append(b);
+  }
+}
+
+function makeCaption(svg,x,y,caption,max=3) {
+  const t=svgElement('text',{x,y,class:'v19-caption graph-visible-caption'});
+  const lines=graphCaptionLines(caption,22,max);
+  for (let i=0;i<lines.length;i++) {
+    const line=svgElement('tspan',{x,dy:i?19:0});line.textContent=lines[i];t.append(line);
+  }
+  svg.append(t);return t;
+}
+
+// V19.1 — On touch devices, keep a *real visual connection map* instead of
+// hiding the diagram behind a plain relation list. Its branches come solely
+// from the items already present in the V19 graph/document plan.
+function drawMobileConnectionMap(target,centerLabel,items,{documentary=false}={}){
+  const diagram=element('section','v191-mobile-diagram');
+  diagram.setAttribute('aria-label',documentary?'Carte tactile de classement des documents':'Carte tactile des connexions déclarées');
+  const intro=element('p','v191-mobile-map-caption',documentary?
+    'CARTE DOCUMENTAIRE · lignes de classement, sans relation sémantique':
+    'CARTE DES LIENS · connexions réellement déclarées');
+  const hub=element('div','v191-mobile-hub');
+  hub.append(element('span','v191-mobile-hub-mark',documentary?'▤':'✳'),element('strong','',centerLabel));
+  diagram.append(intro,hub);
+  const branches=element('div','v191-mobile-branches');
+  if(!items.length)branches.append(element('p','v191-mobile-empty','Aucun voisin affichable pour cette sélection.'));
+  for(const [index,item] of items.entries()){
+    const button=element('button','v191-mobile-branch');button.type='button';
+    button.setAttribute('data-v191-node-id',String(item.id||item.label));
+    button.setAttribute('aria-label',`Explorer ${item.label}. ${item.meta||item.relationLabel||''}`);
+    const title=element('strong','',item.label);
+    const metadata=element('small','',item.meta||item.relationLabel||
+      (documentary?'Document public répertorié':'Lien déclaré'));
+    button.append(element('span','v191-mobile-index',String(index+1).padStart(2,'0')),title,metadata);
+    button.addEventListener('click',item.open);
+    branches.append(button);
+  }
+  diagram.append(branches);target.append(diagram);
+  return diagram;
+}
+
+// Accessible, collision-free 2-column constellation, shared with documentary maps.
+function drawReadableMap(target,centerLabel,items,{documentary=false}={}){
+  if(items.length>8)throw Error('Carte V19 : trop de nœuds simultanément.');
+  const positions=readableMapPositions(items.length);
+  if(!mapGeometrySafe(positions))throw Error('Carte V19 : géométrie non lisible.');
+  const stage=element('div','v19-map-stage');
+  const svg=svgElement('svg',{viewBox:'0 0 1000 720',class:'reader-graph-svg v19-map-svg',role:'group',
+    'data-map-mode':documentary?'documents':'knowledge',
+    'aria-label':documentary?'Carte documentaire : les lignes indiquent uniquement le classement des fichiers.':'Carte de connexions réelles, chaque notion est sélectionnable au clic ou au clavier.'});
+  // Render declared lines first, then cards so labels remain legible and on top.
+  for (let i=0;i<items.length;i++) {
+    const p=positions[i];
+    const line=svgElement('path',{d:`M 500 335 Q ${p.side==='left'?420:580} ${p.y} ${p.x} ${p.y}`,class:documentary?'document-cluster-link':'graph-link v19-card-link'});
+    const tip=svgElement('title');tip.textContent=documentary?'Lien de classement documentaire':items[i].relationLabel||'Lien déclaré';line.append(tip);svg.append(line);
+  }
+  const center=svgElement('g',{class:'v19-focus graph-node','data-selected':'true',role:'img','aria-label':`Centre : ${centerLabel}`});
+  center.append(svgElement('circle',{cx:500,cy:335,r:61}));
+  const sym=svgElement('text',{x:500,y:342});sym.textContent=documentary?'▤':'✳';center.append(sym);
+  const centralTitle=svgElement('rect',{x:360,y:415,width:280,height:58,rx:13,class:'v19-center-title'});center.append(centralTitle);
+  const title=svgElement('text',{x:500,y:439,class:'v19-title-text'});
+  const lines=graphCaptionLines(centerLabel,28,2);
+  for(let i=0;i<lines.length;i++){const tspan=svgElement('tspan',{x:500,dy:i?21:0});tspan.textContent=lines[i];title.append(tspan);}
+  center.append(title);svg.append(center);
+  for(let i=0;i<items.length;i++) {
+    const item=items[i],p=positions[i];
+    const g=svgElement('g',{class:`graph-node v19-node-card ${item.cssClass||''}`, 'data-selected':'false',
+      'data-node-id':item.id || item.label,'data-v19-label':item.label,role:'button',tabindex:'0',
+      'aria-label':`Explorer : ${item.label}. ${item.meta||item.relationLabel||''}`});
+    g.append(svgElement('rect',{x:p.boxX,y:p.boxY,width:p.boxW,height:p.boxH,rx:13,class:'card-bg'}));
+    g.append(svgElement('circle',{cx:p.x,cy:p.y,r:20}));
+    const mark=svgElement('text',{x:p.x,y:p.y+6,class:'type-mark'});mark.textContent=documentary?'▤':'◇';g.append(mark);
+    const cap=svgElement('g',{class:'v19-title-group'});
+    makeCaption(cap,p.boxX+13,p.boxY+28,item.label,3);g.append(cap);
+    const description=svgElement('text',{x:p.boxX+13,y:p.boxY+93,class:'v19-relation-caption'});
+    description.textContent=String(item.meta||item.relationLabel||'').slice(0,34);g.append(description);
+    const tip=svgElement('title');tip.textContent=`${item.label} — ${item.meta||item.relationLabel||''}`;g.append(tip);
+    g.addEventListener('click',item.open);
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();item.open();}});
+    svg.append(g);
+  }
+  stage.append(svg);target.append(stage);
+  const mobileDiagram=drawMobileConnectionMap(target,centerLabel,items,{documentary});
+  return {stage,svg,mobileDiagram};
+}
+
+function appendNeighborPager(target,current,total,pages){
+  const controls=element('div','v19-graph-toolbar');
+  controls.append(element('span','v19-page-state',`${total} voisin(s) réels · page ${current+1}/${pages}`));
+  if(pages>1){
+    const prev=actionButton('← Connexions précédentes',()=>{state.neighborPage=Math.max(0,state.neighborPage-1);render();urlState();});prev.disabled=current===0;
+    const next=actionButton('Autres connexions →',()=>{state.neighborPage=Math.min(pages-1,state.neighborPage+1);render();urlState();});next.disabled=current>=pages-1;
+    controls.append(prev,next);
+  }
+  controls.append(actionButton('Agrandir la carte',()=>{
+    const map=target.querySelector('.v19-map-stage');if(!map)return;
+    if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+    else map.requestFullscreen?.().catch(()=>notify('Plein écran indisponible.'));
+  }));
+  target.append(controls);
+}
+
+function makeOverview(target,nodes,edges) {
+  if(!isKnowledge())return;
+  const eligible=n=>!n.technical_identifier && !isReferenceOrMachineValue(n) &&
+    (!isUnnamedForVisitor(n) || state.showUnnamed);
+  const entries=connectedEntryPoints(nodes,edges,eligible,displayNode,6);
+  const section=element('section','v19-discovery');
+  const header=element('div','v19-discovery-head');
+  const title=element('div');title.append(element('h3','','Explorer ce Kristal'),element('p','',
+    'Choisissez un point d’entrée réellement connecté. Le nombre de liens n’indique pas une importance scientifique.'));
+  const toggle=actionButton(state.overviewOpen?'Masquer les parcours':'Voir les points d’entrée',()=>{state.overviewOpen=!state.overviewOpen;render();urlState();},'v19-overview-toggle');
+  toggle.setAttribute('aria-expanded',String(state.overviewOpen));header.append(title,toggle);section.append(header);
+  if(state.overviewOpen){
+    const grid=element('div','v19-discovery-list');
+    if(!entries.length)grid.append(element('p','v19-empty','Aucun point d’entrée connecté n’est disponible avec ces critères.'));
+    for(const {node,degree} of entries){
+      const button=element('button','v19-entry');button.type='button';
+      button.append(element('strong','',displayNode(node)),element('small','',`${degree} connexion(s) déclarée(s)`));
+      button.addEventListener('click',()=>focusOn(node.id));grid.append(button);
+    }
+    section.append(grid);
+  }
+  target.append(section);
+}
+
+function drawGraph(target, visible) {
+  if(state.bundle.view_kind==='derived-hosting-navigation')return drawDocumentConstellation(target,visible);
+  const data=state.bundle,all=data.nodes;
+  const selected=all.find(n=>n.id===state.selection&&!isReferenceOrMachineValue(n)) ||
+    all.find(n=>!isReferenceOrMachineValue(n)) || all[0];
+  if(!selected){target.append(element('p','v19-empty','Aucune notion disponible.'));return;}
+  const visibleIds=state.query.trim()?new Set(visible.map(n=>n.id)):null;
+  const unnamedIds=!state.showUnnamed&&!state.query.trim()?new Set(all.filter(n=>isUnnamedForVisitor(n)&&n.id!==selected.id).map(n=>n.id)):null;
+  const resourceIds=new Set(all.filter(isReferenceOrMachineValue).map(n=>n.id));
+  const links=readableKnowledgeEdges(all,data.edges,selected.id).filter(e=>
+    !resourceIds.has(e.from)&&!resourceIds.has(e.to)&&
+    (!unnamedIds||(!unnamedIds.has(e.from)&&!unnamedIds.has(e.to))));
+  makeOverview(target,all,links);
+  const eligible=n=>!n.technical_identifier && !isReferenceOrMachineValue(n) &&
+    (!unnamedIds||!unnamedIds.has(n.id));
+  const paged=directNeighborPages(all,links,selected.id,eligible,displayNode,
+    state.neighborPage,state.satellites,visibleIds);
+  state.neighborPage=paged.page;
+  const index=buildNeighborIndex(all,links);
+  const entries=paged.items.map(({node,relation,direction})=>({id:node.id,label:displayNode(node),
+    relationLabel:displayRelation(relation),cssClass:isUnnamedForVisitor(node)?'graph-node-unlabeled':'',
+    meta:`${direction==='sortant'?'↗':direction==='entrant'?'↙':'↔'} ${displayRelation(relation)} · ${index.adjacent.get(node.id)?.size||0} voisin(s)`,
+    open:()=>focusOn(node.id)}));
+  drawReadableMap(target,displayNode(selected),entries);
+  const focus=element('div','v19-mobile-focus');focus.append(element('small','','Notion actuelle'),element('strong','',displayNode(selected)));
+  target.append(focus);
+  appendNeighborPager(target,paged.page,paged.total,paged.pages);
+  target.append(element('p','v19-label-note',
+    'Chaque carte porte un intitulé. Les noms longs sont également accessibles entièrement dans la liste et la fiche. Sélectionnez un voisin pour avancer.'));
+  const browser=element('section','reader-mobile-map reader-relations-browser');
+  browser.append(element('h3','','Connexions autour de cette notion'),
+    element('p','reader-muted','Sélectionnez une relation réelle pour approfondir. Les liens sans intitulé restent neutres.'));
+  if(paged.total===0)browser.append(element('p','reader-muted',state.query?'Aucun voisin ne correspond à la recherche.':'Aucun lien direct visible pour cette notion.'));
+  for(const {node,relation,direction} of paged.items){
+    const button=element('button','reader-mobile-link');button.type='button';
+    button.append(element('strong','',displayNode(node)),element('small','',`${direction==='sortant'?'↗ Sortant':direction==='entrant'?'↙ Entrant':'↔ Multiple'} · ${displayRelation(relation)}`));
+    button.setAttribute('aria-label',`Explorer ${displayNode(node)} · ${displayRelation(relation)}`);
+    button.addEventListener('click',()=>focusOn(node.id));browser.append(button);
+  }
+  if(isKnowledge()&&state.showUnnamed)browser.append(actionButton('Revenir aux notions nommées',returnToReadableWords,'button ghost'));
+  else if(isKnowledge()){
+    const id=new Set([selected.id]);
+    const hidden=data.edges.filter(e=>(id.has(e.from)||id.has(e.to)) &&
+      isUnnamedForVisitor(all.find(n=>n.id===(e.from===selected.id?e.to:e.from)))).length;
+    if(hidden)browser.append(element('p','reader-muted',`${hidden} relation(s) vers des notions sans intitulé peuvent être explorées en mode avancé.`),
+      actionButton('Explorer les connexions sans intitulé',activateRealConnections,'button ghost'));
+  }
+  target.append(browser);
+  if(state.portraitId){const n=all.find(node=>node.id===state.portraitId);if(n)profileCard(target,n);}
+  if(paged.total===0){
+    const fallback=connectedEntry(all,links);
+    if(fallback&&fallback!==selected.id)target.append(actionButton('Explorer une autre notion connectée',()=>focusOn(fallback),'button accent'));
+  }
+  $('truncation').textContent=`${paged.items.length}/${paged.total} voisins affichés · ${data.edges.length} liens déclarés dans la collection · aucune relation ajoutée`;
+}
+function drawDocumentRegistry(target,nodes){
+  const intro=element('section','reader-overview');
+  intro.append(element('h3','','Inventaire des documents publics'),
+    element('p','','Ces documents sont répertoriés dans la collection. Leur présence ne signifie pas que leur contenu a été vérifié ou qu’un graphe de connaissances existe.'));
+  target.append(intro);
+  const groups=readerDocumentGroups(nodes);
+  if(!groups.length)target.append(element('p','reader-muted','Aucun document correspondant à la recherche.'));
+  for(const group of groups){
+    const section=element('details','reader-doc-group');
+    section.open=group.key==='presentation'||groups.length===1;
+    section.append(element('summary','',`${group.label} · ${group.nodes.length} élément(s)`));
+    const list=element('div','reader-doc-list');
+    for(const [i,n] of group.nodes.entries()){
+      const row=element('div','reader-doc-row');
+      const readable=displayDocumentTitle(n);
+      const select=element('button','reader-doc-title',readable);select.type='button';
+      select.setAttribute('aria-pressed',String(state.selection===n.id));
+      if(state.selection===n.id)row.classList.add('selected');
+      select.addEventListener('click',()=>{
+        state.selection=n.id;state.history=navigationPath(state.history,n.id);
+        for(const other of target.querySelectorAll('.reader-doc-title')){
+          other.setAttribute('aria-pressed',String(other===select));
+          other.closest('.reader-doc-row')?.classList.toggle('selected',other===select);
+        }
+        drawInspection();urlState();
+        if(window.matchMedia('(max-width:720px)').matches)
+          $('inspection').scrollIntoView({block:'start',behavior:'instant'});
+      });
+      row.append(select);
+      const link=gitFileLink(state.bundle,n);
+      if(link){const a=element('a','reader-doc-source','Consulter le document original');
+        a.href=link;a.target='_blank';a.rel='noopener noreferrer';row.append(a);}
+      list.append(row);
+    }
+    section.append(list);target.append(section);
+  }
+  $('truncation').textContent='Inventaire de documents · pas de relations sémantiques supposées';
 }
 function drawRegistry(target, nodes) {
-  const container=element('div','record-list');
-  const pageItems=nodes.slice(0,(state.page+1)*60);
-  if (!pageItems.length) target.append(element('div','empty','Aucun élément dans cette page.'));
-  for(const n of pageItems) {
+  if(state.bundle.view_kind==='derived-hosting-navigation'){
+    drawDocumentRegistry(target,nodes);return;
+  }
+  const info=isKnowledge()?readerKnowledgeSummary(state.bundle.nodes,state.bundle.edges,{
+    localized:state.localized,requireReviewed:Boolean(state.locale)}):null;
+  if(info){
+    const summary=element('section','reader-overview');
+    summary.append(element('h3','','Notions ayant un nom lisible'),
+      element('p','',`${info.named.toLocaleString(uiLocale())} notion(s) nommée(s) · ${state.bundle.nodes.filter(n=>!n.technical_identifier && !isReferenceOrMachineValue(n) && !isNamedForReader(n,{localizedLabel:state.localized?.get(n.id)?.label,requireReviewed:Boolean(state.locale)})).length.toLocaleString(uiLocale())} notion(s) sans intitulé regroupée(s) · ${readerMediaGroups(state.bundle.nodes).reduce((sum,g)=>sum+g.count,0).toLocaleString(uiLocale())} référence(s) de médias séparée(s).`));
+    if(info.unnamed)summary.append(element('p','reader-muted','Les notions sans intitulé ne sont pas des traductions manquantes à deviner. Elles restent dans les données et peuvent être explorées séparément.'));
+    if(info.navigable){
+      summary.append(element('p','reader-muted',`${info.navigable.toLocaleString(uiLocale())} lien(s) entre notions consultables, sur ${info.declared.toLocaleString(uiLocale())} relations déclarées. Tous les liens ne disposent pas d’un intitulé compréhensible.`));
+      summary.append(actionButton('Explorer les relations existantes',activateRealConnections,'button accent'));
+    }
+    target.append(summary);
+  }
+  const container=element('div','record-list reader-named-list');
+  const sorted=[...nodes].sort((a,b)=>{
+    const namedA=isNamedForReader(a,{localizedLabel:state.localized?.get(a.id)?.label,requireReviewed:Boolean(state.locale)});
+    const namedB=isNamedForReader(b,{localizedLabel:state.localized?.get(b.id)?.label,requireReviewed:Boolean(state.locale)});
+    return Number(namedB)-Number(namedA)||displayNode(a).localeCompare(displayNode(b),'fr')||a.id.localeCompare(b.id);
+  });
+  const named=sorted.filter(n=>isNamedForReader(n,{localizedLabel:state.localized?.get(n.id)?.label,requireReviewed:Boolean(state.locale)}));
+  const anonymous=sorted.filter(n=>!named.includes(n) && !isReferenceOrMachineValue(n));
+  const mediaGroups=isKnowledge()?readerMediaGroups(state.bundle.nodes):[];
+  const mediaCount=mediaGroups.reduce((sum,group)=>sum+group.count,0);
+  const pageItems=named.slice(0,(state.page+1)*60);
+  if(!pageItems.length)target.append(element('div','empty','Aucune notion ayant un intitulé révisé ou lisible dans cette sélection.'));
+  for(const n of pageItems){
     const btn=element('button',`record ${state.selection===n.id?'selected':''}`);btn.type='button';
-    const content=element('main');content.append(element('strong','',isUnlabeledKnowledge(n) ? `Notion sans nom · ${n.label}` : displayNode(n)));
-    const description=publicDescription(n.description);if(description)content.append(element('small','',short(description,140)));
+    const content=element('main');content.append(element('strong','',displayNode(n)));
+    const description=displayDescription(n);if(description)content.append(element('small','',short(description,140)));
     btn.append(content,element('em','',publicNodeKind(n.kind)));btn.addEventListener('click',()=>focusOn(n.id));container.append(btn);
   }
   target.append(container);
-  if ((state.page+1)*60<nodes.length) {
-    const more=element('button','button ghost','Afficher 60 éléments supplémentaires');
-    more.addEventListener('click',()=>{ state.page++; render(); });target.append(more);
+  if((state.page+1)*60<named.length){
+    const more=element('button','button ghost','Afficher 60 notions supplémentaires');more.type='button';
+    more.addEventListener('click',()=>{state.page++;render();});target.append(more);
   }
-  $('truncation').textContent=`${Math.min((state.page+1)*60,nodes.length).toLocaleString('fr-FR')} élément(s) affiché(s) · page ${state.page+1}`;
+  if(anonymous.length){
+    const details=element('details','reader-unnamed-group');
+    details.append(element('summary','',`${anonymous.length} notion(s) sans intitulé regroupée(s) — exploration avancée`));
+    const p=element('p','reader-muted','Aucun sens n’est attribué à ces notions. Les numéros servent uniquement à distinguer les éléments pendant la navigation.');details.append(p);
+    const list=element('div','reader-unnamed-list');
+    for(const [index,n] of anonymous.slice(0,30).entries()){
+      const btn=element('button','reader-unnamed-link',displayNode(n));btn.type='button';
+      btn.addEventListener('click',()=>focusOn(n.id));list.append(btn);
+    }
+    details.append(list);
+    if(anonymous.length>30)details.append(element('p','reader-muted',`Les ${anonymous.length-30} autres restent accessibles par leurs relations dans la vue avancée.`));
+    target.append(details);
+  }
+  if(mediaCount){
+    const section=element('section','reader-media-summary');
+    section.append(element('h3','','Ressources citées dans la collection'),
+      element('p','reader-muted','Les noms de fichiers ne sont pas des notions. Cet inventaire compte les références déclarées, sans garantir leur contenu ni leur disponibilité.'));
+    const list=element('ul','reader-media-groups');
+    for(const group of mediaGroups)list.append(element('li','',`${group.label} : ${group.count.toLocaleString(uiLocale())}`));
+    section.append(list);target.append(section);
+  }
+  $('truncation').textContent=`${Math.min((state.page+1)*60,named.length).toLocaleString(uiLocale())} notions nommées affichées · ${anonymous.length} à documenter · ${mediaCount} médias référencés`;
 }
 function evidence(label,value,good=false) {
   const div=element('div','evidence-item');div.append(element('small','',label),element('strong',good?'ok':'',value));return div;
@@ -316,26 +1028,15 @@ function drawTrace(target){
       'Fichiers conformes aux empreintes déclarées':'Contrôle non établi',d.verification.byteDigestsVerified),
     evidence('Exactitude des informations','Non vérifiée indépendamment'),
     evidence('Autorisation et validation de publication','Non attestées par cet explorateur'));
-  const details=element('details','technical-details');details.append(element('summary','','Voir les empreintes, chemins et identifiants'));
-  const raw=element('div','evidence');
-  raw.append(evidence('Profil de données',d.format),
-    ...(d.knowledge ? [evidence('Fichier du graphe source',d.knowledge.graph_path),
-      evidence('Liens repris du graphe',`${d.knowledge.displayed_assertions} / ${d.knowledge.declared_assertions}`),
-      evidence('Liens non repris',String(d.knowledge.omitted_assertions)),
-      evidence('Identifiants des sources citées',String(d.knowledge.referenced_sources))] : []),
-    evidence('Empreinte du contenu',d.surface_digest),
-    evidence('Identifiant d’état',d.state_ref),
-    evidence('Engagement déclaré',d.declared_commitment.digest),
-    evidence('Vérification SHA-256 du fichier Web','Effectuée au chargement'),
-    evidence('Signatures et activation','Non vérifiées ici'));
-  details.append(raw);holder.append(details);target.append(holder);
+  holder.append(element('p','subtle-hint','L’intégrité du fichier n’établit pas l’exactitude des informations.'));
+  target.append(holder);
   $('truncation').textContent='Contrôle d’intégrité ≠ validation des faits';
 }
 
 async function drawCompare(target){
   const versions=existingRevisions(state.slug).filter(x=>x.revision!==state.revision);
   if(!versions.length){target.append(element('div','empty','Une deuxième révision contrôlée du même Kristal est nécessaire pour comparer.'));$('truncation').textContent='Aucune comparaison artificielle';return;}
-  const old=versions[versions.length-1];const heading=element('p','',`Comparaison de « ${state.revision} » avec « ${old.revision} »`);target.append(heading);
+  const old=versions[versions.length-1];const heading=element('p','',`Comparaison entre deux versions de ce Kristal`);target.append(heading);
   try {const other=await loadPack(old); if(state.lens!=='compare')return;
     const identity=(n)=>n.kind+'\u0000'+n.label;
     const a=new Map(state.bundle.nodes.map(n=>[identity(n),n]));const b=new Map(other.nodes.map(n=>[identity(n),n]));
@@ -344,7 +1045,7 @@ async function drawCompare(target){
     const diff=element('div','diff-list');
     for(const [label,list,source] of [['Ajoutés',added,a],['Retirés',removed,b],['Métadonnées modifiées',changes,a]]){
       const card=evidence(`${label} (${list.length})`,list.length ? 'Différences visibles dans la projection' : 'Aucune différence détectée');
-      for(const k of list.slice(0,24))card.append(element('span','diff-item',short(source.get(k).label,150)));
+      for(const k of list.slice(0,24))card.append(element('span','diff-item',short(publicReaderLabel(source.get(k),{viewKind:state.bundle.view_kind}),150)));
       if(list.length>24)card.append(element('span','diff-item',`… ${list.length-24} autres`));
       diff.append(card);
     }target.append(diff);$('truncation').textContent='Comparaison de projections techniques, pas de sens ni de vérité';
@@ -362,27 +1063,59 @@ function drawInspection(){
   const target=$('inspection');target.replaceChildren();const d=state.bundle;
   const n=d.nodes.find(x=>x.id===state.selection);
   if (!n){target.append(element('p','','Choisissez une notion sur la carte.'));return;}
-  target.append(element('span','kind',publicNodeKind(n.kind)),element('h3','',isUnlabeledKnowledge(n) ? `Notion sans nom (${n.label})` : displayNode(n)));
-  const description=publicDescription(n.description);
-  if(description)target.append(element('p','node-description',description));
+  const inspectorTitle=d.view_kind==='derived-hosting-navigation'
+    ? displayDocumentTitle(n)
+    : displayNode(n);
+  const titleNode=element('h3','',inspectorTitle);titleNode.tabIndex=-1;
+  target.append(element('span','kind',publicNodeKind(n.kind)),titleNode);
+  const localizedDefinition=state.localized?.get(n.id)?.definition;
+  const description=documentReading(n)?.excerpt || displayDescription(n);
+  if(description)target.append(element('p',localizedDefinition?'node-definition':'node-description',description));
+  const documented=documentReading(n);
+  if(documented?.sections?.length){const p=element('p','v20-inspector-outline','Rubriques : '+documented.sections.slice(0,4).map(x=>x.title).join(' · '));target.append(p);}
+  if(d.view_kind==='derived-hosting-navigation')target.append(element('p','subtle-hint',
+    'Ce document est répertorié dans la collection publique. Son contenu n’a pas été vérifié indépendamment.'));
+
+  if(isKnowledge() && isUnnamedForVisitor(n))target.append(element('p','subtle-hint','Cette notion ne possède pas encore d’intitulé vérifié. Ses liens ne suffisent pas à lui attribuer un nom.'));
+  if(state.locale && !state.localized?.has(n.id)) target.append(element('p','subtle-hint','Traduction révisée indisponible pour cette notion. Les mots d’origine sont conservés lorsqu’ils existent.'));
   if(n.period||n.source){const info=element('dl','public-node-facts');
-    if(n.period)addDefinition(info,'Période',n.period);
-    if(n.source)addDefinition(info,'Source mentionnée',n.source);
+    if(n.period&&!isOpaqueReaderText(n.period))addDefinition(info,/^\d{4}$/.test(String(n.period))?'Année mentionnée':'Date ou période déclarée',n.period);
+    if(n.source&&!isOpaqueReaderText(n.source))addDefinition(info,'Source mentionnée',n.source);
     target.append(info);
   }
   const nodeById=new Map(d.nodes.map(x=>[x.id,x]));
-  const related=(d.view_kind==='derived-semantic-preview'||isKnowledge() ? d.edges : [])
-    .filter(e=>(e.from===n.id||e.to===n.id) &&
-      (!isKnowledge() || state.showUnnamed || !nodeById.get(e.to)?.technical_identifier));
+  const sourceRelations=(d.view_kind==='derived-semantic-preview'||isKnowledge() ? d.edges : [])
+    .filter(e=>e.from===n.id||e.to===n.id);
+  const related=sourceRelations.filter(e=>{
+    const other=nodeById.get(e.from===n.id?e.to:e.from);
+    return other && !other.technical_identifier && !isReferenceOrMachineValue(other) &&
+      (state.showUnnamed || !isKnowledge() || isNamedForReader(other,{
+        localizedLabel:state.localized?.get(other.id)?.label,requireReviewed:Boolean(state.locale)
+      }));
+  });
+  const grouped=sourceRelations.filter(e=>{
+    const other=nodeById.get(e.from===n.id?e.to:e.from);
+    return other && !other.technical_identifier && !related.includes(e);
+  });
+  if(isKnowledge()){
+    const outbound=sourceRelations.filter(e=>e.from===n.id).length;
+    const inbound=sourceRelations.filter(e=>e.to===n.id).length;
+    const stats=element('section','v19-inspector-facts');
+    stats.append(element('h4','','Connexions déclarées'),
+      element('p','',`${outbound} lien(s) sortant(s) · ${inbound} lien(s) entrant(s). Les directions reflètent uniquement les déclarations de la source.`));
+    if(!description && !localizedDefinition)stats.append(element('p','reader-muted',
+      'Aucune définition vérifiée n’est disponible pour cette notion dans le lecteur public.'));
+    target.append(stats);
+  }
   if(related.length){
-    target.append(element('h4','relation-heading',`Liens avec d’autres notions (${related.length.toLocaleString('fr-FR')})`));
+    target.append(element('h4','relation-heading',`Liens avec d’autres notions (${related.length.toLocaleString(uiLocale())})`));
     const list=element('div','relation-list');
     const addRelation=(edge)=>{
       const other=nodeById.get(edge.from===n.id?edge.to:edge.from);
       if(!other)return;
       const button=element('button','relation-entry');button.type='button';
-      button.append(element('strong','',isUnlabeledKnowledge(other)?`Notion sans nom (${other.label})`:displayNode(other)),
-        element('small','',displayRelation(edge.relation)));
+      button.append(element('strong','',displayNode(other)),
+        element('small','',`${edge.from===n.id?'↗ Sortant':'↙ Entrant'} · ${displayRelation(edge.relation)}`));
       button.addEventListener('click',()=>focusOn(other.id));list.append(button);
     };
     for(const edge of related.slice(0,8))addRelation(edge);
@@ -398,7 +1131,7 @@ function drawInspection(){
           const other=nodeById.get(edge.from===n.id?edge.to:edge.from);
           if(!other)continue;
           const button=element('button','relation-entry');button.type='button';
-          button.append(element('strong','',isUnlabeledKnowledge(other)?`Notion sans nom (${other.label})`:displayNode(other)),element('small','',displayRelation(edge.relation)));
+          button.append(element('strong','',displayNode(other)),element('small','',`${edge.from===n.id?'↗ Sortant':'↙ Entrant'} · ${displayRelation(edge.relation)}`));
           button.addEventListener('click',()=>focusOn(other.id));holder.append(button);
         }
         offset=limit;load.hidden=offset>=related.length;
@@ -406,50 +1139,25 @@ function drawInspection(){
       more.addEventListener('toggle',()=>{if(more.open&&!more.dataset.loaded){more.dataset.loaded='1';append();}});
       load.addEventListener('click',append);more.append(holder,load);target.append(more);
     }
-  } else if(isKnowledge()) target.append(element('p','subtle-hint','Aucun lien direct n’est affiché pour cette notion.'));
-  const details=element('details','technical-details');details.append(element('summary','','Détails techniques et références'));
-  const dl=element('dl');addDefinition(dl,'Identifiant exact',n.id);
-  if(displayNode(n)!==n.label)addDefinition(dl,'Libellé original',n.label);
-  if(n.technical_identifier&&n.property_code)addDefinition(dl,'Propriété d’identification',n.property_code);
-  addDefinition(dl,'Type de donnée',n.kind);
-  addDefinition(dl,'Relations entrantes',String(d.edges.filter(e=>e.to===n.id).length));
-  addDefinition(dl,'Identifiant d’état',d.state_ref);
-  if(isKnowledge())addDefinition(dl,'Fichier du graphe',d.knowledge.graph_path);
-  if(d.discovery && n.kind==='hosted_state'){
-    const m=d.discovery,c=m.classification;
-    if(c.primary_archetype)addDefinition(dl,'Arketype',c.primary_archetype);
-    if(c.primary_usage)addDefinition(dl,'Usage Arketype',c.primary_usage);
-    if(c.usage_slug)addDefinition(dl,'Usage',c.usage_slug);
-    if(c.domain)addDefinition(dl,'Domaine',c.domain);
-    addDefinition(dl,'Organisation',m.organization);
-    addDefinition(dl,'Profil de lecture',m.reader_profile);
-    addDefinition(dl,'Accès recommandé',m.access_pattern);
+  } else if(isKnowledge()) target.append(element('p','subtle-hint','Aucun lien direct vers une notion nommée n’est disponible dans cette sélection.'));
+  if(isKnowledge() && grouped.length){
+    const mediaLinks=grouped.filter(e=>isReferenceOrMachineValue(nodeById.get(e.from===n.id?e.to:e.from))).length;
+    if(grouped.length>mediaLinks)target.append(element('p','reader-grouped-hint',
+      `${grouped.length-mediaLinks} lien(s) vers des notions sans intitulé sont regroupés, sans changer les relations d’origine.`));
+    if(mediaLinks)target.append(element('p','reader-grouped-hint',
+      `${mediaLinks} lien(s) vers des ressources ou informations techniques ne sont pas présentés comme des connaissances.`));
   }
-  const referenceLink=gitFileLink(d,n);
-  if(referenceLink){const a=element('a','inspector-action','↗ Ouvrir le fichier d’origine');a.href=referenceLink;a.target='_blank';a.rel='noopener noreferrer';details.append(a);}
-  if(isKnowledge() && d.source && /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+$/.test(d.source.repository) && /^[a-f\d]{40}$/.test(d.source.commit)){
-    const rel=`kristals/${d.slug}/${d.knowledge.graph_path}`;
-    const a=element('a','inspector-action','↗ Voir le graphe d’origine');
-    a.href=`${d.source.repository}/blob/${d.source.commit}/${rel.split('/').map(encodeURIComponent).join('/')}`;
-    a.target='_blank';a.rel='noopener noreferrer';details.append(a);
+  if(d.view_kind==='derived-hosting-navigation'){
+    const link=gitFileLink(d,n);
+    if(link){const a=element('a','inspector-action','Consulter ce document public');
+      a.href=link;a.target='_blank';a.rel='noopener noreferrer';target.append(a);}
   }
-  if(related.length){
-    const provenance=element('details','provenance-details');provenance.append(element('summary','','Identifiants des relations et sources'));
-    const provenanceList=element('div','provenance-rows');let generated=false;
-    provenance.addEventListener('toggle',()=>{if(!provenance.open||generated)return;generated=true;
-      for(const e of related){const other=nodeById.get(e.from===n.id?e.to:e.from);
-        const item=element('div','provenance-item');
-        item.append(element('strong','',other?displayNode(other):'Lien'),element('small','',`Propriété : ${e.relation}`));
-        if(e.assertion_id)item.append(element('small','',`Assertion : ${e.assertion_id}`));
-        if(e.source_refs?.length)item.append(element('small','',`Sources : ${e.source_refs.join(', ')}`));
-        provenanceList.append(item);
-      }
-    });provenance.append(provenanceList);details.append(provenance);
-  }
-  details.insertBefore(dl, details.children[1] || null);target.append(details);
   if(d.source?.repository){const issue=element('a','inspector-action','Signaler un problème');
-    const title=`Konstellation Light · ${d.slug} · ${short(n.label,70)}`;
-    const body=`Révision: ${d.revision}\nState ref: ${d.state_ref}\nSurface digest: ${d.surface_digest}\nEntité: ${n.id}\nLien: ${location.href}\n\nObservation (à compléter) :`;
+    const title=`Konstellation Light · ${publicKristalTitle(d.slug,d.title)} · ${short(displayNode(n),70)}`;
+    const here=new URL(location.pathname,location.origin);
+    here.searchParams.set('k',d.slug);here.searchParams.set('r',d.revision);here.searchParams.set('lens',state.lens);here.searchParams.set('n',String(state.satellites));here.searchParams.set('focus',n.id);
+    if(state.showUnnamed)here.searchParams.set('ids','1');
+    const body=`Révision: ${d.revision}\nState ref: ${d.state_ref}\nSurface digest: ${d.surface_digest}\nEntité: ${n.id}\nLien: ${here.href}\n\nObservation (à compléter) :`;
     issue.href=`${d.source.repository}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
     issue.target='_blank';issue.rel='noopener noreferrer';target.append(issue);
   }
@@ -477,14 +1185,21 @@ async function main(){
     } catch { /* The local reader must still work if service workers are unavailable. */ }
   }
   const params=new URLSearchParams(location.search);
+  state.requestedCategory=(params.get('cat')||'').slice(0,40);
   state.embed=params.get('embed')==='1';document.documentElement.classList.toggle('embed',state.embed);
   const back=params.get('retour');
   if(back && /^\/eleve\/(?:[a-z0-9._~!$&'()*+,;=:@%\/?-]*)$/i.test(back) && !back.includes('//')){ $('back-ekole').href=back; $('back-ekole').hidden=false; }
   else if(location.pathname.includes('/eleve/konstellation/')){ $('back-ekole').href='../'; $('back-ekole').hidden=false; }
   state.query=(params.get('q')||'').slice(0,250);$('search').value=state.query;
-  state.lens=['constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
-  state.selection=params.get('focus'); state.satellites=clampSatellites(params.get('n')||8);
+  const requestedReading=params.get('lecture')||'';
+  state.readingId=/^lecture-scene-(?:0[1-9]|1[0-9]|20)$/.test(requestedReading)?requestedReading:null;
+  state.autoLens=!params.has('lens');
+  state.lens=['discover','constellation','registry','trace','compare'].includes(params.get('lens'))?params.get('lens'):'constellation';
+  state.selection=params.get('focus'); state.satellites=Math.min(8,clampSatellites(params.get('n')||6));
+  state.neighborPage=Math.max(0,Math.min(999,Number.parseInt(params.get('pg')||'0',10)||0));
+  state.overviewOpen=!params.has('focus');
   state.showUnnamed=params.get('ids')==='1';$('show-unnamed').checked=state.showUnnamed;
+  state.requestedLocale=priorityLocale(params.get('lang'))?params.get('lang'):null;
   try {
     const res=await fetch('./data/catalog.json',{cache:'no-cache'});if(!res.ok)throw Error('Catalogue indisponible');
     const catalog=await res.json();
@@ -492,32 +1207,72 @@ async function main(){
     state.catalog=catalog;
     const first=catalog.entries[0];const slug=catalog.entries.some(x=>x.slug===params.get('k'))?params.get('k'):first.slug;
     const revision=lookup(slug,params.get('r'))?params.get('r'):existingRevisions(slug).at(-1).revision;
-    if(!params.has('lens')) state.lens='constellation';
     await setChoice(slug,revision,{keepFocus:true});
   }catch(e){showFailure(e);}
 }
-$('collection').addEventListener('change',()=>{const s=$('collection').value;state.page=0;state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
+$('ui-language').addEventListener('change',()=>{const next=priorityLocale($('ui-language').value);if(!next||next===activeUi)return;try{localStorage.setItem(UI_PREF_KEY,next);}catch{}const url=new URL(location.href);url.searchParams.set('ui',next);location.assign(url.toString());});
+$('collection').addEventListener('change',()=>{const s=$('collection').value;state.readingId=null;state.page=0;state.docCategory=null;state.requestedCategory=null;state.autoLens=true;state.lens='constellation';state.query='';$('search').value='';setChoice(s,existingRevisions(s).at(-1).revision);});
 $('revision').addEventListener('change',()=>{state.page=0;setChoice(state.slug,$('revision').value);});
-$('show-unnamed').addEventListener('change',()=>{state.showUnnamed=$('show-unnamed').checked;state.page=0;render();urlState();});
-for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.lens=btn.dataset.lens;state.page=0;render();urlState();});
-$('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;render();urlState();});
+$('localization').addEventListener('change',async()=>{
+  const selected=$('localization').value;
+  try{if(!await loadLocalization(selected||null))return;state.requestedLocale=state.locale;
+    $('localization-status').textContent=state.locale?`${t('reviewedText')} ${localeName(state.locale)}.`:t('originalWords');
+    state.page=0;state.neighborPage=0;render();urlState();
+  }catch(e){$('localization-status').textContent=e.message;notify('Fichier de langue refusé : '+e.message);
+    $('localization').value=state.locale||'';}
+});
+$('show-unnamed').addEventListener('change',()=>{
+  state.showUnnamed=$('show-unnamed').checked;
+  if(!state.showUnnamed && isKnowledge() && isUnnamedForVisitor(state.bundle?.nodes.find(n=>n.id===state.selection))){
+    const named=state.bundle.nodes.find(n=>!n.technical_identifier&&!isUnnamedForVisitor(n));
+    if(named){state.selection=named.id;state.history=[named.id];state.autoFocus=false;}
+  }
+  state.page=0;state.neighborPage=0;render();urlState();
+});
+for(const btn of document.querySelectorAll('[data-lens]'))btn.addEventListener('click',()=>{state.autoLens=false;state.lens=btn.dataset.lens;state.page=0;state.neighborPage=0;render();urlState();});
+$('search').addEventListener('input',()=>{state.query=$('search').value.slice(0,250);state.page=0;state.neighborPage=0;refreshSearch();});
+$('search-language-add').addEventListener('change',()=>{const tag=priorityLocale($('search-language-add').value);if(tag&&Object.keys(currentDescriptors()).some(x=>priorityLocale(x)===tag)&&searchTags().length<PRIORITY_LANGUAGES.length&&!searchTags().includes(tag)){searchExtras.push(tag);saveSearchExtras();state.page=0;refreshSearch();}});
+$('search-language-reset').addEventListener('click',()=>{searchExtras=[];originalSearchOverride=null;saveSearchExtras();state.page=0;refreshSearch();});
+$('search-original').addEventListener('change',()=>{originalSearchOverride=$('search-original').checked;state.page=0;refreshSearch();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape' && state.portraitId){e.preventDefault();document.querySelector('.node-portrait-card .portrait-close')?.click();}});
-$('satellites').addEventListener('input',()=>{state.satellites=clampSatellites($('satellites').value);render();urlState();});
-$('graph-back').addEventListener('click',()=>{if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);render();urlState();});
-$('graph-home').addEventListener('click',()=>{if(!state.bundle)return;const home=state.bundle.nodes.find(n=>!n.technical_identifier&&!isUnlabeledKnowledge(n))||state.bundle.nodes[0];if(home)focusOn(home.id);});
-$('reset').addEventListener('click',()=>{state.page=0;state.query='';$('search').value='';render();urlState();});
+$('satellites').addEventListener('input',()=>{state.satellites=Math.min(8,clampSatellites($('satellites').value));state.neighborPage=0;render();urlState();});
+$('map-fullscreen')?.addEventListener('click',async()=>{
+  const map=document.querySelector('#visual .v19-map-stage');if(!map)return;
+  try{if(document.fullscreenElement)await document.exitFullscreen();else await map.requestFullscreen();}
+  catch{notify('Plein écran indisponible dans ce navigateur.');}
+});
+$('graph-back').addEventListener('click',()=>{
+  if(state.bundle?.view_kind==='derived-hosting-navigation' && state.docCategory){
+    state.docCategory=null;state.selection=state.bundle.nodes.find(n=>n.kind==='hosted_state')?.id||null;
+    state.history=state.selection?[state.selection]:[];state.neighborPage=0;render();urlState();return;
+  }
+  if(state.history.length<2)return;state.history.pop();state.selection=state.history.at(-1);state.neighborPage=0;render();urlState();
+});
+$('graph-home').addEventListener('click',()=>{
+  state.overviewOpen=true;state.neighborPage=0;
+  if(!state.bundle)return;
+  if(state.bundle.view_kind==='derived-hosting-navigation'){
+    state.docCategory=null;state.selection=state.bundle.nodes.find(n=>n.kind==='hosted_state')?.id||state.bundle.nodes[0]?.id;
+    state.history=state.selection?[state.selection]:[];state.neighborPage=0;render();urlState();return;
+  }
+  const nodes=state.bundle.nodes;const edges=readableKnowledgeEdges(nodes,state.bundle.edges,'');
+  const eligible=nodes.filter(n=>!n.technical_identifier&&!isReferenceOrMachineValue(n));
+  const id=readerConnectedNamedFocus(eligible,edges,{localized:state.localized,requireReviewed:Boolean(state.locale)}) || connectedEntry(eligible,edges);
+  const home=nodes.find(n=>n.id===id)||eligible[0]||nodes[0];if(home)focusOn(home.id);
+});
+$('reset').addEventListener('click',()=>{state.neighborPage=0;state.page=0;state.query='';$('search').value='';refreshSearch();});
 $('share').addEventListener('click',async()=>{urlState();try{await navigator.clipboard.writeText(location.href);notify('Lien de navigation copié.');}catch{notify(`Copiez l’URL du navigateur pour partager la vue.`);}});
-$('export').addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';
+$('export')?.addEventListener('click',()=>{if(!state.bundle)return;const text=JSON.stringify(selectionDescriptor(),null,2)+'\n';
  const href=URL.createObjectURL(new Blob([text],{type:'application/json'}));const a=element('a');a.href=href;a.download='konstellation-light-selection.json';a.click();setTimeout(()=>URL.revokeObjectURL(href),3000);notify('Descripteur de sélection exporté.');});
 $('offline').addEventListener('click',async()=>{
  if(['127.0.0.1','localhost'].includes(location.hostname)){notify('Mode hors ligne réservé au site hébergé. La prévisualisation locale lit toujours les fichiers à jour.');return;}
  if(!('serviceWorker' in navigator)){notify('Mode hors ligne indisponible dans ce navigateur.');return;}
  try{const reg=await navigator.serviceWorker.register('./sw.js',{scope:'./'});await navigator.serviceWorker.ready;
  const row=lookup(state.slug,state.revision);const worker=reg.active||reg.waiting||reg.installing;
- worker?.postMessage({type:'KEEP',urls:['./data/catalog.json',`./${row.path}`]});notify('Cache local public activé. Revérifiez les versions après reconnexion.');}
+ worker?.postMessage({type:'KEEP',urls:['./data/catalog.json',`./${row.path}`,...new Set([...(state.locale?[`./${row.localizations[state.locale].path}`]:[]),...selectedDescriptors(searchTags(),row.localizations||{}).map(x=>`./${x.descriptor.path}`)])]});notify('Cache local public activé. Revérifiez les versions après reconnexion.');}
  catch(e){notify(`Mode hors ligne non activé : ${e.message}`);}
 });
-const networkStatus = () => { $('mode-label').textContent = navigator.onLine ? 'Consultation en lecture seule' : 'Hors ligne · version enregistrée'; };
+const networkStatus = () => { $('mode-label').textContent = navigator.onLine ? t('readOnly') : 'Hors ligne · version enregistrée'; };
 window.addEventListener('online',networkStatus);window.addEventListener('offline',networkStatus);networkStatus();
 window.addEventListener('popstate',()=>location.reload());
 main();

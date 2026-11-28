@@ -59,3 +59,41 @@ export function readableKnowledgeEdges(nodes, edges, focus) {
   if (byId.get(focus)?.technical_identifier) return edges;
   return edges.filter(e=>!byId.get(e.from)?.technical_identifier && !byId.get(e.to)?.technical_identifier);
 }
+
+
+// Public beta navigation only. Choose an existing connected notion rather than
+// the first lexical label, which may be isolated in a graph with real relations.
+// Never create an assertion, change a canonical ID or infer a relation.
+export function connectedEntry(nodes, edges) {
+  if (!Array.isArray(nodes) || !Array.isArray(edges)) throw Error('Graphe invalide.');
+  const eligible = new Map(nodes.filter(n => !n.technical_identifier).map(n => [n.id, n]));
+  const degrees = new Map([...eligible.keys()].map(id => [id, 0]));
+  for (const e of edges) {
+    if (e.from === e.to || !eligible.has(e.from) || !eligible.has(e.to)) continue;
+    degrees.set(e.from, degrees.get(e.from) + 1);
+    degrees.set(e.to, degrees.get(e.to) + 1);
+  }
+  return [...eligible.values()]
+    .filter(n => degrees.get(n.id) > 0)
+    .sort((a, b) => degrees.get(b.id) - degrees.get(a.id) || a.id.localeCompare(b.id))[0]?.id || null;
+}
+
+// A real, bounded second ring; each satellite has an explicit edge to one
+// displayed first-ring neighbor. No graph completions or invented inferences.
+export function secondaryRing(nodes, edges, firstRing, focus, limit = 6) {
+  const index = buildNeighborIndex(nodes, edges);
+  const visible = new Set([focus, ...firstRing.map(n => n.id)]);
+  const output = [];
+  const max = Math.max(0, Math.min(8, Math.trunc(Number(limit) || 0)));
+  for (const parent of firstRing) {
+    if (output.length >= max) break;
+    const next = [...(index.adjacent.get(parent.id) || [])]
+      .filter(([id]) => !visible.has(id) && !index.byId.get(id)?.technical_identifier)
+      .sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0]));
+    if (!next.length) continue;
+    const node = index.byId.get(next[0][0]);
+    visible.add(node.id);
+    output.push({node, parentId: parent.id});
+  }
+  return output;
+}

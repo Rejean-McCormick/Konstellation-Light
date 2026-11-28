@@ -1,0 +1,996 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "MechanicalEngineering",
+  "slug": "mechanicalengineering",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:mechanical-engineering",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:cf0959ebd2173a8f1dbd949420fec251c245675457aab35a803407577da3c3d0"
+  },
+  "surface_digest": "sha256:396f1ba9be82740699269468f7a437db78610a171f7b20b23e440a31e87a768e",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 29,
+    "bytes": 490500
+  },
+  "nodes": [
+    {
+      "id": "state:e9774dee9433f9344322131f",
+      "kind": "hosted_state",
+      "label": "MechanicalEngineering",
+      "description": "Navigation dérivée ; état urn:kristal:state:mechanical-engineering ; engagement déclaré sha256:cf0959ebd2173a8f1dbd949420fec251c245675457aab35a803407577da3c3d0"
+    },
+    {
+      "id": "artifact:67e3c0b2ac51a16e60227e80",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:mechanical-engineering:artifact:canonical-knowledge",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:a5a7481dac8c29013e4c92de10f14b2330bc7e1f282d320770c538870159dea2"
+    },
+    {
+      "id": "file:070c1f64f39f8c6c38ae63ce",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 1925 octets ; sha256:ef6ce2be216c46175ffd9fefc2d185fc3daba0cf8ef0dc0c9ecdfef51dbd396d"
+    },
+    {
+      "id": "file:bf284775ab8f8c0d9d12a26b",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1962 octets ; sha256:f7eced4ac1dc3a27a3134d0d0bea247df64974561a47976bb433ca99d92f6953"
+    },
+    {
+      "id": "file:c3688b8c29dc825676b34b92",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:b27023f3eb209a960fd979bc",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 1312 octets ; sha256:0bcd8893622d98d35c2e5a207376dd1fe015a31838ec8dc18462e59a1c12663f"
+    },
+    {
+      "id": "file:b18a0ec3b7b08246e4d7df61",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 5753 octets ; sha256:06f7b03515dde4b9d265028a0d6a719bb7846f88307370678cda43a34b61116f"
+    },
+    {
+      "id": "file:d079afd2872042ba7d500c85",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1607 octets ; sha256:8a6ec508ed58ff0ff9e6d4d2deda5f40c15f9efb6fc2d2e973db5694d2704560"
+    },
+    {
+      "id": "file:917db671e2357a07550adb7a",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 454 octets ; sha256:3a2b81dcfe5c8426706c62d4058478adc775997b1356f3aa68a4796cedb08daa"
+    },
+    {
+      "id": "file:f9d73876bbcd18aa5bd9fb44",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 4641 octets ; sha256:3e4e6e53d7c0917faf564088e7a090c339f51c0d456dfaf9938b9d560c21afde"
+    },
+    {
+      "id": "file:4a9d76efcc93513370032dec",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 593 octets ; sha256:76d998ef3520772d2dd43b5e867b5acad262412203ea2bd5d33c30574fe64ff5"
+    },
+    {
+      "id": "file:d2945ffd3c152a84b1572068",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 763 octets ; sha256:8d11161272a5b92ee140498194e1f5623fcd4f4c7886d2270fb32f21f692e4c7"
+    },
+    {
+      "id": "file:12b3d266c5605a8c88161ea0",
+      "kind": "hosted_file",
+      "label": "canon/domain/legacy-v6-logical-payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 421423 octets ; sha256:cd07ef1d150f9de7a48066cfc46641b3547df0873045c5dab7483279f49cea77"
+    },
+    {
+      "id": "file:1cc04d2287049c368c9e12a3",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1055 octets ; sha256:6e5e275ea0f6d65b9bc8a52eb3cda2460ce4317887e070d427a65cbffc70459a"
+    },
+    {
+      "id": "file:848df89fafc7ae61d82cf544",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1902 octets ; sha256:ba83ce54afd648c95c7ffb804d0e63664a16b8cac84e25beaed191b80b78ac77"
+    },
+    {
+      "id": "file:4a5761dcae3317efc09456f8",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2709 octets ; sha256:7a15fbc296f5fbb9fd72e3e812ea1b73917ae541d96c300a404ce552dc4d4fa0"
+    },
+    {
+      "id": "file:0dac81a738c742a235900df7",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 641 octets ; sha256:0dd055e4866028be9485f35449e451483bf81d26e2f578bb1056654ed1bef68e"
+    },
+    {
+      "id": "file:b30a64a013e01c746a5099fd",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 947 octets ; sha256:31e0807b8faf6149897f5d604609692628833a045d1be7c6a0399c68dd066947"
+    },
+    {
+      "id": "file:298487258a2fac10722944d4",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 846 octets ; sha256:34c59e4fd2afe3998b605c8fa5ab456d2589ef77ae7bfea3a7bd6f0eb3b7652c"
+    },
+    {
+      "id": "file:cec1e2a69d8f404f45a9e8ea",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 779 octets ; sha256:83df3db96b53bb49591a035d9643dc96fe3ffccccbea2856edd5c765cc9eacdd"
+    },
+    {
+      "id": "file:8c07007d2f3beaa8b7418851",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 1307 octets ; sha256:c859e667050c623b70ee4d0b09ac3d69c775241fd0956600891c0cb3c07b39be"
+    },
+    {
+      "id": "file:05cf15c4830cad0eadcddb8a",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 463 octets ; sha256:370f63c9f6d6bc016e71213bfc4763ca7ec1e29f9534f7161bab222a6145f409"
+    },
+    {
+      "id": "file:cb881a9da3e3438c7dee8f7c",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 661 octets ; sha256:d2cc341e03f1df4ce175e2ffe03883ef330fe31c336798a6f8699ea0114e333e"
+    },
+    {
+      "id": "file:0231788fda96a9f4d5a8afc8",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 437 octets ; sha256:ce4fe2cfad7d42b509c375fdcee56040e19b47375f368273d927318f1f97c8fb"
+    },
+    {
+      "id": "file:784720836c15692a7b498d70",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 3899 octets ; sha256:ffcdc5671fd980652afac2c746ed5561460abc631e60871587bdb8d7b77d683f"
+    },
+    {
+      "id": "file:8c2adb9b8a1d99cb386439f4",
+      "kind": "hosted_file",
+      "label": "docs/08_GLOSSARY.md",
+      "description": "Fichier dérivé (documentation) ; 454 octets ; sha256:3a2b81dcfe5c8426706c62d4058478adc775997b1356f3aa68a4796cedb08daa"
+    },
+    {
+      "id": "file:95cdf75c772d8d3d10e74cf1",
+      "kind": "hosted_file",
+      "label": "docs/09_MECHANICAL_STUDY_CONTRACT.md",
+      "description": "Fichier dérivé (documentation) ; 3931 octets ; sha256:3bba702de1025c80235b7501f4776a241c6ff4fa1dd08c3e2d62c56acc571a78"
+    },
+    {
+      "id": "file:d593baa736070acf4a027252",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1793 octets ; sha256:da4ba713c550739ba4ac952d1871ecd9e5945b44dedfd4c313d4dbb07526e983"
+    },
+    {
+      "id": "file:f3747f59ec04ec5dbe62234e",
+      "kind": "hosted_file",
+      "label": "schemas/mechanical-study.schema.json",
+      "description": "Fichier dérivé (schema) ; 14606 octets ; sha256:6a240a16a57076dbf14c71a44c41d4b42d79282a84064066589eb25922ea70e1"
+    },
+    {
+      "id": "file:4454ed7a61bfe78dfc4abb08",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 10087 octets ; sha256:2e5400e469ce805642dbb34e0af2cf4ba694218c94ab8437ac19ffb33cde9038"
+    },
+    {
+      "id": "file:2a71b6c0303136563a086fb8",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 923 octets ; sha256:33b515bcf9904942f86774f5200b0f3b38076923ac3fe5d0062b88ee88a1df50"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "artifact:67e3c0b2ac51a16e60227e80",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:070c1f64f39f8c6c38ae63ce",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:bf284775ab8f8c0d9d12a26b",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:c3688b8c29dc825676b34b92",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:b27023f3eb209a960fd979bc",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:b18a0ec3b7b08246e4d7df61",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:d079afd2872042ba7d500c85",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:917db671e2357a07550adb7a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:f9d73876bbcd18aa5bd9fb44",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:4a9d76efcc93513370032dec",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:d2945ffd3c152a84b1572068",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:12b3d266c5605a8c88161ea0",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:1cc04d2287049c368c9e12a3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:848df89fafc7ae61d82cf544",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:4a5761dcae3317efc09456f8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:0dac81a738c742a235900df7",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:b30a64a013e01c746a5099fd",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:298487258a2fac10722944d4",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:cec1e2a69d8f404f45a9e8ea",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:8c07007d2f3beaa8b7418851",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:05cf15c4830cad0eadcddb8a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:cb881a9da3e3438c7dee8f7c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:0231788fda96a9f4d5a8afc8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:784720836c15692a7b498d70",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:8c2adb9b8a1d99cb386439f4",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:95cdf75c772d8d3d10e74cf1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:d593baa736070acf4a027252",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:f3747f59ec04ec5dbe62234e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:4454ed7a61bfe78dfc4abb08",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e9774dee9433f9344322131f",
+      "to": "file:2a71b6c0303136563a086fb8",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Corpus statique et versionné de référence sur la chaîne efforts → mouvement → mécanismes → puissance → usure/défaillance.",
+    "topics": [
+      {
+        "title": "force/couple ≠ puissance ; la puissance exige une vitesse ;",
+        "detail": "force/couple ≠ puissance ; la puissance exige une vitesse ;",
+        "section": "Garde-fous",
+        "line": 13
+      },
+      {
+        "title": "couple ≠ énergie, même si les dimensions SI coïncident ;",
+        "detail": "couple ≠ énergie, même si les dimensions SI coïncident ;",
+        "section": "Garde-fous",
+        "line": 14
+      },
+      {
+        "title": "cinématique idéale ≠ capacité réelle d’un composant ;",
+        "detail": "cinématique idéale ≠ capacité réelle d’un composant ;",
+        "section": "Garde-fous",
+        "line": 15
+      },
+      {
+        "title": "usure ≠ défaillance instantanée ;",
+        "detail": "usure ≠ défaillance instantanée ;",
+        "section": "Garde-fous",
+        "line": 16
+      },
+      {
+        "title": "fatigue exige un historique de chargement ;",
+        "detail": "fatigue exige un historique de chargement ;",
+        "section": "Garde-fous",
+        "line": 17
+      },
+      {
+        "title": "durée de vie de roulement = grandeur statistique ;",
+        "detail": "durée de vie de roulement = grandeur statistique ;",
+        "section": "Garde-fous",
+        "line": 18
+      },
+      {
+        "title": "mode de défaillance observé ≠ cause racine démontrée.",
+        "detail": "mode de défaillance observé ≠ cause racine démontrée.",
+        "section": "Garde-fous",
+        "line": 19
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:0bcd8893622d98d35c2e5a207376dd1fe015a31838ec8dc18462e59a1c12663f",
+        "title": "Kristal-MechanicalEngineering v0.1.0",
+        "excerpt": "Corpus statique et versionné de référence sur la chaîne efforts → mouvement → mécanismes → puissance → usure/défaillance.",
+        "sections": [
+          {
+            "title": "Noyau conceptuel",
+            "line": 5
+          },
+          {
+            "title": "Garde-fous",
+            "line": 11
+          },
+          {
+            "title": "Contenu seed",
+            "line": 21
+          },
+          {
+            "title": "Validation",
+            "line": 25
+          }
+        ],
+        "topics": [
+          {
+            "title": "force/couple ≠ puissance ; la puissance exige une vitesse ;",
+            "detail": "force/couple ≠ puissance ; la puissance exige une vitesse ;",
+            "section": "Garde-fous",
+            "line": 13
+          },
+          {
+            "title": "couple ≠ énergie, même si les dimensions SI coïncident ;",
+            "detail": "couple ≠ énergie, même si les dimensions SI coïncident ;",
+            "section": "Garde-fous",
+            "line": 14
+          },
+          {
+            "title": "cinématique idéale ≠ capacité réelle d’un composant ;",
+            "detail": "cinématique idéale ≠ capacité réelle d’un composant ;",
+            "section": "Garde-fous",
+            "line": 15
+          },
+          {
+            "title": "usure ≠ défaillance instantanée ;",
+            "detail": "usure ≠ défaillance instantanée ;",
+            "section": "Garde-fous",
+            "line": 16
+          },
+          {
+            "title": "fatigue exige un historique de chargement ;",
+            "detail": "fatigue exige un historique de chargement ;",
+            "section": "Garde-fous",
+            "line": 17
+          },
+          {
+            "title": "durée de vie de roulement = grandeur statistique ;",
+            "detail": "durée de vie de roulement = grandeur statistique ;",
+            "section": "Garde-fous",
+            "line": 18
+          },
+          {
+            "title": "mode de défaillance observé ≠ cause racine démontrée.",
+            "detail": "mode de défaillance observé ≠ cause racine démontrée.",
+            "section": "Garde-fous",
+            "line": 19
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:0dd055e4866028be9485f35449e451483bf81d26e2f578bb1056654ed1bef68e",
+        "title": "Intention et portée — Kristal-MechanicalEngineering",
+        "excerpt": "Ce Kristal est un corpus de référence statique sur : Efforts, mouvements, mécanismes, puissance, tribologie et modes de défaillance. La mise à niveau 3.2.2 est additive et préserve la connaissance canonique engagée et le format portable v6 historique.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:31e0807b8faf6149897f5d604609692628833a045d1be7c6a0399c68dd066947",
+        "title": "Frontière sémantique — Kristal-MechanicalEngineering",
+        "excerpt": "Efforts, mouvements, mécanismes, puissance, tribologie et modes de défaillance",
+        "sections": [
+          {
+            "title": "Subject",
+            "line": 3
+          },
+          {
+            "title": "Possession locale",
+            "line": 7
+          },
+          {
+            "title": "Ne possède pas",
+            "line": 11
+          },
+          {
+            "title": "Invariant et scope",
+            "line": 15
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:34c59e4fd2afe3998b605c8fa5ab456d2589ef77ae7bfea3a7bd6f0eb3b7652c",
+        "title": "Forme native — Kristal-MechanicalEngineering",
+        "excerpt": "Type de forme découvert : typed_mechanism_effort_motion_graph. Cette désignation est descriptive dans l'enveloppe d'authoring, elle ne remplace pas le contrat de l'artefact historique.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:83df3db96b53bb49591a035d9643dc96fe3ffccccbea2856edd5c765cc9eacdd",
+        "title": "Épistémologie et autorité — Kristal-MechanicalEngineering",
+        "excerpt": "Le Kristal conserve les source_refs, la provenance et les statuts épistémiques exactement comme dans le corpus d'origine. Une référence source n'est pas automatiquement une preuve ni une autorité unique.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:c859e667050c623b70ee4d0b09ac3d69c775241fd0956600891c0cb3c07b39be",
+        "title": "Canonique, projections et matérialisations — Kristal-MechanicalEngineering",
+        "excerpt": "Le fichier canon/domain/legacy-v6-logical-payload.json est la représentation JSON du payload logique engagé par .kristal/v9/artifact.json ; canon/state.index.json enregistre son compute-json-jcs. Le corpus v6 et les sources historiques restent des témoins canoniques hérités, préservés octet pour octet. Une nouvelle…",
+        "sections": [
+          {
+            "title": "Représentation authoring v9",
+            "line": 3
+          },
+          {
+            "title": "Représentations physiques",
+            "line": 7
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:370f63c9f6d6bc016e71213bfc4763ca7ec1e29f9534f7161bab222a6145f409",
+        "title": "Orientations et projections — Kristal-MechanicalEngineering",
+        "excerpt": "Axes sémantiques : efforts, mouvements, mécanismes, puissance, tribologie, défaillance.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:d2cc341e03f1df4ce175e2ffe03883ef330fe31c336798a6f8699ea0114e333e",
+        "title": "Validation — Kristal-MechanicalEngineering",
+        "excerpt": "State Commitment attendu : sha256:cf0959ebd2173a8f1dbd949420fec251c245675457aab35a803407577da3c3d0",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 9
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:ce4fe2cfad7d42b509c375fdcee56040e19b47375f368273d927318f1f97c8fb",
+        "title": "Hosting et publication — Kristal-MechanicalEngineering",
+        "excerpt": "Le workspace est local, au format kristal.local-workspace/3.2.0. Son engagement sémantique est v9 ; la couche v10 n'est pas activée.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:ffcdc5671fd980652afac2c746ed5561460abc631e60871587bdb8d7b77d683f",
+        "title": "MechanicalEngineering — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Semantic Reference (ARK-01), declared; not independently approved.",
+            "detail": "Arketype: Semantic Reference (ARK-01), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Manufacturing and transport engineering, declared, semantic review pending.",
+            "detail": "UNESCO: Manufacturing and transport engineering, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 0dd055e4866028be94…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 0dd055e4866028be94…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 31e0807b8faf614989…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 31e0807b8faf614989…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 34c59e4fd2afe3998b…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 34c59e4fd2afe3998b…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 83df3db96b53bb4959…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 83df3db96b53bb4959…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 c859e667050c623b70…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 c859e667050c623b70…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 d2cc341e03f1df4ce1…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 d2cc341e03f1df4ce1…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/08_GLOSSARY.md",
+        "sha256": "sha256:3a2b81dcfe5c8426706c62d4058478adc775997b1356f3aa68a4796cedb08daa",
+        "title": "Repères de domaine — Kristal-MechanicalEngineering",
+        "excerpt": "Subject : Efforts, mouvements, mécanismes, puissance, tribologie et modes de défaillance",
+        "sections": [],
+        "topics": [
+          {
+            "title": "Subject",
+            "detail": "Efforts, mouvements, mécanismes, puissance, tribologie et modes de défaillance",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 3
+          },
+          {
+            "title": "Modèle natif",
+            "detail": "typed_mechanism_effort_motion_graph",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 4
+          },
+          {
+            "title": "Axes",
+            "detail": "efforts, mouvements, mécanismes, puissance, tribologie, défaillance",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 5
+          },
+          {
+            "title": "Distinction impérative",
+            "detail": "Force/couple ≠ puissance ; cinématique idéale ≠ performance réelle ; mode de défaillance ≠ cause racine démontrée.",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 6
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "docs/09_MECHANICAL_STUDY_CONTRACT.md",
+        "sha256": "sha256:3bba702de1025c80235b7501f4776a241c6ff4fa1dd08c3e2d62c56acc571a78",
+        "title": "Mechanical Study Candidate Contract (noncanonical)",
+        "excerpt": "This additive contract describes one bounded mechanical study without rewriting the historical typed_mechanism_effort_motion_graph. It is not an approval to size, manufacture, operate, repair, inspect or certify real machinery. schemas/mechanical-study.schema.json specifies structure;…",
+        "sections": [
+          {
+            "title": "Purpose and boundary",
+            "line": 3
+          },
+          {
+            "title": "Semantic layers",
+            "line": 7
+          },
+          {
+            "title": "Supported equations (SI inputs)",
+            "line": 15
+          },
+          {
+            "title": "Provenance and standards",
+            "line": 27
+          },
+          {
+            "title": "Execution",
+            "line": 33
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:06f7b03515dde4b9d265028a0d6a719bb7846f88307370678cda43a34b61116f",
+        "title": "AI Context — MechanicalEngineering",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 33
+          },
+          {
+            "title": "Subject",
+            "line": 37
+          },
+          {
+            "title": "Possession locale",
+            "line": 41
+          },
+          {
+            "title": "Ne possède pas",
+            "line": 45
+          },
+          {
+            "title": "Invariant et scope",
+            "line": 49
+          },
+          {
+            "title": "Included orientation from docs/02_NATIVE_MODEL.md",
+            "line": 57
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:mechanical-engineering",
+            "detail": "State ref: urn:kristal:state:mechanical-engineering",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:cf0959ebd2173a8f1dbd949420fec251c245675457aab35a803407577da3c3d0",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 7
+          },
+          {
+            "title": "Native model: typed_mechanism_effort_motion_graph",
+            "detail": "Native model: typed_mechanism_effort_motion_graph",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 9
+          },
+          {
+            "title": "Sources: 12",
+            "detail": "Sources: 12",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — MechanicalEngineering",
+            "line": 13
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:3a2b81dcfe5c8426706c62d4058478adc775997b1356f3aa68a4796cedb08daa",
+        "title": "Repères de domaine — Kristal-MechanicalEngineering",
+        "excerpt": "Subject : Efforts, mouvements, mécanismes, puissance, tribologie et modes de défaillance",
+        "sections": [],
+        "topics": [
+          {
+            "title": "Subject",
+            "detail": "Efforts, mouvements, mécanismes, puissance, tribologie et modes de défaillance",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 3
+          },
+          {
+            "title": "Modèle natif",
+            "detail": "typed_mechanism_effort_motion_graph",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 4
+          },
+          {
+            "title": "Axes",
+            "detail": "efforts, mouvements, mécanismes, puissance, tribologie, défaillance",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 5
+          },
+          {
+            "title": "Distinction impérative",
+            "detail": "Force/couple ≠ puissance ; cinématique idéale ≠ performance réelle ; mode de défaillance ≠ cause racine démontrée.",
+            "section": "Repères de domaine — Kristal-MechanicalEngineering",
+            "line": 6
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": null
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:76d998ef3520772d2dd43b5e867b5acad262412203ea2bd5d33c30574fe64ff5",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading MechanicalEngineering offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 16
+  }
+}

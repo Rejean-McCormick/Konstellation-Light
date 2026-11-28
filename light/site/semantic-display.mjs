@@ -192,12 +192,36 @@ export function publicDescription(raw) {
       /^canon\/(?:[A-Za-z0-9._-]+\/)*[A-Za-z0-9._-]+\.(?:json|jsonl)$/i.test(s)) return '';
   return s;
 }
+// Public-facing relation titles: never transform an internal predicate into
+// plausible-sounding English or French. Only explicit approved presentation
+// mappings or readable labels already supplied by the public bundle are used.
+// Raw machine keys and property identifiers remain unchanged in the pack.
+export function isMachineRelationLabel(value) {
+  const s=String(value ?? '').trim();
+  return !s || isOpaqueReaderText(s) ||
+    /^K?[PQAS]\d+(?:\s*\(|$)/i.test(s) ||
+    /(?:_|[a-z0-9][A-Z]|[a-zA-Z]\.[a-zA-Z]|[a-zA-Z]:[a-zA-Z]|[a-zA-Z]\/[a-zA-Z])/.test(s) ||
+    /^(?:(?:K?[PQAS])\d+(?:\b|\s*\()|[A-Z]{2,}[._:-]\d+|[a-z][a-z0-9]*[-_][a-z0-9_-]+)$/i.test(s) ||
+    /^(?:[a-z][a-z0-9]*\.)+[a-z][a-z0-9]*$/i.test(s) ||
+    /^\w{28,}$/.test(s);
+}
+// Conservative union: keep local anti-code protection and add explicit reader predicates.
+export function isReaderPredicateCode(value) {
+  const s=String(value??'').trim();
+  return isMachineRelationLabel(s) ||
+    /^(?:coordinate|property|predicate|schema|datatype|type|wikidata\s+(?:statement|property|precision|timezone|before|after))\s*[: —-]/i.test(s) ||
+    /\b(?:K[QPAS]\d{5,}|[PQ]\d{3,})\b/i.test(s) ||
+    /^(?:xsd|rdf|owl):\S+/i.test(s) ||
+    /^(?:string|boolean|integer|object|array|null|undefined)$/i.test(s);
+}
 export function publicRelationLabel(id, configured) {
-  const raw=String(id || '');const label=String(configured || '').trim();
-  if (label && label !== raw && !/sans libellé/i.test(label) && !/^K[PQAS]\d+\b/i.test(label)) return label;
-  if (/^K[PQAS]\d+$/i.test(raw)) return 'Lien déclaré';
-  if (/^P[1-9]\d+$/i.test(raw) && !WIKIDATA_FR[raw]) return 'Lien déclaré';
-  return semanticLabel(raw) || 'Lien déclaré';
+  const raw=String(id || '').trim();
+  const label=String(configured || '').trim();
+  if(label && label!==raw && !isReaderPredicateCode(label) &&
+     !/\b(?:sans libellé|label missing|unknown relation)\b/i.test(label)) return label;
+  if(WIKIDATA_FR[raw])return WIKIDATA_FR[raw];
+  if(RELATIONS_FR[raw])return RELATIONS_FR[raw];
+  return 'Lien déclaré';
 }
 
 // Only a few unambiguous everyday scientific terms are translated. Unknown
@@ -210,4 +234,215 @@ const CONCEPT_FR = Object.freeze({
 export function publicConceptLabel(label) {
   const original=String(label ?? '');
   return Object.prototype.hasOwnProperty.call(CONCEPT_FR,original) ? CONCEPT_FR[original] : original;
+}
+
+
+/**
+ * A strict public-reader presentation layer. These are neutral type labels, NOT
+ * translations of an unknown Kristal term and NOT editorial classifications.
+ * Raw canonical labels, identifiers, provenance and edges remain untouched.
+ */
+// A schema key is an identifier, not an independently reviewed name. We do
+// not turn snake_case or camelCase into plausible French/English concepts.
+// Scoped to public-reader labels: original canonical data are never changed.
+export function isReaderMachineConceptLabel(value) {
+  const s=String(value ?? '').trim();
+  return /\b[a-z][a-z0-9]{1,}(?:_[a-z0-9]{2,})+\b/i.test(s) ||
+    /^(?:[a-z][a-z0-9]*[A-Z][a-zA-Z0-9]*|[a-z][a-z0-9]*\.[a-z][a-z0-9.]*)$/.test(s) ||
+    /^(?:type|datatype|schema|property|coordinate|value)\s*[:=]\s*[a-z][a-z0-9:._-]*$/i.test(s);
+}
+export function isOpaqueReaderText(value) {
+  const s=String(value ?? '').trim();
+  return !s || isReaderMachineConceptLabel(s) || /^(?:K[QPAS]\d{2,}|[QP]\d{2,}|(?:urn|sha256|state|artifact|file):\S+|[a-f0-9]{24,})$/i.test(s) ||
+    /(?:^|[\/])(?:\.kristal|canon|materializations|snapshot)[\/]/i.test(s) ||
+    /\.(?:jsonl?|ya?ml|mjs|cjs|py|tsx?|md|jpe?g|png|webp|gif|svg|bmp|tiff?|wav|mp3|ogg|flac|m4a|mp4|webm|mov|pdf)\b/i.test(s) ||
+    /^(?:type|datatype|schema|property|coordinate|value)\s*[:=]\s*(?:string|integer|number|boolean|array|object|null|xsd:\S+|[a-z][a-z0-9_:.\-]+)$/i.test(s) ||
+    /(?:^|[\/])(?:[a-f0-9]{24,})(?:[\/]|$)/i.test(s) ||
+    s.includes('\\') || s.includes('://') || /^\s*[{[]/.test(s);
+}
+
+// File references are grouped as resources, never reinterpreted as named concepts.
+const MEDIA_EXTENSIONS=Object.freeze({
+  jpg:'images',jpeg:'images',png:'images',gif:'images',webp:'images',svg:'images',bmp:'images',tif:'images',tiff:'images',
+  wav:'audio',mp3:'audio',ogg:'audio',flac:'audio',m4a:'audio',
+  mp4:'video',webm:'video',mov:'video',pdf:'documents',
+});
+const MEDIA_GROUP_NAMES=Object.freeze({images:'Images et illustrations',audio:'Enregistrements audio',video:'Vidéos',documents:'Documents annexes'});
+export function readerMediaCategory(node) {
+  if(node?.kind!=='valeur')return null;
+  const label=String(node.label??'').trim().split(/[?#]/,1)[0];
+  const match=/\.([a-z0-9]{2,5})$/i.exec(label);
+  return match?MEDIA_EXTENSIONS[match[1].toLowerCase()]||null:null;
+}
+export function readerMediaGroups(nodes) {
+  const groups=new Map(Object.entries(MEDIA_GROUP_NAMES).map(([key,label])=>[key,{key,label,count:0}]));
+  for(const node of nodes){const group=readerMediaCategory(node);if(group)groups.get(group).count++;}
+  return [...groups.values()].filter(group=>group.count>0);
+}
+export function isReaderMachineValue(node) {
+  return node?.kind==='valeur' &&
+    /^(?:type|datatype|schema|property|coordinate|value)\s*[:=]\s*(?:string|integer|number|boolean|array|object|null|xsd:\S+|[a-z][a-z0-9_:.\-]+)$/i.test(String(node.label??'').trim());
+}
+
+const HUMAN_FILES_FR=Object.freeze({
+  'README.md':'Présentation du projet', 'LICENSE':'Conditions d’utilisation',
+  'CHANGELOG.md':'Historique des changements', 'AGENTS.md':'Consignes aux contributeurs',
+  'AI_START_HERE.md':'Guide de démarrage', 'NOTICE':'Informations pratiques',
+});
+export function publicReaderLabel(node, { localizedLabel='', viewKind='derived-public-knowledge', ordinal=0, requireReviewed=false }={}) {
+  const reviewed=String(localizedLabel || '').trim();
+  if(reviewed && !isOpaqueReaderText(reviewed)) return reviewed;
+  if(requireReviewed) return node?.kind==='valeur' ? 'Valeur non traduite' : 'Notion non traduite';
+  const raw=String(node?.label ?? '').trim();
+  const kind=node?.kind;
+  if(viewKind==='derived-public-knowledge'){
+    const media=readerMediaCategory(node);
+    if(media)return ({images:'Image de la collection',audio:'Enregistrement audio de la collection',video:'Vidéo de la collection',documents:'Document annexe de la collection'})[media];
+    if(isReaderMachineValue(node))return 'Information technique non présentée';
+  }
+  if(viewKind==='derived-hosting-navigation') {
+    if(kind==='hosted_state')return 'Documents de la collection';
+    if(kind==='logical_artifact')return `Élément de la collection${ordinal ? ` ${ordinal}` : ''}`;
+    if(kind==='hosted_file'){
+      const base=raw.replaceAll('\\','/').split('/').at(-1);
+      return HUMAN_FILES_FR[base] || `Document de la collection${ordinal ? ` ${ordinal}` : ''}`;
+    }
+  }
+  if(node?.technical_identifier)return 'Référence externe';
+  if(isUnlabeledKnowledge(node)||isOpaqueReaderText(raw))return kind==='valeur'?'Valeur sans intitulé':'Notion sans intitulé';
+  return viewKind==='derived-public-knowledge'?publicConceptLabel(raw):readableNodeLabel(raw,kind);
+}
+export function publicReaderDescription(value) {
+  const s=publicDescription(value);
+  // The 126 derived public packs use this as an internal value-type descriptor,
+  // not a reader-facing definition. Suppress just this well-known template;
+  // preserve real prose, original values and their datatypes in the pack.
+  if(/^Valeur littérale déclarée(?:\s*\([a-z]{2}(?:-[a-z0-9]+)?\))?;\s*type\s*:\s*[a-z][a-z0-9:._-]*\.$/i.test(s))return '';
+  // No source paths, internal commitments, or transport terms in reader prose.
+  if(/(?:sha256:|urn:|\.kristal[\/]|canon[\/]|\.(?:jsonl?|ya?ml|mjs|cjs|tsx?)\b|state snapshot|materialization_manifest|\b\d+\s+octets\b)/i.test(s))return '';
+  return s;
+}
+
+
+// Reader-centred navigation. All quantities derive from original nodes/edges;
+// no unknown name is reconstructed from a graph position or a filename.
+export function isNamedForReader(node, {localizedLabel='', requireReviewed=false}={}) {
+  if (!node || node.technical_identifier || readerMediaCategory(node) || isReaderMachineValue(node)) return false;
+  if (requireReviewed && !String(localizedLabel || '').trim()) return false;
+  const s=String(localizedLabel || node.label || '').trim();
+  return Boolean(s && (localizedLabel || !isUnlabeledKnowledge(node)) && !isOpaqueReaderText(s) &&
+    !/^(?:Notion|Valeur|Élément) (?:sans intitulé|non traduite?)$/i.test(s));
+}
+
+export function readerKnowledgeSummary(nodes, edges, {localized=null, requireReviewed=false}={}) {
+  const eligible=nodes.filter(n=>!n.technical_identifier);
+  const ids=new Set(eligible.map(n=>n.id));
+  const named=new Set(eligible.filter(n=>isNamedForReader(n,{
+    localizedLabel:localized?.get(n.id)?.label, requireReviewed
+  })).map(n=>n.id));
+  const validEdges=edges.filter(e=>ids.has(e.from)&&ids.has(e.to));
+  const namedEdges=validEdges.filter(e=>named.has(e.from)&&named.has(e.to));
+  return {named:named.size,unnamed:eligible.length-named.size,
+    declared:edges.length,navigable:validEdges.length,namedEdges:namedEdges.length};
+}
+
+// Light is a *visual* reader. A public hosting surface gets a clearly
+// labelled structural map; an unnamed knowledge graph stays a real graph with
+// neutral node captions. Neither choice creates an assertion or an identity.
+export function defaultReaderLens(_bundle, _options={}) {
+  return 'constellation';
+}
+
+export function readerPreferredFocus(nodes, edges, {localized=null, requireReviewed=false}={}) {
+  const eligible=nodes.filter(n=>isNamedForReader(n,{
+    localizedLabel:localized?.get(n.id)?.label,requireReviewed
+  }));
+  if(!eligible.length) return null;
+  const named=new Set(eligible.map(n=>n.id));
+  const degree=new Map(eligible.map(n=>[n.id,0]));
+  for(const e of edges)if(named.has(e.from)&&named.has(e.to)){
+    degree.set(e.from,degree.get(e.from)+1);
+    degree.set(e.to,degree.get(e.to)+1);
+  }
+  return [...eligible].sort((a,b)=>degree.get(b.id)-degree.get(a.id)||
+    String(a.label).localeCompare(String(b.label),'fr')||a.id.localeCompare(b.id))[0].id;
+}
+
+const DOCUMENT_KINDS=Object.freeze({
+  presentation:'Guides et présentation', documentation:'Documentation',
+  tests:'Tests et contrôles', data:'Données et états', other:'Autres documents',
+});
+export function readerDocumentCategory(node) {
+  if(node?.kind==='logical_artifact')return 'data';
+  if(node?.kind!=='hosted_file')return 'other';
+  const path=String(node.label||'').replaceAll('\\','/').toLowerCase();
+  const base=path.split('/').at(-1);
+  if(/^(?:readme|license|notice|changelog|ai_start_here|agents)(?:\.[a-z0-9]+)?$/.test(base))return 'presentation';
+  if(path.startsWith('docs/') || path.startsWith('doc/'))return 'documentation';
+  if(path.startsWith('tests/') || path.startsWith('test/') || /(?:audit|check|validation)/.test(base))return 'tests';
+  if(path.startsWith('.kristal/') || path.startsWith('state/') ||
+     path.startsWith('sources/') || /(?:manifest|snapshot|catalog|registry|materialization)/.test(base))return 'data';
+  return 'other';
+}
+export function readerDocumentGroups(nodes) {
+  const groups=new Map(Object.entries(DOCUMENT_KINDS).map(([key,label])=>[key,{key,label,nodes:[]}]));
+  for(const node of nodes){if(node.kind!=='hosted_file' && node.kind!=='logical_artifact')continue;
+    groups.get(readerDocumentCategory(node)).nodes.push(node);
+  }
+  return [...groups.values()].filter(group=>group.nodes.length);
+}
+
+// Presentation-only plan: groups derive from file paths/kinds already present
+// in the public bundle. The returned map never adds graph edges or facts.
+export function readerDocumentMap(nodes,{category=null,allowedIds=null,limit=8}={}){
+  const allowed=allowedIds instanceof Set ? allowedIds : null;
+  const groups=readerDocumentGroups(nodes)
+    .map(group=>({...group,nodes:group.nodes.filter(n=>!allowed||allowed.has(n.id))}))
+    .filter(group=>group.nodes.length);
+  const selected=groups.find(group=>group.key===category)||null;
+  const max=Math.min(25,Math.max(3,Math.trunc(Number(limit)||8)));
+  return {groups,selected,visible:selected?.nodes.slice(0,max)||[],total:selected?.nodes.length||0};
+}
+
+
+/** Chooses an actually connected, named public notion, if one exists. */
+export function readerConnectedNamedFocus(nodes,edges,{localized=null,requireReviewed=false}={}){
+  const named=new Map(nodes.filter(n=>isNamedForReader(n,{
+    localizedLabel:localized?.get(n.id)?.label,requireReviewed
+  })).map(n=>[n.id,n]));
+  // The graph hides media and pure machine values. Do not choose a focus
+  // whose only edges lead to such hidden endpoints.
+  const eligible=new Set(nodes.filter(n=>!n.technical_identifier &&
+    !readerMediaCategory(n) && !isReaderMachineValue(n)).map(n=>n.id));
+  const degree=new Map([...named.keys()].map(id=>[id,0]));
+  for(const e of edges){
+    if(!eligible.has(e.from)||!eligible.has(e.to)||e.from===e.to)continue;
+    if(degree.has(e.from))degree.set(e.from,degree.get(e.from)+1);
+    if(degree.has(e.to))degree.set(e.to,degree.get(e.to)+1);
+  }
+  return [...named.values()].filter(n=>degree.get(n.id)>0)
+    .sort((a,b)=>degree.get(b.id)-degree.get(a.id)||
+      String(a.label).localeCompare(String(b.label),'fr')||a.id.localeCompare(b.id))[0]?.id||null;
+}
+// Derived exclusively from explicit file names, NOT from inferred document content.
+const DOCUMENT_TITLES_FR=Object.freeze({
+  README:'Présentation du projet',LICENSE:'Conditions d’utilisation',NOTICE:'Informations pratiques',
+  CHANGELOG:'Historique des changements',AGENTS:'Consignes aux contributeurs',
+  AI_START_HERE:'Guide de démarrage',GLOSSARY:'Glossaire',HANDBOOK:'Guide',
+  GUIDE:'Guide',CONTEXT:'Contexte du projet',COVERAGE:'Inventaire de couverture',
+  INDEX:'Index',MANIFEST:'Manifeste',SUMMARY:'Résumé',REPORT:'Rapport',
+  CITATION:'Références',REFERENCES:'Références',BIBLIOGRAPHY:'Bibliographie',
+  TEST:'Tests',TESTS:'Tests',POLICY:'Politique',SCHEMA:'Structure de données',
+});
+export function readableDocumentTitle(node,{ordinal=1,groupLabel='Document'}={}){
+  if(node?.kind==='hosted_state')return 'Documents de la collection';
+  const path=String(node?.label||'').replaceAll('\\','/');
+  const base=path.split('/').at(-1).replace(/\.[^.]+$/,'').replace(/^\d+[_. -]*/,'');
+  const key=base.toUpperCase().replace(/[- ]+/g,'_');
+  const title=DOCUMENT_TITLES_FR[key]||
+    (key.startsWith('TEST_')?'Fichier de tests':
+      key.startsWith('README_')?'Guide de présentation':null);
+  const category=String(groupLabel||'Document');
+  const index=Number.isInteger(ordinal)&&ordinal>0?ordinal:1;
+  return `${title||category} · document n° ${index}`;
 }

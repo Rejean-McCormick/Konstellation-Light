@@ -1,0 +1,962 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "ElectricalEngineering",
+  "slug": "electricalengineering",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:kristal-electricalengineering",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:ba2ca177fa9738f7634eda20f1ba346d9cd1621c9e67908da60588763c3686bb"
+  },
+  "surface_digest": "sha256:fe5d37017f49d3932b2cb60811357425d876019effc838e985730787f6402d63",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 26,
+    "bytes": 233137
+  },
+  "nodes": [
+    {
+      "id": "state:e92c3a73b2b807aedc23ddd2",
+      "kind": "hosted_state",
+      "label": "ElectricalEngineering",
+      "description": "Navigation dérivée ; état urn:kristal:state:kristal-electricalengineering ; engagement déclaré sha256:ba2ca177fa9738f7634eda20f1ba346d9cd1621c9e67908da60588763c3686bb"
+    },
+    {
+      "id": "artifact:0680e6cbaac5a0deb5467191",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:artifact:kristal-electricalengineering:portable-epistemic-state",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:1637a2b8a3d258f9dc2bf7878c5915e59dd437288e41c21288148ee7bb23eccf"
+    },
+    {
+      "id": "file:8d43ecd802aa806e30ee32fb",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 2040 octets ; sha256:42ec5ff3f8d1b68c0c69731ff9b445fd254c82bb13747f189f931d416d947f22"
+    },
+    {
+      "id": "file:655853016ceaa5f87f39b66f",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1969 octets ; sha256:d67038b8c263319a6e1ad971344062254fb5770664bc7bdcbcdd4c9bd169c689"
+    },
+    {
+      "id": "file:d92ab5e9a14b2eddca031d04",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:44a69dd8be48853b6208d1ae",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 2272 octets ; sha256:917374bd8c2f3170552e4f719ca7f94fee4d2e1198ab73344f4d92234e08b56d"
+    },
+    {
+      "id": "file:04cd964f52d7aafeb63cb593",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 5252 octets ; sha256:7f508c9ad904c37efbb957b9ed53f8ad7e3b673acd68b0e42c55f4340c2054d4"
+    },
+    {
+      "id": "file:9387593443cc896befaa9e81",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1900 octets ; sha256:8c4e57655ef17598d9085156a4a7c6e72d563bb6fe664689f5391d49fd9f50dd"
+    },
+    {
+      "id": "file:8a8182b9a525e06f04cfcaec",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 156 octets ; sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef"
+    },
+    {
+      "id": "file:308140e6592e65837218968d",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 3940 octets ; sha256:b6c9add73fe4a7fd2d0c2ea6e9cc0e1086bd41b6d7b7bbd090357b5fd9391d0d"
+    },
+    {
+      "id": "file:1de3a37ec14068c582f75e71",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 593 octets ; sha256:beed7b7ce96f0a29b5b04de42b75e2cf9414897ed73d3a17b8eec240205ad554"
+    },
+    {
+      "id": "file:97e04f7abdd847ce44d870b3",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 763 octets ; sha256:ae2e0b88c51b00a363b6fa9e0e3530bc5c973f87f85e004ba38e90a9582b4dad"
+    },
+    {
+      "id": "file:7db6067fccfa71464ffaece6",
+      "kind": "hosted_file",
+      "label": "canon/domain/portable-epistemic-state.payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 189580 octets ; sha256:8e85b98997b06fa0d4a7c46d09c005d8cb3d310a1545558f678fa0467679202c"
+    },
+    {
+      "id": "file:8679b3c2b7e5ba940645c20c",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1111 octets ; sha256:5c31d40a72b6bd9b02795697cedce1e89da3c02cd93f0c5c6ced272090ebd9b1"
+    },
+    {
+      "id": "file:c930b455d4be3f8f45a180b1",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1928 octets ; sha256:6237b382990424228fccd7fe341ecc039061d04e3fbe9833b791a06d970349ca"
+    },
+    {
+      "id": "file:cf0def3f84e39b182d8befae",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2735 octets ; sha256:35dbb11b886b347d51f90dbdc3992c80e7aba097fac1d310e09b038c4b7193c0"
+    },
+    {
+      "id": "file:2d175e225fdcc8eed218e078",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 685 octets ; sha256:0271559e7bc61e911a9138585067849c14e0687cd101b13e3a4039ea919ffa65"
+    },
+    {
+      "id": "file:296c57be890f9625348ed2a8",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 638 octets ; sha256:c8b6d04da0f61ff4d1e86e9b48a5da6ac70bcd135dcf6e577fd0b0ef3653bd4a"
+    },
+    {
+      "id": "file:a51cc08145d5f2f65f78c65e",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 667 octets ; sha256:0d66e36715c137883e54f2d1ab7aad5ec472e73b8e4aee1850a9046fef0b9e42"
+    },
+    {
+      "id": "file:66f2ef520f041b42dad93f9f",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 693 octets ; sha256:50c9a10788b3ce1c3bf297331cc2fd25b3da7653d5560cedd2ebbf95cb8cbca1"
+    },
+    {
+      "id": "file:c7ce9e7bb6aacd1dec98ef92",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 1330 octets ; sha256:5f64f117dbe41173a73e58fe1645a1ea5beb4d94130cd8b4831b5f57dbda85c0"
+    },
+    {
+      "id": "file:53b4765f0565f5b9e586394a",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 503 octets ; sha256:8c48efb810a447ef15c1f589b49c33852f09f261aa79d359309091ce8c38edcf"
+    },
+    {
+      "id": "file:20eed4e0e74517f6ec22c64e",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 801 octets ; sha256:bfc7069b04b3478f058dd91d8110cbd91098bcb7aa72a297aa05eb349a0026e0"
+    },
+    {
+      "id": "file:5730135cc3c6c85ee5726741",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 381 octets ; sha256:047b78cc0d9f3f2312c9bba824e2a6063ea5048bf5140975657069035b82ed00"
+    },
+    {
+      "id": "file:23d65eb73ae2aae7c7432d22",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 3932 octets ; sha256:c60870f4b3f8d40ca66dbe5a9a5af23a88eb9f21ef4664f3d6a646fcac70aea4"
+    },
+    {
+      "id": "file:7b90d0d568c85e11eb94e394",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 2111 octets ; sha256:395db2fe3a856ae40a8b3330bb9a9ead7e7b86740e20d29ba845c42fbc3b89a2"
+    },
+    {
+      "id": "file:68b45e928964d35170692c5c",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 3750 octets ; sha256:40b4c4f2b4df534b5b1bee7c335c079b2b83f128b7986e54b2dc69b2042b729b"
+    },
+    {
+      "id": "file:f98e4b37cafe5cb7a3c391fa",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 780 octets ; sha256:45e0d06d68a6cfec75332347f2a20959106c71f497737b2043dfbc27306e98e9"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "artifact:0680e6cbaac5a0deb5467191",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:8d43ecd802aa806e30ee32fb",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:655853016ceaa5f87f39b66f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:d92ab5e9a14b2eddca031d04",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:44a69dd8be48853b6208d1ae",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:04cd964f52d7aafeb63cb593",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:9387593443cc896befaa9e81",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:8a8182b9a525e06f04cfcaec",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:308140e6592e65837218968d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:1de3a37ec14068c582f75e71",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:97e04f7abdd847ce44d870b3",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:7db6067fccfa71464ffaece6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:8679b3c2b7e5ba940645c20c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:c930b455d4be3f8f45a180b1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:cf0def3f84e39b182d8befae",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:2d175e225fdcc8eed218e078",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:296c57be890f9625348ed2a8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:a51cc08145d5f2f65f78c65e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:66f2ef520f041b42dad93f9f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:c7ce9e7bb6aacd1dec98ef92",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:53b4765f0565f5b9e586394a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:20eed4e0e74517f6ec22c64e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:5730135cc3c6c85ee5726741",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:23d65eb73ae2aae7c7432d22",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:7b90d0d568c85e11eb94e394",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:68b45e928964d35170692c5c",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:e92c3a73b2b807aedc23ddd2",
+      "to": "file:f98e4b37cafe5cb7a3c391fa",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Kristal v6 statique de référence sur les abstractions fondamentales du génie électrique.",
+    "topics": [
+      {
+        "title": "charge ≠ courant ;",
+        "detail": "charge ≠ courant ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 19
+      },
+      {
+        "title": "courant ≠ puissance ;",
+        "detail": "courant ≠ puissance ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 20
+      },
+      {
+        "title": "tension = différence de potentiel entre deux points ;",
+        "detail": "tension = différence de potentiel entre deux points ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 21
+      },
+      {
+        "title": "sens conventionnel du courant ≠ nécessairement sens des électrons ;",
+        "detail": "sens conventionnel du courant ≠ nécessairement sens des électrons ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 22
+      },
+      {
+        "title": "source réelle ≠ source idéale ;",
+        "detail": "source réelle ≠ source idéale ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 23
+      },
+      {
+        "title": "le courant n’est pas « consommé » par une charge ;",
+        "detail": "le courant n’est pas « consommé » par une charge ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 24
+      },
+      {
+        "title": "masse (ground) ≠ nécessairement Terre ;",
+        "detail": "masse (ground) ≠ nécessairement Terre ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 25
+      },
+      {
+        "title": "circuit ouvert ≠ tension nulle ;",
+        "detail": "circuit ouvert ≠ tension nulle ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 26
+      },
+      {
+        "title": "court-circuit ≠ courant réellement infini ;",
+        "detail": "court-circuit ≠ courant réellement infini ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 27
+      },
+      {
+        "title": "loi d’Ohm ≠ loi constitutive universelle de tout composant ;",
+        "detail": "loi d’Ohm ≠ loi constitutive universelle de tout composant ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 28
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:917374bd8c2f3170552e4f719ca7f94fee4d2e1198ab73344f4d92234e08b56d",
+        "title": "Kristal ElectricalEngineering v1.0.0",
+        "excerpt": "Kristal v6 statique de référence sur les abstractions fondamentales du génie électrique.",
+        "sections": [
+          {
+            "title": "Noyau",
+            "line": 5
+          },
+          {
+            "title": "Garde-fous sémantiques principaux",
+            "line": 17
+          },
+          {
+            "title": "Frontière",
+            "line": 34
+          },
+          {
+            "title": "Contenu",
+            "line": 40
+          }
+        ],
+        "topics": [
+          {
+            "title": "charge ≠ courant ;",
+            "detail": "charge ≠ courant ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 19
+          },
+          {
+            "title": "courant ≠ puissance ;",
+            "detail": "courant ≠ puissance ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 20
+          },
+          {
+            "title": "tension = différence de potentiel entre deux points ;",
+            "detail": "tension = différence de potentiel entre deux points ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 21
+          },
+          {
+            "title": "sens conventionnel du courant ≠ nécessairement sens des électrons ;",
+            "detail": "sens conventionnel du courant ≠ nécessairement sens des électrons ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 22
+          },
+          {
+            "title": "source réelle ≠ source idéale ;",
+            "detail": "source réelle ≠ source idéale ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 23
+          },
+          {
+            "title": "le courant n’est pas « consommé » par une charge ;",
+            "detail": "le courant n’est pas « consommé » par une charge ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 24
+          },
+          {
+            "title": "masse (ground) ≠ nécessairement Terre ;",
+            "detail": "masse (ground) ≠ nécessairement Terre ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 25
+          },
+          {
+            "title": "circuit ouvert ≠ tension nulle ;",
+            "detail": "circuit ouvert ≠ tension nulle ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 26
+          },
+          {
+            "title": "court-circuit ≠ courant réellement infini ;",
+            "detail": "court-circuit ≠ courant réellement infini ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 27
+          },
+          {
+            "title": "loi d’Ohm ≠ loi constitutive universelle de tout composant ;",
+            "detail": "loi d’Ohm ≠ loi constitutive universelle de tout composant ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:0271559e7bc61e911a9138585067849c14e0687cd101b13e3a4039ea919ffa65",
+        "title": "Intention et portée — Kristal-ElectricalEngineering",
+        "excerpt": "Ce Kristal conserve la connaissance originale associée à ElectricalEngineering, sous sa forme native : three-plane electrical knowledge graph.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:c8b6d04da0f61ff4d1e86e9b48a5da6ac70bcd135dcf6e577fd0b0ef3653bd4a",
+        "title": "Frontière sémantique — Kristal-ElectricalEngineering",
+        "excerpt": "Territoire propre : three-plane electrical knowledge graph.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:0d66e36715c137883e54f2d1ab7aad5ec472e73b8e4aee1850a9046fef0b9e42",
+        "title": "Modèle natif — Kristal-ElectricalEngineering",
+        "excerpt": "Le modèle déclaré par .kristal/v9/domain-profile.json est : three-plane electrical knowledge graph.",
+        "sections": [
+          {
+            "title": "Distinctions à préserver",
+            "line": 7
+          },
+          {
+            "title": "Supports locaux du modèle",
+            "line": 13
+          }
+        ],
+        "topics": [
+          {
+            "title": "physical plane",
+            "detail": "physical plane",
+            "section": "Distinctions à préserver",
+            "line": 9
+          },
+          {
+            "title": "circuit abstraction",
+            "detail": "circuit abstraction",
+            "section": "Distinctions à préserver",
+            "line": 10
+          },
+          {
+            "title": "information/signal plane",
+            "detail": "information/signal plane",
+            "section": "Distinctions à préserver",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:50c9a10788b3ce1c3bf297331cc2fd25b3da7653d5560cedd2ebbf95cb8cbca1",
+        "title": "Modèle épistémique — Kristal-ElectricalEngineering",
+        "excerpt": "Le payload historique contient 160 assertions, leurs champs de provenance et leurs éventuelles références aux sources.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:5f64f117dbe41173a73e58fe1645a1ea5beb4d94130cd8b4831b5f57dbda85c0",
+        "title": "Canonique, matérialisations et dérivés — Kristal-ElectricalEngineering",
+        "excerpt": "La relation entre le JSON v6 et le payload logique est vérifiée par projection exacte des clés du payload ; les seuls champs physiques supplémentaires admis sont state_id, content_hash et signatures.",
+        "sections": [
+          {
+            "title": "Canon authoring v3.2.2",
+            "line": 3
+          },
+          {
+            "title": "Materializations physiques existantes",
+            "line": 9
+          }
+        ],
+        "topics": [
+          {
+            "title": "canon/domain/portable-epistemic-state.payload.json",
+            "detail": "payload original du Logical Artifact v9.",
+            "section": "Canon authoring v3.2.2",
+            "line": 5
+          },
+          {
+            "title": "canon/state.index.json",
+            "detail": "identité et contrat du même artefact.",
+            "section": "Canon authoring v3.2.2",
+            "line": 6
+          },
+          {
+            "title": "knowledge-base/sources/",
+            "detail": "données/source policies historiques conservées.",
+            "section": "Canon authoring v3.2.2",
+            "line": 7
+          },
+          {
+            "title": ".kristal/v9/materialization-manifest.json",
+            "detail": "profil kristal.materialization/kristal-state-v6/1.",
+            "section": "Materializations physiques existantes",
+            "line": 11
+          },
+          {
+            "title": "knowledge-base/corpus/electrical-engineering.kristal-state.json",
+            "detail": "représentation v6 physique historisée, avec ses champs de métadonnées d'enveloppe.",
+            "section": "Materializations physiques existantes",
+            "line": 12
+          },
+          {
+            "title": "build/v9/materializations/",
+            "detail": "représentation inline JSON du kit ET enregistrement du manifest v6 existant.",
+            "section": "Materializations physiques existantes",
+            "line": 13
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 15
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:8c48efb810a447ef15c1f589b49c33852f09f261aa79d359309091ce8c38edcf",
+        "title": "Orientations et projections — Kristal-ElectricalEngineering",
+        "excerpt": "Orientation dominante donnée par le modèle natif : source → circuit → load, crossed by voltage/current/power/signal.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:bfc7069b04b3478f058dd91d8110cbd91098bcb7aa72a297aa05eb349a0026e0",
+        "title": "Validation — Kristal-ElectricalEngineering",
+        "excerpt": "Ces tests contrôlent : format authoring 3.2.2, build v9, original Logical Commitment, original State Commitment, digest/size du blob v6, correspondance source/manifest et reconstruction exacte du payload à partir de la projection v6.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 11
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:047b78cc0d9f3f2312c9bba824e2a6063ea5048bf5140975657069035b82ed00",
+        "title": "Hosting/publication — Kristal-ElectricalEngineering",
+        "excerpt": "L'identité sémantique reste kristal.state/9.0. L'enveloppe cible mentionne kristal.hosting/10.0, mais aucun repo/commit GitHub n'est inventé.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:c60870f4b3f8d40ca66dbe5a9a5af23a88eb9f21ef4664f3d6a646fcac70aea4",
+        "title": "ElectricalEngineering — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Multiplex / Organizational Model (ARK-09), declared; not independently approved.",
+            "detail": "Arketype: Multiplex / Organizational Model (ARK-09), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Manufacturing and transport engineering, declared, semantic review pending.",
+            "detail": "UNESCO: Manufacturing and transport engineering, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 0271559e7bc61e911a…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 0271559e7bc61e911a…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 c8b6d04da0f61ff4d1…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 c8b6d04da0f61ff4d1…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 0d66e36715c137883e…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 0d66e36715c137883e…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 50c9a10788b3ce1c3b…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 50c9a10788b3ce1c3b…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 5f64f117dbe41173a7…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 5f64f117dbe41173a7…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 bfc7069b04b3478f05…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 bfc7069b04b3478f05…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:7f508c9ad904c37efbb957b9ed53f8ad7e3b673acd68b0e42c55f4340c2054d4",
+        "title": "AI Context — ElectricalEngineering",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 35
+          },
+          {
+            "title": "Included orientation from docs/02_NATIVE_MODEL.md",
+            "line": 49
+          },
+          {
+            "title": "Distinctions à préserver",
+            "line": 57
+          },
+          {
+            "title": "Supports locaux du modèle",
+            "line": 63
+          },
+          {
+            "title": "Included orientation from docs/03_EPISTEMIC_MODEL.md",
+            "line": 71
+          },
+          {
+            "title": "Included orientation from docs/04_CANONICAL_DERIVED.md",
+            "line": 83
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:kristal-electricalengineering",
+            "detail": "State ref: urn:kristal:state:kristal-electricalengineering",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:ba2ca177fa9738f7634eda20f1ba346d9cd1621c9e67908da60588763c3686bb",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 7
+          },
+          {
+            "title": "Native model: electrical_physical_relation_model",
+            "detail": "Native model: electrical_physical_relation_model",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 9
+          },
+          {
+            "title": "Sources: 13",
+            "detail": "Sources: 13",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — ElectricalEngineering",
+            "line": 13
+          },
+          {
+            "title": "physical plane",
+            "detail": "physical plane",
+            "section": "Distinctions à préserver",
+            "line": 59
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef",
+        "title": "Glossary",
+        "excerpt": "No project-specific glossary has been authored. Use the native terminology in the canonical files and documentation; do not invent definitions.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:beed7b7ce96f0a29b5b04de42b75e2cf9414897ed73d3a17b8eec240205ad554",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading ElectricalEngineering offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 14
+  }
+}

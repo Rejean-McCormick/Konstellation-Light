@@ -1,0 +1,1099 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-public-knowledge",
+  "semantic_authority": false,
+  "title": "FoodBrands",
+  "slug": "foodbrands",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:foodbrands",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:e41df7d28e730954db8ecea433571c99d77c09db3f7ebc0aee4b8480833b1eb9"
+  },
+  "surface_digest": "sha256:d8a2a8d5698be67c8a930946e49ce7e1a391b6f52c39b4a012f9981ed6de67dc",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 6,
+    "files": 37,
+    "bytes": 111978
+  },
+  "nodes": [
+    {
+      "id": "KQ945369369243044877640639",
+      "kind": "notion",
+      "label": "Sources donnees",
+      "description": "Notion déclarée dans canon/domain/v11/updates/kristalizer-2026-10-27/graph.json."
+    },
+    {
+      "id": "KQ349090627806166772278318",
+      "kind": "notion",
+      "label": "Sources licences",
+      "description": "Notion déclarée dans canon/domain/v11/updates/kristalizer-2026-10-27/graph.json."
+    },
+    {
+      "id": "KQ374095489195815724234526",
+      "kind": "notion",
+      "label": "Sources reglementaires",
+      "description": "Notion déclarée dans canon/domain/v11/updates/kristalizer-2026-10-27/graph.json."
+    },
+    {
+      "id": "KQ1010060899441258319322377",
+      "kind": "notion",
+      "label": "documenté par une source",
+      "description": "Notion déclarée dans canon/domain/v11/updates/kristalizer-2026-10-27/graph.json."
+    },
+    {
+      "id": "KQ1022407589938841679907210",
+      "kind": "notion",
+      "label": "enregistrement structurel",
+      "description": "Notion déclarée dans canon/domain/v11/updates/kristalizer-2026-10-27/graph.json."
+    },
+    {
+      "id": "KQ898964521568144209300596",
+      "kind": "notion",
+      "label": "sans objet",
+      "description": "Notion déclarée dans canon/domain/v11/updates/kristalizer-2026-10-27/graph.json."
+    },
+    {
+      "id": "KQ1125818744239952535217445",
+      "kind": "notion",
+      "label": "KQ1125818744239952535217445",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ150998854248255721566136",
+      "kind": "notion",
+      "label": "KQ150998854248255721566136",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ214615568821143814509363",
+      "kind": "notion",
+      "label": "KQ214615568821143814509363",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ227901931378143835618740",
+      "kind": "notion",
+      "label": "KQ227901931378143835618740",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ245670208312691008458779",
+      "kind": "notion",
+      "label": "KQ245670208312691008458779",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ259278633895979600986060",
+      "kind": "notion",
+      "label": "KQ259278633895979600986060",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ328651108160523965097728",
+      "kind": "notion",
+      "label": "KQ328651108160523965097728",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ432101515135115234236383",
+      "kind": "notion",
+      "label": "KQ432101515135115234236383",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ460806211063668189201203",
+      "kind": "notion",
+      "label": "KQ460806211063668189201203",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ566854624163542024646427",
+      "kind": "notion",
+      "label": "KQ566854624163542024646427",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ694915949555183682503051",
+      "kind": "notion",
+      "label": "KQ694915949555183682503051",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "KQ772831169677723576757641",
+      "kind": "notion",
+      "label": "KQ772831169677723576757641",
+      "description": "Notion canonique sans libellé disponible dans la surface publiée."
+    },
+    {
+      "id": "value:KA318539542082062905106207",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:1e2b8ca809b340e7289f8e3e9ad38c4a7d172b1deabf8869bd1ed4a4b57ef8e3",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA372361689815593623727753",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:37bf41639f21c44eebb32f75d739a928a9240a52dc85fde416736b480983b809",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA1094172348500505886840099",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:4b1ac6e50a597a912d9084519561e3c2545e3909f5b915e830bbc5179d591ffd",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA737733451648734507520503",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:508daace41a7703371a64f68e61b616025ed36e892c455cf5c277d81f60065f2",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA153880263208470820602314",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:775fbb23db2f414c1386c7a5f68d85c8ee7ed7393fd3c4a4902eeb72efb67fd4",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA768574619961961140818237",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:9415bf62e0c6e17c68e7089a348ae8041ce845b37983c002841e645c3459fb57",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA843915692266936885428821",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:98332435e5344f2f4a74eeeaf658b498b5b7cac52f945adde881a7baf0ee0d81",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA7372588793554516373579",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:aac23caa1f2bd7c341672a5246145bab22a7f1b4359affa75f3bab3fd95fc835",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA839960526391386541452291",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:ac3a0d6908cfa6271135f756bbb1c9d79337beed6f7f0086cfa711f213883e71",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA78223053109078813809270",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:b73aca0e5f486de72dcd65a0a5a88ad90ef5b9042b30de657654e62046971acd",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA949814045847323797377165",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:dec2b7d609b291e65b5b57d9a0c04e3d400f7d63e622707a4b0bb8ab7624bfcf",
+      "description": "Valeur littérale déclarée; type : uri."
+    },
+    {
+      "id": "value:KA125354613778805556739102",
+      "kind": "valeur",
+      "label": "urn:dik:blob:sha256:f0d4458a55d2a02e260423c702f347405aaa5291773e1009b5db2a3ceb372a9d",
+      "description": "Valeur littérale déclarée; type : uri."
+    }
+  ],
+  "edges": [
+    {
+      "from": "KQ214615568821143814509363",
+      "to": "value:KA1094172348500505886840099",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA1094172348500505886840099",
+      "source_refs": [
+        "KS1096234222371104381051345",
+        "KS1123941147962598474304187"
+      ]
+    },
+    {
+      "from": "KQ150998854248255721566136",
+      "to": "value:KA125354613778805556739102",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA125354613778805556739102",
+      "source_refs": [
+        "KS920889178494399995944548",
+        "KS937091208399832261192020"
+      ]
+    },
+    {
+      "from": "KQ227901931378143835618740",
+      "to": "value:KA153880263208470820602314",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA153880263208470820602314",
+      "source_refs": [
+        "KS25059240444891239729168",
+        "KS706740874474891069953408"
+      ]
+    },
+    {
+      "from": "KQ432101515135115234236383",
+      "to": "value:KA318539542082062905106207",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA318539542082062905106207",
+      "source_refs": [
+        "KS220055742540781331220630",
+        "KS614695654696152703379474"
+      ]
+    },
+    {
+      "from": "KQ566854624163542024646427",
+      "to": "value:KA372361689815593623727753",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA372361689815593623727753",
+      "source_refs": [
+        "KS707555695997563045930332",
+        "KS924163365427491403291466"
+      ]
+    },
+    {
+      "from": "KQ259278633895979600986060",
+      "to": "value:KA7372588793554516373579",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA7372588793554516373579",
+      "source_refs": [
+        "KS464840776149968500924526",
+        "KS534653125653106937896377"
+      ]
+    },
+    {
+      "from": "KQ460806211063668189201203",
+      "to": "value:KA737733451648734507520503",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA737733451648734507520503",
+      "source_refs": [
+        "KS625962917516640120745191",
+        "KS755081861677109039270070"
+      ]
+    },
+    {
+      "from": "KQ772831169677723576757641",
+      "to": "value:KA768574619961961140818237",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA768574619961961140818237",
+      "source_refs": [
+        "KS252836177184012671484172",
+        "KS683447550709287337929750"
+      ]
+    },
+    {
+      "from": "KQ1125818744239952535217445",
+      "to": "value:KA78223053109078813809270",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA78223053109078813809270",
+      "source_refs": [
+        "KS1156132958859493391206374",
+        "KS430692443430659250509957"
+      ]
+    },
+    {
+      "from": "KQ694915949555183682503051",
+      "to": "value:KA839960526391386541452291",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA839960526391386541452291",
+      "source_refs": [
+        "KS266577419070091755482776",
+        "KS658600117536120029986410"
+      ]
+    },
+    {
+      "from": "KQ245670208312691008458779",
+      "to": "value:KA843915692266936885428821",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA843915692266936885428821",
+      "source_refs": [
+        "KS166686990238760779515907",
+        "KS852584048347502735250716"
+      ]
+    },
+    {
+      "from": "KQ328651108160523965097728",
+      "to": "value:KA949814045847323797377165",
+      "relation": "KP600166102959156553129296",
+      "assertion_id": "KA949814045847323797377165",
+      "source_refs": [
+        "KS42538766812119483189916",
+        "KS569539264533049453376894"
+      ]
+    },
+    {
+      "from": "KQ374095489195815724234526",
+      "to": "KQ214615568821143814509363",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA669763106321515724632988",
+      "source_refs": [
+        "KS1096234222371104381051345",
+        "KS1123941147962598474304187"
+      ]
+    },
+    {
+      "from": "KQ945369369243044877640639",
+      "to": "KQ150998854248255721566136",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA968538738625569970423314",
+      "source_refs": [
+        "KS920889178494399995944548",
+        "KS937091208399832261192020"
+      ]
+    },
+    {
+      "from": "KQ945369369243044877640639",
+      "to": "KQ227901931378143835618740",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA244473823167672953508716",
+      "source_refs": [
+        "KS25059240444891239729168",
+        "KS706740874474891069953408"
+      ]
+    },
+    {
+      "from": "KQ945369369243044877640639",
+      "to": "KQ432101515135115234236383",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA424329099991682594181636",
+      "source_refs": [
+        "KS220055742540781331220630",
+        "KS614695654696152703379474"
+      ]
+    },
+    {
+      "from": "KQ374095489195815724234526",
+      "to": "KQ566854624163542024646427",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA714283953950707250099674",
+      "source_refs": [
+        "KS707555695997563045930332",
+        "KS924163365427491403291466"
+      ]
+    },
+    {
+      "from": "KQ349090627806166772278318",
+      "to": "KQ259278633895979600986060",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA171891030489731153503252",
+      "source_refs": [
+        "KS464840776149968500924526",
+        "KS534653125653106937896377"
+      ]
+    },
+    {
+      "from": "KQ945369369243044877640639",
+      "to": "KQ460806211063668189201203",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA846368777338524640864645",
+      "source_refs": [
+        "KS625962917516640120745191",
+        "KS755081861677109039270070"
+      ]
+    },
+    {
+      "from": "KQ374095489195815724234526",
+      "to": "KQ772831169677723576757641",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA920612871466226427177185",
+      "source_refs": [
+        "KS252836177184012671484172",
+        "KS683447550709287337929750"
+      ]
+    },
+    {
+      "from": "KQ945369369243044877640639",
+      "to": "KQ1125818744239952535217445",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA807594506919286287306975",
+      "source_refs": [
+        "KS1156132958859493391206374",
+        "KS430692443430659250509957"
+      ]
+    },
+    {
+      "from": "KQ374095489195815724234526",
+      "to": "KQ694915949555183682503051",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA575021762168128309570547",
+      "source_refs": [
+        "KS266577419070091755482776",
+        "KS658600117536120029986410"
+      ]
+    },
+    {
+      "from": "KQ374095489195815724234526",
+      "to": "KQ245670208312691008458779",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA522526124438282785154847",
+      "source_refs": [
+        "KS166686990238760779515907",
+        "KS852584048347502735250716"
+      ]
+    },
+    {
+      "from": "KQ374095489195815724234526",
+      "to": "KQ328651108160523965097728",
+      "relation": "KP821646576107654828514431",
+      "assertion_id": "KA390839133767725386700897",
+      "source_refs": [
+        "KS42538766812119483189916",
+        "KS569539264533049453376894"
+      ]
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Le paquet a été réorganisé avec des noms stables, explicites et sans numéro de version dans les dossiers.",
+    "topics": [
+      {
+        "title": "canon v9",
+        "detail": "le source catalog natif (providers, reference-sources, acquisition-overrides);",
+        "section": "Kristal v9",
+        "line": 20
+      },
+      {
+        "title": "snapshot logique immuable",
+        "detail": ".kristal/v9/state-snapshot.json;",
+        "section": "Kristal v9",
+        "line": 21
+      },
+      {
+        "title": "matérialisation(s)",
+        "detail": ".kristal/v9/materialization..json;",
+        "section": "Kristal v9",
+        "line": 22
+      },
+      {
+        "title": "projection portable v6",
+        "detail": "conservée sous .kristal/v8/portable-state.kristal-state.json et explicitement dérivée;",
+        "section": "Kristal v9",
+        "line": 23
+      },
+      {
+        "title": "indexes/read models v8",
+        "detail": "restent dérivés et reconstruisibles;",
+        "section": "Kristal v9",
+        "line": 24
+      },
+      {
+        "title": "identité logique v9",
+        "detail": "séparée des digests physiques des fichiers.",
+        "section": "Kristal v9",
+        "line": 25
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:b1c9ffb5f3b9a5f43e62aa9894d868d6baff4ef4ad955ae7a273e8ce6a799f6d",
+        "title": "FoodKristal — paquet consolidé",
+        "excerpt": "Le paquet a été réorganisé avec des noms stables, explicites et sans numéro de version dans les dossiers.",
+        "sections": [
+          {
+            "title": "Kristal v9",
+            "line": 16
+          }
+        ],
+        "topics": [
+          {
+            "title": "canon v9",
+            "detail": "le source catalog natif (providers, reference-sources, acquisition-overrides);",
+            "section": "Kristal v9",
+            "line": 20
+          },
+          {
+            "title": "snapshot logique immuable",
+            "detail": ".kristal/v9/state-snapshot.json;",
+            "section": "Kristal v9",
+            "line": 21
+          },
+          {
+            "title": "matérialisation(s)",
+            "detail": ".kristal/v9/materialization..json;",
+            "section": "Kristal v9",
+            "line": 22
+          },
+          {
+            "title": "projection portable v6",
+            "detail": "conservée sous .kristal/v8/portable-state.kristal-state.json et explicitement dérivée;",
+            "section": "Kristal v9",
+            "line": 23
+          },
+          {
+            "title": "indexes/read models v8",
+            "detail": "restent dérivés et reconstruisibles;",
+            "section": "Kristal v9",
+            "line": 24
+          },
+          {
+            "title": "identité logique v9",
+            "detail": "séparée des digests physiques des fichiers.",
+            "section": "Kristal v9",
+            "line": 25
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:16ab64e148efbc2b7d65e036ab8d9ef7d905bb3d54bf5f81f5ac5b1eb0d385f0",
+        "title": "Intentions et scope — Kristal-FoodBrands",
+        "excerpt": "Le sujet est : Registre contrôlé des fournisseurs, sources de référence et règles explicites d’acquisition.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:ed3a6e9ca414d997d2e7afe404fb97883f4b5b673b93ef52ff8ea0c70f5aa136",
+        "title": "Frontière sémantique",
+        "excerpt": "Registre contrôlé des fournisseurs, sources de référence et règles explicites d’acquisition.",
+        "sections": [
+          {
+            "title": "Possède",
+            "line": 3
+          },
+          {
+            "title": "Distinction non négociable",
+            "line": 7
+          },
+          {
+            "title": "Ne possède pas",
+            "line": 11
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:5f5d602e533286e6304afcf6dcbe3cdc1f0f20e614b41bcf211807246bf970eb",
+        "title": "Modèle natif",
+        "excerpt": "Le Logical Artifact urn:kristal:foodbrands:canonical possède le contrat foodbrands.source-catalog/1.0. Son payload authoring se trouve dans canon/domain/foodbrands.logical-payload.json et est recalculé sans commitment precomputed.",
+        "sections": [
+          {
+            "title": "Canal canonique de migration",
+            "line": 8
+          }
+        ],
+        "topics": [
+          {
+            "title": "Kind",
+            "detail": "controlled_source_catalog",
+            "section": "Modèle natif",
+            "line": 3
+          },
+          {
+            "title": "Description",
+            "detail": "Registre contrôlé des fournisseurs, sources de référence et règles explicites d’acquisition.",
+            "section": "Modèle natif",
+            "line": 4
+          },
+          {
+            "title": "Axes et coordonnées",
+            "detail": "Fournisseurs, références et règles d’acquisition (trois membres distincts).",
+            "section": "Modèle natif",
+            "line": 5
+          },
+          {
+            "title": "Invariant",
+            "detail": "Un fournisseur ou une source ne devient pas une vérité nutritionnelle par son inscription au catalogue.",
+            "section": "Modèle natif",
+            "line": 6
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 10
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:cf0fca39d6d54cd320d704d33d55f6e461fd014d9431580cb9a07d8b33a726d8",
+        "title": "Modèle épistémique",
+        "excerpt": "Les sources documentaires / preuves et les assertions sont des plans différents. Un fournisseur ou une source ne devient pas une vérité nutritionnelle par son inscription au catalogue.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "Source ≠ assertion validée ; provenance ≠ autorité.",
+            "detail": "Source ≠ assertion validée ; provenance ≠ autorité.",
+            "section": "Modèle épistémique",
+            "line": 5
+          },
+          {
+            "title": "Inconnu ≠ faux ; une divergence doit être conservée avec sa provenance.",
+            "detail": "Inconnu ≠ faux ; une divergence doit être conservée avec sa provenance.",
+            "section": "Modèle épistémique",
+            "line": 6
+          },
+          {
+            "title": "Les sorties d'IA sont des propositions, jamais des faits admis automatiquement.",
+            "detail": "Les sorties d'IA sont des propositions, jamais des faits admis automatiquement.",
+            "section": "Modèle épistémique",
+            "line": 7
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:6b7e7dd377719ff449d5293f577ef2fc99a8744e34cf76f869a6c454f58a0370",
+        "title": "Canonique et dérivé",
+        "excerpt": "La stratégie native-source-catalog doit rester explicite : les bridges v6 référencent la source historique et ne représentent pas une nouvelle factorisation ou refonte du graphe métier.",
+        "sections": [
+          {
+            "title": "Canon",
+            "line": 3
+          },
+          {
+            "title": "Dérivés / représentations",
+            "line": 11
+          }
+        ],
+        "topics": [
+          {
+            "title": "Entrée du build 3.2.2",
+            "detail": "canon/domain/foodbrands.logical-payload.json (payload logique identique au snapshot historique).",
+            "section": "Canon",
+            "line": 5
+          },
+          {
+            "title": "Source métier historique",
+            "detail": "knowledge-base/sources/source-catalog/reference-sources.json.",
+            "section": "Canon",
+            "line": 6
+          },
+          {
+            "title": "Legacy State v9",
+            "detail": ".kristal/v9/state-snapshot.json.",
+            "section": "Canon",
+            "line": 7
+          },
+          {
+            "title": "build/v9 est un build reconstruit (fallback inline-json/1 du kit).",
+            "detail": "build/v9 est un build reconstruit (fallback inline-json/1 du kit).",
+            "section": "Dérivés / représentations",
+            "line": 13
+          },
+          {
+            "title": ".kristal/v9/materialization..json",
+            "detail": "profils physiques antérieurs préservés, inventoriés dans materializations/existing-v9-registry.json.",
+            "section": "Dérivés / représentations",
+            "line": 14
+          },
+          {
+            "title": ".kristal/v8",
+            "detail": "read models / projection portable antérieurs.",
+            "section": "Dérivés / représentations",
+            "line": 15
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 9
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:974cf0fa29ab427d955d46c2d5199030be2d8d1cb1c48176ac62302fea8e7506",
+        "title": "Orientations et projections",
+        "excerpt": "Orientations métier disponibles : Fournisseurs, références et règles d’acquisition (trois membres distincts).",
+        "sections": [],
+        "topics": [
+          {
+            "title": "Projection portable préexistante",
+            "detail": ".kristal/v8/portable-state.kristal-state.json",
+            "section": "Orientations et projections",
+            "line": 7
+          },
+          {
+            "title": "Indices v8 préexistants",
+            "detail": ".kristal/v8/index/",
+            "section": "Orientations et projections",
+            "line": 8
+          },
+          {
+            "title": "Manifeste de dérivation",
+            "detail": ".kristal/v9/derivation.v8-portable.json",
+            "section": "Orientations et projections",
+            "line": 9
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:d9636198c30ab99af6b85716c0a316fec3f9fd1367d1a403692b36cc33b19ac1",
+        "title": "Validation",
+        "excerpt": "Contrôles automatisés de cette migration :",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:fabef2b7b70b8d119165701d733d2792659573a54289341a08344f755ca72da1",
+        "title": "Hosting v10 et publication",
+        "excerpt": "L'ajout du target kristal.hosting/10.0 est une compatibilité d'enveloppe. Aucune cible GitHub / branche / commit / URL de déploiement n'est inventée. Aucun publish-v9 ni activate-v9 n'est déclenché.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:8fb7f420253fe3862ac8b4bc4447cfaac8c01d7a8561c9d42d427ad166940ccb",
+        "title": "FoodBrands — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Compilation / Collection (ARK-05), declared; not independently approved.",
+            "detail": "Arketype: Compilation / Collection (ARK-05), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Industry; Finance and trade, declared, semantic review pending.",
+            "detail": "UNESCO: Industry; Finance and trade, declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 16ab64e148efbc2b7d…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 16ab64e148efbc2b7d…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 ed3a6e9ca414d997d2…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 ed3a6e9ca414d997d2…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 5f5d602e533286e630…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 5f5d602e533286e630…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 cf0fca39d6d54cd320…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 cf0fca39d6d54cd320…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 6b7e7dd377719ff449…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 6b7e7dd377719ff449…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 d9636198c30ab99af6…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 d9636198c30ab99af6…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:3c665c908d1c9a083de926753b6c3b174c35f26a3de08bfd0175f44afdda95bc",
+        "title": "AI Context — FoodBrands",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 33
+          },
+          {
+            "title": "Possède",
+            "line": 37
+          },
+          {
+            "title": "Distinction non négociable",
+            "line": 41
+          },
+          {
+            "title": "Ne possède pas",
+            "line": 45
+          },
+          {
+            "title": "Included orientation from docs/02_NATIVE_MODEL.md",
+            "line": 53
+          },
+          {
+            "title": "Canal canonique de migration",
+            "line": 62
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:foodbrands",
+            "detail": "State ref: urn:kristal:state:foodbrands",
+            "section": "AI Context — FoodBrands",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:e41df7d28e730954db8ecea433571c99d77c09db3f7ebc0aee4b8480833b1eb9",
+            "section": "AI Context — FoodBrands",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — FoodBrands",
+            "line": 7
+          },
+          {
+            "title": "Native model: controlled_source_catalog",
+            "detail": "Native model: controlled_source_catalog",
+            "section": "AI Context — FoodBrands",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 6",
+            "detail": "Canonical artifacts: 6",
+            "section": "AI Context — FoodBrands",
+            "line": 9
+          },
+          {
+            "title": "Sources: 12",
+            "detail": "Sources: 12",
+            "section": "AI Context — FoodBrands",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — FoodBrands",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — FoodBrands",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — FoodBrands",
+            "line": 13
+          },
+          {
+            "title": "Kind",
+            "detail": "controlled_source_catalog",
+            "section": "Modèle natif",
+            "line": 57
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef",
+        "title": "Glossary",
+        "excerpt": "No project-specific glossary has been authored. Use the native terminology in the canonical files and documentation; do not invent definitions.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:e5cc7b694e4bf0436c5a1f2e3136da8b07f00552a85f537f8528150f60d9daa0",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading FoodBrands offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 14
+  },
+  "knowledge": {
+    "graph_path": "canon/domain/v11/updates/kristalizer-2026-10-27/graph.json",
+    "dictionaries": [
+      "canon/domain/v11/updates/kristalizer-2026-10-27/dictionaries/metadata-fr.json",
+      "canon/domain/v11/updates/kristalizer-2026-10-27/dictionaries/metadata-und.json",
+      "canon/domain/v11/updates/kristalizer-2026-10-27/dictionaries/themes-fr.json",
+      "canon/domain/v11/updates/qualite-fr-2026-11-06/dictionaries/metadata-fr.json",
+      "canon/domain/v11/updates/qualite-fr-2026-11-06/dictionaries/metadata-und.json",
+      "canon/domain/v11/updates/qualite-fr-2026-11-06/dictionaries/themes-fr.json"
+    ],
+    "declared_assertions": 24,
+    "displayed_assertions": 24,
+    "omitted_assertions": 0,
+    "declared_sources": 24,
+    "referenced_sources": 24,
+    "unlisted_source_references": 0,
+    "graph_versions_omitted": 0,
+    "note": "Projection d’un seul graphe canonique v11. Sources référencées = identifiants déclarés, non sources indépendamment authentifiées."
+  },
+  "relation_labels": {
+    "KP1017466168516673630528541": "notes",
+    "KP1142679162128656938669650": "rôle de l’assertion",
+    "KP349787952793991791172078": "statut de l’assertion",
+    "KP420391349396427517783348": "mode d’actionnabilité",
+    "KP600166102959156553129296": "membre du paquet",
+    "KP821646576107654828514431": "répertorie un référent d’assertion dans ce thème documentaire"
+  }
+}

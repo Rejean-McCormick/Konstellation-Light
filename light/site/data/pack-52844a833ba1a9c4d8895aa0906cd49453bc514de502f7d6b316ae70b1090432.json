@@ -1,0 +1,938 @@
+{
+  "format": "konstellation.light-navigation/1.0",
+  "view_kind": "derived-hosting-navigation",
+  "semantic_authority": false,
+  "title": "Software",
+  "slug": "software",
+  "revision": "collection-1e0a7ff800cee4d9",
+  "state_ref": "urn:kristal:state:software",
+  "declared_commitment": {
+    "profile": "kristal.state-commitment/jcs-sha256-v1",
+    "digest": "sha256:bb4c4a11d82d6efee72b7eed05b5674e44fcd7028ec48477fea060ceaf083dee"
+  },
+  "surface_digest": "sha256:e57962a221114d270524e043f65700241612e3e428d2f2ba22eca7311789507c",
+  "verification": {
+    "byteDigestsVerified": true,
+    "syncAndIndexConsistent": true,
+    "semanticCommitmentVerified": false,
+    "signaturesVerified": false,
+    "publicationVerified": false,
+    "activationVerified": false
+  },
+  "source": null,
+  "metrics": {
+    "members": 1,
+    "files": 26,
+    "bytes": 279772
+  },
+  "nodes": [
+    {
+      "id": "state:0d178fb66612717fb6e6fd6f",
+      "kind": "hosted_state",
+      "label": "Software",
+      "description": "Navigation dérivée ; état urn:kristal:state:software ; engagement déclaré sha256:bb4c4a11d82d6efee72b7eed05b5674e44fcd7028ec48477fea060ceaf083dee"
+    },
+    {
+      "id": "artifact:388102ca2f62a418c3586754",
+      "kind": "logical_artifact",
+      "label": "urn:kristal:software:canonical-state",
+      "description": "Membre déclaré du State Snapshot, engagement sha256:e266bcfeb790b976d10f501d0daa0c57d837d0365bd95a971679720ebe2bd1cf"
+    },
+    {
+      "id": "file:d927eb797c2498a67e653cb4",
+      "kind": "hosted_file",
+      "label": "AGENTS.md",
+      "description": "Fichier dérivé (ai_instructions) ; 2101 octets ; sha256:6fd26eb74520aa81efb3e6e9eb4396431042d1e1e1a050796eead0c604cbbd5d"
+    },
+    {
+      "id": "file:062bb2636eac9f753dff1044",
+      "kind": "hosted_file",
+      "label": "AI_MANIFEST.json",
+      "description": "Fichier dérivé (ai_manifest) ; 1922 octets ; sha256:da8ca8e5db05dd50cdc77a02efd5edefbeacb45c4b16a9cc980c347662d3d87e"
+    },
+    {
+      "id": "file:24c3653185f78a56be3094a1",
+      "kind": "hosted_file",
+      "label": "AI_START_HERE.md",
+      "description": "Fichier dérivé (ai_entrypoint) ; 2627 octets ; sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a"
+    },
+    {
+      "id": "file:831b502116e94a42fac8a180",
+      "kind": "hosted_file",
+      "label": "README.md",
+      "description": "Fichier dérivé (overview) ; 2188 octets ; sha256:c1fd1b238f44c63430da3ad72d23d851f820b6863fc08ea819a537e928763904"
+    },
+    {
+      "id": "file:3ef3a8195eaf5def155c9114",
+      "kind": "hosted_file",
+      "label": "ai/CONTEXT.md",
+      "description": "Fichier dérivé (ai_context) ; 4127 octets ; sha256:2cbce9af5654a3f21df30823e35ebd0727e75be96eb927303fa30a1c85e3596e"
+    },
+    {
+      "id": "file:12a4596f14304d3b351dfa2d",
+      "kind": "hosted_file",
+      "label": "ai/COVERAGE.json",
+      "description": "Fichier dérivé (ai_coverage) ; 1751 octets ; sha256:7b3f48cea0074819809cac54b854c58ead8197f2b92814f75ac1b8d235ba5fd8"
+    },
+    {
+      "id": "file:cf1ed89ef56c42d32ca5d054",
+      "kind": "hosted_file",
+      "label": "ai/GLOSSARY.md",
+      "description": "Fichier dérivé (ai_glossary) ; 156 octets ; sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef"
+    },
+    {
+      "id": "file:c96e74bc3280f3e40112ec15",
+      "kind": "hosted_file",
+      "label": "ai/INDEX.json",
+      "description": "Fichier dérivé (ai_index) ; 3830 octets ; sha256:e0c29fc58ecef5faba2c30ac4c082a77ea9d20c27151e1eaf717f5d68bed58af"
+    },
+    {
+      "id": "file:ee857f3330bf6626cb4ada63",
+      "kind": "hosted_file",
+      "label": "ai/QUESTIONS.md",
+      "description": "Fichier dérivé (ai_navigation) ; 580 octets ; sha256:ecf801917d7032cc8e827cf143735a50858a3f8bd1ecf5b2bbe8d6376dc5b5fc"
+    },
+    {
+      "id": "file:39a53fb93273a431091e90e8",
+      "kind": "hosted_file",
+      "label": "ai/RELATIONS.json",
+      "description": "Fichier dérivé (ai_relations) ; 741 octets ; sha256:7d0596bf55c206007d4085dc56b0e4bda2e5fe0934fc58f39655dab321ef7abd"
+    },
+    {
+      "id": "file:2236b673e914f8bd48e7ffc1",
+      "kind": "hosted_file",
+      "label": "canon/domain/legacy-v6-state.payload.json",
+      "description": "Fichier dérivé (canonical_content) ; 233902 octets ; sha256:7a616f85fe98351cf65d1090e2c7d1adc80e22bb027815b37e14b66e41ead5e4"
+    },
+    {
+      "id": "file:f7a8b5f4072240dcfca9df7e",
+      "kind": "hosted_file",
+      "label": "canon/state.index.json",
+      "description": "Fichier dérivé (semantic_index) ; 1234 octets ; sha256:9beb940b9cc490d3a824c056bbfbaabb07c38dae98e2aeb63906c63189fb49b0"
+    },
+    {
+      "id": "file:7ea4cf7c4b28f1f471f64923",
+      "kind": "hosted_file",
+      "label": "derived/reader-inventory.json",
+      "description": "Fichier dérivé (reader_inventory) ; 1859 octets ; sha256:1559e9e7cd5b9beb88c3296e3a5b9a7825d0ad087039b4b738399cbfb10e631e"
+    },
+    {
+      "id": "file:dabbed34666f1018007e4ead",
+      "kind": "hosted_file",
+      "label": "derived/reader-profile.json",
+      "description": "Fichier dérivé (reader_profile) ; 2666 octets ; sha256:44e1c93ec8f0fe7ca161b99643b16722daf25b411ea9046593410e07965299c8"
+    },
+    {
+      "id": "file:24ea83d692d1e02db9e20d0f",
+      "kind": "hosted_file",
+      "label": "docs/00_INTENT_AND_SCOPE.md",
+      "description": "Fichier dérivé (documentation) ; 418 octets ; sha256:500a138701eb4472452bd98de4a1de702dae47d0dd9de7aab54e548c64582d85"
+    },
+    {
+      "id": "file:6e1c3cc9b16b7dbbfaa4ee7a",
+      "kind": "hosted_file",
+      "label": "docs/01_SEMANTIC_BOUNDARY.md",
+      "description": "Fichier dérivé (documentation) ; 700 octets ; sha256:1100e9c4deda678ca6ca4d8089e528ad413b9adaf32e18b033aa0a09c81b65cc"
+    },
+    {
+      "id": "file:8df021599121797b2195b5c4",
+      "kind": "hosted_file",
+      "label": "docs/02_NATIVE_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 575 octets ; sha256:d44e334694644af397cc792785481332024f2e2daf9ca13213e28c87c6bc73f5"
+    },
+    {
+      "id": "file:155925cd6e5b9b5091a0bbfd",
+      "kind": "hosted_file",
+      "label": "docs/03_EPISTEMIC_MODEL.md",
+      "description": "Fichier dérivé (documentation) ; 442 octets ; sha256:fc97a8cf0edc72c4351e5b2457c03b6f41eddc0a69d731bb4c30ee037dacc5eb"
+    },
+    {
+      "id": "file:dd048373bab564466c4dee98",
+      "kind": "hosted_file",
+      "label": "docs/04_CANONICAL_DERIVED.md",
+      "description": "Fichier dérivé (documentation) ; 791 octets ; sha256:0fad278ff697539e0c826563b3eea6bd11ab74580f6a606f26977d2222ca7658"
+    },
+    {
+      "id": "file:35c8571202071b8fb55a80f6",
+      "kind": "hosted_file",
+      "label": "docs/05_ORIENTATIONS.md",
+      "description": "Fichier dérivé (documentation) ; 485 octets ; sha256:47579b41da155180d0a2ca758852c5d25dd462e80d1c7929fd15cc40913a6542"
+    },
+    {
+      "id": "file:1527e41fac59f23c98d9bea2",
+      "kind": "hosted_file",
+      "label": "docs/06_VALIDATION.md",
+      "description": "Fichier dérivé (documentation) ; 581 octets ; sha256:303395e67586319c0d65ecf9536f0b6f0b0ef9146b0bc62cbd2ba1dcd7104038"
+    },
+    {
+      "id": "file:7f0a0fc8e87e47eb771f6e53",
+      "kind": "hosted_file",
+      "label": "docs/07_HOSTING_AND_PUBLICATION.md",
+      "description": "Fichier dérivé (documentation) ; 349 octets ; sha256:20d230b2a19afcc896b89ef41d9aa6e5c3a64f4ec526f5417c1b91d2b1924086"
+    },
+    {
+      "id": "file:3bd0069b67491125a2520056",
+      "kind": "hosted_file",
+      "label": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+      "description": "Fichier dérivé (documentation) ; 4020 octets ; sha256:f252db2f7f0c8a4b5879e4f1775aeb19e4d4ce9e5352601b8931ec5b1b2d7b6f"
+    },
+    {
+      "id": "file:a7fb6db357828b3d90576409",
+      "kind": "hosted_file",
+      "label": "kristal.discovery.json",
+      "description": "Fichier dérivé (reader_discovery) ; 1768 octets ; sha256:19c283bd1aca20f89c679b0f70aad308af5b2b03a27c0082451463162b5f4bce"
+    },
+    {
+      "id": "file:54032924c3e8f7c472b2c54e",
+      "kind": "hosted_file",
+      "label": "sources/source-catalog.json",
+      "description": "Fichier dérivé (provenance_catalog) ; 9066 octets ; sha256:b843e44caaefbe49e66bde10d6b87ab9ca4dce8fc9c595983aae0dffb215df1a"
+    },
+    {
+      "id": "file:e11d802af47ec35ab0df2311",
+      "kind": "hosted_file",
+      "label": "state/state-snapshot.json",
+      "description": "Fichier dérivé (state_snapshot) ; 893 octets ; sha256:ff062094812881537f4d466ed5efddae0a0368967340c1547257c7d94d1002c3"
+    }
+  ],
+  "edges": [
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "artifact:388102ca2f62a418c3586754",
+      "relation": "has_member"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:d927eb797c2498a67e653cb4",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:062bb2636eac9f753dff1044",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:24c3653185f78a56be3094a1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:831b502116e94a42fac8a180",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:3ef3a8195eaf5def155c9114",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:12a4596f14304d3b351dfa2d",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:cf1ed89ef56c42d32ca5d054",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:c96e74bc3280f3e40112ec15",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:ee857f3330bf6626cb4ada63",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:39a53fb93273a431091e90e8",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:2236b673e914f8bd48e7ffc1",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:f7a8b5f4072240dcfca9df7e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:7ea4cf7c4b28f1f471f64923",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:dabbed34666f1018007e4ead",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:24ea83d692d1e02db9e20d0f",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:6e1c3cc9b16b7dbbfaa4ee7a",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:8df021599121797b2195b5c4",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:155925cd6e5b9b5091a0bbfd",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:dd048373bab564466c4dee98",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:35c8571202071b8fb55a80f6",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:1527e41fac59f23c98d9bea2",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:7f0a0fc8e87e47eb771f6e53",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:3bd0069b67491125a2520056",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:a7fb6db357828b3d90576409",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:54032924c3e8f7c472b2c54e",
+      "relation": "lists_file"
+    },
+    {
+      "from": "state:0d178fb66612717fb6e6fd6f",
+      "to": "file:e11d802af47ec35ab0df2311",
+      "relation": "lists_file"
+    }
+  ],
+  "reading": {
+    "format": "konstellation.light-reading/1.0",
+    "status": "source-public-documents-unqualified",
+    "semantic_assertions_created": 0,
+    "overview_path": "README.md",
+    "intro": "Kristal v6 statique de référence sur le cycle intention → spécification → code → exécution → état → défaut.",
+    "topics": [
+      {
+        "title": "intention ≠ exigence ;",
+        "detail": "intention ≠ exigence ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 13
+      },
+      {
+        "title": "exigence ≠ spécification complète ;",
+        "detail": "exigence ≠ spécification complète ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 14
+      },
+      {
+        "title": "spécification ≠ implémentation ;",
+        "detail": "spécification ≠ implémentation ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 15
+      },
+      {
+        "title": "code source ≠ exécutable ;",
+        "detail": "code source ≠ exécutable ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 16
+      },
+      {
+        "title": "programme ≠ processus ;",
+        "detail": "programme ≠ processus ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 17
+      },
+      {
+        "title": "code ≠ exécution ;",
+        "detail": "code ≠ exécution ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 18
+      },
+      {
+        "title": "état interne ≠ sortie observable ;",
+        "detail": "état interne ≠ sortie observable ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 19
+      },
+      {
+        "title": "défaut ≠ état erroné ≠ défaillance ;",
+        "detail": "défaut ≠ état erroné ≠ défaillance ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 20
+      },
+      {
+        "title": "exception ≠ défaillance ;",
+        "detail": "exception ≠ défaillance ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 21
+      },
+      {
+        "title": "vulnérabilité ≠ exploitation ;",
+        "detail": "vulnérabilité ≠ exploitation ;",
+        "section": "Garde-fous sémantiques principaux",
+        "line": 22
+      }
+    ],
+    "documents": [
+      {
+        "path": "README.md",
+        "sha256": "sha256:c1fd1b238f44c63430da3ad72d23d851f820b6863fc08ea819a537e928763904",
+        "title": "Kristal Software v1.0.0",
+        "excerpt": "Kristal v6 statique de référence sur le cycle intention → spécification → code → exécution → état → défaut.",
+        "sections": [
+          {
+            "title": "Noyau",
+            "line": 5
+          },
+          {
+            "title": "Garde-fous sémantiques principaux",
+            "line": 11
+          },
+          {
+            "title": "Frontière",
+            "line": 30
+          },
+          {
+            "title": "Contenu",
+            "line": 36
+          }
+        ],
+        "topics": [
+          {
+            "title": "intention ≠ exigence ;",
+            "detail": "intention ≠ exigence ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 13
+          },
+          {
+            "title": "exigence ≠ spécification complète ;",
+            "detail": "exigence ≠ spécification complète ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 14
+          },
+          {
+            "title": "spécification ≠ implémentation ;",
+            "detail": "spécification ≠ implémentation ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 15
+          },
+          {
+            "title": "code source ≠ exécutable ;",
+            "detail": "code source ≠ exécutable ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 16
+          },
+          {
+            "title": "programme ≠ processus ;",
+            "detail": "programme ≠ processus ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 17
+          },
+          {
+            "title": "code ≠ exécution ;",
+            "detail": "code ≠ exécution ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 18
+          },
+          {
+            "title": "état interne ≠ sortie observable ;",
+            "detail": "état interne ≠ sortie observable ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 19
+          },
+          {
+            "title": "défaut ≠ état erroné ≠ défaillance ;",
+            "detail": "défaut ≠ état erroné ≠ défaillance ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 20
+          },
+          {
+            "title": "exception ≠ défaillance ;",
+            "detail": "exception ≠ défaillance ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 21
+          },
+          {
+            "title": "vulnérabilité ≠ exploitation ;",
+            "detail": "vulnérabilité ≠ exploitation ;",
+            "section": "Garde-fous sémantiques principaux",
+            "line": 22
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/00_INTENT_AND_SCOPE.md",
+        "sha256": "sha256:500a138701eb4472452bd98de4a1de702dae47d0dd9de7aab54e548c64582d85",
+        "title": "Intention et portée — Kristal-Software",
+        "excerpt": "Kristal v6 statique de référence sur le cycle intention → spécification → code → exécution → état → défaut.",
+        "sections": [
+          {
+            "title": "Intention d’origine (README)",
+            "line": 3
+          },
+          {
+            "title": "Portée de la migration",
+            "line": 9
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 7
+      },
+      {
+        "path": "docs/01_SEMANTIC_BOUNDARY.md",
+        "sha256": "sha256:1100e9c4deda678ca6ca4d8089e528ad413b9adaf32e18b033aa0a09c81b65cc",
+        "title": "Frontière sémantique — Kristal-Software",
+        "excerpt": "Le modèle décrit : intention → spécification → code → exécution → état → défaut.",
+        "sections": [
+          {
+            "title": "Invariant",
+            "line": 5
+          },
+          {
+            "title": "Ownership",
+            "line": 9
+          },
+          {
+            "title": "Identité",
+            "line": 13
+          }
+        ],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/02_NATIVE_MODEL.md",
+        "sha256": "sha256:d44e334694644af397cc792785481332024f2e2daf9ca13213e28c87c6bc73f5",
+        "title": "Modèle natif — Kristal-Software",
+        "excerpt": "Forme native identifiée : typed_software_lifecycle_graph.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/03_EPISTEMIC_MODEL.md",
+        "sha256": "sha256:fc97a8cf0edc72c4351e5b2457c03b6f41eddc0a69d731bb4c30ee037dacc5eb",
+        "title": "Modèle épistémique — Kristal-Software",
+        "excerpt": "Les assertions d’origine restent engagées, sans adjudication nouvelle. Catalogue d’origine : knowledge-base/sources/source-catalog.json.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/04_CANONICAL_DERIVED.md",
+        "sha256": "sha256:0fad278ff697539e0c826563b3eea6bd11ab74580f6a606f26977d2222ca7658",
+        "title": "Canonique, dérivé, matérialisation — Kristal-Software",
+        "excerpt": "canon/domain/legacy-v6-state.payload.json est le payload logique exact du v9 historique. canon/state.index.json l’engage sous le contrat existant via compute-json-jcs.",
+        "sections": [
+          {
+            "title": "Adaptateur 3.2.2",
+            "line": 3
+          },
+          {
+            "title": "Emplacements historiques conservés",
+            "line": 7
+          }
+        ],
+        "topics": [
+          {
+            "title": "knowledge-base/",
+            "detail": "sources et fichiers historiques de vérité v6 selon l’autorité indiquée par le README original, autres vues reconstruites.",
+            "section": "Emplacements historiques conservés",
+            "line": 9
+          },
+          {
+            "title": ".kristal/v8/",
+            "detail": "index et projections antérieurs.",
+            "section": "Emplacements historiques conservés",
+            "line": 10
+          },
+          {
+            "title": ".kristal/v9/",
+            "detail": "artefact et manifestes v9 originaux.",
+            "section": "Emplacements historiques conservés",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "docs/05_ORIENTATIONS.md",
+        "sha256": "sha256:47579b41da155180d0a2ca758852c5d25dd462e80d1c7929fd15cc40913a6542",
+        "title": "Orientations et projections — Kristal-Software",
+        "excerpt": "Axe métier : intention → spécification → code → exécution → état → défaut.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/06_VALIDATION.md",
+        "sha256": "sha256:303395e67586319c0d65ecf9536f0b6f0b0ef9146b0bc62cbd2ba1dcd7104038",
+        "title": "Validation — Kristal-Software",
+        "excerpt": "Engagement de Logical Artifact d’origine : sha256:e266bcfeb790b976d10f501d0daa0c57d837d0365bd95a971679720ebe2bd1cf.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 8
+      },
+      {
+        "path": "docs/07_HOSTING_AND_PUBLICATION.md",
+        "sha256": "sha256:20d230b2a19afcc896b89ef41d9aa6e5c3a64f4ec526f5417c1b91d2b1924086",
+        "title": "Hosting et publication — Kristal-Software",
+        "excerpt": "Aucune opération de publication, activation ou rollback n’a été réalisée par cette normalisation. Les fichiers lifecycle sous .kristal/v9/ restent identiques.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "docs/08_AI_AUTHORING_IMPROVEMENTS.md",
+        "sha256": "sha256:f252db2f7f0c8a4b5879e4f1775aeb19e4d4ce9e5352601b8931ec5b1b2d7b6f",
+        "title": "Software — AI authoring improvement review",
+        "excerpt": "Review: AI draft, not accepted · 2026-11-05",
+        "sections": [
+          {
+            "title": "1. Source-grounded semantic orientation",
+            "line": 8
+          },
+          {
+            "title": "2. Concrete authoring improvements to review",
+            "line": 18
+          },
+          {
+            "title": "3. Present classifications, not approvals",
+            "line": 26
+          },
+          {
+            "title": "4. Evidence and reviewer acceptance conditions",
+            "line": 32
+          },
+          {
+            "title": "5. Source anchors in this snapshot",
+            "line": 41
+          }
+        ],
+        "topics": [
+          {
+            "title": "Arketype: Semantic Reference (ARK-01), declared; not independently approved.",
+            "detail": "Arketype: Semantic Reference (ARK-01), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 28
+          },
+          {
+            "title": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "detail": "Usage PRF: Multi-Purpose Semantic Reference (PRF-20), declared; not independently approved.",
+            "section": "3. Present classifications, not approvals",
+            "line": 29
+          },
+          {
+            "title": "UNESCO: Information technology (software), declared, semantic review pending.",
+            "detail": "UNESCO: Information technology (software), declared, semantic review pending.",
+            "section": "3. Present classifications, not approvals",
+            "line": 30
+          },
+          {
+            "title": "AI read index currently not present; this review is not a replacement for a generated…",
+            "detail": "AI read index currently not present; this review is not a replacement for a generated portable AI read layer.",
+            "section": "4. Evidence and reviewer acceptance conditions",
+            "line": 36
+          },
+          {
+            "title": "docs/00_INTENT_AND_SCOPE.md (SHA-256 500a138701eb447245…)",
+            "detail": "docs/00_INTENT_AND_SCOPE.md (SHA-256 500a138701eb447245…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 43
+          },
+          {
+            "title": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 1100e9c4deda678ca6…)",
+            "detail": "docs/01_SEMANTIC_BOUNDARY.md (SHA-256 1100e9c4deda678ca6…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 44
+          },
+          {
+            "title": "docs/02_NATIVE_MODEL.md (SHA-256 d44e334694644af397…)",
+            "detail": "docs/02_NATIVE_MODEL.md (SHA-256 d44e334694644af397…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 45
+          },
+          {
+            "title": "docs/03_EPISTEMIC_MODEL.md (SHA-256 fc97a8cf0edc72c435…)",
+            "detail": "docs/03_EPISTEMIC_MODEL.md (SHA-256 fc97a8cf0edc72c435…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 46
+          },
+          {
+            "title": "docs/04_CANONICAL_DERIVED.md (SHA-256 0fad278ff697539e0c…)",
+            "detail": "docs/04_CANONICAL_DERIVED.md (SHA-256 0fad278ff697539e0c…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 47
+          },
+          {
+            "title": "docs/06_VALIDATION.md (SHA-256 303395e67586319c0d…)",
+            "detail": "docs/06_VALIDATION.md (SHA-256 303395e67586319c0d…)",
+            "section": "5. Source anchors in this snapshot",
+            "line": 48
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 5
+      },
+      {
+        "path": "AI_START_HERE.md",
+        "sha256": "sha256:10aed7be4dca93df11a492b435868a4421988d406392187527c5b156b253529a",
+        "title": "AI START HERE — Portable Kristal",
+        "excerpt": "You are reading a self-contained Kristal knowledge package.",
+        "sections": [
+          {
+            "title": "Read in this order",
+            "line": 7
+          },
+          {
+            "title": "Interpretation rules",
+            "line": 19
+          },
+          {
+            "title": "Offline guarantee",
+            "line": 30
+          }
+        ],
+        "topics": [
+          {
+            "title": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state…",
+            "detail": "Treat canon/ as canonical content and state/state-snapshot.json as the exact semantic state declaration.",
+            "section": "Interpretation rules",
+            "line": 21
+          },
+          {
+            "title": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by…",
+            "detail": "Treat ai/ as a derived read model. It helps navigation but is never a source of truth by itself.",
+            "section": "Interpretation rules",
+            "line": 22
+          },
+          {
+            "title": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "detail": "Do not invent missing facts, provenance, authority, definitions, or relationships.",
+            "section": "Interpretation rules",
+            "line": 24
+          },
+          {
+            "title": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative…",
+            "detail": "A missing claim is not automatically false. Check ai/COVERAGE.json before drawing negative conclusions.",
+            "section": "Interpretation rules",
+            "line": 25
+          },
+          {
+            "title": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "detail": "Preserve uncertainty and conflicts explicitly declared by the Kristal.",
+            "section": "Interpretation rules",
+            "line": 26
+          },
+          {
+            "title": "AI-generated answers are not automatically part of the Kristal canon.",
+            "detail": "AI-generated answers are not automatically part of the Kristal canon.",
+            "section": "Interpretation rules",
+            "line": 27
+          },
+          {
+            "title": "When practical, mention the source file(s) used for an answer.",
+            "detail": "When practical, mention the source file(s) used for an answer.",
+            "section": "Interpretation rules",
+            "line": 28
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/CONTEXT.md",
+        "sha256": "sha256:2cbce9af5654a3f21df30823e35ebd0727e75be96eb927303fa30a1c85e3596e",
+        "title": "AI Context — Software",
+        "excerpt": "This is a deterministic, derived orientation document for offline AI reading. It is not the canon.",
+        "sections": [
+          {
+            "title": "Reading rule",
+            "line": 15
+          },
+          {
+            "title": "Included orientation from docs/00_INTENT_AND_SCOPE.md",
+            "line": 21
+          },
+          {
+            "title": "Intention d’origine (README)",
+            "line": 25
+          },
+          {
+            "title": "Portée de la migration",
+            "line": 31
+          },
+          {
+            "title": "Included orientation from docs/01_SEMANTIC_BOUNDARY.md",
+            "line": 37
+          },
+          {
+            "title": "Invariant",
+            "line": 43
+          },
+          {
+            "title": "Ownership",
+            "line": 47
+          },
+          {
+            "title": "Identité",
+            "line": 51
+          }
+        ],
+        "topics": [
+          {
+            "title": "State ref: urn:kristal:state:software",
+            "detail": "State ref: urn:kristal:state:software",
+            "section": "AI Context — Software",
+            "line": 5
+          },
+          {
+            "title": "State Logical Commitment:…",
+            "detail": "State Logical Commitment: sha256:bb4c4a11d82d6efee72b7eed05b5674e44fcd7028ec48477fea060ceaf083dee",
+            "section": "AI Context — Software",
+            "line": 6
+          },
+          {
+            "title": "Workspace profile: layered",
+            "detail": "Workspace profile: layered",
+            "section": "AI Context — Software",
+            "line": 7
+          },
+          {
+            "title": "Native model: typed_software_lifecycle_graph",
+            "detail": "Native model: typed_software_lifecycle_graph",
+            "section": "AI Context — Software",
+            "line": 8
+          },
+          {
+            "title": "Canonical artifacts: 1",
+            "detail": "Canonical artifacts: 1",
+            "section": "AI Context — Software",
+            "line": 9
+          },
+          {
+            "title": "Sources: 10",
+            "detail": "Sources: 10",
+            "section": "AI Context — Software",
+            "line": 10
+          },
+          {
+            "title": "External pinned references: 0",
+            "detail": "External pinned references: 0",
+            "section": "AI Context — Software",
+            "line": 11
+          },
+          {
+            "title": "Materialization manifests: 0",
+            "detail": "Materialization manifests: 0",
+            "section": "AI Context — Software",
+            "line": 12
+          },
+          {
+            "title": "Workspace-local materialization blobs: 0",
+            "detail": "Workspace-local materialization blobs: 0",
+            "section": "AI Context — Software",
+            "line": 13
+          },
+          {
+            "title": "knowledge-base/",
+            "detail": "sources et fichiers historiques de vérité v6 selon l’autorité indiquée par le README original, autres vues reconstruites.",
+            "section": "Emplacements historiques conservés",
+            "line": 99
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/GLOSSARY.md",
+        "sha256": "sha256:79c804f7bf4a7eea11ec41abf8df730625277ee6c0dfbf786e98466536f445ef",
+        "title": "Glossary",
+        "excerpt": "No project-specific glossary has been authored. Use the native terminology in the canonical files and documentation; do not invent definitions.",
+        "sections": [],
+        "topics": [],
+        "heading_line": 1,
+        "excerpt_line": 3
+      },
+      {
+        "path": "ai/QUESTIONS.md",
+        "sha256": "sha256:ecf801917d7032cc8e827cf143735a50858a3f8bd1ecf5b2bbe8d6376dc5b5fc",
+        "title": "Questions and navigation hints",
+        "excerpt": "This file is a derived aid for an AI reading Software offline.",
+        "sections": [],
+        "topics": [
+          {
+            "title": "What is the stated purpose and semantic boundary of this Kristal?",
+            "detail": "What is the stated purpose and semantic boundary of this Kristal?",
+            "section": "Questions and navigation hints",
+            "line": 7
+          },
+          {
+            "title": "Which files are canonical, and which are derived or explanatory?",
+            "detail": "Which files are canonical, and which are derived or explanatory?",
+            "section": "Questions and navigation hints",
+            "line": 8
+          },
+          {
+            "title": "What sources and authority declarations support a claim?",
+            "detail": "What sources and authority declarations support a claim?",
+            "section": "Questions and navigation hints",
+            "line": 9
+          },
+          {
+            "title": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "detail": "What does ai/COVERAGE.json say is owned, excluded, or externally referenced?",
+            "section": "Questions and navigation hints",
+            "line": 10
+          },
+          {
+            "title": "Which State Snapshot and Logical Commitment does this package represent?",
+            "detail": "Which State Snapshot and Logical Commitment does this package represent?",
+            "section": "Questions and navigation hints",
+            "line": 11
+          }
+        ],
+        "heading_line": 1,
+        "excerpt_line": 3
+      }
+    ],
+    "scanned_files": 14
+  }
+}
