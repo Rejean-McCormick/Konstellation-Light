@@ -3,7 +3,11 @@ const localeRE=/^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$/;
 const slugRE=/^[a-z0-9][a-z0-9-]{0,99}$/;
 const digestRE=/^sha256:[a-f0-9]{64}$/;
 const text=(x,max,multiline=false)=>typeof x==='string'&&x.trim().length>0&&x.length<=max&&!(multiline?/[\u0000-\u0009\u000b-\u001f\u007f]/:/[\u0000-\u001f\u007f]/).test(x);
-export function validateLocalization(obj, base, { reviewed = true } = {}) {
+// Source-only publication is a distinct explicit beta path. Never a review decision.
+export function isPublicSourceProvenance(pr) {
+ return pr?.provider==='wikidata' && pr.review_status==='public_source' && pr.review_ref===undefined && pr.runtime_set_id===undefined && Array.isArray(pr.source_refs) && pr.source_refs.length===4 && /^wikidata:[QP][1-9]\d*@\d+$/.test(pr.source_refs[0]) && /^wbgetentities-sha256-[a-f0-9]{64}$/.test(pr.source_refs[1]) && pr.source_refs.slice(2).every(x=>digestRE.test(x));
+}
+export function validateLocalization(obj, base, { reviewed = true, publicSource = false } = {}) {
   if (!obj||typeof obj!=='object'||Array.isArray(obj)||
       Object.keys(obj).some(k=>!['authority','entries','relations','format','locale','slug','state_ref','surface_digest'].includes(k)) ||
       obj.format!=='konstellation.multilingual-read/1.0'||
@@ -16,19 +20,20 @@ export function validateLocalization(obj, base, { reviewed = true } = {}) {
   const seen=new Set();
   for(const item of obj.entries){
     if(!item||typeof item!=='object'||Array.isArray(item)||
-       Object.keys(item).some(k=>!['node_id','label','definition','provenance'].includes(k))||
+       Object.keys(item).some(k=>!['node_id','label','definition','aliases','provenance'].includes(k))||
        !text(item.node_id,300)||seen.has(item.node_id)||
        (known&&!known.has(item.node_id))||
        (item.label===undefined&&item.definition===undefined)||
        (item.label!==undefined&&!text(item.label,600))||
+       (item.aliases!==undefined&&(!Array.isArray(item.aliases)||item.aliases.length>80||item.aliases.some(x=>!text(x,600))||new Set(item.aliases).size!==item.aliases.length))||
        (item.definition!==undefined&&!text(item.definition,4000,true))) throw Error('Notion linguistique inconnue ou invalide.');
     seen.add(item.node_id);
     const pr=item.provenance;
     if(!pr||typeof pr!=='object'||Array.isArray(pr)||
        Object.keys(pr).some(k=>!['provider','source_refs','review_status','review_ref','runtime_set_id'].includes(k))||
-       !['dik','semantik_architect','spek','editorial'].includes(pr.provider)||
-       !['candidate','reviewed'].includes(pr.review_status)||
-       (reviewed&&pr.review_status!=='reviewed')||
+       (!['dik','semantik_architect','spek','editorial'].includes(pr.provider)&&!(publicSource&&isPublicSourceProvenance(pr)))||
+       (!['candidate','reviewed'].includes(pr.review_status)&&!(publicSource&&isPublicSourceProvenance(pr)))||
+       (reviewed&&pr.review_status!=='reviewed'&&!(publicSource&&isPublicSourceProvenance(pr)))||
        (pr.review_status==='reviewed'&&!text(pr.review_ref,300))||
        (pr.review_ref!==undefined&&!text(pr.review_ref,300))||
        (pr.runtime_set_id!==undefined&&!text(pr.runtime_set_id,300))||
@@ -48,9 +53,9 @@ export function validateLocalization(obj, base, { reviewed = true } = {}) {
       const pr=item.provenance;
       if(!pr||typeof pr!=='object'||Array.isArray(pr)||
          Object.keys(pr).some(k=>!['provider','source_refs','review_status','review_ref','runtime_set_id'].includes(k))||
-         !['dik','semantik_architect','spek','editorial'].includes(pr.provider)||
-         !['candidate','reviewed'].includes(pr.review_status)||
-         (reviewed&&pr.review_status!=='reviewed')||
+         (!['dik','semantik_architect','spek','editorial'].includes(pr.provider)&&!(publicSource&&isPublicSourceProvenance(pr)))||
+         (!['candidate','reviewed'].includes(pr.review_status)&&!(publicSource&&isPublicSourceProvenance(pr)))||
+         (reviewed&&pr.review_status!=='reviewed'&&!(publicSource&&isPublicSourceProvenance(pr)))||
          (pr.review_status==='reviewed'&&!text(pr.review_ref,300))||
          !Array.isArray(pr.source_refs)||pr.source_refs.length>80||
          !pr.source_refs.every(x=>text(x,300)))throw Error('Revue de relation invalide.');
@@ -104,11 +109,13 @@ export function searchMatches(query, rows, {uiLocale='fr'}={}){
     const q=searchNormalize(query,row.locale), terms=q.split(/\s+/).filter(Boolean);
     if(!terms.length||!row.node_id)continue;
     const label=searchNormalize(row.label,row.locale), definition=searchNormalize(row.definition,row.locale);
-    const combined=[label,definition].join(' ');
+    const aliases=(Array.isArray(row.aliases)?row.aliases:[]).map(a=>searchNormalize(a,row.locale));
+    const combined=[label,...aliases,definition].join(' ');
     if(!terms.every(t=>combined.includes(t)))continue;
     const exact=label===q, labelMatch=terms.every(t=>label.includes(t));
     // Exact label, then other label matches, then definition; UI language breaks ties.
-    const rank=(exact?0:labelMatch?2:4)+(row.locale===uiLocale?0:1);
+    const aliasMatch=aliases.some(a=>terms.every(t=>a.includes(t)));
+    const rank=(exact?0:labelMatch?2:aliasMatch?3:4)+(row.locale===uiLocale?0:1);
     const match={locale:row.locale,label:row.label||'',definition:row.definition||'',rank};
     let item=results.get(row.node_id);
     if(!item){item={node_id:row.node_id,rank,matches:[]};results.set(row.node_id,item);}

@@ -32,7 +32,7 @@ export function validatePublicIndex(index, expectedCount = 126) {
   return { count: index.count, index_digest: index.index_digest };
 }
 
-async function resolve() {
+async function resolve(expectedCount) {
   const git = spawnSync('git', ['ls-remote', '--heads', BASE, 'main'], {
     encoding: 'utf8', timeout: 60000,
     env: { ...process.env, GIT_TERMINAL_PROMPT: '0' }
@@ -47,7 +47,8 @@ async function resolve() {
   const body = Buffer.from(await response.arrayBuffer());
   if (body.length > 8 * 1024 * 1024) throw Error('Index trop volumineux.');
   const index = JSON.parse(body.toString('utf8'));
-  const {count,index_digest} = validatePublicIndex(index);
+  const {count,index_digest} = validatePublicIndex(index,expectedCount);
+  if(expectedCount===127&&!index.kristals.some(x=>x.slug==='hospital-ops'))throw Error('Hospital-Ops absent.');
   return {
     format: 'konstellation.light-technical-source-pin/1.0',
     repository: REPOSITORY, branch: 'main', commit, count, index_digest,
@@ -61,7 +62,7 @@ async function resolve() {
 function argMap(argv) {
   const a={};for(let i=0;i<argv.length;i+=2){
     const opt=argv[i],val=argv[i+1];
-    if(!['--report','--github-output','--github-summary'].includes(opt)||!val||a[opt])throw Error('Usage: --report FILE [--github-output FILE] [--github-summary FILE]');
+    if(!['--report','--github-output','--github-summary','--expected-count'].includes(opt)||!val||a[opt])throw Error('Usage: --report FILE [--github-output FILE] [--github-summary FILE]');
     a[opt]=val;
   }
   if(!a['--report']) throw Error('Argument --report obligatoire.');
@@ -77,10 +78,11 @@ function writeFile(target,content,append=false) {
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(here,'resoudre-pin-kristals-126.mjs')) {
   try {
     const args=argMap(process.argv.slice(2));
-    const report=await resolve();
+    const count=Number(args['--expected-count']||126);if(![126,127].includes(count))throw Error('Périmètre non autorisé');
+    const report=await resolve(count);
     writeFile(args['--report'],JSON.stringify(report,null,2)+'\n');
     writeFile(args['--github-output'],`commit=${report.commit}\nindex_digest=${report.index_digest}\n`,true);
-    writeFile(args['--github-summary'],`### Source technique 126 Kristals\n\nCommit : \`${report.commit}\`  \nIndex : \`${report.index_digest}\`  \nUsage : prévisualisation uniquement; qualification et autorisation **NON VÉRIFIÉES**.\n\n`,true);
+    writeFile(args['--github-summary'],`### Source technique ${report.count} Kristals\n\nCommit : \`${report.commit}\`  \nIndex : \`${report.index_digest}\`  \nUsage : prévisualisation uniquement; qualification et autorisation **NON VÉRIFIÉES**.\n\n`,true);
     console.log(JSON.stringify(report));
   } catch(e) { console.error('Résolution bloquée : '+e.message);process.exitCode=1; }
 }

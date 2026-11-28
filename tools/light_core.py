@@ -117,6 +117,9 @@ def validated_site(site: Path) -> dict:
                 if not isinstance(item,dict) or item.get('node_id') not in node_ids or item['node_id'] in seen_nodes:
                     raise LightError('Identité multilingue inconnue ou répétée.')
                 seen_nodes.add(item['node_id'])
+                aliases=item.get('aliases',[])
+                if not isinstance(aliases,list) or len(aliases)>80 or any(not isinstance(x,str) or not x.strip() or len(x)>600 or any(ord(c)<32 or ord(c)==127 for c in x) for x in aliases) or len(set(aliases))!=len(aliases):
+                    raise LightError('Alias linguistiques invalides.')
                 pr=item.get('provenance')
                 if (not isinstance(pr,dict) or pr.get('review_status')!='reviewed' or
                     not isinstance(pr.get('review_ref'),str) or not pr['review_ref'].strip()):

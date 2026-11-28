@@ -1,0 +1,159 @@
+name: Konstellation Light - 127 publics ML6 Wikidata - beta explicite
+
+# Parcours public *distinct* du workflow de publication qualifiée C1-C4.
+# Le propriétaire a explicitement choisi d'exposer via un lecteur les surfaces
+# qui sont DÉJÀ publiques dans Rejean-McCormick/kristal-public.
+# Aucun reçu de qualification, approbation éditoriale ou signature inventé.
+# Ne jamais y substituer des sources privées, locales ou candidates.
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Tapez PUBLIER_127_ML6_WIKIDATA pour publier la bêta des 127 Kristals déjà publics'
+        required: true
+        type: string
+      scope_sha256:
+        description: 'sha256:... du périmètre exact public-ml6-source/scope.json'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: konstellation-light-pages
+  cancel-in-progress: false
+
+jobs:
+  build-public-beta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Confirmer la décision explicite du propriétaire
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          if [ "$CONFIRMATION" != 'PUBLIER_127_ML6_WIKIDATA' ]; then
+            echo 'Publication annulée : confirmation exacte requise.' >&2
+            exit 1
+          fi
+      - name: Charger le code sans conserver de jeton
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tester la garde minimale de la bêta
+        run: node --test tests/public-beta-126.test.mjs tests/ml-six-languages.test.mjs tests/ml-v22-ui.test.mjs tests/multilingual-read.test.mjs tests/ml-reviewed-handoff.test.mjs tests/ml6-release.test.mjs tests/ml6-public-source.test.mjs
+      - name: Résoudre le commit exact déjà public
+        id: pin
+        run: |
+          node scripts/resoudre-pin-kristals-126.mjs \
+            --expected-count 127 \
+            --report "$RUNNER_TEMP/source-pin.json" \
+            --github-output "$GITHUB_OUTPUT" \
+            --github-summary "$GITHUB_STEP_SUMMARY"
+      - name: Importer uniquement la collection publique épinglée
+        env:
+          SOURCE_COMMIT: ${{ steps.pin.outputs.commit }}
+          INDEX_DIGEST: ${{ steps.pin.outputs.index_digest }}
+        run: |
+          node scripts/import-pinned-collection.mjs \
+            --repository Rejean-McCormick/kristal-public \
+            --commit "$SOURCE_COMMIT" \
+            --expected-index-digest "$INDEX_DIGEST" \
+            --out "$RUNNER_TEMP/public-kristals"
+      - name: Construire la collection publique épinglée
+        run: |
+          node scripts/preparer-site-web-126.mjs \
+            --collection "$RUNNER_TEMP/public-kristals" \
+            --out "$RUNNER_TEMP/konstellation-light-public-beta-127" \
+            --expected-count 127
+      - name: Vérifier l'intégrité et constater le C4 historique toujours bloqué
+        run: |
+          set +e
+          node scripts/c4-publication-gate.mjs --site "$RUNNER_TEMP/konstellation-light-public-beta-127"
+          code=$?
+          set -e
+          if [ "$code" -ne 3 ]; then
+            echo 'Intégrité inattendue, ou démonstration épinglée confondue avec la collection réelle.' >&2
+            exit 1
+          fi
+      - name: Charger les seuls libellés Wikidata publics du périmètre confirmé
+        env:
+          SCOPE_SHA: ${{ inputs.scope_sha256 }}
+        run: |
+          node scripts/ml6-wikidata-public.mjs attach \
+            "$RUNNER_TEMP/public-kristals" "$RUNNER_TEMP/konstellation-light-public-beta-127" \
+            public-ml6-source/scope.json "$SCOPE_SHA" "$RUNNER_TEMP/ml6-wikidata"
+      - name: Apposer une mention de bêta non qualifiée visible
+        run: |
+          node scripts/estampiller-beta-publique-126.mjs \
+            --expected-count 127 \
+            --site "$RUNNER_TEMP/konstellation-light-public-beta-127" \
+            --source-report "$RUNNER_TEMP/source-pin.json"
+      - name: Contrôler la bêta source après estampillage (C4 ordinaire reste bloqué)
+        env:
+          SCOPE_SHA: ${{ inputs.scope_sha256 }}
+        run: |
+          node scripts/ml6-wikidata-public.mjs verify \
+            "$RUNNER_TEMP/public-kristals" "$RUNNER_TEMP/konstellation-light-public-beta-127" \
+            public-ml6-source/scope.json "$SCOPE_SHA"
+      - name: Servir rapidement le HTML et le catalogue en HTTP local
+        run: |
+          python3 -m http.server 47821 --bind 127.0.0.1 --directory "$RUNNER_TEMP/konstellation-light-public-beta-127" &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl --silent --fail http://127.0.0.1:47821/ -o /tmp/konstellation-test-index.html; then break; fi
+            sleep 1
+          done
+          grep -q 'konstellation-public-beta-disclosure' /tmp/konstellation-test-index.html
+          curl --silent --fail http://127.0.0.1:47821/data/catalog.json -o /tmp/konstellation-test-catalog.json
+          node --input-type=module -e 'import fs from "node:fs";const c=JSON.parse(fs.readFileSync("/tmp/konstellation-test-catalog.json","utf8"));if(c.entries.length!==127)process.exit(1);'
+      - name: Recette Chromium ML6 avant publication
+        run: |
+          python3 -m venv "$RUNNER_TEMP/ml6-venv"
+          "$RUNNER_TEMP/ml6-venv/bin/python" -m pip install playwright==1.56.0
+          "$RUNNER_TEMP/ml6-venv/bin/python" -m playwright install --with-deps chromium
+          PORT=47822 node scripts/serve-light.mjs "$RUNNER_TEMP/konstellation-light-public-beta-127" &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:47822/data/catalog.json >/dev/null; then break; fi
+            sleep 1
+          done
+          "$RUNNER_TEMP/ml6-venv/bin/python" tests/recette-light-ml6.py --url http://127.0.0.1:47822/ --out "$RUNNER_TEMP/ml6-recipe"
+          "$RUNNER_TEMP/ml6-venv/bin/python" tests/ml6-public-source-browser.py --url http://127.0.0.1:47822/ --samples "$RUNNER_TEMP/ml6-wikidata/samples.json" --out "$RUNNER_TEMP/ml6-wikidata/browser.json"
+      - name: Configurer GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Charger l'artefact du lecteur public (pas les archives privées)
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/konstellation-light-public-beta-127
+      - name: Résumé transparent du périmètre
+        run: |
+          {
+            echo '### Konstellation-Light : bêta publique'
+            echo '- 127 Kristals déjà publics, prélevés à un seul commit de kristal-public.'
+            echo '- Démonstration C4 historique et chaîne C1-C4 indépendante inchangées.'
+            echo '- **Aucune qualification C1/C2/C3/C4 prétendue.**'
+            echo '- Libellés publics Wikidata CC0, non révisés; traductions candidates et fichiers privés exclus. Couverture partielle.'
+            echo '- Cette mise en ligne est une bêta explicitement confirmée par le propriétaire.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  deploy-public-beta:
+    needs: build-public-beta
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Déployer la bêta publique HTTPS
+        id: deploy
+        uses: actions/deploy-pages@v4

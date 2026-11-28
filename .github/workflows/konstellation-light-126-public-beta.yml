@@ -42,7 +42,7 @@ jobs:
         with:
           node-version: '22'
       - name: Tester la garde minimale de la bêta
-        run: node --test tests/public-beta-126.test.mjs
+        run: node --test tests/public-beta-126.test.mjs tests/ml-six-languages.test.mjs tests/ml-v22-ui.test.mjs tests/multilingual-read.test.mjs
       - name: Résoudre le commit exact déjà public
         id: pin
         run: |

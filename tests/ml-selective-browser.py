@@ -41,9 +41,9 @@ def main():
             context.route('**/*',route)
             page.goto('http://localhost:8765/')
             expect(page.locator('#search-language-status')).to_contain_text('Seules les ressources')
-            assert requests==[],requests
+            assert requests==['fr'],requests # automatic display pack only; search stays selective
             assert page.locator('#ui-language option').count()==6
-            assert page.locator('#localization option').count()==4
+            assert page.locator('#localization option').count()==5
             assert page.locator('#search-language-add option').count()==2
             page.locator('#search').fill('cell'); expect(page.locator('.ml-search-results .record')).to_have_count(2)
             assert set(requests)=={'fr','en'},requests
@@ -62,7 +62,7 @@ def main():
             expect(page.locator('#search-language-summary')).to_contain_text('Suchsprachen')
             expect(page.locator('.ml-search-results .record')).to_have_count(1)
             expect(page.locator('#search-language-summary')).to_contain_text('Deutsch')
-            assert page.locator('#localization option').count()==4
+            assert page.locator('#localization option').count()==5
             assert not (set(requests)-{'fr','en','de'}),requests
             assert not errors,errors
             print('PASS: Chromium — 300 descriptors; default FR+EN only; DE display independent; add/remove; persistence; deduplication; homonyms; no unselected requests.')

@@ -49,11 +49,11 @@ export function convert(scope,dictionary,base){
   const isPred=id.startsWith('KP');require((isPred?graphPreds:graphNodes).has(id),'Dictionary identity outside exact graph');
   if(!(isPred?preds:nodes).has(id)){omitted++;continue;}
   const provenance={provider:'dik',source_refs:[scope.dictionary_sha256],review_status:'reviewed',review_ref:review.decision_id};
-  (isPred?relations:entries).push(isPred?{relation_id:id,label:row.preferred_term,provenance}:{node_id:id,label:row.preferred_term,provenance});
+  (isPred?relations:entries).push(isPred?{relation_id:id,label:row.preferred_term,provenance}:{node_id:id,label:row.preferred_term,...(row.alternate_terms?.length?{aliases:row.alternate_terms}:{}),...(row.definition?.trim()?{definition:row.definition}:{}),provenance});
  }
  const doc={format:'konstellation.multilingual-read/1.0',authority:'derived_non_authoritative',slug:scope.slug,state_ref:scope.state_ref,surface_digest:scope.surface_digest,locale:scope.locale,entries,...(relations.length?{relations}:{})};
  validateLocalization(doc,{slug:scope.slug,state_ref:scope.state_ref,surface_digest:scope.surface_digest,nodes:base.project.nodes,edges:base.project.edges});
- return {doc,omitted,aliases_exported:0};
+ return {doc,omitted,aliases_exported:entries.reduce((n,e)=>n+(e.aliases?.length||0),0)};
 }
 function disjointOutput(out,roots){const resolved=path.resolve(out);require(!fs.existsSync(resolved),'Output must be new');let p=path.dirname(resolved);while(!fs.existsSync(p)){const next=path.dirname(p);require(next!==p,'Missing output ancestor');p=next;}require(fs.realpathSync(p)===p,'Output ancestor symlink refused');for(const root of roots){const r=fs.realpathSync(root),relative=path.relative(r,resolved);require(relative.startsWith('..'+path.sep)||path.isAbsolute(relative),'Output inside input refused');}return resolved;}
 export function prepare(collection,handoff,out,expectedSha){
@@ -64,7 +64,7 @@ export function prepare(collection,handoff,out,expectedSha){
   if(!scopes.has(s.slug))scopes.set(s.slug,verifiedSurface(collection,s.slug));const v=scopes.get(s.slug);require(v.project,'Not a verified knowledge graph');
   const b=safeFile(handoff,s.dictionary_path,4*1024*1024);require(sha(b)===s.dictionary_sha256,'Dictionary digest mismatch');const result=convert(s,JSON.parse(b),v);staged.push({s,...result});}
  // All validation completes before creating any output. Private preview files only, no publishing action.
- fs.mkdirSync(path.dirname(dest),{recursive:true});fs.mkdirSync(dest);const report=[];try{for(const {s,doc,omitted} of staged){const b=Buffer.from(JSON.stringify(doc,null,2)+'\n');require(b.length<=4*1024*1024,'Sidecar byte budget exceeded');const dir=path.join(dest,'localizations',s.slug);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,s.locale+'.json'),b,{flag:'wx'});report.push({slug:s.slug,locale:s.locale,namespace_id:s.namespace_id,graph_sha256:s.graph_sha256,dictionary_sha256:s.dictionary_sha256,admission_ref:s.admission_ref,nodes:doc.entries.length,relations:doc.relations?.length||0,omitted,sha256:sha(b)});}
+ fs.mkdirSync(path.dirname(dest),{recursive:true});fs.mkdirSync(dest);const report=[];try{for(const {s,doc,omitted,aliases_exported} of staged){const b=Buffer.from(JSON.stringify(doc,null,2)+'\n');require(b.length<=4*1024*1024,'Sidecar byte budget exceeded');const dir=path.join(dest,'localizations',s.slug);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,s.locale+'.json'),b,{flag:'wx'});report.push({slug:s.slug,locale:s.locale,namespace_id:s.namespace_id,graph_sha256:s.graph_sha256,dictionary_sha256:s.dictionary_sha256,admission_ref:s.admission_ref,aliases_exported,definitions:doc.entries.filter(e=>e.definition).length,nodes:doc.entries.length,relations:doc.relations?.length||0,omitted,sha256:sha(b)});}
  const r={format:'light.reviewed-dictionary-export-report/1',authority:'derived_non_authoritative',publication_authorized:false,activation_authorized:false,manifest_sha256:expectedSha,items:report};fs.writeFileSync(path.join(dest,'report.json'),JSON.stringify(r,null,2)+'\n',{flag:'wx'});return r;
  }catch(e){fs.rmSync(dest,{recursive:true,force:true});throw e;}
 }

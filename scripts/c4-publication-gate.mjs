@@ -30,7 +30,7 @@ function filesUnder(root) {
   }
   walk(root);return seen;
 }
-export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pin.json')) {
+export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pin.json'), {publicSource=false}={}) {
   const root=path.resolve(site);
   if(!fs.existsSync(root)||!fs.lstatSync(root).isDirectory()||fs.lstatSync(root).isSymbolicLink())
     reject('SITE_INVALID','Site directory missing, invalid or linked.');
@@ -43,6 +43,7 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
   try {catalog=JSON.parse(catalogBytes);} catch {reject('CATALOG_INVALID','Invalid JSON catalog.');}
   if(!catalog||catalog.format!=='konstellation.light-catalog/1.0'||!Array.isArray(catalog.entries)||
      catalog.entries.length<1||catalog.entries.length>1000) reject('CATALOG_INVALID','Unsupported static catalog.');
+  if(catalog.lexical_source!==undefined && (!publicSource || catalog.lexical_source!=='wikidata-public-cc0-v1'))reject('SOURCE_BETA_ONLY','Source-only beta requires its dedicated integrity check.');
   const allowed=new Set(fixed), keys=new Set();
   for(const entry of catalog.entries) {
     if(!entry||typeof entry.slug!=='string'||typeof entry.revision!=='string'||
@@ -88,7 +89,7 @@ export function inspectSite(site, demoPin = path.join(project,'config/c4-demo-pi
       if(data.length!==descriptor.bytes||`sha256:${sha(data)}`!==descriptor.sha256)
         reject('LOCALE_TAMPERED','Locale digest or size does not match.');
       let local;
-      try{local=JSON.parse(data);validateLocalization(local,bundle);}catch(e){reject('LOCALE_INVALID',e.message);}
+      try{local=JSON.parse(data);validateLocalization(local,bundle,{publicSource:publicSource&&catalog.lexical_source==='wikidata-public-cc0-v1'});}catch(e){reject('LOCALE_INVALID',e.message);}
       if(local.locale!==locale)reject('LOCALE_INVALID','Language tag mismatch.');
       allowed.add(descriptor.path);
     }

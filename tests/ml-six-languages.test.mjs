@@ -7,7 +7,7 @@ test('Six exact locales; default UI + English; no implicit variants or other lan
  assert.deepEqual(PRIORITY_LANGUAGES,['fr','en','es','it','fi','de']);
  for(const tag of PRIORITY_LANGUAGES)assert.deepEqual(searchProfile(tag),tag==='en'?['en']:[tag,'en']);
  assert.deepEqual(searchProfile('de',['fr','es','it','fi','nl','fr-CA','EN','DE','und']),['de','en','fr','es','it','fi']);
- for(const tag of ['fr-CA','pt','und','en-US','bad tag',null])assert.equal(priorityLocale(tag),null);
+ for(const tag of ['fr-CA','ru','und','en-US','bad tag',null])assert.equal(priorityLocale(tag),null);
  assert.equal(initialUi('pt','fi'),'fi');assert.equal(initialUi('IT','fr'),'it');assert.equal(initialUi(null,'pt'),'fr');
 });
 test('300 catalog entries: six allowed, only explicit selections fetched; duplicate normalized tags fail closed',async()=>{
