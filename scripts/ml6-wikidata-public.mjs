@@ -61,11 +61,11 @@ export function parseEntityResponse(bytes,requested){
   out.set(id,{revision:e.lastrevid,snapshot:hash,terms});
  }return out;
 }
-export async function fetchTerms(ids,fetcher=fetch){
+export async function fetchTerms(ids,fetcher=fetch,wait=ms=>new Promise(r=>setTimeout(r,ms))){
  const unique=[...new Set(ids)].sort();need(unique.length>0&&unique.length<=2000&&unique.every(x=>/^[QP][1-9]\d*$/.test(x)),'Public query budget exceeded');const result=new Map();
  for(let i=0;i<unique.length;i+=40){const batch=unique.slice(i,i+40),u=new URL('https://www.wikidata.org/w/api.php');u.search=new URLSearchParams({action:'wbgetentities',ids:batch.join('|'),props:'info|labels|aliases|descriptions',languages:LANGS.join('|'),format:'json',maxlag:'5'}).toString();let bytes;
-  for(let attempt=0;attempt<4;attempt++){try{const response=await fetcher(u,{headers:{'User-Agent':'Konstellation-Light/2.3.1 (https://github.com/Rejean-McCormick/Konstellation-Light)','Accept':'application/json'},signal:AbortSignal.timeout(60000),redirect:'error'});need(response.ok,'Wikidata HTTP '+response.status);const b=Buffer.from(await response.arrayBuffer());need(b.length<=12*1024*1024,'Wikidata response too large');const j=JSON.parse(b);need(!j.error,'Wikidata API error: '+(j.error?.code||''));bytes=b;break;}catch(e){if(attempt===3)throw e;await new Promise(r=>setTimeout(r,2000*(attempt+1)));}}
-  for(const [id,row] of parseEntityResponse(bytes,batch))result.set(id,row);console.log('WIKIDATA:',Math.min(i+40,unique.length),'/',unique.length);if(i+40<unique.length)await new Promise(r=>setTimeout(r,400));
+  for(let attempt=0;attempt<7;attempt++){let retryAfter=0;try{const response=await fetcher(u,{headers:{'User-Agent':'Konstellation-Light/2.3.1 (https://github.com/Rejean-McCormick/Konstellation-Light)','Accept':'application/json'},signal:AbortSignal.timeout(60000),redirect:'error'});const header=response.headers?.get('retry-after');if(header){const seconds=Number(header);retryAfter=Number.isFinite(seconds)?Math.max(0,seconds*1000):Math.max(0,Date.parse(header)-Date.now())||0;}need(response.ok,'Wikidata HTTP '+response.status);const b=Buffer.from(await response.arrayBuffer());need(b.length<=12*1024*1024,'Wikidata response too large');const j=JSON.parse(b);need(!j.error,'Wikidata API error: '+(j.error?.code||''));bytes=b;break;}catch(e){if(attempt===6||retryAfter>120000)throw e;const delay=Math.max(retryAfter,Math.min(60000,5000*2**attempt));console.warn('WIKIDATA RETRY:',e.message,'in',delay,'ms');await wait(delay);}}
+  for(const [id,row] of parseEntityResponse(bytes,batch))result.set(id,row);console.log('WIKIDATA:',Math.min(i+40,unique.length),'/',unique.length);if(i+40<unique.length)await wait(400);
  }return result;
 }
 export function stageTerms(checked,terms){const {cat,selected}=checked,files=new Map(),samples=[],details=[];

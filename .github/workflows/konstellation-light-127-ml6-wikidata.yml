@@ -26,7 +26,7 @@ concurrency:
 
 jobs:
   build-public-beta:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
       - name: Confirmer la décision explicite du propriétaire
@@ -113,9 +113,13 @@ jobs:
           grep -q 'konstellation-public-beta-disclosure' /tmp/konstellation-test-index.html
           curl --silent --fail http://127.0.0.1:47821/data/catalog.json -o /tmp/konstellation-test-catalog.json
           node --input-type=module -e 'import fs from "node:fs";const c=JSON.parse(fs.readFileSync("/tmp/konstellation-test-catalog.json","utf8"));if(c.entries.length!==127)process.exit(1);'
+      - name: Installer Python 3.12 pour Chromium
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Recette Chromium ML6 avant publication
         run: |
-          python3 -m venv "$RUNNER_TEMP/ml6-venv"
+          python -m venv "$RUNNER_TEMP/ml6-venv"
           "$RUNNER_TEMP/ml6-venv/bin/python" -m pip install playwright==1.56.0
           "$RUNNER_TEMP/ml6-venv/bin/python" -m playwright install --with-deps chromium
           PORT=47822 node scripts/serve-light.mjs "$RUNNER_TEMP/konstellation-light-public-beta-127" &
@@ -146,7 +150,7 @@ jobs:
 
   deploy-public-beta:
     needs: build-public-beta
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
